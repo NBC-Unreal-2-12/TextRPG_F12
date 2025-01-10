@@ -15,8 +15,8 @@ class Character
 private:
     string name;
     int level;
-    int helth;
-    int maxHelth;
+    int health;
+    int maxHealth;
     int mp;
 	int maxMp;
     double attack;
