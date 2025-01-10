@@ -230,7 +230,7 @@ protected:
     float avoid = 99;
 };
 
-class Goblin : public Monster {
+class Goblin : public Monster { //고블린
 
 public:
     Goblin(int level) {
@@ -268,7 +268,7 @@ public:
     }
 };
 
-class Orc : public Monster {
+class Orc : public Monster { // 오크
 
 public:
     Orc(int level) {
@@ -306,7 +306,7 @@ public:
     }
 };
 
-class Slime : public Monster {
+class Slime : public Monster { // 슬라임
 
 public:
     Slime(int level) {
@@ -344,7 +344,7 @@ public:
     }
 };
 
-class BossMonster : public Monster {
+class BossMonster : public Monster { // 보스
 
 public:
     BossMonster(int level) {

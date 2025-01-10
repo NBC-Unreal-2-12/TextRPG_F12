@@ -130,9 +130,15 @@
     <ClCompile Include="TextRPG_F12.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattleManager.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Iteam.h" />
+    <ClInclude Include="Job.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="Shop.h" />
+    <ClInclude Include="Skill.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

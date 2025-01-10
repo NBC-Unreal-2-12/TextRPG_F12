@@ -11,11 +11,11 @@
 
 using namespace std;
 
-// Text RPG¿¡¼­ GameManager´Â ´Ü ÇÏ³ª¸¸ Á¸ÀçÇØ¾ß ÇÏ¹Ç·Î ½Ì±ÛÅæ »ç¿ë
+// Text RPGï¿½ï¿½ï¿½ï¿½ GameManagerï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï¹Ç·ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 class GameManager
 {
 private:
-	// Á¤Àû ¸â¹ö º¯¼ö·Î ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¸¦ ÀúÀå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	static GameManager* instance;
 
 	GameManager()
@@ -31,7 +31,7 @@ private:
 
 
 public:
-	// ½Ì±ÛÅæ ÀÎ½ºÅÏ½º Á¢±Ù ¸Þ¼­µå
+	// ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	static GameManager* getInstance()
 	{
 		if (instance == nullptr)
@@ -41,41 +41,41 @@ public:
 		return instance;
 	}
 
-	// »óÁ¡ ¹æ¹®
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½æ¹®
 	void visitShop(Character* player)
 	{
 		Shop shop;
 		shop.displayItems();
 
 		int choice;
-		cout << "¾ÆÀÌÅÛ ±¸¸Å : 1 , ¾ÆÀÌÅÛ ÆÇ¸Å : 2 >> ";
+		cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : 1 , ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ : 2 >> ";
 		cin >> choice;
 
 		if (choice == 1)
 		{
 			int index;
-			cout << "¸î ¹ø ¾ÆÀÌÅÛÀ» ±¸¸ÅÇÏ½Ã°Ú½À´Ï±î? >> ";
+			cout << "ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½? >> ";
 			cin >> index;
 			shop.buyItem(index, player);
 		}
 		else if (choice == 2)
 		{
 			int index;
-			cout << "¸î ¹ø ¾ÆÀÌÅÛÀ» ÆÇ¸ÅÇÏ½Ã°Ú½À´Ï±î? >> ";
+			cout << "ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½? >> ";
 			cin >> index;
 			shop.sellItem(index, player);
 		}
 		else
 		{
-			cout << "ºÎÀûÀýÇÑ ÀÔ·ÂÀÔ´Ï´Ù." << endl;
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ô´Ï´ï¿½." << endl;
 		}
 	}
 
-	// ÀÎº¥Åä¸® Ç¥½Ã
+	// ï¿½Îºï¿½ï¿½ä¸® Ç¥ï¿½ï¿½
 	void displayInventory(Inventory inventory)
 	{
 		Inventory inventory;
-		cout << "======ÇöÀç ¼ÒÁöÇÑ ¾ÆÀÌÅÛ======" << endl;
+		cout << "======ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½======" << endl;
 		inventory.listItem();
 		cout << "==============================." << endl;
 	}
