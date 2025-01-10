@@ -1,4 +1,7 @@
-﻿#include "PlayerInput.h"
+﻿#ifndef GAMEMANAGER_H_
+#define GAMEMANAGER_H_
+
+#include "PlayerInput.h"
 
 class BattleManager {
 private:
