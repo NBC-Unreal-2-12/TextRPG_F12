@@ -1,13 +1,17 @@
-#ifndef GAMEMANAGER_H_
+﻿#ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
 #include <cstdlib>
 #include <ctime>
+#include <string>
 #include <iostream>
 
 #include "Character.h"
 #include "Shop.h"
 #include "Inventory.h"
+#include "BattleManager.h"
+#include "Item.h"
+#include "Monster.h"
 
 using namespace std;
 
@@ -20,10 +24,12 @@ private:
 
 	GameManager()
 	{
+		cout << "게임 매니저 생성\n";
 	};
 
 	~GameManager()
 	{
+		cout << "게임 매니저 소멸\n";
 	};
 
 	GameManager(const GameManager&) = delete;
@@ -42,43 +48,10 @@ public:
 	}
 
 	// ���� �湮
-	void visitShop(Character* player)
-	{
-		Shop shop;
-		shop.displayItems();
-
-		int choice;
-		cout << "������ ���� : 1 , ������ �Ǹ� : 2 >> ";
-		cin >> choice;
-
-		if (choice == 1)
-		{
-			int index;
-			cout << "�� �� �������� �����Ͻðڽ��ϱ�? >> ";
-			cin >> index;
-			shop.buyItem(index, player);
-		}
-		else if (choice == 2)
-		{
-			int index;
-			cout << "�� �� �������� �Ǹ��Ͻðڽ��ϱ�? >> ";
-			cin >> index;
-			shop.sellItem(index, player);
-		}
-		else
-		{
-			cout << "�������� �Է��Դϴ�." << endl;
-		}
-	}
+	void visitShop(Character* player);
 
 	// �κ��丮 ǥ��
-	void displayInventory(Inventory inventory)
-	{
-		Inventory inventory;
-		cout << "======���� ������ ������======" << endl;
-		inventory.listItem();
-		cout << "==============================." << endl;
-	}
+	void displayInventory(Inventory inventory);
 
 };
 

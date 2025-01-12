@@ -1,17 +1,17 @@
-#ifndef ITEM_H
+ï»¿#ifndef ITEM_H
 #define ITEM_H
 
 #include <string>
 
-using namespace std; 
+using namespace std;
 
 class Character;
 
 class Item {
 protected:
-    int index; // ItemÀÇ ÀÎµ¦½º
-    string name; // ¾ÆÀÌÅÛ ÀÌ¸§
-    int price; // ¾ÆÀÌÅÛ °¡°İ
+    int index; // Itemì˜ ì¸ë±ìŠ¤
+    string name; // ì•„ì´í…œ ì´ë¦„
+    int price; // ì•„ì´í…œ ê°€ê²©
 
 public:
     Item(int idx, const string& itemName, int itemPrice)
@@ -29,38 +29,38 @@ public:
 
 class HealthPotion : public Item {
 private:
-    int healthRestore; // È¸º¹·®
+    int healthRestore; // íšŒë³µëŸ‰
 
 public:
     HealthPotion(int idx, const string& itemName, int itemPrice, int restoreAmount)
         : Item(idx, itemName, itemPrice), healthRestore(restoreAmount) {
     }
 
-    void use(Character* character) override;
+    void use(Character* character) override {}
 };
 
 class ManaPotion : public Item {
 private:
-    int manaRestore; // ¸¶³ª È¸º¹·®
+    int manaRestore; // ë§ˆë‚˜ íšŒë³µëŸ‰
 
 public:
     ManaPotion(int idx, const string& itemName, int itemPrice, int restoreAmount)
         : Item(idx, itemName, itemPrice), manaRestore(restoreAmount) {
     }
 
-    void use(Character* character) override;
+    void use(Character* character) override {}
 };
 
 class AttackBoost : public Item {
 private:
-    int attackIncrease; // °ø°İ·Â Áõ°¡·®
+    int attackIncrease; // ê³µê²©ë ¥ ì¦ê°€ëŸ‰
 
 public:
     AttackBoost(int idx, const string& itemName, int itemPrice, int increaseAmount)
         : Item(idx, itemName, itemPrice), attackIncrease(increaseAmount) {
     }
 
-    void use(Character* character) override;
+    void use(Character* character) override {}
 };
 
 #endif // ITEM_H

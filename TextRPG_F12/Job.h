@@ -20,7 +20,7 @@ public:
 // 전사 직업 클래스
 class Warrior : public Job {
 private:
-	Skill* skill = new WarriorSkill();
+    Skill* skill = new WarriorSkill();
 public:
     string getJobName() const override {
         return "Warrior";
@@ -40,7 +40,7 @@ public:
 // 마법사 직업 클래스
 class Mage : public Job {
 private:
-	Skill* skill = new MageSkill();
+    Skill* skill = new MageSkill();
 public:
     string getJobName() const override {
         return "Mage";
@@ -61,7 +61,7 @@ public:
 // 궁수 직업 클래스
 class Archer : public Job {
 private:
-	Skill* skill = new ArcherSkill();
+    Skill* skill = new ArcherSkill();
 public:
     string getJobName() const override {
         return "Archer";
@@ -71,8 +71,8 @@ public:
         attack += 20;
         maxHelth += 30;
         evasion += 0.1;
-		attackspeed += 20;
-		accuracy += 10;
+        attackspeed += 20;
+        accuracy += 10;
     }
 
     Skill* getSkill() const override {

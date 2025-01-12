@@ -127,6 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattleManager.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="TextRPG_F12.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +139,10 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="Iteam.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Job.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Skill.h" />
   </ItemGroup>

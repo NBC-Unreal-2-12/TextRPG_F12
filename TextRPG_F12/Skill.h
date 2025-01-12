@@ -38,14 +38,14 @@ public:
     }
 };
 
-class ArcherSkill : public Skill { 
+class ArcherSkill : public Skill {
 public:
-	void useSkill() const override {
+    void useSkill() const override {
         cout << "궁수의 연속 사격을 사용합니다!" << endl;
-	}
-	string getSkillName() const override {
-		return "궁수의 연속 사격";
-	}
+    }
+    string getSkillName() const override {
+        return "궁수의 연속 사격";
+    }
 };
 
 #endif

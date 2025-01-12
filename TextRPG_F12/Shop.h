@@ -18,8 +18,8 @@ private:
 	std::vector<StockItem> stock;
 
 public:
-	Shop();
-	~Shop();
+	Shop() {}
+	~Shop() = default;
 
 	void displayItems();
 	void buyItem(int index, Character* player);
