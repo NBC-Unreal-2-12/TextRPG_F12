@@ -8,6 +8,13 @@
 class BattleManager 
 {
 private:
+    struct TurnOrder {
+        bool isPlayer;  // 플레이어인지 아닌지 구분
+        int attackSpeed;  // 공격 속도
+
+        // 생성자
+        TurnOrder(bool isPlayer, int attackSpeed) : isPlayer(isPlayer), attackSpeed(attackSpeed) {}
+    };
     Character* player;              // 플레이어 캐릭터
     vector<Monster*> monster; // 전투 참여 몬스터
     bool isPlayerTurn;              // 현재 턴이 플레이어의 턴인지 여부

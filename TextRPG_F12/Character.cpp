@@ -2,8 +2,6 @@
 #include <string>
 #include "Character.h"
 
-using namespace std;
-
 Character* Character::instance = nullptr;
 
 Character::Character(string userName, Job* characterJob) : 
@@ -198,7 +196,6 @@ void Character::useSkill(vector<Monster*>& targets)
     }
 
     int choice;
-    
 	bool validInput = false;
 
     while (!validInput) 
