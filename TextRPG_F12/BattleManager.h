@@ -8,7 +8,7 @@
 class BattleManager {
 private:
     Character* player;              // 플레이어 캐릭터
-    Monster* monster; // 전투 참여 몬스터
+    vector<Monster*> monster; // 전투 참여 몬스터
     bool isPlayerTurn;              // 현재 턴이 플레이어의 턴인지 여부
 
 public:
@@ -24,11 +24,11 @@ public:
     // 몬스터 행동 처리
     void processMonsterTurn();
 
-    // 전투 종료 처리
-    void resolveBattle();
-
     // 전투 시작
     void startBattle(Character* player, Monster* monster);
+
+    // 전투 종료 처리
+    void resolveBattle();
 };
 
 #endif
