@@ -9,3 +9,11 @@ public:
 	{ 
 	}
 };
+
+class GGD : public BossMonster
+{
+public:
+	GGD() : BossMonster("GGD")
+	{
+	}
+};

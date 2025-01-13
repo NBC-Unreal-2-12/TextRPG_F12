@@ -2,6 +2,14 @@
 #include <iostream>
 #include <algorithm>
 
+// 함수에서 참조할 변수 monster에 대하여
+// ★BattleManager 호출 이전에 마주치게 될 monster는 이미 생성이 되어있는 상태.
+// 
+// TextRPG_F12.cpp(이하 main())에서 MonsterFactory.h를 참조하여 랜덤 몬스터 생성
+// -> std::vector<std::unique_ptr<Monster>> monster;
+// -> monsters.push_back(createMonster(round));
+// 아래 BattleManager의 함수들은 저 unique_ptr<Monster>> 객체로 선언된 monster를 받아와야 함.
+
 // 전투 종료 조건 확인
 bool BattleManager::isBattleOver()
 {
