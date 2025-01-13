@@ -1,69 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<ItemGroup>
-		<Filter Include="소스 파일">
-			<UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-			<Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-		</Filter>
-		<Filter Include="헤더 파일">
-			<UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-			<Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-		</Filter>
-		<Filter Include="리소스 파일">
-			<UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-			<Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-		</Filter>
-	</ItemGroup>
-	<ItemGroup>
-		<ClCompile Include="TextRPG_F12.cpp">
-			<Filter>소스 파일</Filter>
-		</ClCompile>
-		<ClCompile Include="Shop.cpp">
-			<Filter>소스 파일</Filter>
-		</ClCompile>
-		<ClCompile Include="PlayerInput.cpp">
-			<Filter>소스 파일</Filter>
-		</ClCompile>
-		<ClCompile Include="Character.cpp">
-			<Filter>소스 파일</Filter>
-		</ClCompile>
-		<ClCompile Include="BattleManager.cpp">
-			<Filter>소스 파일</Filter>
-		</ClCompile>
-		<ClCompile Include="GameManager.cpp">
-			<Filter>소스 파일</Filter>
-		</ClCompile>
-	</ItemGroup>
-	<ItemGroup>
-		<ClInclude Include="Monster.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="Inventory.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="BattleManager.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="Character.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="Item.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="Job.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="GameManager.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="PlayerInput.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="Shop.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-		<ClInclude Include="Skill.h">
-			<Filter>헤더 파일</Filter>
-		</ClInclude>
-	</ItemGroup>
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Battle">
+      <UniqueIdentifier>{f4229e3c-69d4-41d5-8265-323d03588e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{5dd74b45-29d9-4e9b-b594-a4432ecca025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{044d33dd-e4d0-4219-9998-bd4ef41fbb18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{5938ccc0-68cb-45bf-971e-2172cbd0cc45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop">
+      <UniqueIdentifier>{69dc1761-13ca-4bc8-9bea-ca0a329c0001}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleManager.cpp">
+      <Filter>Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRPG_F12.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleManager.h">
+      <Filter>Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Job.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

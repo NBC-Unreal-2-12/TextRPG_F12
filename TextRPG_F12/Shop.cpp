@@ -1,4 +1,4 @@
-#include "Shop.h"
+﻿#include "Shop.h"
 
 // StockItem 생성자
 Shop::StockItem::StockItem(Item* _item, int _quantity) : item(_item), quantity(_quantity) {}

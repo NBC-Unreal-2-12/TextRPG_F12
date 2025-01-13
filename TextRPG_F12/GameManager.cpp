@@ -10,10 +10,14 @@ void GameManager::visitShop(Character* player)
 	shop.displayItems();
 
 	int choice;
-	cout << "아이템 구매 : 1 , 아이템 판매 : 2 >> ";
+	cout << "아이템 구매 : 1 , 아이템 판매 : 2 , 나가기 : 0>> ";
 	cin >> choice;
 
-	if (choice == 1)
+	if (choice == 0)
+	{
+		return;
+	}
+	else if (choice == 1)
 	{
 		int index;
 		cout << "몇 번 아이템을 구매하시겠습니까? >> ";
