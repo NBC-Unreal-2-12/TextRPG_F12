@@ -8,7 +8,7 @@
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter> 
+    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -27,6 +27,9 @@
     </Filter>
     <Filter Include="Shop">
       <UniqueIdentifier>{69dc1761-13ca-4bc8-9bea-ca0a329c0001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors\Monsters">
+      <UniqueIdentifier>{b8404696-b0e8-4fee-a0b0-84033858e935}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +50,24 @@
     </ClCompile>
     <ClCompile Include="TextRPG_F12.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BossMonster.cpp">
+      <Filter>Actors\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="EliteMonster.cpp">
+      <Filter>Actors\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterFactory.cpp">
+      <Filter>Actors\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMonster.cpp">
+      <Filter>Actors\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialMonster.cpp">
+      <Filter>Actors\Monsters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,11 +95,29 @@
     <ClInclude Include="Job.h">
       <Filter>Actors</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actors</Filter>
-    </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BossMonster.h">
+      <Filter>Actors\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="EliteMonster.h">
+      <Filter>Actors\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterFactory.h">
+      <Filter>Actors\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMonster.h">
+      <Filter>Actors\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecialMonster.h">
+      <Filter>Actors\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actors\Monsters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

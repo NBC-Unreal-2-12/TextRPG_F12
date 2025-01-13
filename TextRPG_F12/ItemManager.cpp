@@ -1,4 +1,4 @@
-#include "ItemManager.h"
+﻿#include "ItemManager.h"
 
 void ItemManager::registerItem(int index, Item* item)
 {

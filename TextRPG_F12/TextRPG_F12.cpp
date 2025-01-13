@@ -83,9 +83,9 @@ int main()
 	clearConsole();
 
 	Inventory inventory;
-	Item* item1 = new HealthPotion(1, "테스트아이템1", 50, 11);
-	Item* item2 = new ManaPotion(2, "테스트아이템2", 10, 22);
-	Item* item3 = new AttackBoost(3, "테스트아이템3", 500, 33);
+	Item* item1 = new HealthPotion("테스트아이템1", 50, 11);
+	Item* item2 = new ManaPotion("테스트아이템2", 10, 22);
+	Item* item3 = new AttackBoost("테스트아이템3", 500, 33);
 
 	inventory.addItem(item1);
 	inventory.addItem(item2);

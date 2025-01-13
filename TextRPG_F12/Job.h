@@ -1,4 +1,4 @@
-#ifndef JOB_H
+﻿#ifndef JOB_H
 #define JOB_H
 #pragma once
 
