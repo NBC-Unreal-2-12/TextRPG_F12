@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <memory>
+
 #include "Monster.h"
 #include "NormalMonster.h"
 #include "EliteMonster.h"

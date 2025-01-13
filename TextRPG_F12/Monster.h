@@ -41,7 +41,7 @@ public:
 
     virtual int useMobSkill() = 0;
 
-    virtual void mobFace() = 0;
+   // virtual void mobFace() = 0;
 
     int useMobAttack() // 몬스터가 공격할 때
     {
@@ -71,7 +71,7 @@ public:
 
     void getMobInterface() //인터페이스 출력
     {
-        mobFace();
+   //     mobFace();
         cout << "이름 : " << this->mobName << endl;
         cout << "체력 : " << this->mobHealth << endl;
         cout << "공격력 : " << this->mobAttack << endl;
@@ -82,6 +82,10 @@ public:
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
+    Item* dropItem()
+    {
+        return loot;
+    }
 
 protected:
     string mobName = "Unknown";
@@ -92,415 +96,423 @@ protected:
     int mobMaxMana = 99;
     int mobAccuracy = 99;
     double mobEvasion = 99;
+    Item* loot;
 };
 
 
+//class Goblin : public Monster // 고블린
+//{
+//
+//public:
+//    Goblin()
+//    {
+//        mobName = "Goblin";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("고블린의 작은 동전", 20);
+//    }
+//
+//    /*void mobFace() override
+//    {
+//            cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⢅⡀⠀⠀⡀⣔⢀⠀⡀⡄⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⢠⡹⣜⢦⢣⢳⢱⢱⢺⢤⡠⡠⡆⣆⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⢀⢠⡢⣟⣗⡧⣧⡣⢧⡳⣽⣳⢵⢕⣟⡧⡣⠀⠀⠀⠀⠀
+//⠀⠀⢠⣺⠕⠉⠈⠺⡽⡮⣯⣪⢯⣗⣯⠳⡑⠈⢫⢮⡰⠀⠀⠀⠀
+//⠀⣀⢷⠹⢀⢠⣰⢴⣻⣽⢮⣺⣺⣪⢖⠄⠀⠀⠘⣵⢫⠤⠀⠀⠀
+//⠀⢗⠌⢃⢌⢧⢯⢯⣳⣝⡯⣯⡿⣽⢽⡗⢆⠀⢠⠺⢪⢯⡲⡢⡀
+//⠀⠀⠀⢇⣗⢽⡍⠳⣷⡳⣫⢯⣟⢽⡱⡀⠀⠀⠈⡇⠈⡖⡵⠘⠀
+//⠀⠀⠀⠀⠈⣳⣣⠀⡢⠫⠈⠫⠪⢷⢝⡦⡀⠀⠀⠀⠀⠃⠀⠀⠀
+//⠀⠀⠀⢠⢰⢕⠯⠂⠀⠀⠀⠀⠀⠸⡱⡣⣏⣆⠀⠀⠀⠀⠀⠀⠀
+//⠀⠰⣝⢞⠕⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡜⣆⢀⠀⠀⠀⠀⠀
+//⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢯⢞⡳⣕⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠈⠀⠁⠀⠀⠀
+//            )" << endl;
+//    }*/
+//
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
+//        return mobAttack * 2;
+//    }
+//};
+
+//class Orc : public Monster //오크
+//{
+//
+//public:
+//    Orc()
+//    {
+//        mobName = "Orc";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("오크의 부서진 검", 20);
+//    }
+//
+//    /*void mobFace() override
+//    {
+//        cout << R"(
+//⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⣻⣿⣿⣿⣿⣿⣆⠀⠀
+//⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣂⠀
+//⠀⠀⠀⠀⠀⣸⣿⢿⣿⣿⣿⡌⠹⣿⡄
+//⠀⠀⠀⠀⢠⣿⠇⣺⣿⣿⣿⣷⠄⢹⡯
+//⠀⠀⠀⠀⢰⣿⣦⣿⣿⣿⣿⣿⣇⠴⣿
+//⠀⠀⠀⢀⡾⠏⣰⣿⣿⠿⣿⣿⠻⠀⠉
+//⠀⣀⣶⡿⠁⠀⣺⣿⡃⠈⣿⣿⠀⠀⠀
+//⣼⣿⡿⠁⠀⠀⠺⣿⡇⠀⠹⣿⡇⠀⠀
+//⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀
+//⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀
+//        )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "의 공격력이 5 증가합니다." << endl;
+//        mobAttack += 5;
+//        return mobAttack;
+//    }
+//};
+
+//class Slime : public Monster // 슬라임
+//{
+//
+//public:
+//    Slime()
+//    {
+//        mobName = "Slime";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("슬라임 젤리", 20);
+//    }
+//
+//    /*void mobFace() override
+//    {
+//            cout << R"(
+//⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⣀⣾⠀⠀⠀⠈⡆⠀⠀⠀
+//⠀⢀⣴⣶⣿⣿⣿⣷⣄⠀⠀⡆⠀⠀⠀
+//⢰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠐⠀⣀⡀⠀
+//⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀
+//⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀
+//            )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
+//        mobHealth += 20;
+//        return mobAttack;
+//    }
+//};
 
 
 
-class Goblin : public Monster // 고블린
-{
+//class EliteGoblin : public Monster // 엘리트 고블린
+//{
+//
+//public:
+//    EliteGoblin()
+//    {
+//        mobName = "Elite Goblin";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("고블린 대장의 반지", 20);
+//    }
+//
+//    /*void mobFace() override
+//    {
+//        cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⢅⡀⠀⠀⡀⣔⢀⠀⡀⡄⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⢠⡹⣜⢦⢣⢳⢱⢱⢺⢤⡠⡠⡆⣆⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⢀⢠⡢⣟⣗⡧⣧⡣⢧⡳⣽⣳⢵⢕⣟⡧⡣⠀⠀⠀⠀⠀
+//⠀⠀⢠⣺⠕⠉⠈⠺⡽⡮⣯⣪⢯⣗⣯⠳⡑⠈⢫⢮⡰⠀⠀⠀⠀
+//⠀⣀⢷⠹⢀⢠⣰⢴⣻⣽⢮⣺⣺⣪⢖⠄⠀⠀⠘⣵⢫⠤⠀⠀⠀
+//⠀⢗⠌⢃⢌⢧⢯⢯⣳⣝⡯⣯⡿⣽⢽⡗⢆⠀⢠⠺⢪⢯⡲⡢⡀
+//⠀⠀⠀⢇⣗⢽⡍⠳⣷⡳⣫⢯⣟⢽⡱⡀⠀⠀⠈⡇⠈⡖⡵⠘⠀
+//⠀⠀⠀⠀⠈⣳⣣⠀⡢⠫⠈⠫⠪⢷⢝⡦⡀⠀⠀⠀⠀⠃⠀⠀⠀
+//⠀⠀⠀⢠⢰⢕⠯⠂⠀⠀⠀⠀⠀⠸⡱⡣⣏⣆⠀⠀⠀⠀⠀⠀⠀
+//⠀⠰⣝⢞⠕⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡜⣆⢀⠀⠀⠀⠀⠀
+//⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢯⢞⡳⣕⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠈⠀⠁⠀⠀⠀
+//        )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
+//        return mobAttack * 2;
+//    }
+//};
 
-public:
-    Goblin()
-    {
-        mobName = "Goblin";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
+//class EliteOrc : public Monster // 엘리트 오크
+//{
+//
+//public:
+//    EliteOrc()
+//    {
+//        mobName = "Elite Orc";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("오크 대왕의 검", 20);
+//    }
+//
+//    /*void mobFace() override
+//    {
+//        cout << R"(
+//⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⣻⣿⣿⣿⣿⣿⣆⠀⠀
+//⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣂⠀
+//⠀⠀⠀⠀⠀⣸⣿⢿⣿⣿⣿⡌⠹⣿⡄
+//⠀⠀⠀⠀⢠⣿⠇⣺⣿⣿⣿⣷⠄⢹⡯
+//⠀⠀⠀⠀⢰⣿⣦⣿⣿⣿⣿⣿⣇⠴⣿
+//⠀⠀⠀⢀⡾⠏⣰⣿⣿⠿⣿⣿⠻⠀⠉
+//⠀⣀⣶⡿⠁⠀⣺⣿⡃⠈⣿⣿⠀⠀⠀
+//⣼⣿⡿⠁⠀⠀⠺⣿⡇⠀⠹⣿⡇⠀⠀
+//⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀
+//⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀
+//        )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "의 공격력이 5 증가합니다." << endl;
+//        mobAttack += 5;
+//        return mobAttack;
+//    }
+//};
 
-    void mobFace() override
-    {
-            cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢅⡀⠀⠀⡀⣔⢀⠀⡀⡄⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢠⡹⣜⢦⢣⢳⢱⢱⢺⢤⡠⡠⡆⣆⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⢠⡢⣟⣗⡧⣧⡣⢧⡳⣽⣳⢵⢕⣟⡧⡣⠀⠀⠀⠀⠀
-⠀⠀⢠⣺⠕⠉⠈⠺⡽⡮⣯⣪⢯⣗⣯⠳⡑⠈⢫⢮⡰⠀⠀⠀⠀
-⠀⣀⢷⠹⢀⢠⣰⢴⣻⣽⢮⣺⣺⣪⢖⠄⠀⠀⠘⣵⢫⠤⠀⠀⠀
-⠀⢗⠌⢃⢌⢧⢯⢯⣳⣝⡯⣯⡿⣽⢽⡗⢆⠀⢠⠺⢪⢯⡲⡢⡀
-⠀⠀⠀⢇⣗⢽⡍⠳⣷⡳⣫⢯⣟⢽⡱⡀⠀⠀⠈⡇⠈⡖⡵⠘⠀
-⠀⠀⠀⠀⠈⣳⣣⠀⡢⠫⠈⠫⠪⢷⢝⡦⡀⠀⠀⠀⠀⠃⠀⠀⠀
-⠀⠀⠀⢠⢰⢕⠯⠂⠀⠀⠀⠀⠀⠸⡱⡣⣏⣆⠀⠀⠀⠀⠀⠀⠀
-⠀⠰⣝⢞⠕⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡜⣆⢀⠀⠀⠀⠀⠀
-⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢯⢞⡳⣕⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠈⠀⠁⠀⠀⠀
-            )" << endl;
-    }
+//class EliteSlime : public Monster // 엘리트 슬라임
+//{
+//
+//public:
+//    EliteSlime()
+//    {
+//        mobName = "Elite Slime";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("슬라임 왕관", 20);
+//    }
+//
+//   /* void mobFace() override
+//    {
+//        cout << R"(
+//⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⣀⣾⠀⠀⠀⠈⡆⠀⠀⠀
+//⠀⢀⣴⣶⣿⣿⣿⣷⣄⠀⠀⡆⠀⠀⠀
+//⢰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠐⠀⣀⡀⠀
+//⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀
+//⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀
+//            )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
+//        mobHealth += 20;
+//        return mobAttack;
+//    }
+//};
 
+//class Dragon : public Monster // 드래곤
+//{
+//
+//public:
+//    Dragon()
+//    {
+//        mobName = "Dragon";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("드래곤의 비늘", 20);
+//    }
+//
+//    /*void mobFace() override
+//    {
+//            cout << R"(
+//⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⣠⣠⣤⣄⠀⠈⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⣼⡿⠋⢉⣿⠀⢀⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀
+//⠀⠀⠝⠀⢠⣾⣿⣠⣾⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀
+//⠀⠀⠀⠀⣾⣿⣿⣿⣟⠛⢽⠟⠫⣿⣿⡆⠀⠀⠀⠀
+//⠀⠀⠀⠀⠘⣿⢿⣿⣿⣷⣆⠀⠀⠉⠉⠇⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⣸⠽⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⣴⠃⠀⣹⣻⡾⠿⣿⣶⣿⠟⠒⠢⠀⠀⠀
+//⠀⠀⠀⠀⠁⠀⠀⠀⠀⠈⠀⠀⠈⠀⠀⠀⠀⠈⠁⠀
+//            )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
+//        return mobAttack * 2;
+//    }
+//};
 
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
-        return mobAttack * 2;
-    }
-};
+//class Balrog : public Monster // 발록
+//{
+//
+//public:
+//    Balrog()
+//    {
+//        mobName = "Balrog";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("발록의 재", 20);
+//    }
+//
+//   /* void mobFace()
+//    {
+//            cout << R"(
+//⠀⠀⠀⠀⠀⢰⡄⠀⠀⠀⠀⠀⠀⢴⠀⠀⠀⠀⠀⠀
+//⠀ ⠀⠀ ⣾⣝⠀⠀ ⠀⠀ ⣿⣣⡀⠀     
+//⠀⠀ ⠀⣺⣽⣻⣄⣀⣡⢤⣰⣺⣟⣿⣳⡄⠀⠀⠀
+//   ⠀⣸⣟⢷⢫⢕⢟⡾⡿⣽⢞⡽⣽⣷⢿⡄⠀
+//   ⠀⣿⢾⣻⢔⡕⡽⡪⡹⢽⣳⢿⣻⣽⣟⣷⠀⠀
+//⠀⠀⢀⢻⣳⣽⢝⣪⢧⡱⣨⣟⣮⣫⢾⡿⣟⣿⠅⠀
+//⠀⠙⢭⢧⢳⡹⠀⢈⣨⣟⡵⣧⢮⡳⡕⠇⠈⠻⠁⠀
+// ⠀⠀⠀⠀⠀⠐⢽⣺⣏⠙⠱⣯⣗⠀⠀⠀⠀ ⠀
+//       ⠀⢀⣤⣮⡏⠀⢠⢿⣦⠀⠀ ⠀⠀⠀
+//            )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "의 공격력이 5 증가합니다." << endl;
+//        mobAttack += 5;
+//        return mobAttack;
+//    }
+//};
 
-class Orc : public Monster // 오크
-{
+//class Kraken : public Monster // 크라켄
+//{
+//
+//public:
+//    Kraken()
+//    {
+//        mobName = "Kraken";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("크라켄의 심장", 20);
+//    }
+//
+//    /*void mobFace()
+//    {
+//            cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⡀⠀⣾⣿⣿⣿⣿⣷⠀⠀⡀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠍⣹⢆⢿⣿⣿⣿⣿⡿⡰⣏⠩⠀⠀⠀⠀
+//⠀⠀⠀⠀⣰⡏⣼⢨⢿⣿⣿⡿⡅⣇⢹⣦⠀⠀⠀⠀
+//⠀⠀⠀⠀⣿⣧⣛⣶⣷⣿⣿⣾⣶⣛⣼⣿⠀⠀⠀⠀
+//⠀⠀⠀⠀⣼⡿⠾⣪⣾⡿⢿⣷⣕⠷⢿⣧⠀⠀⠀⠀
+//⠀⠀⠀⠀⠻⠿⢹⣿⠉⢲⡖⠉⣿⡏⠿⠟⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⠈⠛⠛⠁⠈⠛⠛⠁⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//        )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
+//        mobHealth += 20;
+//        return mobAttack;
+//    }
+//};
 
-public:
-    Orc()
-    {
-        mobName = "Orc";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace() override
-    {
-        cout << R"(
-⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⣻⣿⣿⣿⣿⣿⣆⠀⠀
-⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣂⠀
-⠀⠀⠀⠀⠀⣸⣿⢿⣿⣿⣿⡌⠹⣿⡄
-⠀⠀⠀⠀⢠⣿⠇⣺⣿⣿⣿⣷⠄⢹⡯
-⠀⠀⠀⠀⢰⣿⣦⣿⣿⣿⣿⣿⣇⠴⣿
-⠀⠀⠀⢀⡾⠏⣰⣿⣿⠿⣿⣿⠻⠀⠉
-⠀⣀⣶⡿⠁⠀⣺⣿⡃⠈⣿⣿⠀⠀⠀
-⣼⣿⡿⠁⠀⠀⠺⣿⡇⠀⠹⣿⡇⠀⠀
-⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀
-⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀
-        )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "의 공격력이 5 증가합니다." << endl;
-        mobAttack += 5;
-        return mobAttack;
-    }
-};
-
-class Slime : public Monster // 슬라임
-{
-
-public:
-    Slime()
-    {
-        mobName = "Slime";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace() override
-    {
-            cout << R"(
-⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣀⣾⠀⠀⠀⠈⡆⠀⠀⠀
-⠀⢀⣴⣶⣿⣿⣿⣷⣄⠀⠀⡆⠀⠀⠀
-⢰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠐⠀⣀⡀⠀
-⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀
-⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀
-            )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-        mobHealth += 20;
-        return mobAttack;
-    }
-};
-
-
-
-class EliteGoblin : public Monster // 엘리트 고블린
-{
-
-public:
-    EliteGoblin()
-    {
-        mobName = "Elite Goblin";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace() override
-    {
-        cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢅⡀⠀⠀⡀⣔⢀⠀⡀⡄⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢠⡹⣜⢦⢣⢳⢱⢱⢺⢤⡠⡠⡆⣆⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⢠⡢⣟⣗⡧⣧⡣⢧⡳⣽⣳⢵⢕⣟⡧⡣⠀⠀⠀⠀⠀
-⠀⠀⢠⣺⠕⠉⠈⠺⡽⡮⣯⣪⢯⣗⣯⠳⡑⠈⢫⢮⡰⠀⠀⠀⠀
-⠀⣀⢷⠹⢀⢠⣰⢴⣻⣽⢮⣺⣺⣪⢖⠄⠀⠀⠘⣵⢫⠤⠀⠀⠀
-⠀⢗⠌⢃⢌⢧⢯⢯⣳⣝⡯⣯⡿⣽⢽⡗⢆⠀⢠⠺⢪⢯⡲⡢⡀
-⠀⠀⠀⢇⣗⢽⡍⠳⣷⡳⣫⢯⣟⢽⡱⡀⠀⠀⠈⡇⠈⡖⡵⠘⠀
-⠀⠀⠀⠀⠈⣳⣣⠀⡢⠫⠈⠫⠪⢷⢝⡦⡀⠀⠀⠀⠀⠃⠀⠀⠀
-⠀⠀⠀⢠⢰⢕⠯⠂⠀⠀⠀⠀⠀⠸⡱⡣⣏⣆⠀⠀⠀⠀⠀⠀⠀
-⠀⠰⣝⢞⠕⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡜⣆⢀⠀⠀⠀⠀⠀
-⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢯⢞⡳⣕⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠈⠀⠁⠀⠀⠀
-        )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
-        return mobAttack * 2;
-    }
-};
-
-class EliteOrc : public Monster // 엘리트 오크
-{
-
-public:
-    EliteOrc()
-    {
-        mobName = "Elite Orc";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace() override
-    {
-        cout << R"(
-⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⣻⣿⣿⣿⣿⣿⣆⠀⠀
-⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣂⠀
-⠀⠀⠀⠀⠀⣸⣿⢿⣿⣿⣿⡌⠹⣿⡄
-⠀⠀⠀⠀⢠⣿⠇⣺⣿⣿⣿⣷⠄⢹⡯
-⠀⠀⠀⠀⢰⣿⣦⣿⣿⣿⣿⣿⣇⠴⣿
-⠀⠀⠀⢀⡾⠏⣰⣿⣿⠿⣿⣿⠻⠀⠉
-⠀⣀⣶⡿⠁⠀⣺⣿⡃⠈⣿⣿⠀⠀⠀
-⣼⣿⡿⠁⠀⠀⠺⣿⡇⠀⠹⣿⡇⠀⠀
-⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀
-⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀
-        )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "의 공격력이 5 증가합니다." << endl;
-        mobAttack += 5;
-        return mobAttack;
-    }
-};
-
-class EliteSlime : public Monster // 엘리트 슬라임
-{
-
-public:
-    EliteSlime()
-    {
-        mobName = "Elite Slime";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace() override
-    {
-        cout << R"(
-⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣀⣾⠀⠀⠀⠈⡆⠀⠀⠀
-⠀⢀⣴⣶⣿⣿⣿⣷⣄⠀⠀⡆⠀⠀⠀
-⢰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠐⠀⣀⡀⠀
-⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀
-⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀
-            )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-        mobHealth += 20;
-        return mobAttack;
-    }
-};
-
-class Dragon : public Monster // 드래곤
-{
-
-public:
-    Dragon()
-    {
-        mobName = "Dragon";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace() override
-    {
-            cout << R"(
-⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣠⣠⣤⣄⠀⠈⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⣼⡿⠋⢉⣿⠀⢀⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀
-⠀⠀⠝⠀⢠⣾⣿⣠⣾⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⣾⣿⣿⣿⣟⠛⢽⠟⠫⣿⣿⡆⠀⠀⠀⠀
-⠀⠀⠀⠀⠘⣿⢿⣿⣿⣷⣆⠀⠀⠉⠉⠇⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣸⠽⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⣴⠃⠀⣹⣻⡾⠿⣿⣶⣿⠟⠒⠢⠀⠀⠀
-⠀⠀⠀⠀⠁⠀⠀⠀⠀⠈⠀⠀⠈⠀⠀⠀⠀⠈⠁⠀
-            )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
-        return mobAttack * 2;
-    }
-};
-
-class Balrog : public Monster // 발록
-{
-
-public:
-    Balrog()
-    {
-        mobName = "Balrog";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace()
-    {
-            cout << R"(
-⠀⠀⠀⠀⠀⢰⡄⠀⠀⠀⠀⠀⠀⢴⠀⠀⠀⠀⠀⠀
-⠀ ⠀⠀ ⣾⣝⠀⠀ ⠀⠀ ⣿⣣⡀⠀     
-⠀⠀ ⠀⣺⣽⣻⣄⣀⣡⢤⣰⣺⣟⣿⣳⡄⠀⠀⠀
-   ⠀⣸⣟⢷⢫⢕⢟⡾⡿⣽⢞⡽⣽⣷⢿⡄⠀
-   ⠀⣿⢾⣻⢔⡕⡽⡪⡹⢽⣳⢿⣻⣽⣟⣷⠀⠀
-⠀⠀⢀⢻⣳⣽⢝⣪⢧⡱⣨⣟⣮⣫⢾⡿⣟⣿⠅⠀
-⠀⠙⢭⢧⢳⡹⠀⢈⣨⣟⡵⣧⢮⡳⡕⠇⠈⠻⠁⠀
- ⠀⠀⠀⠀⠀⠐⢽⣺⣏⠙⠱⣯⣗⠀⠀⠀⠀ ⠀
-       ⠀⢀⣤⣮⡏⠀⢠⢿⣦⠀⠀ ⠀⠀⠀
-            )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "의 공격력이 5 증가합니다." << endl;
-        mobAttack += 5;
-        return mobAttack;
-    }
-};
-
-class Kraken : public Monster // 미노타우로스
-{
-
-public:
-    Kraken()
-    {
-        mobName = "Kraken";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace()
-    {
-            cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⡀⠀⣾⣿⣿⣿⣿⣷⠀⠀⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⠍⣹⢆⢿⣿⣿⣿⣿⡿⡰⣏⠩⠀⠀⠀⠀
-⠀⠀⠀⠀⣰⡏⣼⢨⢿⣿⣿⡿⡅⣇⢹⣦⠀⠀⠀⠀
-⠀⠀⠀⠀⣿⣧⣛⣶⣷⣿⣿⣾⣶⣛⣼⣿⠀⠀⠀⠀
-⠀⠀⠀⠀⣼⡿⠾⣪⣾⡿⢿⣷⣕⠷⢿⣧⠀⠀⠀⠀
-⠀⠀⠀⠀⠻⠿⢹⣿⠉⢲⡖⠉⣿⡏⠿⠟⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⠛⠛⠁⠈⠛⠛⠁⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-        mobHealth += 20;
-        return mobAttack;
-    }
-};
-
-class GGD : public Monster // 보스
-{
-
-public:
-    GGD()
-    {
-        mobName = "고길동";
-        mobHealth = 20;
-        mobAttack = 10;
-        mobMana = 0;
-        mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
-    }
-
-    void mobFace()
-    {
-            cout << R"(
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⢷⣷⣣⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⢏⣿⣿⡵⡀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⣠⣮⣷⣿⣿⣿⣿⣷⣄⣄⠀⠀⠀⠀⠈⢞⣿⣿⡵⡀⠀⠀⠀⠀⠀
- ⠀⠀⡠⣿⣿⣿⣿⣿⣿⣿⣿⣧⣏⢦⣤⡀⠀⠀⠀⠫⣻⣿⣾⢄⠀⠀⠀
- ⠀⣔⣿⣿⣿⣿⣿⠿⣿⠻⢟⣿⣿⣿⣿⣿⡆⠀⠀⠀⠑⡿⣿⣯⢆⠀⠀
- ⢰⣸⢿⣻⢟⠃⠉⠉⠀⡠⠤⠸⣸⣿⣿⣿⡳⠁⠀⠀⠀⠀⡨⠺⠿⠇⢓⡄
- ⠧⠊⠁⠘⣖⣳⠠⣶⣋⡹⠁⠀⠛⣩⢻⠋⠀⠀⠀⠀⠀⢀⠇⠀⠀⠀⠀⢾⠀
-⠀⠀⢠⠂⠁⠓⠒⠊⠀⡠⠤⡀⢠⠀⠚⠀⠀⠀⠀⠀⡠⠊⢀⠤⡤⣔⠩⠼⡀
-⠀⠀⢇⠀⠀⢀⡠⢔⣪⠠⠖⠇⡘⠀⠀⠀⢀⠄⠒⠉⢀⠔⠁⠀⣧⢞⠮⠭⠵⡀
-⠀⠀⠘⠒⠉⣾⣀⣀⠀⣀⣀⠦⠗⠹⠙⠃⠁⠀⡠⠔⡡⠔⠒⠉⡨⢴⢹⣿⣏⡆
-⠀⠀⠀⠀⡸⠉⠀⠀⠁⠀⠀⠀⠀⣇⡠⡄⡶⠯⠔⠈⠀⠀⡠⠊⠀⠀⡿⣿⣿⡇
-⠀⠀⠀⢀⠇⠀⠀⠀⠀⢀⣀⠤⡤⠵⠊⢸⠀⡠⠤⠤⠐⠉⠀⠀⠀⠀⣷⣿⢿⡇
-⠀⠀⢀⠃⠀⢀⣀⣀⣀⣠⣀⣀⣿⠉⠉⠉⠉⠀⠀
-            )" << endl;
-    }
-
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-        cout << mobName << " 의 공격력이 5 증가합니다." << endl;
-        cout << mobName << "의 명중률이 50 증가합니다." << endl;
-        cout << mobName << "의 회피율이 0.5 증가합니다." << endl;
-        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
-        mobHealth += 20;
-        mobAttack += 5;
-        mobAccuracy += 50;
-        mobEvasion += 0.5;
-        return mobAttack * 2;
-    }
-};
+//class GGD : public Monster // 보스
+//{
+//
+//public:
+//    GGD()
+//    {
+//        mobName = "고길동";
+//        mobHealth = 20;
+//        mobAttack = 10;
+//        mobMana = 0;
+//        mobMaxMana = 3;
+//        mobAttackSpeed = 1;
+//        mobAccuracy = 50 + 20;
+//        mobEvasion = 1;
+//        loot = new MonsterLoot("가시고기의 갈비뼈", 20);
+//    }
+//
+//   /* void mobFace()
+//    {
+//            cout << R"(
+//⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⢷⣷⣣⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⢏⣿⣿⡵⡀⠀⠀⠀⠀⠀⠀⠀
+//⠀⠀⠀⠀⣠⣮⣷⣿⣿⣿⣿⣷⣄⣄⠀⠀⠀⠀⠈⢞⣿⣿⡵⡀⠀⠀⠀⠀⠀
+// ⠀⠀⡠⣿⣿⣿⣿⣿⣿⣿⣿⣧⣏⢦⣤⡀⠀⠀⠀⠫⣻⣿⣾⢄⠀⠀⠀
+// ⠀⣔⣿⣿⣿⣿⣿⠿⣿⠻⢟⣿⣿⣿⣿⣿⡆⠀⠀⠀⠑⡿⣿⣯⢆⠀⠀
+// ⢰⣸⢿⣻⢟⠃⠉⠉⠀⡠⠤⠸⣸⣿⣿⣿⡳⠁⠀⠀⠀⠀⡨⠺⠿⠇⢓⡄
+// ⠧⠊⠁⠘⣖⣳⠠⣶⣋⡹⠁⠀⠛⣩⢻⠋⠀⠀⠀⠀⠀⢀⠇⠀⠀⠀⠀⢾⠀
+//⠀⠀⢠⠂⠁⠓⠒⠊⠀⡠⠤⡀⢠⠀⠚⠀⠀⠀⠀⠀⡠⠊⢀⠤⡤⣔⠩⠼⡀
+//⠀⠀⢇⠀⠀⢀⡠⢔⣪⠠⠖⠇⡘⠀⠀⠀⢀⠄⠒⠉⢀⠔⠁⠀⣧⢞⠮⠭⠵⡀
+//⠀⠀⠘⠒⠉⣾⣀⣀⠀⣀⣀⠦⠗⠹⠙⠃⠁⠀⡠⠔⡡⠔⠒⠉⡨⢴⢹⣿⣏⡆
+//⠀⠀⠀⠀⡸⠉⠀⠀⠁⠀⠀⠀⠀⣇⡠⡄⡶⠯⠔⠈⠀⠀⡠⠊⠀⠀⡿⣿⣿⡇
+//⠀⠀⠀⢀⠇⠀⠀⠀⠀⢀⣀⠤⡤⠵⠊⢸⠀⡠⠤⠤⠐⠉⠀⠀⠀⠀⣷⣿⢿⡇
+//⠀⠀⢀⠃⠀⢀⣀⣀⣀⣠⣀⣀⣿⠉⠉⠉⠉⠀⠀
+//            )" << endl;
+//    }*/
+//
+//    int useMobSkill() override
+//    {
+//        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
+//        cout << mobName << " 의 공격력이 5 증가합니다." << endl;
+//        cout << mobName << "의 명중률이 50 증가합니다." << endl;
+//        cout << mobName << "의 회피율이 0.5 증가합니다." << endl;
+//        cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
+//        mobHealth += 20;
+//        mobAttack += 5;
+//        mobAccuracy += 50;
+//        mobEvasion += 0.5;
+//        return mobAttack * 2;
+//    }
+//};
 
 #endif // MONSTERS_H

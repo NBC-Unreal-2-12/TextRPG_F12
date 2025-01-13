@@ -79,4 +79,17 @@ public:
     }
 };
 
+class MonsterLoot : public Item
+{
+public:
+    MonsterLoot(const string& itemName, int itemPrice)
+        : Item(itemName, itemPrice)
+    {
+    }
+
+    void use(Character* character) override
+    {
+    }
+};
+
 #endif // ITEM_H
