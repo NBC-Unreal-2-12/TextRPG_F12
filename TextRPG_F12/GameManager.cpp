@@ -6,7 +6,11 @@ GameManager* GameManager::instance = nullptr;
 // 상점 방문
 void GameManager::visitShop(Character* player)
 {
-	Shop shop;
+	// 아이템 리스트 초기화
+	ItemManager itemManager;
+	itemManager.initializeDefaultItems();
+
+	Shop shop(itemManager);
 	shop.displayItems();
 
 	int choice;
