@@ -13,82 +13,84 @@ class Monster {
 public:
     virtual ~Monster() = default;
 
-    string getName() {
-        return this->name;
+    string getMobName() {
+        return this->mobName;
     }
 
-    int getHealth() {
+    int getMobHealth() {
         return this->mobHealth;
     }
 
-    int getAttack() {
+    int getMobAttack() {
         return this->mobAttack;
     }
 
-    int getMana() {
+    int getMobMana() {
         return this->mobMana;
     }
 
-    int getMaxMana() {
+    int getMobMaxMana() {
         return this->mobMaxMana;
     }
 
-    int getSpeed() {
-        return this->mobSpeed;
+    int getMobAttackSpeed() {
+        return this->mobAttackSpeed;
     }
 
-    int getAccuracy() {
+    int getMobAccuracy() {
         return this->mobAccuracy;
     }
 
-    double getEvasion() {
+    double getMobEvasion() {
         return this->mobEvasion;
     }
 
-    virtual int useSkill() = 0;
+    bool isMobDead() {
+        return this->mobHealth <= 0;
+    }
 
-    int useAttack() { // 몬스터가 공격할 때
+    virtual int useMobSkill() = 0;
+
+    int useMobAttack() { // 몬스터가 공격할 때
         if (mobMana < mobMaxMana) { // mobMaxMana만큼 Attack
             mobMana++; // 공격할 때 마다 마나++
             return mobAttack;
         }
         else {
             mobMana = 0; // 마나 초기화
-            return useSkill(); // 스킬 호출
+            return useMobSkill(); // 스킬 호출
         }
     }
 
-    bool isMonsterDie() {
-        return this->mobHealth <= 0;
-    }
 
-    void takeDamage(int damage) { // 몬스터가 공격 받을 때
+
+    void takeMobDamage(int damage) { // 몬스터가 공격 받을 때
         this->mobHealth -= damage;
         if (this->mobHealth <= 0) {
             this->mobHealth = 0;
         }
-        cout << this->name << " 이 " << damage << " 데미지 받음. 남은 체력 : " << this->mobHealth << endl;
+        cout << this->mobName << " 이 " << damage << " 데미지 받음. 남은 체력 : " << this->mobHealth << endl;
     }
 
-    void getInterface() {
-        cout << "이름 : " << this->name << endl;
+    void getMobInterface() {
+        cout << "이름 : " << this->mobName << endl;
         cout << "체력 : " << this->mobHealth << endl;
         cout << "공격력 : " << this->mobAttack << endl;
         cout << "현재 마나 : " << this->mobMana << endl;
         cout << "최대 마나 : " << this->mobMaxMana << endl;
-        cout << "속도 : " << this->mobSpeed << endl;
+        cout << "속도 : " << this->mobAttackSpeed << endl;
         cout << "명중률 : " << this->mobAccuracy << endl;
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
 
 protected:
-    string name = "Unknown";
+    string mobName = "Unknown";
     int mobHealth = 99;
     int mobAttack = 99;
     int mobMana = 99;
     int mobMaxMana = 99;
-    int mobSpeed = 99;
+    int mobAttackSpeed = 99;
     int mobAccuracy = 99;
     double mobEvasion = 99;
 };
@@ -100,18 +102,18 @@ protected:
 class Goblin : public Monster { //고블린
 
 public:
-    Goblin(int level) {
-        name = "Goblin";
-        mobHealth = level * 20;
-        mobAttack = (level * 10);
+    Goblin() {
+        mobName = "Goblin";
+        mobHealth = 20;
+        mobAttack = 10;
         mobMana = 0;
         mobMaxMana = 3;
-        mobSpeed = level;
-        mobAccuracy = 50 + (level * 20);
-        mobEvasion = 1 + (level * 0.05f);
+        mobAttackSpeed = 1;
+        mobAccuracy = 50 + 20;
+        mobEvasion = 1;
     }
 
-    int useSkill() override {
+    int useMobSkill() override {
         return mobAttack * 2;
     }
 };
@@ -119,18 +121,18 @@ public:
 class Orc : public Monster { // 오크
 
 public:
-    Orc(int level) {
-        name = "Orc";
-        mobHealth = level * 20;
-        mobAttack = (level * 10);
+    Orc() {
+        mobName = "Orc";
+        mobHealth = 20;
+        mobAttack = 10;
         mobMana = 0;
         mobMaxMana = 3;
-        mobSpeed = level;
-        mobAccuracy = 50 + (level * 20);
-        mobEvasion = 1 + (level * 0.05f);
+        mobAttackSpeed = 1;
+        mobAccuracy = 50 + 20;
+        mobEvasion = 1;
     }
 
-    int useSkill() override {
+    int useMobSkill() override {
         return mobAttack * 2;
     }
 };
@@ -138,19 +140,19 @@ public:
 class Slime : public Monster { // 슬라임
 
 public:
-    Slime(int level) {
-        name = "Slime";
-        mobHealth = level * 20;
-        mobAttack = (level * 10);
+    Slime() {
+        mobName = "Slime";
+        mobHealth = 20;
+        mobAttack = 10;
         mobMana = 0;
         mobMaxMana = 3;
-        mobSpeed = level;
-        mobAccuracy = 50 + (level * 20);
-        mobEvasion = 1 + (level * 0.05f);
+        mobAttackSpeed = 1;
+        mobAccuracy = 50 + 20;
+        mobEvasion = 1;
     }
 
 
-    int useSkill() override {
+    int useMobSkill() override {
         return mobAttack * 2;
     }
 };
@@ -158,18 +160,18 @@ public:
 class BossMonster : public Monster { // 보스
 
 public:
-    BossMonster(int level) {
-        name = "BossMonster";
-        mobHealth = level * 20;
-        mobAttack = (level * 10);
+    BossMonster() {
+        mobName = "BossMonster";
+        mobHealth = 20;
+        mobAttack = 10;
         mobMana = 0;
         mobMaxMana = 3;
-        mobSpeed = level;
-        mobAccuracy = 50 + (level * 20);
-        mobEvasion = 1 + (level * 0.05f);
+        mobAttackSpeed = 1;
+        mobAccuracy = 50 + 20;
+        mobEvasion = 1;
     }
 
-    int useSkill() override {
+    int useMobSkill() override {
         return mobAttack * 2;
     }
 };
