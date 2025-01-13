@@ -19,7 +19,8 @@ using namespace std;
 
 int main()
 {
-	GameManager::getInstance()->InitializeGame();
+	GameManager* gameManager = GameManager::getInstance();
+	gameManager->InitializeGame();
 
 
 }
