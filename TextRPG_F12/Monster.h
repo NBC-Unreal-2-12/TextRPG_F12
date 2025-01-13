@@ -13,7 +13,11 @@ using namespace std;
 class Monster
 {
 public:
-    Monster(const string& monster) {}
+    Monster() {};
+
+    Monster(const std::string& name) : name(name) // 멤버 변수 초기화 { }
+
+    string name;
 
     virtual ~Monster() = default;
 
