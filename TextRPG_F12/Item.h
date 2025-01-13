@@ -10,22 +10,17 @@ class Character;
 class Item 
 {
 protected:
-    int index; // Item의 인덱스
     string name; // 아이템 이름
     int price; // 아이템 가격
 
 public:
-    Item(int idx, const string& itemName, int itemPrice)
-        : index(idx), name(itemName), price(itemPrice) 
+    Item(const string& itemName, int itemPrice)
+        : name(itemName), price(itemPrice) 
     {
     }
 
     virtual ~Item() = default;
 
-    int getIndex() const 
-    {
-        return index; 
-    }
     string getName() const 
     {
         return name;
@@ -44,8 +39,8 @@ private:
     int healthRestore; // 회복량
 
 public:
-    HealthPotion(int idx, const string& itemName, int itemPrice, int restoreAmount)
-        : Item(idx, itemName, itemPrice), healthRestore(restoreAmount) 
+    HealthPotion(const string& itemName, int itemPrice, int restoreAmount)
+        : Item(itemName, itemPrice), healthRestore(restoreAmount) 
     {
     }
 
@@ -58,8 +53,8 @@ private:
     int manaRestore; // 마나 회복량
 
 public:
-    ManaPotion(int idx, const string& itemName, int itemPrice, int restoreAmount)
-        : Item(idx, itemName, itemPrice), manaRestore(restoreAmount) 
+    ManaPotion(const string& itemName, int itemPrice, int restoreAmount)
+        : Item(itemName, itemPrice), manaRestore(restoreAmount) 
     {
     }
 
@@ -74,8 +69,8 @@ private:
     int attackIncrease; // 공격력 증가량
 
 public:
-    AttackBoost(int idx, const string& itemName, int itemPrice, int increaseAmount)
-        : Item(idx, itemName, itemPrice), attackIncrease(increaseAmount) 
+    AttackBoost(const string& itemName, int itemPrice, int increaseAmount)
+        : Item(itemName, itemPrice), attackIncrease(increaseAmount) 
     {
     }
 

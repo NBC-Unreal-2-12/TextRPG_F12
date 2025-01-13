@@ -5,24 +5,27 @@
 #include <algorithm>
 #include <iostream>
 
+class ItemManager;
+
 class Shop 
 {
 private:
 	struct StockItem
 	{
+		int index;
 		Item* item;   // 아이템 포인터
 		int quantity; // 재고 수량
 
-		StockItem(Item* _item, int _quantity = 5);
+		StockItem(int index, Item* _item, int _quantity = 5);
 	};
 
 	std::vector<StockItem> stock;
+	bool isValidIndex(int index) const;
 
 public:
-	Shop() 
-	{
-	}
 	~Shop() = default;
+
+	Shop(ItemManager& itemManager);
 
 	void displayItems();
 	void buyItem(int index, Character* player);

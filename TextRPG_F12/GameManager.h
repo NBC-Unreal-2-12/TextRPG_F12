@@ -11,6 +11,7 @@
 #include "Inventory.h"
 #include "BattleManager.h"
 #include "Item.h"
+#include "ItemManager.h"
 #include "Monster.h"
 
 using namespace std;
