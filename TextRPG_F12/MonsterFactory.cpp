@@ -43,9 +43,7 @@ std::unique_ptr<BossMonster> createBossMonster()
 {
     int randomType = std::rand() % 3; // 0, 1, 2 중 랜덤
     switch (randomType) {
-    case 0: return std::make_unique<EliteSlime>();
-    case 1: return std::make_unique<EliteOrc>();
-    case 2: return std::make_unique<EliteGoblin>();
+    case 0: return std::make_unique<GGD>();
     default: return nullptr;
     }
 }
