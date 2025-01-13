@@ -82,6 +82,10 @@ public:
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
+    Item* dropItem()
+    {
+        return loot;
+    }
 
 protected:
     string mobName = "Unknown";
@@ -92,6 +96,7 @@ protected:
     int mobMaxMana = 99;
     int mobAccuracy = 99;
     double mobEvasion = 99;
+    Item* loot;
 };
 
 
@@ -109,6 +114,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("고블린의 작은 동전", 20);
 //    }
 //
 //    /*void mobFace() override
