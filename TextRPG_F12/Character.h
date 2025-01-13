@@ -35,8 +35,8 @@ private:
 public:
     Character(const Character&) = delete;
     Character& operator=(const Character&) = delete;
-	static void initialize(string userName, Job* characterJob);
-	static Character* getInstance();
+	static void initialize(string userName, Job* characterJob);	// 인스턴스 초기화
+	static Character* getInstance();				// 인스턴스 가져오기
 	void displayStatus();   // 현재 상태 출력
 	void levelUp();     // 레벨업
 	void useItem(Item* item);   // 아이템 사용   
@@ -46,6 +46,8 @@ public:
 	void displayInventory(); // 인벤토리 표시
 	int getGold(); // 골드 getter
 	void setGold(int sellPrice); // 골드 setter
+	int getExp();				// 경험치 getter
+	void setExp(int set_exp);	// 경험치 setter
 	bool isCharacterDead();		 // 사망 여부 getter
 	int getHealth();                // health getter
     int getMP();                    // mp getter

@@ -92,6 +92,14 @@ void Character::setGold(int sellPrice)
 {
     gold += sellPrice;
 }
+int Character::getExp()
+{
+    return experience;
+}
+void Character::setExp(int set_exp)
+{
+	experience = set_exp;
+}
 bool Character::isCharacterDead()
 {
     return isDead;
@@ -169,7 +177,7 @@ void Character::useSkill(Monster& target)
     }
 
     // 스킬의 데미지 배율 가져오기
-    float damageFactor = skill->getDamageFactor();
+    double damageFactor = skill->getDamageFactor();
 
     // 데미지 계산
     int damage = static_cast<int>(attack * damageFactor);
