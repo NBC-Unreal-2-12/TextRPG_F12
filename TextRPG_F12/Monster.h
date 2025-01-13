@@ -14,40 +14,9 @@ class Monster
 public:
     virtual ~Monster() = default;
 
-<<<<<<< Updated upstream
-    string getMobName() {
-        return this->mobName;
-    }
-
-    int getMobHealth() {
-        return this->mobHealth;
-    }
-
-    int getMobAttack() {
-        return this->mobAttack;
-    }
-
-    int getMobMana() {
-        return this->mobMana;
-    }
-
-    int getMobMaxMana() {
-        return this->mobMaxMana;
-    }
-
-    int getMobAttackSpeed() {
-        return this->mobAttackSpeed;
-    }
-
-    int getMobAccuracy() {
-        return this->mobAccuracy;
-    }
-
-    double getMobEvasion() {
-=======
     string getName() 
     {
-        return this->name;
+        return this->mobName;
     }
 
     int getHealth() 
@@ -75,9 +44,7 @@ public:
         return this->mobAccuracy;
     }
 
-    float getEvasion() 
-    {
->>>>>>> Stashed changes
+    float getEvasion() {
         return this->mobEvasion;
     }
 
@@ -85,40 +52,26 @@ public:
         return this->mobHealth <= 0;
     }
 
-<<<<<<< Updated upstream
-    virtual int useMobSkill() = 0;
-
-    int useMobAttack() { // 몬스터가 공격할 때
+    int getAttack() {
         if (mobMana < mobMaxMana) { // mobMaxMana만큼 Attack
-=======
-    int getAttack() 
-    {
-        if (mobMana < mobMaxMana)
-        { // mobMaxMana만큼 Attack
->>>>>>> Stashed changes
             mobMana++; // 공격할 때 마다 마나++
             return mobAttack;
         }
         else 
         {
             mobMana = 0; // 마나 초기화
-            return useMobSkill(); // 스킬 호출
+            // 스킬 호출 useMobSkill();
+            return 0;
         }
     }
 
-<<<<<<< Updated upstream
-
-
-    void takeMobDamage(int damage) { // 몬스터가 공격 받을 때
-=======
     bool isMonsterDie() 
     {
         return this->mobHealth <= 0;
     }
 
-    void takeDamage(int damage)
+    void takeDamage(int damage) 
     {
->>>>>>> Stashed changes
         this->mobHealth -= damage;
         if (this->mobHealth <= 0) 
         {
@@ -127,14 +80,9 @@ public:
         cout << this->mobName << " 이 " << damage << " 데미지 받음. 남은 체력 : " << this->mobHealth << endl;
     }
 
-<<<<<<< Updated upstream
-    void getMobInterface() {
-        cout << "이름 : " << this->mobName << endl;
-=======
-    void getInterface()
+    void getInterface() 
     {
-        cout << "이름 : " << this->name << endl;
->>>>>>> Stashed changes
+        cout << "이름 : " << this->mobName << endl;
         cout << "체력 : " << this->mobHealth << endl;
         cout << "공격력 : " << this->mobAttack << endl;
         cout << "현재 마나 : " << this->mobMana << endl;
@@ -144,11 +92,17 @@ public:
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
+    int getSkill()
+    {
+        return mobAttack * 2;
+    }
+
 
 protected:
     string mobName = "Unknown";
     int mobHealth = 99;
     int mobAttack = 99;
+    int mobSpeed = 99;
     int mobMana = 99;
     int mobMaxMana = 99;
     int mobAttackSpeed = 99;
@@ -156,72 +110,37 @@ protected:
     double mobEvasion = 99;
 };
 
-
-
-
-
 class Goblin : public Monster 
 { //고블린
 
 public:
-<<<<<<< Updated upstream
-    Goblin() {
-        mobName = "Goblin";
-        mobHealth = 20;
-        mobAttack = 10;
-=======
     Goblin(int level) 
     {
-        name = "Goblin";
+        mobName = "Goblin";
         mobHealth = level * 20;
         mobAttack = (level * 10);
->>>>>>> Stashed changes
         mobMana = 0;
         mobMaxMana = 3;
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-    }
-
-<<<<<<< Updated upstream
-    int useMobSkill() override {
-=======
-    int getSkill() override
-    {
->>>>>>> Stashed changes
-        return mobAttack * 2;
     }
 };
 
-class Orc : public Monster { // 오크
+class Orc : public Monster
+{ // 오크
 
 public:
-<<<<<<< Updated upstream
-    Orc() {
-        mobName = "Orc";
-        mobHealth = 20;
-        mobAttack = 10;
-=======
-    Orc(int level) 
+    Orc(int level)
     {
-        name = "Orc";
+        mobName = "Orc";
         mobHealth = level * 20;
         mobAttack = (level * 10);
->>>>>>> Stashed changes
         mobMana = 0;
         mobMaxMana = 3;
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-    }
-
-<<<<<<< Updated upstream
-    int useMobSkill() override {
-=======
-    int getSkill() override 
-    {
->>>>>>> Stashed changes
-        return mobAttack * 2;
     }
 };
 
@@ -229,18 +148,11 @@ class Slime : public Monster
 { // 슬라임
 
 public:
-<<<<<<< Updated upstream
-    Slime() {
-        mobName = "Slime";
-        mobHealth = 20;
-        mobAttack = 10;
-=======
-    Slime(int level)
+    Slime(int level) 
     {
-        name = "Slime";
+        mobName = "Slime";
         mobHealth = level * 20;
         mobAttack = (level * 10);
->>>>>>> Stashed changes
         mobMana = 0;
         mobMaxMana = 3;
         mobAttackSpeed = 1;
@@ -248,33 +160,17 @@ public:
         mobEvasion = 1;
     }
 
-
-<<<<<<< Updated upstream
-    int useMobSkill() override {
-=======
-    int getSkill() override 
-    {
->>>>>>> Stashed changes
-        return mobAttack * 2;
-    }
 };
 
 class BossMonster : public Monster 
 { // 보스
 
 public:
-<<<<<<< Updated upstream
-    BossMonster() {
-        mobName = "BossMonster";
-        mobHealth = 20;
-        mobAttack = 10;
-=======
     BossMonster(int level)
     {
-        name = "BossMonster";
+        mobName = "BossMonster";
         mobHealth = level * 20;
         mobAttack = (level * 10);
->>>>>>> Stashed changes
         mobMana = 0;
         mobMaxMana = 3;
         mobAttackSpeed = 1;
@@ -282,14 +178,6 @@ public:
         mobEvasion = 1;
     }
 
-<<<<<<< Updated upstream
-    int useMobSkill() override {
-=======
-    int getSkill() override 
-    {
->>>>>>> Stashed changes
-        return mobAttack * 2;
-    }
 };
 
 #endif // MONSTERS_H
