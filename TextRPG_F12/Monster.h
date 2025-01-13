@@ -36,6 +36,8 @@ public:
 
     virtual int useMobSkill() = 0;
 
+    virtual void mobFace() = 0;
+
     int useMobAttack() // 몬스터가 공격할 때
     {
         if (mobMana < mobMaxMana) // mobMaxMana만큼 Attack
@@ -62,6 +64,7 @@ public:
 
     void getMobInterface()
     {
+        mobFace();
         cout << "이름 : " << this->mobName << endl;
         cout << "체력 : " << this->mobHealth << endl;
         cout << "공격력 : " << this->mobAttack << endl;
@@ -104,6 +107,20 @@ public:
         mobEvasion = 1;
     }
 
+    void mobFace() override
+    {
+        cout << "⠀⠀ ⠀⣠⣴⣾⣿⣿⣷⣶⣤⠀ ⠀⠀⠀" << endl;
+        cout << "⣇⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⣰" << endl;
+        cout << "⢸⣷⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣧⣾⡏" << endl;
+        cout << "⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀" << endl;
+        cout << "⠘⣿⣿⣏⠻⣿⣿⣿⡟⣩⣿⣿⣿⠀⠀" << endl;
+        cout << "  ⠈⠻⣿⣿⣿⢿⣿⣿⣿⣿⡛⠀⠀" << endl;
+        cout << "⠀  ⠀⢻⡟⡿⣿⡾⡿⣿⠟⠀⠀⠀ " << endl;
+        cout << "     ⠀⢿⣦⣀⣠⣽⠏⠀⠀⠀ ⠀" << endl;
+        cout << "⠀⠀⠀ ⠀⠈⠿⣿⡿⠏⠀⠀⠀    " << endl;
+    }
+
+
     int useMobSkill() override
     {
         return mobAttack * 2;
@@ -124,6 +141,21 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+    }
+
+    void mobFace() override
+    {
+            cout << "⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⣻⣿⣿⣿⣿⣿⣆⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣂⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⣸⣿⢿⣿⣿⣿⡌⠹⣿⡄" << endl;
+            cout << "⠀⠀⠀⠀⢠⣿⠇⣺⣿⣿⣿⣷⠄⢹⡯" << endl;
+            cout << "⠀⠀⠀⠀⢰⣿⣦⣿⣿⣿⣿⣿⣇⠴⣿" << endl;
+            cout << "⠀⠀⠀⢀⡾⠏⣰⣿⣿⠿⣿⣿⠻⠀⠉" << endl;
+            cout << "⠀⣀⣶⡿⠁⠀⣺⣿⡃⠈⣿⣿⠀⠀⠀" << endl;
+            cout << "⣼⣿⡿⠁⠀⠀⠺⣿⡇⠀⠹⣿⡇⠀⠀" << endl;
+            cout << "⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀" << endl;
     }
 
     int useMobSkill() override
@@ -149,6 +181,15 @@ public:
         mobEvasion = 1;
     }
 
+    void mobFace() override
+    {
+            cout << "⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⣀⣾⠀⠀⠀⠈⡆⠀⠀⠀" << endl;
+            cout << "⠀⢀⣴⣶⣿⣿⣿⣷⣄⠀⠀⡆⠀⠀⠀" << endl;
+            cout << "⢰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠐⠀⣀⡀⠀" << endl;
+            cout << "⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀" << endl;
+            cout << "⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀" << endl;
+    }
 
     int useMobSkill() override
     {
@@ -175,6 +216,19 @@ public:
         mobEvasion = 1;
     }
 
+    void mobFace() override
+    {
+        cout << "⠀⠀ ⠀⣠⣴⣾⣿⣿⣷⣶⣤⠀ ⠀⠀⠀" << endl;
+        cout << "⣇⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⣰" << endl;
+        cout << "⢸⣷⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣧⣾⡏" << endl;
+        cout << "⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀" << endl;
+        cout << "⠘⣿⣿⣏⠻⣿⣿⣿⡟⣩⣿⣿⣿⠀⠀" << endl;
+        cout << "  ⠈⠻⣿⣿⣿⢿⣿⣿⣿⣿⡛⠀⠀" << endl;
+        cout << "⠀  ⠀⢻⡟⡿⣿⡾⡿⣿⠟⠀⠀⠀ " << endl;
+        cout << "     ⠀⢿⣦⣀⣠⣽⠏⠀⠀⠀ ⠀" << endl;
+        cout << "⠀⠀⠀ ⠀⠈⠿⣿⡿⠏⠀⠀⠀    " << endl;
+    }
+
     int useMobSkill() override
     {
         return mobAttack * 2;
@@ -195,6 +249,21 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+    }
+
+    void mobFace() override
+    {
+        cout << "⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀" << endl;
+        cout << "⠀⠀⠀⠀⠀⠀⣻⣿⣿⣿⣿⣿⣆⠀⠀" << endl;
+        cout << "⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣂⠀" << endl;
+        cout << "⠀⠀⠀⠀⠀⣸⣿⢿⣿⣿⣿⡌⠹⣿⡄" << endl;
+        cout << "⠀⠀⠀⠀⢠⣿⠇⣺⣿⣿⣿⣷⠄⢹⡯" << endl;
+        cout << "⠀⠀⠀⠀⢰⣿⣦⣿⣿⣿⣿⣿⣇⠴⣿" << endl;
+        cout << "⠀⠀⠀⢀⡾⠏⣰⣿⣿⠿⣿⣿⠻⠀⠉" << endl;
+        cout << "⠀⣀⣶⡿⠁⠀⣺⣿⡃⠈⣿⣿⠀⠀⠀" << endl;
+        cout << "⣼⣿⡿⠁⠀⠀⠺⣿⡇⠀⠹⣿⡇⠀⠀" << endl;
+        cout << "⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀" << endl;
+        cout << "⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀" << endl;
     }
 
     int useMobSkill() override
@@ -220,6 +289,16 @@ public:
         mobEvasion = 1;
     }
 
+    void mobFace() override
+    {
+        cout << "⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀" << endl;
+        cout << "⠀⠀⠀⠀⠀⣀⣾⠀⠀⠀⠈⡆⠀⠀⠀" << endl;
+        cout << "⠀⢀⣴⣶⣿⣿⣿⣷⣄⠀⠀⡆⠀⠀⠀" << endl;
+        cout << "⢰⣿⣿⣿⣿⣿⣿⣿⣿⣆⠐⠀⣀⡀⠀" << endl;
+        cout << "⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀" << endl;
+        cout << "⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀" << endl;
+    }
+
     int useMobSkill() override
     {
         mobHealth += 20;
@@ -243,6 +322,19 @@ public:
         mobEvasion = 1;
     }
 
+    void mobFace() override
+    {
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⣠⣠⣤⣄⠀⠈⣿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⣼⡿⠋⢉⣿⠀⢀⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠝⠀⢠⣾⣿⣠⣾⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⣾⣿⣿⣿⣟⠛⢽⠟⠫⣿⣿⡆⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠘⣿⢿⣿⣿⣷⣆⠀⠀⠉⠉⠇⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⣸⠽⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⣴⠃⠀⣹⣻⡾⠿⣿⣶⣿⠟⠒⠢⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠁⠀⠀⠀⠀⠈⠀⠀⠈⠀⠀⠀⠀⠈⠁⠀" << endl;
+    }
+
     int useMobSkill() override
     {
         return mobAttack * 2;
@@ -263,6 +355,19 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+    }
+
+    void mobFace()
+    {
+            cout << "⠀⠀⠀⠀⠀⢰⡄⠀⠀⠀⠀⠀⠀⢴⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀ ⠀⠀ ⣾⣝⠀⠀ ⠀⠀ ⣿⣣⡀⠀     " << endl;
+            cout << "⠀⠀ ⠀⣺⣽⣻⣄⣀⣡⢤⣰⣺⣟⣿⣳⡄⠀⠀⠀" << endl;
+            cout << "   ⠀⣸⣟⢷⢫⢕⢟⡾⡿⣽⢞⡽⣽⣷⢿⡄⠈⠀" << endl;
+            cout << "   ⠀⣿⢾⣻⢔⡕⡽⡪⡹⢽⣳⢿⣻⣽⣟⣷⠀⠀" << endl;
+            cout << "⠀⠀⢀⢻⣳⣽⢝⣪⢧⡱⣨⣟⣮⣫⢾⡿⣟⣿⠅⠀" << endl;
+            cout << "⠀⠙⢭⢧⢳⡹⠀⢈⣨⣟⡵⣧⢮⡳⡕⠇⠈⠻⠁⠀" << endl;
+            cout << " ⠀⠀⠀⠀⠀⠐⢽⣺⣏⠙⠱⣯⣗⠀⠀⠀⠀ ⠀" << endl;
+            cout << "       ⠀⢀⣤⣮⡏⠀⢠⢿⣦⠀⠀ ⠀⠀⠀" << endl;
     }
 
     int useMobSkill() override
@@ -288,6 +393,20 @@ public:
         mobEvasion = 1;
     }
 
+    void mobFace()
+    {
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⡀⠀⣾⣿⣿⣿⣿⣷⠀⠀⡀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠍⣹⢆⢿⣿⣿⣿⣿⡿⡰⣏⠩⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⣰⡏⣼⢨⢿⣿⣿⡿⡅⣇⢹⣦⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⣿⣧⣛⣶⣷⣿⣿⣾⣶⣛⣼⣿⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⣼⡿⠾⣪⣾⡿⢿⣷⣕⠷⢿⣧⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠻⠿⢹⣿⠉⢲⡖⠉⣿⡏⠿⠟⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⠈⠛⠛⠁⠈⠛⠛⠁⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+    }
+
     int useMobSkill() override
     {
         mobHealth += 20;
@@ -309,6 +428,28 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+    }
+
+    void mobFace()
+    {
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⢠⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢨⡇⠄⠀⠀⠀⡀⡿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡶⣸⠀⠀⢠⣣⢯⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⢨⢳⢯⡲⣔⢼⢧⡏⠄⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⢀⣔⢶⢵⣲⡲⣄⡀⠐⢽⢯⣻⣽⣻⣻⠍⠀⣀⣵⡲⡦⣷⢲⣁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⡳⣳⢽⣝⣾⢮⡫⣟⣶⣼⣻⣟⢮⡷⣯⢦⣿⡓⣕⢷⣻⡺⡾⣵⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⢄⡼⣝⣯⣳⣟⡽⡼⣸⢿⣗⡷⣽⡯⣯⣟⣿⢷⣹⢺⣻⢷⣻⢯⣳⣅⠔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠹⠛⠞⠁⠁⠋⠚⣿⣻⣯⣟⣯⣿⡷⣟⣿⢿⡳⠙⠊⠁⠙⠞⠛⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⠀⠀⢀⢤⢾⠍⠂⠀⠸⡽⣾⣯⢿⣽⣟⣿⣽⣫⠁⠀⠈⠶⡧⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⢀⣴⢿⣝⣟⢶⣀⣤⣾⢯⣟⣾⣻⡽⣾⣻⣞⣮⣦⣄⡤⡟⣟⣽⢷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⣠⣿⣟⣿⢷⡗⡿⢿⣻⡵⣗⢎⢎⣞⣽⡱⡕⡖⣞⣽⢟⡿⢯⣷⢿⣻⣟⣯⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⡴⣿⢿⣯⣿⢹⠁⡞⡷⣹⢿⣽⢷⡽⡾⣞⡷⣽⣽⣽⡾⣝⡮⣣⠹⢸⡿⣿⢿⣳⡄⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠠⠩⣿⡿⢚⣞⣄⡄⡑⡩⣾⣟⣯⣳⢝⣜⣗⣝⡼⡺⡽⣿⣎⠱⣁⢄⣜⣟⠺⣿⣗⠱⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⢫⣿⡏⢼⢾⣻⣻⣿⡿⣯⣧⡣⡣⡕⣍⢯⢲⢱⡱⢭⣻⣽⣿⢿⣻⣿⣺⠆⣿⡟⠕⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⢺⢹⠂⠘⣿⢿⣽⢷⣿⡿⣺⢪⡣⢷⢽⡟⡗⡗⡝⣗⣟⣯⣿⢿⣽⢿⡞⠀⢸⠹⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠘⠀⠀⠈⣻⡿⣿⣷⣿⣯⢷⡽⣕⣯⣷⣽⣪⢯⣺⣾⢿⣽⣿⣟⣯⡀⠀⠸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠀⣀⡀⣀⢜⡿⣿⢾⢷⣿⣽⣾⣽⡾⣗⣷⣳⣿⣽⣾⢿⣻⡽⣟⢾⢿⢷⡲⣤⡠⡀⡀⠀⠀⠀⠀⠀⠀" << endl;
+            cout << "⠀⠀⠜⠞⠮⠾⠗⠿⠻⠻⠟⠺⠺⡽⠾⠿⢟⠿⠽⡳⡻⠺⠽⠟⠿⠯⠾⠞⠞⠾⠺⠻⠻⠻⠳⠷⠳⠴⠴⠤" << endl;
     }
 
     int useMobSkill() override
