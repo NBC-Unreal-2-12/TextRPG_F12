@@ -13,6 +13,7 @@
 #include "Item.h"
 #include "Job.h"
 #include "Monster.h"
+#include "MonsterFactory.h"
 #include "PlayerInput.h"
 #include "Shop.h"
 #include "Skill.h"
@@ -79,6 +80,20 @@ int main()
 
 	battleManager.startBattle(player, monsterPool);*/
 	// startBattle의 인자는 vector<Monster*>보다 Monster*가 적절해 보입니다.
+
+	std::vector<std::unique_ptr<Monster>> monsters;
+
+	// 라운드별 몬스터 생성
+	// 한 번에 여러마리를 생성하게 되면 for문으로 가능.
+	MonsterFactory* mf = new MonsterFactory();
+	for (int i = 0;i < 3;i++) monsters.push_back(mf->createMonster(1));
+
+	// 생성된 몬스터 출력
+	for (auto& w : monsters)
+	{
+		std::cout << "A wild " << typeid(*w).name() << " appeared!\n";
+		w->useMobAttack();
+	}
 
 	clearConsole();
 

@@ -10,6 +10,7 @@
 
 class MonsterFactory
 {
+public:
 	std::unique_ptr<Monster> createMonster(int round);
 
 };

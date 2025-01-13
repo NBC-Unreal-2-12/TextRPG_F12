@@ -48,7 +48,7 @@ std::unique_ptr<BossMonster> createBossMonster()
     }
 }
 
-std::unique_ptr<Monster> createMonster(int round) 
+std::unique_ptr<Monster> MonsterFactory::createMonster(int round) 
 {
     // srand() 함수가 unsigned int 타입 값을 인수로 받기 때문에 time_t 타입 변수를 형변환 해준다.
     std::srand(static_cast<unsigned>(std::time(nullptr))); // time(nullptr)이 가리키는 것은 현재 시각
