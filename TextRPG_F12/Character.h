@@ -52,6 +52,7 @@ public:
 	bool isCharacterDead();		 // 사망 여부 getter
 	int getHealth();                // health getter
 	void setHealth(int set_health); // health setter
+	int getMaxHealth();				// maxhealth getter
     int getMP();                    // mp getter
     double getAttack();             // 데미지 getter
     int getAttackSpeed();           // 공격속도 getter

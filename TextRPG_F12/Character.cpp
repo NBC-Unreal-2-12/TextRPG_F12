@@ -110,6 +110,10 @@ void Character::setHealth(int set_health)
 {
 	health = set_health;
 }
+int Character::getMaxHealth()
+{
+    return maxHealth;
+}
 int Character::getMP()
 {
     return mp;
