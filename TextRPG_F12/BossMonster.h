@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "Monster.h"
 
 class BossMonster : public Monster
 {
 public:
-	BossMonster(const std::string& name) // ¸¸¾à º¸½º¸¦ µÎ ¸¶¸® ÀÌ»ó ¸¸µé¸é ÀÎÀÚ°¡ ÇÊ¿äÇØ Áú °Í.
+	BossMonster(const std::string& name) // ë§Œì•½ ë³´ìŠ¤ë¥¼ ë‘ ë§ˆë¦¬ ì´ìƒ ë§Œë“¤ë©´ ì¸ìê°€ í•„ìš”í•´ ì§ˆ ê²ƒ.
 		: Monster(name)
 	{ 
 	}

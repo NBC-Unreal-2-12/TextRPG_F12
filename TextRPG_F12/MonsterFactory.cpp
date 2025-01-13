@@ -1,9 +1,9 @@
-#include "MonsterFactory.h"
-#include <cstdlib> // ³­¼ö »ı¼º ÇÔ¼ö( srand() ) Á¦°ø
-#include <ctime> // srandÀÇ ½Ãµå ¼³Á¤(ÇöÀç½Ã°¢)
+ï»¿#include "MonsterFactory.h"
+#include <cstdlib> // ë‚œìˆ˜ ìƒì„± í•¨ìˆ˜( srand() ) ì œê³µ
+#include <ctime> // srandì˜ ì‹œë“œ ì„¤ì •(í˜„ì¬ì‹œê°)
 
 std::unique_ptr<NormalMonster> createNormalMonster() {
-    int randomType = std::rand() % 3; // 0, 1, 2 Áß ·£´ı
+    int randomType = std::rand() % 3; // 0, 1, 2 ì¤‘ ëœë¤
     switch (randomType) {
     case 0: return std::make_unique<Slime>();
     case 1: return std::make_unique<Orc>();
@@ -13,7 +13,7 @@ std::unique_ptr<NormalMonster> createNormalMonster() {
 }
 
 std::unique_ptr<EliteMonster> createEliteMonster() {
-    int randomType = std::rand() % 3; // 0, 1, 2 Áß ·£´ı
+    int randomType = std::rand() % 3; // 0, 1, 2 ì¤‘ ëœë¤
     switch (randomType) {
     case 0: return std::make_unique<EliteSlime>();
     case 1: return std::make_unique<EliteOrc>();
@@ -23,7 +23,7 @@ std::unique_ptr<EliteMonster> createEliteMonster() {
 }
 
 std::unique_ptr<SpecialMonster> createSpecialMonster() {
-    int randomType = std::rand() % 3; // 0, 1, 2 Áß ·£´ı
+    int randomType = std::rand() % 3; // 0, 1, 2 ì¤‘ ëœë¤
     switch (randomType) {
     case 0: return std::make_unique<Dragon>();
     case 1: return std::make_unique<Balrog>();
@@ -33,7 +33,7 @@ std::unique_ptr<SpecialMonster> createSpecialMonster() {
 }
 
 std::unique_ptr<BossMonster> createBossMonster() {
-    //int randomType = std::rand() % 3; // 0, 1, 2 Áß ·£´ı
+    //int randomType = std::rand() % 3; // 0, 1, 2 ì¤‘ ëœë¤
     //switch (randomType) {
     //case 0: return std::make_unique<EliteSlime>();
     //case 1: return std::make_unique<EliteOrc>();
@@ -43,9 +43,9 @@ std::unique_ptr<BossMonster> createBossMonster() {
 }
 
 std::unique_ptr<Monster> createMonster(int round) {
-    // srand() ÇÔ¼ö°¡ unsigned int Å¸ÀÔ °ªÀ» ÀÎ¼ö·Î ¹Ş±â ¶§¹®¿¡ time_t Å¸ÀÔ º¯¼ö¸¦ Çüº¯È¯ ÇØÁØ´Ù.
-    std::srand(static_cast<unsigned>(std::time(nullptr))); // time(nullptr)ÀÌ °¡¸®Å°´Â °ÍÀº ÇöÀç ½Ã°¢
-    int probability = std::rand() % 100 + 1; // 1~100 »çÀÌ ·£´ı °ª
+    // srand() í•¨ìˆ˜ê°€ unsigned int íƒ€ì… ê°’ì„ ì¸ìˆ˜ë¡œ ë°›ê¸° ë•Œë¬¸ì— time_t íƒ€ì… ë³€ìˆ˜ë¥¼ í˜•ë³€í™˜ í•´ì¤€ë‹¤.
+    std::srand(static_cast<unsigned>(std::time(nullptr))); // time(nullptr)ì´ ê°€ë¦¬í‚¤ëŠ” ê²ƒì€ í˜„ì¬ ì‹œê°
+    int probability = std::rand() % 100 + 1; // 1~100 ì‚¬ì´ ëœë¤ ê°’
 
     if (round <= 5) {
         if (probability <= 80) return createNormalMonster();
@@ -67,7 +67,7 @@ std::unique_ptr<Monster> createMonster(int round) {
     }
 }
 
-// ¾î¶»°Ô ¾µ°Ç°¡?
+// ì–´ë–»ê²Œ ì“¸ê±´ê°€?
 /*
 const int totalRounds = 15;
 
@@ -76,11 +76,11 @@ const int totalRounds = 15;
 
         std::vector<std::unique_ptr<Monster>> monster;
 
-        // ¶ó¿îµåº° ¸ó½ºÅÍ »ı¼º
-        // ÇÑ ¹ø¿¡ ¿©·¯¸¶¸®¸¦ »ı¼ºÇÏ°Ô µÇ¸é for¹®À¸·Î °¡´É.
+        // ë¼ìš´ë“œë³„ ëª¬ìŠ¤í„° ìƒì„±
+        // í•œ ë²ˆì— ì—¬ëŸ¬ë§ˆë¦¬ë¥¼ ìƒì„±í•˜ê²Œ ë˜ë©´ forë¬¸ìœ¼ë¡œ ê°€ëŠ¥.
         monsters.push_back(createMonster(round));
 
-        // »ı¼ºµÈ ¸ó½ºÅÍ Ãâ·Â
+        // ìƒì„±ëœ ëª¬ìŠ¤í„° ì¶œë ¥
         std::cout << "A wild " << typeid(*monster).name() << " appeared!\n";
         monster->useMobAttack();
 
