@@ -88,6 +88,7 @@ int main()
 	// 라운드별 몬스터 생성
 	// 한 번에 여러마리를 생성하게 되면 for문으로 가능.
 	MonsterFactory* mf = new MonsterFactory();
+	mf->setSeed();
 	for (int i = 0;i < 3;i++) monsters.push_back(mf->createMonster(1));
 
 	// 생성된 몬스터 출력
