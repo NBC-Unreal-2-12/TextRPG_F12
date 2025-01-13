@@ -26,7 +26,7 @@ public:
     void processMonsterTurn();
 
     // 전투 시작
-    void startBattle(Character* player, Monster* monster);
+    void startBattle(Character* player, vector<Monster*> monster);
 
     // 전투 종료 처리
     void resolveBattle();
