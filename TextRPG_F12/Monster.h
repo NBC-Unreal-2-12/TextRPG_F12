@@ -12,74 +12,103 @@ using namespace std;
 class Monster {
 public:
     virtual ~Monster() = default;
-    virtual string getName() = 0;
-    virtual int getHealth() = 0;
-    virtual int getAttack() = 0;
+
+    string getName() {
+        return this->name;
+    }
+
+    int getHealth() {
+        return this->mobHealth;
+    }
+
+    int getMana() {
+        return this->mobMana;
+    }
+
+    int getMaxMana() {
+        return this->mobMaxMana;
+    }
+
+    int getSpeed() {
+        return this->mobSpeed;
+    }
+
+    int getAccuracy() {
+        return this->mobAccuracy;
+    }
+
+    float getEvasion() {
+        return this->mobEvasion;
+    }
+
     virtual int getSkill() = 0;
 
-    bool isMonsterDie() {
-        if (this->health <= 0) {
-            return true;
+    int getAttack() {
+        if (mobMana < mobMaxMana) { // mobMaxMana만큼 Attack
+            mobMana++; // 공격할 때 마다 마나++
+            return mobAttack;
         }
         else {
-            return false;
+            mobMana = 0; // 마나 초기화
+            return getSkill(); // 스킬 호출
         }
+    }
+
+    bool isMonsterDie() {
+        return this->mobHealth <= 0;
     }
 
     void takeDamage(int damage) {
-        this->health -= damage;
-        if (this->health <= 0) {
-            this->health = 0;
+        this->mobHealth -= damage;
+        if (this->mobHealth <= 0) {
+            this->mobHealth = 0;
         }
-        cout << this->name << " 이 " << damage << " 데미지 받음. 남은 체력 : " << this->health << endl;
+        cout << this->name << " 이 " << damage << " 데미지 받음. 남은 체력 : " << this->mobHealth << endl;
     }
+
+    void getInterface() {
+        cout << "이름 : " << this->name << endl;
+        cout << "체력 : " << this->mobHealth << endl;
+        cout << "공격력 : " << this->mobAttack << endl;
+        cout << "현재 마나 : " << this->mobMana << endl;
+        cout << "최대 마나 : " << this->mobMaxMana << endl;
+        cout << "속도 : " << this->mobSpeed << endl;
+        cout << "명중률 : " << this->mobAccuracy << endl;
+        cout << "회피율 : " << this->mobEvasion << endl;
+    }
+
 
 protected:
     string name = "Unknown";
-    int health = 99;
-    int attack = 99;
-    int mana = 99;
-    int maxMana = 99;
-    int speed = 99;
-    int accuracy = 99;
-    float avoid = 99;
+    int mobHealth = 99;
+    int mobAttack = 99;
+    int mobMana = 99;
+    int mobMaxMana = 99;
+    int mobSpeed = 99;
+    int mobAccuracy = 99;
+    float mobEvasion = 99;
 };
+
+
+
+
 
 class Goblin : public Monster { //고블린
 
 public:
     Goblin(int level) {
         name = "Goblin";
-        health = level * 20;
-        attack = (level * 10);
-        mana = 0;
-        maxMana = 3;
-        speed = level;
-        accuracy = 50 + (level * 20);
-        avoid = 1 + (level * 0.05f);
-    }
-
-    string getName() override {
-        return name;
-    }
-
-    int getHealth() override {
-        return health;
-    }
-
-    int getAttack() override {
-        if (mana < maxMana) { // maxMana만큼 Attack
-            mana++; // 공격할 때 마다 마나++
-            return attack;
-        }
-        else {
-            mana = 0; // 마나 초기화
-            return getSkill(); // 스킬 호출
-        }
+        mobHealth = level * 20;
+        mobAttack = (level * 10);
+        mobMana = 0;
+        mobMaxMana = 3;
+        mobSpeed = level;
+        mobAccuracy = 50 + (level * 20);
+        mobEvasion = 1 + (level * 0.05f);
     }
 
     int getSkill() override {
-        return attack * 2;
+        return mobAttack * 2;
     }
 };
 
@@ -88,36 +117,17 @@ class Orc : public Monster { // 오크
 public:
     Orc(int level) {
         name = "Orc";
-        health = level * 20;
-        attack = (level * 10);
-        mana = 0;
-        maxMana = 3;
-        speed = level;
-        accuracy = 50 + (level * 20);
-        avoid = 1 + (level * 0.05f);
-    }
-
-    string getName() override {
-        return name;
-    }
-
-    int getHealth() override {
-        return health;
-    }
-
-    int getAttack() override {
-        if (mana < maxMana) { // maxMana만큼 Attack
-            mana++; // 공격할 때 마다 마나++
-            return attack;
-        }
-        else {
-            mana = 0; // 마나 초기화
-            return getSkill(); // 스킬 호출
-        }
+        mobHealth = level * 20;
+        mobAttack = (level * 10);
+        mobMana = 0;
+        mobMaxMana = 3;
+        mobSpeed = level;
+        mobAccuracy = 50 + (level * 20);
+        mobEvasion = 1 + (level * 0.05f);
     }
 
     int getSkill() override {
-        return attack * 2;
+        return mobAttack * 2;
     }
 };
 
@@ -126,36 +136,18 @@ class Slime : public Monster { // 슬라임
 public:
     Slime(int level) {
         name = "Slime";
-        health = level * 20;
-        attack = (level * 10);
-        mana = 0;
-        maxMana = 3;
-        speed = level;
-        accuracy = 50 + (level * 20);
-        avoid = 1 + (level * 0.05f);
+        mobHealth = level * 20;
+        mobAttack = (level * 10);
+        mobMana = 0;
+        mobMaxMana = 3;
+        mobSpeed = level;
+        mobAccuracy = 50 + (level * 20);
+        mobEvasion = 1 + (level * 0.05f);
     }
 
-    string getName() override {
-        return name;
-    }
-
-    int getHealth() override {
-        return health;
-    }
-
-    int getAttack() override {
-        if (mana < maxMana) { // maxMana만큼 Attack
-            mana++; // 공격할 때 마다 마나++
-            return attack;
-        }
-        else {
-            mana = 0; // 마나 초기화
-            return getSkill(); // 스킬 호출
-        }
-    }
 
     int getSkill() override {
-        return attack * 2;
+        return mobAttack * 2;
     }
 };
 
@@ -164,36 +156,17 @@ class BossMonster : public Monster { // 보스
 public:
     BossMonster(int level) {
         name = "BossMonster";
-        health = level * 20;
-        attack = (level * 10);
-        mana = 0;
-        maxMana = 3;
-        speed = level;
-        accuracy = 50 + (level * 20);
-        avoid = 1 + (level * 0.05f);
-    }
-
-    string getName() override {
-        return name;
-    }
-
-    int getHealth() override {
-        return health;
-    }
-
-    int getAttack() override {
-        if (mana < maxMana) { // maxMana만큼 Attack
-            mana++; // 공격할 때 마다 마나++
-            return attack;
-        }
-        else {
-            mana = 0; // 마나 초기화
-            return getSkill(); // 스킬 호출
-        }
+        mobHealth = level * 20;
+        mobAttack = (level * 10);
+        mobMana = 0;
+        mobMaxMana = 3;
+        mobSpeed = level;
+        mobAccuracy = 50 + (level * 20);
+        mobEvasion = 1 + (level * 0.05f);
     }
 
     int getSkill() override {
-        return attack * 2;
+        return mobAttack * 2;
     }
 };
 
