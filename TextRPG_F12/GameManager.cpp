@@ -13,31 +13,35 @@ void GameManager::visitShop(Character* player)
 	Shop shop(itemManager);
 	shop.displayItems();
 
-	int choice;
-	cout << "아이템 구매 : 1 , 아이템 판매 : 2 , 나가기 : 0>> ";
-	cin >> choice;
+	int choice = -1;
 
-	if (choice == 0)
+	while (choice != 0)
 	{
-		return;
-	}
-	else if (choice == 1)
-	{
-		int index;
-		cout << "몇 번 아이템을 구매하시겠습니까? >> ";
-		cin >> index;
-		shop.buyItem(index, player);
-	}
-	else if (choice == 2)
-	{
-		int index;
-		cout << "몇 번 아이템을 판매하시겠습니까? >> ";
-		cin >> index;
-		shop.sellItem(index, player);
-	}
-	else
-	{
-		cout << "부적절한 입력입니다." << endl;
+		cout << "구매 : 1, 판매 : 2,  나가기 : 0 >> ";
+		cin >> choice;
+
+		if (choice == 0)
+		{
+			return; // 나가기
+		}
+		else if (choice == 1)
+		{
+			int index;
+			cout << "몇 번 아이템을 구매하시겠습니까? >> ";
+			cin >> index;
+			shop.buyItem(index, player);
+		}
+		else if (choice == 2)
+		{
+			int index;
+			cout << "몇 번 아이템을 판매하시겠습니까? >> ";
+			cin >> index;
+			shop.sellItem(index, player);
+		}
+		else
+		{
+			cout << "부적절한 입력입니다. 다시 입력해주세요." << endl;
+		}
 	}
 }
 
