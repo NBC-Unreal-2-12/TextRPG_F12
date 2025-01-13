@@ -47,6 +47,13 @@ public:
 		return instance;
 	}
 
+	// 게임 시작
+	void InitGame()
+	{
+		Character::getInstance("test", 0)->displayStatus();
+
+	}
+
 	// 상점 방문
 	void visitShop(Character* player);
 

@@ -45,6 +45,9 @@ public:
     // 추가
     int getGold();
     void setGold(int sellPrice);
+
+    // 추가
+    string setName();
 };
 
 #endif

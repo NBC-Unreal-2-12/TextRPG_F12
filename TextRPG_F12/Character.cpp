@@ -1,19 +1,24 @@
 #include <iostream>
+#include <string>
 #include "Character.h"
 
 using namespace std;
 
 Character* Character::instance = nullptr;
 
-Character::Character(string userName, Job* characterJob) : name(userName), job(characterJob), level(1), maxHealth(200), health(200), attack(30), experience(0), gold(0), accuracy(100), attackSpeed(20), evasion(1), isDead(false), mp(100), maxMp(100)
+Character::Character(string userName, Job* characterJob) : 
+    name(userName), job(characterJob), level(1), maxHealth(200), health(200), attack(30), 
+    experience(0), gold(0), accuracy(100), attackSpeed(20), evasion(1), isDead(false), mp(100), maxMp(100)
 {
     characterJob->applyJobEffect(attack, maxHealth, attackSpeed, evasion, accuracy, maxMp);
     health = maxHealth;
     mp = maxMp;
 }
 
-Character* Character::getInstance(string userName, Job* characterJob) {
-    if (instance == nullptr) {
+Character* Character::getInstance(string userName, Job* characterJob) 
+{
+    if (instance == nullptr) 
+    {
         instance = new Character(userName, characterJob);
     }
     return instance;
@@ -43,30 +48,35 @@ void Character::levelUp()
     cout << "레벨업!" << name << "의 레벨이 " << level << "이 되었습니다!" << endl;
 }
 
-
 void Character::useItem(Item* item)
 {
     inventory.removeItem(item);
 }
+
 void Character::addItemToInventory(Item* item)
 {
     inventory.addItem(item);
 }
+
 void Character::removeItemFromInventory(Item* item)
 {
     inventory.removeItem(item);
 }
-void Character::displayInventory() {
+
+void Character::displayInventory() 
+{
     inventory.listItem();
 }
 
 
 // 추가
 
-int Character::getGold() {
+int Character::getGold() 
+{
     return gold;
 }
 
-void Character::setGold(int sellPrice) {
+void Character::setGold(int sellPrice) 
+{
     gold += sellPrice;
 }

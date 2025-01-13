@@ -8,17 +8,20 @@
 
 using namespace std;
 
-class Inventory {
+class Inventory 
+{
 private:
     vector<Item*> inventory;
 
 public:
-    void addItem(Item* item) {
+    void addItem(Item* item) 
+    {
         inventory.push_back(item);
         cout << "인벤토리에 " << item->getName() << "이(가) 추가되었습니다." << endl;
     }
 
-    bool hasItem(Item* item) {
+    bool hasItem(Item* item) 
+    {
         auto it = find(inventory.begin(), inventory.end(), item);
 
         if (it != inventory.end()) {
@@ -29,20 +32,25 @@ public:
         }
     }
 
-    void removeItem(Item* item) {
+    void removeItem(Item* item) 
+    {
         auto it = find(inventory.begin(), inventory.end(), item);
 
-        if (it != inventory.end()) {
+        if (it != inventory.end()) 
+        {
             inventory.erase(it);
             cout << item->getName() << " 제거됨." << endl;
         }
-        else {
+        else 
+        {
             cout << item->getName() << " 이(가) 없습니다." << endl;
         }
     }
 
-    void listItem() {
-        for (auto it : inventory) {
+    void listItem() 
+    {
+        for (auto it : inventory) 
+        {
             cout << it->getName() << endl;
         }
     }

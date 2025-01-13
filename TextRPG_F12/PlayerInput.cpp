@@ -1,7 +1,8 @@
 ﻿#include "PlayerInput.h"
 #include <iostream>
 
-int PlayerInput::getPlayerChoice() {
+int PlayerInput::getPlayerChoice() 
+{
     int choice;
     std::cout << "Choose your action:\n";
     std::cout << "1. 공격!\n";

@@ -5,7 +5,8 @@
 #include "GameManager.h"
 #include "Monster.h"
 
-class BattleManager {
+class BattleManager 
+{
 private:
     Character* player;              // 플레이어 캐릭터
     vector<Monster*> monster; // 전투 참여 몬스터

@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <iostream>
 
-class Shop {
+class Shop 
+{
 private:
 	struct StockItem
 	{
@@ -18,7 +19,9 @@ private:
 	std::vector<StockItem> stock;
 
 public:
-	Shop() {}
+	Shop() 
+	{
+	}
 	~Shop() = default;
 
 	void displayItems();

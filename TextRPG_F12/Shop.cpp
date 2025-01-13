@@ -9,7 +9,8 @@ void Shop::displayItems()
 	std::cout << "\n======== ( Item Shop ) ========\n";
 	for (const auto& it : stock)
 	{
-		std::cout << it.item->getIndex() << ". " << it.item->getName() << " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
+		std::cout << it.item->getIndex() << ". " << it.item->getName() 
+			<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
 	}
 
 	// 아이템이 하나도 없을 경우 (재고와 무관)
