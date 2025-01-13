@@ -72,7 +72,7 @@ void BattleManager::processMonsterTurn()
 }
 
 // 전투 시작
-void BattleManager::startBattle(Character* player, std::vector<Monster*> monster)
+void BattleManager::startBattle(Character* player, std::vector<Monster*> monsters)
 {
     this->player = player;
     this->monster = monster;
