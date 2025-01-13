@@ -157,6 +157,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("오크의 부서진 검", 20);
 //    }
 //
 //    /*void mobFace() override
@@ -198,6 +199,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("슬라임 젤리", 20);
 //    }
 //
 //    /*void mobFace() override
@@ -236,6 +238,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("고블린 대장의 반지", 20);
 //    }
 //
 //    /*void mobFace() override
@@ -277,6 +280,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("오크 대왕의 검", 20);
 //    }
 //
 //    /*void mobFace() override
@@ -318,6 +322,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("슬라임 왕관", 20);
 //    }
 //
 //   /* void mobFace() override
@@ -354,6 +359,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("드래곤의 비늘", 20);
 //    }
 //
 //    /*void mobFace() override
@@ -392,6 +398,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("발록의 재", 20);
 //    }
 //
 //   /* void mobFace()
@@ -431,6 +438,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("크라켄의 심장", 20);
 //    }
 //
 //    /*void mobFace()
@@ -470,6 +478,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
+//        loot = new MonsterLoot("가시고기의 갈비뼈", 20);
 //    }
 //
 //   /* void mobFace()
