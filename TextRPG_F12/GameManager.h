@@ -1,4 +1,4 @@
-﻿#ifndef GAMEMANAGER_H_
+#ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
 #include <cstdlib>
@@ -15,11 +15,11 @@
 
 using namespace std;
 
-// Text RPG���� GameManager�� �� �ϳ��� �����ؾ� �ϹǷ� �̱��� ���
+// Text RPG에 GameManager는 하나만 있어야 하므로 싱글톤 사용
 class GameManager
 {
 private:
-	// ���� ��� ������ �̱��� �ν��Ͻ��� ����
+	// 정적 멤버변수로 싱글톤 인스턴스를 저장
 	static GameManager* instance;
 
 	GameManager()
@@ -37,7 +37,7 @@ private:
 
 
 public:
-	// �̱��� �ν��Ͻ� ���� �޼���
+	// 싱글톤 인스턴스 접근 메서드
 	static GameManager* getInstance()
 	{
 		if (instance == nullptr)
@@ -47,10 +47,10 @@ public:
 		return instance;
 	}
 
-	// ���� �湮
+	// 상점 방문
 	void visitShop(Character* player);
 
-	// �κ��丮 ǥ��
+	// 인벤토리 표시
 	void displayInventory(Inventory inventory);
 
 };
