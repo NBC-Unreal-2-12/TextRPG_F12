@@ -1,15 +1,18 @@
 ﻿#include "ItemManager.h"
 
+// 소비 아이템 등록
 void ItemManager::registerItem(int index, Item* item)
 {
 	itemList[index] = item;
 }
 
+// 전리품 등록
 void ItemManager::registerLoot(int index, Item* item)
 {
 	lootLIst[index] = item;
 }
 
+// 인덱스로 아이템 접근
 Item* ItemManager::getItemByIndex(int index) const
 {
 	auto iter = itemList.find(index);
@@ -40,6 +43,7 @@ void ItemManager::initializeDefaultItems()
 	registerItem(3, new ManaPotion("Small Mana Potion", 50, 20));
 	registerItem(4, new ManaPotion("Small Mana Potion", 150, 50));
 	registerItem(5, new AttackBoost("Adrenaline", 100, 5));
+	
 
 	// 전리품 아이템 리스트 초기화
 	registerLoot(101, new MonsterLoot("고블린의 작은 동전", 20));

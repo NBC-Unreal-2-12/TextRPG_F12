@@ -20,15 +20,15 @@ private:
 	};
 
 	std::vector<StockItem> stock;
-	bool isValidIndex(int index) const;
+	bool isValidIndex(int index) const;	// 인덱스 접근 유효성 검사
 
 public:
 	~Shop() = default;
 
-	Shop(ItemManager& itemManager);
+	Shop(ItemManager& itemManager);  // 상점 생성자
 
-	void displayItems();
-	void buyItem(int index, Character* player);
-	void sellItem(int index, Character* player);
+	void displayItems();		// 아이템 목록 확인
+	void buyItem(int index, Character* player);  // 아이템 구매
+	void sellItem(int index, Character* player); // 아이템 판매
 
 };

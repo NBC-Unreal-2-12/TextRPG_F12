@@ -22,6 +22,7 @@ Shop::Shop(ItemManager& itemManager)
 
 }
 
+// 인덱스 아이템 접근 유효성 검사
 bool Shop::isValidIndex(int index) const
 {
 	return std::any_of(stock.begin(), stock.end(),
