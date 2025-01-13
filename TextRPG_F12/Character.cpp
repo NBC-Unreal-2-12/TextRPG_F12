@@ -27,6 +27,7 @@ Character* Character::getInstance(string userName, Job* characterJob)
 void Character::displayStatus()
 {
     cout << "현재 유저의 정보" << endl;
+	cout << "이름: " << name << endl;
     cout << "레벨: " << level << endl;
     cout << "체력: " << health << "/" << maxHealth << endl;
     cout << "마나: " << mp << "/" << maxMp << endl;
