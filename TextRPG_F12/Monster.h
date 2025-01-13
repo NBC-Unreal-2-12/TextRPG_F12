@@ -13,6 +13,7 @@ using namespace std;
 class Monster
 {
 public:
+    Monster(const string& monster) {}
 
     virtual ~Monster() = default;
 
