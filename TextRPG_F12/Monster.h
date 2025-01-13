@@ -45,7 +45,7 @@ public:
         return this->mobEvasion;
     }
 
-    virtual int getSkill() = 0;
+    virtual int useSkill() = 0;
 
     int useAttack() { // 몬스터가 공격할 때
         if (mobMana < mobMaxMana) { // mobMaxMana만큼 Attack
@@ -54,7 +54,7 @@ public:
         }
         else {
             mobMana = 0; // 마나 초기화
-            return getSkill(); // 스킬 호출
+            return useSkill(); // 스킬 호출
         }
     }
 
