@@ -43,11 +43,13 @@ public:
         if (mobMana < mobMaxMana) // mobMaxMana만큼 Attack
         {
             mobMana++; // 공격할 때 마다 마나++
+            cout << "마나 : " << mobMana << " / " << mobMaxMana << endl;
             return mobAttack;
         }
         else
         {
             mobMana = 0; // 마나 초기화
+            cout << "스킬 사용!" << endl;
             return useMobSkill();
         }
     }
@@ -259,7 +261,7 @@ class EliteOrc : public Monster // 엘리트 오크
 public:
     EliteOrc()
     {
-        mobName = "EliteOrc";
+        mobName = "Elite Orc";
         mobHealth = 20;
         mobAttack = 10;
         mobMana = 0;
@@ -300,7 +302,7 @@ class EliteSlime : public Monster // 엘리트 슬라임
 public:
     EliteSlime()
     {
-        mobName = "EliteSlime";
+        mobName = "Elite Slime";
         mobHealth = 20;
         mobAttack = 10;
         mobMana = 0;
@@ -446,13 +448,13 @@ public:
     }
 };
 
-class BossMonster : public Monster // 보스
+class GGD : public Monster // 보스
 {
 
 public:
-    BossMonster()
+    GGD()
     {
-        mobName = "BossMonster";
+        mobName = "고길동";
         mobHealth = 20;
         mobAttack = 10;
         mobMana = 0;
