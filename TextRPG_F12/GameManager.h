@@ -48,11 +48,23 @@ public:
 	}
 
 	// 게임 시작
-	void InitGame()
+	void InitializeGame()
 	{
-		Character::getInstance("test", 0)->displayStatus();
+		// 테스트 직업 생성 
+		Job* job = new Warrior();
 
+		// 캐릭터 이름 설정
+		cout << "캐릭터 이름을 입력하세요: ";
+		string name;
+		getline(cin, name);
+
+		// 싱글톤 객체 초기화 및 상태 출력
+		Character* player = Character::getInstance(name, job);
+		player->displayStatus();
+
+		// 필요에 따라 추가 초기화 작업 수행 가능
 	}
+
 
 	// 상점 방문
 	void visitShop(Character* player);
