@@ -1,4 +1,4 @@
-#ifndef GAMEMANAGER_H_
+﻿#ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
 #include <cstdlib>

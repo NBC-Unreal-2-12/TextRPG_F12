@@ -1,4 +1,4 @@
-#include "GameManager.h"
+﻿#include "GameManager.h"
 
 // 정적 멤버 변수 정의
 GameManager* GameManager::instance = nullptr;
