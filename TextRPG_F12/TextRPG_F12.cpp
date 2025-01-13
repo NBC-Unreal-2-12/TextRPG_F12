@@ -2,6 +2,9 @@
 //
 
 #include <iostream>
+#include <cstdlib> // system() 함수 사용을 위해 필요
+#include <thread> // std::this_thread::sleep_for 사용
+#include <chrono> // std::chrono::seconds 사용
 
 #include "GameManager.h"
 #include "BattleManager.h"
@@ -24,7 +27,7 @@ using namespace std;
 // 생성된 몬스터의 정보를 출력
 // 엔터를 입력하여 전투 시작
 // 
-// 전투 시작시 공격속도를 비교하여 빠른 쪽이 선공
+// 매턴 선공을 결정
 // 플레이어의 행동
 // 1. 공격
 // 2. 스킬
@@ -47,14 +50,26 @@ using namespace std;
 // 조건을 달성하면 보스 등장
 // 보스의 체력이 0이되면 승리
 
+// 전투->상점 상점->전투로 이동할 때 화면 지우기
+void clearConsole()
+{
+	cout << "Enter 를 입력하여 다음으로.." << endl;
+	cin.ignore(); // 엔터 키 입력 대기
+
+	this_thread::sleep_for(chrono::seconds(1)); // 1초 대기
+
+	system("cls"); // 화면 지우기 cls 명령 사용
+}
+
 int main()
 {
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
+	clearConsole();
 	Character* player = Character::getInstance();
 
 	// 전투 테스트 코드입니다.
-	BattleManager battleManager;
+	/*BattleManager battleManager;
 
 	Goblin* goblin1 = new Goblin();
 	Goblin* goblin2 = new Goblin();
@@ -62,11 +77,22 @@ int main()
 	monsterPool.push_back(goblin1);
 	monsterPool.push_back(goblin2);
 
-//	battleManager.startBattle(player,monsterPool);
+	battleManager.startBattle(player, monsterPool);*/
 	// startBattle의 인자는 vector<Monster*>보다 Monster*가 적절해 보입니다.
 
+	clearConsole();
+
+	Inventory inventory;
+	Item* item1 = new HealthPotion(1, "테스트아이템1", 50, 11);
+	Item* item2 = new ManaPotion(2, "테스트아이템2", 10, 22);
+	Item* item3 = new AttackBoost(3, "테스트아이템3", 500, 33);
+
+	inventory.addItem(item1);
+	inventory.addItem(item2);
+	inventory.addItem(item3);
+
 	gameManager->visitShop(player);
-	battleManager.startBattle(player,monsterPool);
+	//	battleManager.startBattle(player, monsterPool);
 
 
 
