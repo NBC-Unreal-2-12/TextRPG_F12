@@ -15,7 +15,7 @@ class Monster
 public:
     Monster() {};
 
-    Monster(const std::string& name) : name(name) // 멤버 변수 초기화 { }
+    Monster(const std::string& name) : name(name) { }
 
     string name;
 
