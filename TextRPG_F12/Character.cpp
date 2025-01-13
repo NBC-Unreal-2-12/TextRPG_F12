@@ -15,14 +15,25 @@ Character::Character(string userName, Job* characterJob) :
     mp = maxMp;
 }
 
-Character* Character::getInstance(string userName, Job* characterJob) 
+void Character::initialize(string userName, Job* characterJob)
 {
-    if (instance == nullptr) 
-    {
+    if (instance == nullptr) {
         instance = new Character(userName, characterJob);
+    }
+    else {
+        cout << "Character instance is already initialized!" << endl;
+    }
+}
+
+Character* Character::getInstance()
+{
+    if (instance == nullptr) {
+        cout << "Error: Character instance is not initialized. Call initialize() first." << endl;
+        return nullptr;
     }
     return instance;
 }
+
 
 void Character::displayStatus()
 {
@@ -185,3 +196,4 @@ string Character::getName()
 {
     return string();
 }
+

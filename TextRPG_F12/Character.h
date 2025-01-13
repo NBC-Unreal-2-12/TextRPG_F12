@@ -28,14 +28,15 @@ private:
 	double evasion;     // 회피율  
 	Job* job;       // 직업
 	bool isDead;        // 사망 여부    
-	static Character* instance; // 싱글톤 인스턴스
+    static Character* instance; // 싱글톤 인스턴스
     Character(string userName, Job* characterJob);
     Inventory inventory;                
 
 public:
     Character(const Character&) = delete;
     Character& operator=(const Character&) = delete;
-    static Character* getInstance(string userName, Job* characterJob);
+	static void initialize(string userName, Job* characterJob);
+	static Character* getInstance();
 	void displayStatus();   // 현재 상태 출력
 	void levelUp();     // 레벨업
 	void useItem(Item* item);   // 아이템 사용   

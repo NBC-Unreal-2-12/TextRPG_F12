@@ -59,7 +59,8 @@ public:
 		getline(cin, name);
 
 		// 싱글톤 객체 초기화 및 상태 출력
-		Character* player = Character::getInstance(name, job);
+		Character::initialize(name, job);
+		Character* player = Character::getInstance();
 		player->displayStatus();
 
 		// 필요에 따라 추가 초기화 작업 수행 가능
