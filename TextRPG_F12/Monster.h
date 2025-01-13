@@ -21,6 +21,10 @@ public:
         return this->mobHealth;
     }
 
+    int getAttack() {
+        return this->mobAttack;
+    }
+
     int getMana() {
         return this->mobMana;
     }
@@ -37,13 +41,13 @@ public:
         return this->mobAccuracy;
     }
 
-    float getEvasion() {
+    double getEvasion() {
         return this->mobEvasion;
     }
 
     virtual int getSkill() = 0;
 
-    int getAttack() {
+    int useAttack() { // 몬스터가 공격할 때
         if (mobMana < mobMaxMana) { // mobMaxMana만큼 Attack
             mobMana++; // 공격할 때 마다 마나++
             return mobAttack;
@@ -58,7 +62,7 @@ public:
         return this->mobHealth <= 0;
     }
 
-    void takeDamage(int damage) {
+    void takeDamage(int damage) { // 몬스터가 공격 받을 때
         this->mobHealth -= damage;
         if (this->mobHealth <= 0) {
             this->mobHealth = 0;
@@ -86,7 +90,7 @@ protected:
     int mobMaxMana = 99;
     int mobSpeed = 99;
     int mobAccuracy = 99;
-    float mobEvasion = 99;
+    double mobEvasion = 99;
 };
 
 
@@ -107,7 +111,7 @@ public:
         mobEvasion = 1 + (level * 0.05f);
     }
 
-    int getSkill() override {
+    int useSkill() override {
         return mobAttack * 2;
     }
 };
@@ -126,7 +130,7 @@ public:
         mobEvasion = 1 + (level * 0.05f);
     }
 
-    int getSkill() override {
+    int useSkill() override {
         return mobAttack * 2;
     }
 };
@@ -146,7 +150,7 @@ public:
     }
 
 
-    int getSkill() override {
+    int useSkill() override {
         return mobAttack * 2;
     }
 };
@@ -165,7 +169,7 @@ public:
         mobEvasion = 1 + (level * 0.05f);
     }
 
-    int getSkill() override {
+    int useSkill() override {
         return mobAttack * 2;
     }
 };
