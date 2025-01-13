@@ -46,7 +46,7 @@ public:
         else
         {
             mobMana = 0; // 마나 초기화
-            return useMobSkill(); // 스킬 호출
+            return useMobSkill();
         }
     }
 
@@ -77,9 +77,9 @@ protected:
     string mobName = "Unknown";
     int mobHealth = 99;
     int mobAttack = 99;
+    int mobAttackSpeed = 99;
     int mobMana = 99;
     int mobMaxMana = 99;
-    int mobAttackSpeed = 99;
     int mobAccuracy = 99;
     double mobEvasion = 99;
 };
