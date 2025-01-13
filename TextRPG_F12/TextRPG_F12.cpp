@@ -19,7 +19,7 @@ using namespace std;
 
 int main()
 {
-	GameManager::getInstance()->InitGame();
-
+	GameManager* GM = GameManager::getInstance();
+	GM->InitGame();
 
 }
