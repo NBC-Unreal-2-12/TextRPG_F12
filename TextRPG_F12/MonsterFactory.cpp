@@ -50,9 +50,7 @@ std::unique_ptr<BossMonster> createBossMonster()
 
 std::unique_ptr<Monster> MonsterFactory::createMonster(int round) 
 {
-    // srand() 함수가 unsigned int 타입 값을 인수로 받기 때문에 time_t 타입 변수를 형변환 해준다.
-    std::srand(static_cast<unsigned>(std::time(nullptr))); // time(nullptr)이 가리키는 것은 현재 시각
-    int probability = std::rand() % 100 + 1; // 1~100 사이 랜덤 값
+    int probability = getRandomInt(1, 100); // 1~100 사이의 난수
 
     if (round <= 5) 
     {
