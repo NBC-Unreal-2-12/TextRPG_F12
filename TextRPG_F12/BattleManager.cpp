@@ -175,7 +175,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 }
 
 // 전투 시작
-void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
+int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
 {
     this->player = player;
     this->monster = std::move(monsters);
@@ -223,7 +223,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
         turnOrders.clear();
     }
 
-    resolveBattle();
+    return resolveBattle();
 }
 
 // 전투 종료 처리

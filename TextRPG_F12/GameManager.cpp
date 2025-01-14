@@ -150,7 +150,8 @@ void GameManager::combat(int currentRound)
 	// BattleManager 생성 시 특정 라운드의 데이터를 전달
 	BattleManager battleManager(player, monsterGroup[currentRound]);
 
-	battleManager.startBattle(player, getMonsterGroup(currentRound));
+	int result = battleManager.startBattle(player, getMonsterGroup(currentRound));
+	
 }
 
 
