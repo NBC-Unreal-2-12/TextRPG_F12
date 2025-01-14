@@ -99,6 +99,7 @@ void BattleManager::processPlayerTurn()
                 std::cout << "잘못된 입력입니다. 다시 입력해주세요.\n";
             }
             else {
+                cin.ignore();
                 break; // 유효한 입력일 경우 반복 종료
             }
         }
