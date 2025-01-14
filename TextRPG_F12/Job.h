@@ -56,6 +56,8 @@ public:
         attackspeed += 10;
     }
 
+    ~Warrior() override { delete skill; }
+
     Skill* getSkill() const override 
     {
         return skill;
@@ -83,6 +85,8 @@ public:
         maxMp += 50;
         attackspeed += 5;
     }
+
+	~Mage() override { delete skill; }
 
     Skill* getSkill() const override 
     {
@@ -112,6 +116,8 @@ public:
         attackspeed += 20;
         accuracy += 10;
     }
+
+	~Archer() override { delete skill; }
 
     Skill* getSkill() const override 
     {
