@@ -23,7 +23,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot.emplace_back(MonsterLoot("슬라임 젤리", 20));
+        loot.emplace_back(new MonsterLoot("슬라임 젤리", 20));
     }
 
     /*void mobFace() override
@@ -59,7 +59,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot.emplace_back(MonsterLoot("오크의 부서진 검", 20));
+        loot.emplace_back(new MonsterLoot("오크의 부서진 검", 20));
     }
 
     /*void mobFace() override
@@ -100,7 +100,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot.emplace_back(MonsterLoot("고블린의 작은 동전", 20));
+        loot.emplace_back(new MonsterLoot("고블린의 작은 동전", 20));
     }
 
     /*void mobFace() override

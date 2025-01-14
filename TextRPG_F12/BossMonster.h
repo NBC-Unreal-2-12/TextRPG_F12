@@ -29,7 +29,7 @@ public:
 		mobAttackSpeed = 1;
 		mobAccuracy = 50 + 20;
 		mobEvasion = 1;
-		loot.emplace_back(MonsterLoot("가시고기의 갈비뼈", 20));
+		loot.emplace_back(new MonsterLoot("가시고기의 갈비뼈", 20));
 	}
 
 	/* void mobFace()
