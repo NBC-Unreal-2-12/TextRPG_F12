@@ -11,10 +11,10 @@ void GameManager::InitializeGame()
 	PlayerInput PI;
 	// 캐릭터 이름 설정
 	string name = PI.setPlayerName();
-
+	system("cls");
 	// 테스트 직업 생성
 	Job* job = PI.setJobByPlayerInput();
-
+	system("cls");
 	// 싱글톤 객체 초기화 및 상태 출력
 	Character::initialize(name, job);
 	Character* player = Character::getInstance();
