@@ -33,7 +33,6 @@ string PlayerInput::setPlayerName()
 {
     std::cout << "캐릭터의 이름을 설정해 주세요.\n";
     string name;
-    cin.ignore();
     while (true)
     {
         getline(cin, name);
@@ -60,9 +59,9 @@ Job* PlayerInput::setJobByPlayerInput()
         cin >> choice;
         if (choice >= 1 && choice <= 3) break;
         std::cout << "잘못된 입력입니다. 다시 선택해 주세요.\n";
-        std::cin.clear(); // 입력 스트림 초기화
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
+
+    cin.ignore();
 
     Job* job = nullptr;
     switch (choice)
