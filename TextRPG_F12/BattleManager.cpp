@@ -64,60 +64,18 @@ void BattleManager::processPlayerTurn()
     switch (choice)
     {
     case 1: // 공격
-    {
-        // 살아있는 몬스터 목록 가져오기
-        std::vector<int> aliveMonsterIndices;
-        for (size_t i = 0; i < monster.size(); ++i) {
-            if (!monster[i]->isMobDead()) {
-                aliveMonsterIndices.push_back(i);
-            }
+        // 우선 테스트용 기능 구현만.
+        std::cout << "player's attack!\n";
+
+        if (int randomType = std::rand() % 100 <= (player->getAccuracy() / monster[0]->getMobEvasion())) // 랜덤값이 "명중률 / 몬스터회피율" 보다 작아야 명중
+        {
+            monster[0]->takeMobDamage(player->getAttack());
         }
-
-        // 살아있는 몬스터가 없으면 전투 종료
-        if (aliveMonsterIndices.empty()) {
-            std::cout << "모든 몬스터가 쓰러졌습니다. 전투가 종료됩니다." << std::endl;
-            return;
-        }
-
-        // 현재 살아있는 몬스터 출력
-        std::cout << "현재 살아있는 몬스터 목록:\n";
-        for (int index : aliveMonsterIndices) {
-            std::cout << "[" << index << "] " << monster[index]->getMobName()
-                << " (HP: " << monster[index]->getMobHealth() << ")\n";
-        }
-
-        // 플레이어가 공격할 몬스터 선택
-        int selectedMonsterIndex = -1;
-        while (true) {
-            std::cout << "공격할 몬스터의 번호를 입력하세요: ";
-            std::cin >> selectedMonsterIndex;
-
-            // 입력값 검증
-            if (std::cin.fail() || std::find(aliveMonsterIndices.begin(), aliveMonsterIndices.end(), selectedMonsterIndex) == aliveMonsterIndices.end()) {
-                std::cin.clear(); // 입력 상태 초기화
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 잘못된 입력 무시
-                std::cout << "잘못된 입력입니다. 다시 입력해주세요.\n";
-            }
-            else {
-                break; // 유효한 입력일 경우 반복 종료
-            }
-        }
-
-        // 몬스터 공격 처리
-        if (std::rand() % 100 <= (player->getAccuracy() / monster[selectedMonsterIndex]->getMobEvasion()) * 100) {
-            int damage = player->getAttack();
-            monster[selectedMonsterIndex]->takeMobDamage(damage);
-            std::cout << monster[selectedMonsterIndex]->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
-
-            if (monster[selectedMonsterIndex]->isMobDead()) {
-                std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
-            }
-        }
-        else {
-            std::cout << "공격이 빗나갔습니다!\n";
+        else
+        {
+            cout << "빗나감!" << endl;
         }
         break;
-    }
     case 2: // 스킬
         if (int randomType = std::rand() % 100 <= (player->getAccuracy() / monster[0]->getMobEvasion())) // 랜덤값이 "명중률 / 몬스터회피율" 보다 작아야 명중
         {
@@ -239,7 +197,7 @@ int BattleManager::resolveBattle()
     }
     else if (allMonstersDead)
     {
-        std::cout << "Player won the battle!\n";
+        std::cout << "축하합니다! 전투에서 승리하셨습니다!\n";
         // 경험치, 돈, 아이템 획득 처리
         int expGained = 100; // 획득 경험치
         int goldGained = 50; // 획득 골드
