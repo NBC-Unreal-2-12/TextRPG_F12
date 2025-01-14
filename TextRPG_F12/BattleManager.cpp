@@ -136,20 +136,25 @@ void BattleManager::processMonsterTurn()
 void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
 {
     this->player = player;
+    this->monster = std::move(monsters);
 
     std::cout << "Battle started!\n";
+
+    for (auto& m : monster) {
+        cout << m->getMobName() << endl;
+    }
 
     // TurnOrder 구조체를 사용하여 전투 순서를 미리 결정
     std::vector<TurnOrder> turnOrders;
 
     // 전투가 끝날 때까지 반복
-    while (isBattleOver() != false)
+    while (isBattleOver() == false)
     {
         // 플레이어의 공격 속도 추가
         turnOrders.push_back(TurnOrder(true, player->getAttackSpeed()));
 
         // 몬스터들의 공격 속도 추가
-        for (auto& m : monsters) {
+        for (auto& m : monster) {
             turnOrders.push_back(TurnOrder(false, m->getMobAttackSpeed()));
         }
 
