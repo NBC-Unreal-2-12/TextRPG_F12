@@ -263,6 +263,6 @@ void Character::useMP(int cost)
 
 string Character::getName()
 {
-    return string();
+    return name;
 }
 
