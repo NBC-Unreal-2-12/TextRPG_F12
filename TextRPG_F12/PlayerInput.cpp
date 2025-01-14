@@ -9,6 +9,7 @@ int PlayerInput::getPlayerChoice()
     std::cout << "2. 스킬\n";
     std::cout << "3. 아이템\n";
     std::cout << "4. 도망친다\n";
+    std::cout << "5. 상태\n";
     std::cout << "Enter your choice: ";
     std::cin >> choice;
     return choice;

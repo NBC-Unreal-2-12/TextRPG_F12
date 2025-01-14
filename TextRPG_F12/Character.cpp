@@ -35,6 +35,7 @@ Character* Character::getInstance()
 
 void Character::displayStatus()
 {
+    cout << "\n================================" << endl;
     cout << "현재 유저의 정보" << endl;
 	cout << "이름: " << name << endl;
     cout << "직업: " << job->getJobName() << endl;
@@ -47,6 +48,7 @@ void Character::displayStatus()
     cout << "공격속도: " << attackSpeed << endl;
     cout << "명중률: " << accuracy << endl;
     cout << "회피율: " << evasion << endl;
+    cout << "================================" << endl;
 }
 
 void Character::levelUp()
@@ -273,4 +275,3 @@ string Character::getName()
 {
     return name;
 }
-

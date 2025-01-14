@@ -62,6 +62,12 @@ void BattleManager::processPlayerTurn()
     PlayerInput input;
     int choice = input.getPlayerChoice();
 
+    while (choice == 5)
+    {
+        player->displayStatus();
+        choice = input.getPlayerChoice();
+    }
+
     switch (choice)
     {
     case 1: // 공격
