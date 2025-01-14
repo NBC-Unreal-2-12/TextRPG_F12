@@ -32,7 +32,8 @@ public:
 
     virtual void use(Character* character) = 0;
 };
-
+// 회복 포션
+// 체력 회복 소모성 아이템
 class HealthPotion : public Item 
 {
 private:
@@ -46,7 +47,8 @@ public:
 
     void use(Character* character) override {}
 };
-
+//마나포션
+//마나 회복 소모성 아이템
 class ManaPotion : public Item 
 {
 private:
@@ -62,7 +64,8 @@ public:
     {
     }
 };
-
+//어택부스트
+//공격력 증가 소모성 아이템
 class AttackBoost : public Item 
 {
 private:
@@ -79,6 +82,61 @@ public:
     }
 };
 
+//진흙단
+//명중률 감소 소모성 아이템
+class MudBall : public Item
+{
+private:
+    int accuracyReduction; // 명중률 감소량
+
+public:
+    MudBall(const string& itemName, int itemPrice, int reductionAmount)
+        : Item(itemName, itemPrice), accuracyReduction(reductionAmount)
+    {
+    }
+
+    void use(Character* character) override
+    {
+    }
+};
+
+//스피드업
+//속도 증가 소모성 아이템
+class SpeedPotion : public Item
+{
+private:
+    int speedIncrease; // 속도 증가량
+
+public:
+    SpeedPotion(const string& itemName, int itemPrice, int increaseAmount)
+        : Item(itemName, itemPrice), speedIncrease(increaseAmount)
+    {
+    }
+
+    void use(Character* character) override
+	{
+	}
+};
+
+//드랍 아이템 확률 매우낮음 
+//1회 부활아이템 사용시 소멸
+class ReviveItem : public Item
+{
+private:
+    int reviveHealth; // 부활시 줄 체력
+
+public:
+    ReviveItem(const string& itemName, int itemPrice, int health)
+        : Item(itemName, itemPrice), reviveHealth(health)
+    {
+    }
+
+    void use(Character* character) override
+	{
+	}
+};
+
+//몬스터 드랍 아이템
 class MonsterLoot : public Item
 {
 public:

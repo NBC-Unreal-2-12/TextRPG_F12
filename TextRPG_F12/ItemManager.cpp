@@ -43,7 +43,8 @@ void ItemManager::initializeDefaultItems()
 	registerItem(3, new ManaPotion("Small Mana Potion", 50, 20));
 	registerItem(4, new ManaPotion("Small Mana Potion", 150, 50));
 	registerItem(5, new AttackBoost("Adrenaline", 100, 5));
-	
+	registerItem(6, new MudBall("MudBall", 80, 50));
+	registerItem(7, new SpeedPotion("SpeedPotion", 100, 5));
 
 	// 전리품 아이템 리스트 초기화
 	registerLoot(101, new MonsterLoot("고블린의 작은 동전", 20));
@@ -56,4 +57,5 @@ void ItemManager::initializeDefaultItems()
 	registerLoot(109, new MonsterLoot("발록의 재", 75));
 	registerLoot(110, new MonsterLoot("크라켄의 심장", 75));
 	registerLoot(111, new MonsterLoot("가시고기의 갈비뼈", 125));
+	registerLoot(112, new ReviveItem("부활의 토탬", 300, 100));
 }
