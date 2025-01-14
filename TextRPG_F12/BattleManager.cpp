@@ -141,38 +141,36 @@ void BattleManager::processPlayerTurn()
 }
 
 // 몬스터 행동 처리
-void BattleManager::processMonsterTurn()
+void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 {
-    for (const auto& monsters : monster)
+    if (monster->isMobDead() == false)
     {
-        if (monsters->isMobDead() == false)
+        std::cout << monster->getMobName() << "이(가) 공격했습니다!" << std::endl;
+        if (int randomType = std::rand() % 1 <= (monster->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
         {
-            std::cout << monsters->getMobName() << "이(가) 공격했습니다!" << std::endl;
-            if (int randomType = std::rand() % 1 <= (monsters->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
+            //명중시
+            int damage = monster->useMobAttack();
+            std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
+            player->setHealth(player->getHealth() - damage);
+            if (player->getHealth() >= 1)
             {
-                //명중시
-                int damage = monsters->useMobAttack();
-                std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
-                player->setHealth(player->getHealth() - damage);
-                if (player->getHealth() >= 1)
-                {
-                    std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
-                }
-
-                else
-                {
-                    player->setCharacterDead(true);
-                    isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
-                    resolveBattle();
-                }
+                std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
             }
+
             else
             {
-                //회피시
-                cout << "빗나감!" << endl;
+                player->setCharacterDead(true);
+                isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
+                resolveBattle();
             }
         }
+        else
+        {
+            //회피시
+            cout << "빗나감!" << endl;
+        }
     }
+
 }
 
 // 전투 시작
@@ -194,11 +192,12 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
     while (isBattleOver() == false)
     {
         // 플레이어의 공격 속도 추가
-        turnOrders.push_back(TurnOrder(true, player->getAttackSpeed()));
+        turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
 
         // 몬스터들의 공격 속도 추가
+        int idx = 0;
         for (auto& m : monster) {
-            turnOrders.push_back(TurnOrder(false, m->getMobAttackSpeed()));
+            turnOrders.push_back(TurnOrder(idx++, false, m->getMobAttackSpeed()));
         }
 
         // 공격 속도에 따라 내림차순으로 정렬
@@ -215,7 +214,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
             }
             else
             {
-                processMonsterTurn();
+                processMonsterTurn(monster[turn.index]);
                 if (isBattleOver()) break; // 전투가 끝났으면 종료
             }
         }
