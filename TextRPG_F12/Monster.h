@@ -41,7 +41,7 @@ public:
 
     virtual int useMobSkill() = 0;
 
-   // virtual void mobFace() = 0;
+    virtual void mobFace() = 0;
 
     int useMobAttack() // 몬스터가 공격할 때
     {
@@ -72,7 +72,7 @@ public:
 
     void getMobInterface() //인터페이스 출력
     {
-   //     mobFace();
+        mobFace();
         cout << "이름 : " << this->mobName << endl;
         cout << "체력 : " << this->mobHealth << endl;
         cout << "공격력 : " << this->mobAttack << endl;

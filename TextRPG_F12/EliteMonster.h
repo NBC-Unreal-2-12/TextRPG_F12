@@ -26,7 +26,7 @@ public:
         loot.emplace_back(new MonsterLoot("슬라임 왕관", 20));
     }
 
-    /* void mobFace() override
+     void mobFace() override
      {
          cout << R"(
  ⠀⠀⠀⠀⠀⠀⠀⡠⠔⠦⣀⠀⠀⠀⠀
@@ -36,7 +36,7 @@ public:
  ⠸⣿⣿⣿⣿⣿⣿⣿⣿⠗⠘⠤⠿⠗⠀
  ⠀⠈⠉⠉⠛⠛⠉⠉⠁⠀⠀⠀⠀⠀⠀
              )" << endl;
-     }*/
+     }
 
     int useMobSkill() override
     {
@@ -62,7 +62,7 @@ public:
         loot.emplace_back(new MonsterLoot("오크 대왕의 검", 20));
     }
 
-    /*void mobFace() override
+    void mobFace() override
     {
         cout << R"(
 ⠀⠀⠀⠀⠀⠀⣿⣿⣄⡀⡀⠀⠀⠀⠀
@@ -77,7 +77,7 @@ public:
 ⠛⠋⠀⠀⠀⠀⢈⣿⡆⠀⠀⣻⡇⠀⠀
 ⠀⠀⠀⠀⠀⠰⠿⠋⠃⠀⠀⣿⡿⠀⠀
         )" << endl;
-    }*/
+    }
 
     int useMobSkill() override
     {
@@ -103,7 +103,7 @@ public:
         loot.emplace_back(new MonsterLoot("고블린 대장의 반지", 20));
     }
 
-    /*void mobFace() override
+    void mobFace() override
     {
         cout << R"(⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢅⡀⠀⠀⡀⣔⢀⠀⡀⡄⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -119,7 +119,7 @@ public:
 ⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢯⢞⡳⣕⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠈⠀⠁⠀⠀⠀
         )" << endl;
-    }*/
+    }
 
     int useMobSkill() override
     {
