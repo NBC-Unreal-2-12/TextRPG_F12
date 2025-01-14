@@ -51,9 +51,6 @@
     <ClCompile Include="TextRPG_F12.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="BossMonster.cpp">
       <Filter>Actors\Monsters</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="SpecialMonster.cpp">
       <Filter>Actors\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

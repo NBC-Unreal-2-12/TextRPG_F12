@@ -29,6 +29,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+        loot = new MonsterLoot("드래곤의 비늘", 20);
     }
 
     /*void mobFace() override
@@ -66,6 +67,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+        loot = new MonsterLoot("발록의 재", 20);
     }
 
     /* void mobFace()
@@ -104,6 +106,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
+        loot = new MonsterLoot("크라켄의 심장", 20);
     }
 
     /*void mobFace()
