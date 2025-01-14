@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <limits> // numeric_limits 사용을 위해 필요
 #include <cstdlib> // system() 함수 사용을 위해 필요
 #include <thread> // std::this_thread::sleep_for 사용
 #include <chrono> // std::chrono::seconds 사용
@@ -56,27 +57,51 @@ using namespace std;
 // 보스의 체력이 0이되면 승리
 
 // 전투->상점 상점->전투로 이동할 때 화면 지우기
+void gameStart() {
+	cout << "Text RPG에 오신 것을 환영합니다." << endl;
+	cout << "Press ENTER to continue..." << endl;
+
+	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 엔터 입력받고 버퍼 지우기
+
+	this_thread::sleep_for(chrono::seconds(1)); // 1초 대기
+	system("cls"); // 화면 지우기 cls 명령 사용
+}
+
 void clearConsole()
 {
 	cout << "Enter 를 입력하여 다음으로.." << endl;
 	cin.ignore(); // 엔터 키 입력 대기
 
 	this_thread::sleep_for(chrono::seconds(1)); // 1초 대기
-
 	system("cls"); // 화면 지우기 cls 명령 사용
+
 }
 
 int main()
 {
-	srand(static_cast<unsigned>(std::time(nullptr))); // 시드 설정
+	gameStart();
+	srand(static_cast<unsigned>(time(nullptr))); // 시드 설정
 
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
 	clearConsole();
 	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
-	gameManager->printAllMonsters();
-	gameManager->combat(1);
+	//gameManager->printAllMonsters();
+	PlayerInput playerInput;
+
+	while (true) {
+		int choice = playerInput.getPlayerChoiceAfterBattle();
+		if (choice == 1)
+		{
+			gameManager->combat(gameManager->getCurrentRound());
+		}
+		else if (choice == 2)
+		{
+			gameManager->visitShop(player);
+		}
+		playerInput.getPlayerChoiceAfterBattle();
+	}
 
 	clearConsole();
 	gameManager->visitShop(player);

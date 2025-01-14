@@ -16,7 +16,6 @@ int PlayerInput::getPlayerChoice()
 
 int PlayerInput::getPlayerChoiceAfterBattle()
 {
-    std::cout << "축하합니다! 전투에서 승리하셨습니다!\n";
     std::cout << "다음 행동을 선택해 주세요.\n";
     std::cout << "1. 다음 라운드 진행!\n";
     std::cout << "2. 상점 방문\n";

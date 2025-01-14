@@ -37,6 +37,7 @@ void Character::displayStatus()
 {
     cout << "현재 유저의 정보" << endl;
 	cout << "이름: " << name << endl;
+    cout << "직업: " << job->getJobName() << endl;
     cout << "레벨: " << level << endl;
     cout << "체력: " << health << "/" << maxHealth << endl;
     cout << "마나: " << mp << "/" << maxMp << endl;
@@ -46,7 +47,6 @@ void Character::displayStatus()
     cout << "공격속도: " << attackSpeed << endl;
     cout << "명중률: " << accuracy << endl;
     cout << "회피율: " << evasion << endl;
-    cout << "직업: " << job->getJobName() << endl;
 }
 
 void Character::levelUp()

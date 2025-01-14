@@ -239,7 +239,7 @@ int BattleManager::resolveBattle()
     }
     else if (allMonstersDead)
     {
-        std::cout << "Player won the battle!\n";
+        std::cout << "축하합니다! 전투에서 승리하셨습니다!\n";
         // 경험치, 돈, 아이템 획득 처리
         int expGained = 100; // 획득 경험치
         int goldGained = 50; // 획득 골드
