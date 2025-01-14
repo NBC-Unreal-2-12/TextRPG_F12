@@ -257,7 +257,7 @@ int BattleManager::resolveBattle()
                 int idx = std::rand() % 100;
                 Item* loot = monster->dropItem(idx);
                 player->addItemToInventory(loot);
-                std::cout << "전리품 " << loot << "을(를) 습득하셨습니다.";
+                std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다.";
             }
         }
 
@@ -265,6 +265,6 @@ int BattleManager::resolveBattle()
     }
     else // 도망, input
     {
-        return 1;
+        return 2;
     }
 }
