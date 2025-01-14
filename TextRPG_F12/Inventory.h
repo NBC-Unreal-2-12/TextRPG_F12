@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
 #include "Item.h"
 
@@ -12,36 +13,79 @@ class Inventory
 {
 private:
     vector<Item*> inventory;
+    unordered_map<Item*, int> counts;
 
 public:
     void addItem(Item* item) 
     {
-        inventory.push_back(item);
+        if (counts[item] == 0)
+        {
+            inventory.push_back(item);
+        }
+        counts[item]++;
         cout << "인벤토리에 " << item->getName() << "이(가) 추가되었습니다." << endl;
     }
 
-    bool hasItem(Item* item) 
+    Item* findItem(int index) 
     {
-        auto it = find(inventory.begin(), inventory.end(), item);
-
-        if (it != inventory.end()) {
-            return true;
+        if (index < 0 || index >= inventory.size())
+        {
+            return nullptr;
         }
-        else {
-            return false;
+
+        Item* item = inventory[index];
+        if (counts.find(item) != counts.end() && counts[item] > 0)
+        {
+            return item;
+        }
+        return nullptr;
+    }
+
+    void sellItem(int index) 
+    {
+        Item* item = findItem(index);
+        if (item == nullptr)
+        {
+            cout << "잘못된 입력입니다." << endl;
+            return;
+        }
+
+        if (--counts[item] == 0)
+        {
+            counts.erase(item);
+            inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
+            cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : 0개" << endl;
+        }
+        else
+        {
+            cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : " << counts[item] << endl;
         }
     }
 
-    void removeItem(Item* item) 
+    void useItem(int index, Character* player)
     {
-        auto it = find(inventory.begin(), inventory.end(), item);
-
-        if (it != inventory.end()) 
+        Item* item = findItem(index);
+        if (item == nullptr)
         {
-            inventory.erase(it);
-            cout << item->getName() << " 제거됨." << endl;
+            cout << "잘못된 입력입니다." << endl;
+            return;
         }
-        else 
+
+        if (counts[item] > 0)
+        {
+            item->use(player);
+            if (--counts[item] == 0)
+            {
+                counts.erase(item);
+                inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
+                cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : 0개" << endl;
+            }
+            else
+            {
+                cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : " << counts[item] << endl;
+            }
+        }
+        else
         {
             cout << item->getName() << " 이(가) 없습니다." << endl;
         }
@@ -49,12 +93,13 @@ public:
 
     void listItem() 
     {
-        for (auto it : inventory) 
+        cout << "======== ( Inventory ) ========" << endl;
+        for (int idx = 0; idx < inventory.size();idx++)
         {
-            cout << it->getName() << endl;
+            Item* item = inventory[idx];
+            cout << "[" << idx << "] " << item->getName() << " (개수: " << counts[item] << ")" << endl;
         }
     }
-
 
 };
 

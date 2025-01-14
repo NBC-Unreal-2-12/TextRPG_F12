@@ -61,9 +61,9 @@ void Character::levelUp()
 	displayStatus();
 }
 
-void Character::useItem(Item* item)
+void Character::useItemFromInventory(int index)
 {
-    inventory.removeItem(item);
+    inventory.useItem(index, this);
 }
 
 void Character::addItemToInventory(Item* item)
@@ -71,9 +71,9 @@ void Character::addItemToInventory(Item* item)
     inventory.addItem(item);
 }
 
-void Character::removeItemFromInventory(Item* item)
+void Character::sellItemFromInventory(int index)
 {
-    inventory.removeItem(item);
+    inventory.sellItem(index);
 }
 
 void Character::displayInventory() 
@@ -141,9 +141,9 @@ int Character::getAttackSpeed()
 {
     return attackSpeed;
 }
-bool Character::findItemFromInventory(Item* item)
+Item* Character::findItemFromInventory(int index)
 {
-    return inventory.hasItem(item);
+    return inventory.findItem(index);
 }
 
 void Character::setAttackSpeed(int set_attackSpeed)
