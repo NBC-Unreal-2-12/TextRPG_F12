@@ -22,7 +22,7 @@ public:
 		mobMaxMana = 3;
 		mobAttackSpeed = 1;
 		mobAccuracy = 50 + 20;
-		mobEvasion = 1;
+		mobEvasion = 4;
 		loot.emplace_back(new MonsterLoot("슬라임 젤리", 20));
 	}
 
@@ -58,7 +58,7 @@ public:
 		mobMaxMana = 3;
 		mobAttackSpeed = 1;
 		mobAccuracy = 50 + 20;
-		mobEvasion = 1;
+		mobEvasion = 3;
 		loot.emplace_back(new MonsterLoot("오크의 부서진 검", 20));
 	}
 
@@ -99,7 +99,7 @@ public:
 		mobMaxMana = 3;
 		mobAttackSpeed = 1;
 		mobAccuracy = 50 + 20;
-		mobEvasion = 1;
+		mobEvasion = 2;
 		loot.emplace_back(new MonsterLoot("고블린의 작은 동전", 20));
 	}
 

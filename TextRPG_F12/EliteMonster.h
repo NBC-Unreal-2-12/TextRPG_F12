@@ -22,7 +22,7 @@ public:
         mobMaxMana = 3;
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
-        mobEvasion = 1;
+        mobEvasion = 6;
         loot.emplace_back(new MonsterLoot("슬라임 왕관", 20));
     }
 
@@ -58,7 +58,7 @@ public:
         mobMaxMana = 3;
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
-        mobEvasion = 1;
+        mobEvasion = 5;
         loot.emplace_back(new MonsterLoot("오크 대왕의 검", 20));
     }
 
@@ -99,7 +99,7 @@ public:
         mobMaxMana = 3;
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
-        mobEvasion = 1;
+        mobEvasion = 4;
         loot.emplace_back(new MonsterLoot("고블린 대장의 반지", 20));
     }
 

@@ -66,7 +66,6 @@ public:
         {
             this->mobHealth = 0;
         }
-        cout << this->mobName << " 이 " << damage << " 데미지 받음. 남은 체력 : " << this->mobHealth << endl;
         isMobDead();
     }
 

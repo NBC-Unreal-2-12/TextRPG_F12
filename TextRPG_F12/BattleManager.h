@@ -1,11 +1,14 @@
 ﻿#ifndef BATTLEMANAGER_H_
 #define BATTLEMANAGER_H_
+#define NOMINMAX
 
 #include "PlayerInput.h"
 #include "GameManager.h"
 #include "Monster.h"
 
 #include <cstdlib>
+#include <Windows.h>
+
 
 class BattleManager 
 {
@@ -48,6 +51,13 @@ public:
 
     // 전투 종료 처리
     int resolveBattle();
+
+    // 글자색 설정
+    void setColor(int color)
+    {
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, color);
+    }
 };
 
 #endif

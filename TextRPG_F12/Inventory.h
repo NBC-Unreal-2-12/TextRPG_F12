@@ -23,7 +23,7 @@ public:
             inventory.push_back(item);
         }
         counts[item]++;
-        cout << "인벤토리에 " << item->getName() << "이(가) 추가되었습니다." << endl;
+        cout << "인벤토리에 " << item->getName() << "이(가) 추가되었습니다.\n" << endl;
     }
 
     Item* findItem(int index) 

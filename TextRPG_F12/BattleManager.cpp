@@ -7,6 +7,7 @@
 #include <ctime> // srand의 시드 설정(현재시각)
 #include "Inventory.h"
 
+
 // 함수에서 참조할 변수 monster에 대하여
 // ★BattleManager 호출 이전에 마주치게 될 monster는 이미 생성이 되어있는 상태.
 // 
@@ -41,7 +42,7 @@ bool BattleManager::isBattleOver()
     }
 
     if (allMonstersDead) {
-        std::cout << "All monsters have been defeated!\n";
+        // std::cout << "All monsters have been defeated!\n";
         return true;
     }
 
@@ -80,10 +81,10 @@ void BattleManager::processPlayerTurn()
         }
 
         // 현재 살아있는 몬스터 출력
-        std::cout << "현재 살아있는 몬스터 목록:\n";
+        std::cout << "\n현재 살아있는 몬스터 목록:\n";
         for (int index : aliveMonsterIndices) {
             std::cout << "[" << index << "] " << monster[index]->getMobName()
-                << " (HP: " << monster[index]->getMobHealth() << ")\n";
+                << " (HP: " << monster[index]->getMobHealth() << ", 명중률: " << player->getAccuracy() / monster[index]->getMobEvasion() << "%)\n";
         }
 
         // 플레이어가 공격할 몬스터 선택
@@ -91,6 +92,7 @@ void BattleManager::processPlayerTurn()
         while (true) {
             std::cout << "공격할 몬스터의 번호를 입력하세요: ";
             std::cin >> selectedMonsterIndex;
+            std::cout << endl;
 
             // 입력값 검증
             if (std::cin.fail() || std::find(aliveMonsterIndices.begin(), aliveMonsterIndices.end(), selectedMonsterIndex) == aliveMonsterIndices.end()) {
@@ -105,17 +107,25 @@ void BattleManager::processPlayerTurn()
         }
 
         // 몬스터 공격 처리
-        if (std::rand() % 100 <= (player->getAccuracy() / monster[selectedMonsterIndex]->getMobEvasion()) * 100) {
+        if (std::rand() % 100 <= (player->getAccuracy() / monster[selectedMonsterIndex]->getMobEvasion()))
+        {
             int damage = player->getAttack();
             monster[selectedMonsterIndex]->takeMobDamage(damage);
+            setColor(1); // 파랑
             std::cout << monster[selectedMonsterIndex]->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
+            std::cout << monster[selectedMonsterIndex]->getMobName() <<"의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << endl;
 
-            if (monster[selectedMonsterIndex]->isMobDead()) {
-                std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
+            if (monster[selectedMonsterIndex]->isMobDead())
+            {
+                std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n\n";
+                setColor(7); // 하양
             }
         }
-        else {
-            std::cout << "공격이 빗나갔습니다!\n";
+        else
+        {
+            setColor(1); // 파랑
+            std::cout << "공격이 빗나갔습니다!\n\n";
+            setColor(7); // 하양
         }
         break;
     }
@@ -146,6 +156,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 {
     if (monster->isMobDead() == false)
     {
+        setColor(12); // 빨강
         std::cout << monster->getMobName() << "이(가) 공격했습니다!" << std::endl;
         if (int randomType = std::rand() % 1 <= (monster->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
         {
@@ -155,7 +166,8 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
             player->setHealth(player->getHealth() - damage);
             if (player->getHealth() >= 1)
             {
-                std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
+                std::cout << player->getName() <<"의 남은 체력은 " << player->getHealth() << "입니다.\n" << std::endl;
+                setColor(7); // 하양
             }
 
             else
@@ -168,7 +180,9 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
         else
         {
             //회피시
+            setColor(12); // 빨강
             cout << "빗나감!" << endl;
+            setColor(7); // 하양
         }
     }
 
@@ -180,7 +194,7 @@ int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster
     this->player = player;
     this->monster = std::move(monsters);
 
-    std::cout << "Battle started!\n";
+    std::cout << "\nBattle started!\n\n";
 
     for (auto& m : monster) {
         cout << m->getMobName() << endl;
@@ -239,7 +253,7 @@ int BattleManager::resolveBattle()
     }
     else if (allMonstersDead)
     {
-        std::cout << "축하합니다! 전투에서 승리하셨습니다!\n";
+        std::cout << "축하합니다! 전투에서 승리하셨습니다!\n\n";
         // 경험치, 돈, 아이템 획득 처리
         int expGained = 100; // 획득 경험치
         int goldGained = 50; // 획득 골드
@@ -248,7 +262,7 @@ int BattleManager::resolveBattle()
         // player->setExp(currentExp + expGained);
         int existGold = player->getGold();
         player->setGold(existGold + expGained);
-        std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n";
+        std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
         // 몬스터 드랍 아이템 처리
         for (auto& monster : monster)
         {
@@ -256,8 +270,10 @@ int BattleManager::resolveBattle()
             {
                 int idx = std::rand() % 100;
                 Item* loot = monster->dropItem(idx);
+                setColor(6); // 노랑
+                std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
                 player->addItemToInventory(loot);
-                std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다.";
+                setColor(7); // 하양
             }
         }
 
