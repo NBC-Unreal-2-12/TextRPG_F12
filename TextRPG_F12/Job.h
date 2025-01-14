@@ -12,12 +12,12 @@ using namespace std;
 class Job 
 {
 protected:
-    const int healthGrowth;
-	const int manaGrowth;
-	const int attackGrowth;
-	const int attackSpeedGrowth;
-	const double evasionGrowth;
-	const double accuracyGrowth;
+    int healthGrowth;
+	int manaGrowth;
+	int attackGrowth;
+	int attackSpeedGrowth;
+	double evasionGrowth;
+	double accuracyGrowth;
 public:
     virtual string getJobName() const = 0;
     Job(int health, int mana, int attack, int attackSpeed, double evasion, double accuracy)
@@ -48,11 +48,11 @@ public:
         return "전사";
     }
 
-    void applyJobEffect(double& attack, int& maxHelth, int& attackspeed,
+    void applyJobEffect(double& attack, int& maxHealth, int& attackspeed,
         double& evasion, double& accuracy, int& maxMp) const override 
     {
         attack += 30;
-        maxHelth += 70;
+        maxHealth += 70;
         attackspeed += 10;
     }
 
