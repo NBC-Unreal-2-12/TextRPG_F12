@@ -166,7 +166,14 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
     {
         std::cout << "/////////////////////////////////\n\n";
         setColor(12); // 빨강
-        std::cout << monster->getMobName() << "이(가) 공격했습니다!" << std::endl;
+        if (monster->getMobMana() != monster->getMobMaxMana())
+        {
+            std::cout << monster->getMobName() << "이(가) 공격했습니다!" << std::endl;
+        }
+        else
+        {
+            std::cout << monster->getMobName() << "이(가) 스킬을 사용했습니다!" << std::endl;
+        }
         if (int randomType = std::rand() % 1 <= (monster->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
         {
             //명중시

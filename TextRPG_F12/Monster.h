@@ -54,7 +54,6 @@ public:
         else
         {
             mobMana = 0; // 마나 초기화
-            cout << "스킬 사용!" << endl;
             return useMobSkill();
         }
     }
