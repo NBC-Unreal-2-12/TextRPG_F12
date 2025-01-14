@@ -105,21 +105,14 @@ bool Character::isCharacterDead()
 {
     return isDead;
 }
-void Character::setCharacterDead(bool dead)
-{
+void Character::setCharacterDead(bool dead) {
     vector<Item*> item = inventory.getInventory();
-
-    ReviveItem* reviveItem = nullptr;
-
-    auto it = find(item.begin(), item.end(), reviveItem);
-
-    if (it != item.end())
-    {
+    auto it = find_if(item.begin(), item.end(), [](Item* i){ return dynamic_cast<ReviveItem*>(i) != nullptr; }); // 죽기 전 ReviveItem 찾기
+    if (it != item.end()) {
         item.erase(it);
         health += 50;
     }
-    else
-    {
+    else { // 없을 시 isDead = true;
         isDead = true;
     }
 }
