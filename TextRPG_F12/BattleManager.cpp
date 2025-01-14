@@ -116,7 +116,7 @@ void BattleManager::processMonsterTurn()
                 {
                     std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
                 }
-                
+
                 else
                 {
                     player->setCharacterDead(true);
