@@ -68,7 +68,6 @@ void clearConsole()
 
 int main()
 {
-
 	srand(static_cast<unsigned>(std::time(nullptr))); // 시드 설정
 
 	GameManager* gameManager = GameManager::getInstance();

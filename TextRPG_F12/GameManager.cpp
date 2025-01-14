@@ -4,6 +4,32 @@ using namespace std;
 // 정적 멤버 변수 정의
 GameManager* GameManager::instance = nullptr;
 
+// 게임 시작시 초기화 메서드
+void GameManager::InitializeGame()
+{
+	// 테스트 직업 생성 
+	Job* job = new Warrior();
+
+	// 캐릭터 이름 설정
+	cout << "캐릭터 이름을 입력하세요: ";
+	string name;
+	getline(cin, name);
+
+	// 싱글톤 객체 초기화 및 상태 출력
+	Character::initialize(name, job);
+	Character* player = Character::getInstance();
+	player->displayStatus();
+
+	// 미리 몬스터를 생성
+	for (int currentRound = 1; currentRound <= round; currentRound++)
+	{
+		monsterGroup[currentRound - 1] = generateMonsters(currentRound);
+	}
+
+
+	// 필요에 따라 추가 초기화 작업 수행 가능
+}
+
 // 상점 방문
 void GameManager::visitShop(Character* player)
 {
@@ -54,7 +80,7 @@ void GameManager::displayInventory(Inventory inventory)
 	cout << "==============================." << endl;
 }
 
-// 라운드별 몬스터 마릿수 결정
+// 라운드 별 몬스터 마릿수를 결정하여 생성
 vector<unique_ptr<Monster>> GameManager::generateMonsters(int round) 
 {
 	std::vector<std::unique_ptr<Monster>> monsters;
@@ -86,6 +112,16 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 	}
 
 	return monsters;
+}
+
+// 특정 라운드의 몬스터 그룹을 반환
+const vector<unique_ptr<Monster>>& GameManager::getMonsterGroup(int round) const
+{
+	if (round < 0 || round >= static_cast<int>(monsterGroup.size()))
+	{
+		throw out_of_range("Invalid round index.");
+	}
+	return monsterGroup[round];
 }
 
 void GameManager::printAllMonsters() const
