@@ -101,6 +101,11 @@ public:
         }
     }
 
+    vector<Item*> getInventory()
+    {
+        return inventory;
+    }
+
 };
 
 #endif // INVENTORY_H

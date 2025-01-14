@@ -107,8 +107,23 @@ bool Character::isCharacterDead()
 }
 void Character::setCharacterDead(bool dead)
 {
-    isDead = dead;
+    vector<Item*> item = inventory.getInventory();
+
+    ReviveItem* reviveItem = nullptr;
+
+    auto it = find(item.begin(), item.end(), reviveItem);
+
+    if (it != item.end())
+    {
+        item.erase(it);
+        health += 50;
+    }
+    else
+    {
+        isDead = true;
+    }
 }
+
 int Character::getHealth()
 {
     return health;
