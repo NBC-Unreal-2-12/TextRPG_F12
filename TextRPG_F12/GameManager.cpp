@@ -125,6 +125,20 @@ const vector<unique_ptr<Monster>>& GameManager::getMonsterGroup(int round) const
 	return monsterGroup[round];
 }
 
+// 현재 라운드 정보 갱신
+void GameManager::setCurrentRound(int currentRound)
+{
+	currentRound = currentRound;
+}
+
+// 현재 라운드 전투
+void GameManager::combat(int currentRound)
+{
+	BattleManager battleManager;
+	battleManager.startBattle(player,monsterGroup[currentRound];);
+
+}
+
 void GameManager::printAllMonsters() const
 {
 	for (size_t roundIndex = 0; roundIndex < monsterGroup.size(); ++roundIndex)
