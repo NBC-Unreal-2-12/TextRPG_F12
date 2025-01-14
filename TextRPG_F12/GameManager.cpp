@@ -7,13 +7,13 @@ GameManager* GameManager::instance = nullptr;
 // 게임 시작시 초기화 메서드
 void GameManager::InitializeGame()
 {
-	// 사용자 입력
-	PlayerInput PI;
-	// 캐릭터 이름 설정
-	string name = PI.setPlayerName();
+	// 테스트 직업 생성 
+	Job* job = new Warrior();
 
-	// 테스트 직업 생성
-	Job* job = PI.setJobByPlayerInput();
+	// 캐릭터 이름 설정
+	cout << "캐릭터 이름을 입력하세요: ";
+	string name;
+	getline(cin, name);
 
 	// 싱글톤 객체 초기화 및 상태 출력
 	Character::initialize(name, job);
@@ -82,18 +82,18 @@ void GameManager::displayInventory(Inventory inventory)
 }
 
 // 라운드 별 몬스터 마릿수를 결정하여 생성
-vector<unique_ptr<Monster>> GameManager::generateMonsters(int round) 
+vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 {
 	std::vector<std::unique_ptr<Monster>> monsters;
 	MonsterFactory factory;
 
 	int monsterCount = 0;
 	int probability = std::rand() % 100 + 1;
-	if (round <= 5) 
+	if (round <= 5)
 	{
 		monsterCount = (probability <= 70) ? 2 : 3;
 	}
-	else if (round <= 10) 
+	else if (round <= 10)
 	{
 		monsterCount = (probability <= 50) ? 1 : 2;
 	}
@@ -107,7 +107,7 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 	}
 
 	// 몬스터 생성
-	for (int i = 0; i < monsterCount; ++i) 
+	for (int i = 0; i < monsterCount; ++i)
 	{
 		monsters.push_back(factory.createMonster(round));
 	}
@@ -126,19 +126,31 @@ const vector<unique_ptr<Monster>>& GameManager::getMonsterGroup(int round) const
 }
 
 // 현재 라운드 정보 갱신
-void GameManager::setCurrentRound(int currentRound)
+void GameManager::setCurrentRound()
 {
-	currentRound = currentRound;
+	currentRound += 1;
 }
 
 // 현재 라운드 전투
 void GameManager::combat(int currentRound)
 {
-	Character* player = Character::getInstance();
-	BattleManager battleManager;
-	// battleManager.startBattle(player, monsterGroup[currentRound]);
+	if (currentRound < 0 || currentRound >= monsterGroup.size()) {
+		std::cout << "Error: Invalid round index." << std::endl;
+		return;
+	}
 
+	BattleManager battleManager;
+	Character* player = Character::getInstance();
+
+	// Null 체크
+	if (!player || monsterGroup[currentRound].empty()) {
+		std::cout << "Error: Null player or no monsters." << std::endl;
+		return;
+	}
+
+	battleManager.startBattle(player, monsterGroup[currentRound]);
 }
+
 
 void GameManager::printAllMonsters() const
 {

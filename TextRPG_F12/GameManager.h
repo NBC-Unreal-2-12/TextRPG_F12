@@ -25,7 +25,7 @@ class GameManager
 private:
 	// 정적 멤버변수로 싱글톤 인스턴스를 저장
 	static GameManager* instance;
-	
+
 	int round = 15; // 게임이 진행되는 총 라운드
 	int currentRound = 1; // 현재 라운드
 	vector<vector<unique_ptr<Monster>>> monsterGroup; // 라운드별 몬스터들
@@ -79,8 +79,8 @@ public:
 	const vector<unique_ptr<Monster>>& getMonsterGroup(int round) const;
 
 	// 현재 라운드 정보를 갱신
-	void setCurrentRound(int currentRound);
-	
+	void setCurrentRound();
+
 	// 현재 라운드 전투
 	void combat(int currentRound);
 
