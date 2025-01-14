@@ -23,7 +23,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot = new MonsterLoot("슬라임 왕관", 20);
+        loot.emplace_back(MonsterLoot("슬라임 왕관", 20));
     }
 
     /* void mobFace() override
@@ -59,7 +59,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot = new MonsterLoot("오크 대왕의 검", 20);
+        loot.emplace_back(MonsterLoot("오크 대왕의 검", 20));
     }
 
     /*void mobFace() override
@@ -100,7 +100,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot = new MonsterLoot("고블린 대장의 반지", 20);
+        loot.emplace_back(MonsterLoot("고블린 대장의 반지", 20));
     }
 
     /*void mobFace() override
