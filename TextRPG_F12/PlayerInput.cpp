@@ -1,9 +1,11 @@
 ﻿#include "PlayerInput.h"
 #include <iostream>
+#include <stdlib.h>
 
 int PlayerInput::getPlayerChoice() 
 {
     int choice;
+    std::cout << "\n==============================\n";
     std::cout << "\nChoose your action : \n";
     std::cout << "1. 공격!\n";
     std::cout << "2. 스킬\n";
@@ -12,6 +14,7 @@ int PlayerInput::getPlayerChoice()
     std::cout << "5. 상태\n";
     std::cout << "Enter your choice: ";
     std::cin >> choice;
+    std::cout << "\n==============================\n";
     return choice;
 }
 

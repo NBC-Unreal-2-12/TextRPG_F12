@@ -112,9 +112,11 @@ void BattleManager::processPlayerTurn()
             }
         }
 
+        std::cout << "/////////////////////////////////\n\n";
         // 몬스터 공격 처리
         if (std::rand() % 100 <= (player->getAccuracy() / monster[selectedMonsterIndex]->getMobEvasion()))
         {
+            
             int damage = player->getAttack();
             monster[selectedMonsterIndex]->takeMobDamage(damage);
             setColor(1); // 파랑
@@ -162,6 +164,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 {
     if (monster->isMobDead() == false)
     {
+        std::cout << "/////////////////////////////////\n\n";
         setColor(12); // 빨강
         std::cout << monster->getMobName() << "이(가) 공격했습니다!" << std::endl;
         if (int randomType = std::rand() % 1 <= (monster->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
