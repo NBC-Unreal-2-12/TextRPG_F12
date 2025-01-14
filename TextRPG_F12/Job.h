@@ -26,7 +26,7 @@ public:
     virtual ~Job() {}
     virtual void applyJobEffect(double& attack, int& maxHelth, int& attackspeed, double& evasion, double& accuracy, int& maxMp) const = 0;
     virtual Skill* getSkill() const = 0; // 스킬 반환
-
+        
     // Getter 메서드
     int getHealthGrowth() const { return healthGrowth; }
     int getManaGrowth() const { return manaGrowth; }
@@ -77,11 +77,11 @@ public:
         return "마법사";
     }
 
-    void applyJobEffect(double& attack, int& maxHelth, int& attackspeed, 
+    void applyJobEffect(double& attack, int& maxHealth, int& attackspeed, 
         double& evasion, double& accuracy, int& maxMp) const override 
     {
         attack += 25;
-        maxHelth += 20;
+        maxHealth += 20;
         maxMp += 50;
         attackspeed += 5;
     }
@@ -107,11 +107,11 @@ public:
         return "궁수";
     }
 
-    void applyJobEffect(double& attack, int& maxHelth, int& attackspeed,
+    void applyJobEffect(double& attack, int& maxHealth, int& attackspeed,
         double& evasion, double& accuracy, int& maxMp) const override 
     {
         attack += 20;
-        maxHelth += 30;
+        maxHealth += 30;
         evasion += 0.1;
         attackspeed += 20;
         accuracy += 10;
