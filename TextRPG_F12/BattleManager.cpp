@@ -128,7 +128,7 @@ void BattleManager::processMonsterTurn()
 }
 
 // 전투 시작
-void BattleManager::startBattle(Character* player, std::vector<Monster*> monsters)
+void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster*>> monsters)
 {
     this->player = player;
     this->monster = monster;
