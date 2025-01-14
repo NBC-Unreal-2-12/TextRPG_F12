@@ -86,29 +86,22 @@ void Shop::buyItem(int index, Character* player)
 // 아이템 판매
 void Shop::sellItem(int index, Character* player)
 {
-	// 유혀성 검사
-	if (!isValidIndex(index))
-	{
-		std::cout << "잘못된 선택입니다.\n";
-		return;
-	}
-
-	// 해당 아이템 찾기
-	auto& stockItem = *std::find_if(stock.begin(), stock.end(),
-		[index](const StockItem& stockItem) { return stockItem.index == index; });
-
-	// 인벤토리 내에서 아이템 찾기
-	Item* item = stockItem.item;
-	if (!player->findItemFromInventory(item))
+	// 유효성 검사
+	Item* item = player->findItemFromInventory(index);
+	if (item == nullptr)
 	{
 		std::cout << "해당 아이템을 소지하고 있지 않습니다.\n";
 		return;
 	}
 
+	// 해당 아이템 찾기
+	auto& stockItem = *std::find_if(stock.begin(), stock.end(),
+		[item](const StockItem& stockItem) { return stockItem.item == item; });
+
 	// 판매 처리
 	int sellPrice = static_cast<int>(item->getPrice() * 0.6);
 	player->setGold(sellPrice);
-	player->removeItemFromInventory(item);
+	player->sellItemFromInventory(index);
 
 	// 재고 업데이트
 	stockItem.quantity++;

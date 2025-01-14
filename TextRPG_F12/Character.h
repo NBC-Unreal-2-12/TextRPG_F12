@@ -40,10 +40,10 @@ public:
 	static Character* getInstance();				// 인스턴스 가져오기
 	void displayStatus();   // 현재 상태 출력
 	void levelUp();     // 레벨업
-	void useItem(Item* item);   // 아이템 사용   
+	void useItemFromInventory(int index);   // 아이템 사용   
 	void addItemToInventory(Item* item);   // 인벤토리에 아이템 추가
-	bool findItemFromInventory(Item* item); // 인벤토리에서 아이템 찾기
-	void removeItemFromInventory(Item* item); // 인벤토리에서 아이템 제거
+	Item* findItemFromInventory(int index); // 인벤토리에서 아이템 찾기
+	void sellItemFromInventory(int index); // 인벤토리에서 아이템 제거
 	void displayInventory(); // 인벤토리 표시
 	int getGold(); // 골드 getter
 	void setGold(int sellPrice); // 골드 setter

@@ -41,7 +41,7 @@ void GameManager::visitShop(Character* player)
 	shop.displayItems();
 
 	int choice = -1;
-
+	player->setGold(200);
 	while (choice != 0)
 	{
 		cout << "구매 : 1, 판매 : 2,  나가기 : 0 >> ";
@@ -60,6 +60,7 @@ void GameManager::visitShop(Character* player)
 		}
 		else if (choice == 2)
 		{
+			player->displayInventory();
 			int index;
 			cout << "몇 번 아이템을 판매하시겠습니까? >> ";
 			cin >> index;
