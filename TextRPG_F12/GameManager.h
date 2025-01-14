@@ -76,7 +76,7 @@ public:
 	vector<unique_ptr<Monster>> generateMonsters(int round);
 
 	// 특정 라운드의 몬스터 그룹을 반환
-	const vector<unique_ptr<Monster>>& getMonsterGroup(int round) const;
+	vector<unique_ptr<Monster>>& getMonsterGroup(int round);
 
 	// 현재 라운드 정보를 갱신
 	void setCurrentRound();

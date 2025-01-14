@@ -133,7 +133,7 @@ void BattleManager::processMonsterTurn()
 }
 
 // 전투 시작
-void BattleManager::startBattle(Character* player, const std::vector<unique_ptr<Monster>>& monsters)
+void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
 {
     this->player = player;
 
@@ -149,7 +149,7 @@ void BattleManager::startBattle(Character* player, const std::vector<unique_ptr<
         turnOrders.push_back(TurnOrder(true, player->getAttackSpeed()));
 
         // 몬스터들의 공격 속도 추가
-        for (auto& m : monster) {
+        for (auto& m : monsters) {
             turnOrders.push_back(TurnOrder(false, m->getMobAttackSpeed()));
         }
 

@@ -42,7 +42,7 @@ public:
     void processMonsterTurn();
 
     // 전투 시작
-    void startBattle(Character* player, const vector<unique_ptr<Monster>>& monster);
+    void startBattle(Character* player, vector<unique_ptr<Monster>>& monster);
 
     // 전투 종료 처리
     int resolveBattle();

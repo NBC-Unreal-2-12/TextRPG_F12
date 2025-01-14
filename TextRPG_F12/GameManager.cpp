@@ -109,14 +109,14 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 	// 몬스터 생성
 	for (int i = 0; i < monsterCount; ++i)
 	{
-		monsters.push_back(factory.createMonster(round));
+		monsters.emplace_back(factory.createMonster(round));
 	}
 
-	return std::move(monsters);
+	return monsters;
 }
 
 // 특정 라운드의 몬스터 그룹을 반환
-const vector<unique_ptr<Monster>>& GameManager::getMonsterGroup(int round) const
+vector<unique_ptr<Monster>>& GameManager::getMonsterGroup(int round)
 {
 	if (round < 0 || round >= static_cast<int>(monsterGroup.size()))
 	{
@@ -150,7 +150,7 @@ void GameManager::combat(int currentRound)
 	// BattleManager 생성 시 특정 라운드의 데이터를 전달
 	BattleManager battleManager(player, monsterGroup[currentRound]);
 
-	battleManager.startBattle(player, std::move(getMonsterGroup(currentRound)));
+	battleManager.startBattle(player, getMonsterGroup(currentRound));
 }
 
 
