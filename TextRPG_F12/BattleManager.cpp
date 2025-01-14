@@ -1,7 +1,10 @@
 ﻿#include "BattleManager.h"
+#include "MonsterFactory.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <cstdlib> // 난수 생성 함수( srand() ) 제공
+#include <ctime> // srand의 시드 설정(현재시각)
 #include "Inventory.h"
 
 // 함수에서 참조할 변수 monster에 대하여
@@ -58,7 +61,15 @@ void BattleManager::processPlayerTurn()
     case 1: // 공격
         // 우선 테스트용 기능 구현만.
         std::cout << "player's attack!\n";
-        monster[0]->takeMobDamage(player->getAttack());
+
+        if (int randomType = std::rand() % 100 <= (player->getAccuracy() / monster[0]->getMobEvasion())) // 랜덤값이 "명중률 / 몬스터회피율" 보다 작아야 명중
+        {
+            monster[0]->takeMobDamage(player->getAttack());
+        }
+        else
+        {
+            cout << "빗나감!" << endl;
+        }
         break;
     case 2: // 스킬
         player->useSkill(monster);
@@ -83,18 +94,27 @@ void BattleManager::processMonsterTurn()
         if (allMonstersDead == false)
         {
             std::cout << monsters->getMobName() << "이(가) 공격했습니다!" << std::endl;
-            int damage = monsters->useMobAttack();
-            std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
-            player->setHealth(damage);
-            if (player->getHealth() >= 1)
+            if (int randomType = std::rand() % 100 <= (monsters->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
             {
-                std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
+                //명중시
+                int damage = monsters->useMobAttack();
+                std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
+                player->setHealth(damage);
+                if (player->getHealth() >= 1)
+                {
+                    std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
+                }
+                
+                else
+                {
+                    isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
+                    resolveBattle();
+                }
             }
-            // 다음순서로 넘겨줌
             else
             {
-                isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
-                resolveBattle();
+                //회피시
+                cout << "빗나감!" << endl;
             }
         }
     }
