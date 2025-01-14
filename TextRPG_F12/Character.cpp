@@ -54,6 +54,8 @@ void Character::levelUp()
     level++;
     maxHealth += level * 20;
     health = maxHealth;
+	maxMp += level * 10;
+	mp = maxMp;
     attack += level * 5;
     cout << "레벨업!" << name << "의 레벨이 " << level << "이 되었습니다!" << endl;
 }
@@ -117,6 +119,18 @@ int Character::getMaxHealth()
 int Character::getMP()
 {
     return mp;
+}
+void Character::setMP(int set_mp)
+{
+	mp = set_mp;
+}
+int Character::getMaxMP()
+{
+	return maxMp;
+}
+void Character::setMaxMP(int set_maxMp)
+{
+	maxMp = set_maxMp;
 }
 double Character::getAttack()
 {
