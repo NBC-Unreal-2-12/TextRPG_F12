@@ -13,6 +13,10 @@
 #include "Item.h"
 #include "Job.h"
 #include "Monster.h"
+#include "NormalMonster.h"
+#include "EliteMonster.h"
+#include "BossMonster.h"
+#include "SpecialMonster.h"
 #include "MonsterFactory.h"
 #include "PlayerInput.h"
 #include "Shop.h"
@@ -66,53 +70,18 @@ int main()
 {
 
 	srand(static_cast<unsigned>(std::time(nullptr))); // 시드 설정
+
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
 	clearConsole();
-	Character* player = Character::getInstance();
+	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
-	// 전투 테스트 코드입니다.
-	/*BattleManager battleManager;
-
-	Goblin* goblin1 = new Goblin();
-	Goblin* goblin2 = new Goblin();
-	vector<Monster*> monsterPool;
-	monsterPool.push_back(goblin1);
-	monsterPool.push_back(goblin2);
-
-	battleManager.startBattle(player, monsterPool);*/
-	// startBattle의 인자는 vector<Monster*>보다 Monster*가 적절해 보입니다.
-
-	std::vector<std::unique_ptr<Monster>> monsters;
-
-	// 라운드별 몬스터 생성
-	// 한 번에 여러마리를 생성하게 되면 for문으로 가능.
-	MonsterFactory* mf = new MonsterFactory();
-	mf->setSeed();
-	for (int i = 0;i < 3;i++) monsters.push_back(mf->createMonster(1));
-
-	// 생성된 몬스터 출력
-	for (auto& w : monsters)
-	{
-		std::cout << "A wild " << typeid(*w).name() << " appeared!\n";
-		w->useMobAttack();
-	}
+	gameManager->printAllMonsters();
 
 	clearConsole();
 
-	Inventory inventory;
-	Item* item1 = new HealthPotion("테스트아이템1", 50, 11);
-	Item* item2 = new ManaPotion("테스트아이템2", 10, 22);
-	Item* item3 = new AttackBoost("테스트아이템3", 500, 33);
-
-	inventory.addItem(item1);
-	inventory.addItem(item2);
-	inventory.addItem(item3);
-
 	gameManager->visitShop(player);
 	//	battleManager.startBattle(player, monsterPool);
-
-
 
 }
 

@@ -1,5 +1,6 @@
 ﻿#include "GameManager.h"
 
+using namespace std;
 // 정적 멤버 변수 정의
 GameManager* GameManager::instance = nullptr;
 
@@ -51,4 +52,55 @@ void GameManager::displayInventory(Inventory inventory)
 	cout << "======현재 소지한 아이템======" << endl;
 	inventory.listItem();
 	cout << "==============================." << endl;
+}
+
+// 라운드별 몬스터 마릿수 결정
+vector<unique_ptr<Monster>> GameManager::generateMonsters(int round) 
+{
+	std::vector<std::unique_ptr<Monster>> monsters;
+	MonsterFactory factory;
+
+	int monsterCount = 0;
+	int probability = std::rand() % 100 + 1;
+	if (round <= 5) 
+	{
+		monsterCount = (probability <= 70) ? 2 : 3;
+	}
+	else if (round <= 10) 
+	{
+		monsterCount = (probability <= 50) ? 1 : 2;
+	}
+	else 
+	{
+		monsterCount = (probability <= 40) ? 1 : 2;
+	}
+
+	// 몬스터 생성
+	for (int i = 0; i < monsterCount; ++i) 
+	{
+		monsters.push_back(factory.createMonster(round));
+	}
+
+	return monsters;
+}
+
+void GameManager::printAllMonsters() const
+{
+	for (size_t roundIndex = 0; roundIndex < monsterGroup.size(); ++roundIndex)
+	{
+		cout << "Round " << roundIndex + 1 << " Monsters:" << endl;
+
+		const auto& monsters = monsterGroup[roundIndex];
+		if (monsters.empty())
+		{
+			cout << "  No monsters in this round." << endl;
+		}
+		else
+		{
+			for (const auto& monster : monsters)
+			{
+				cout << "  - " << monster->getMobName() << endl;
+			}
+		}
+	}
 }
