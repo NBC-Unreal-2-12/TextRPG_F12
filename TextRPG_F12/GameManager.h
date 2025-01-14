@@ -27,6 +27,7 @@ private:
 	static GameManager* instance;
 	
 	int round = 15; // 게임이 진행되는 총 라운드
+	int currentRound = 1; // 현재 라운드
 	vector<vector<unique_ptr<Monster>>> monsterGroup; // 라운드별 몬스터들
 
 	GameManager()
@@ -77,9 +78,14 @@ public:
 	// 특정 라운드의 몬스터 그룹을 반환
 	const vector<unique_ptr<Monster>>& getMonsterGroup(int round) const;
 
+	// 현재 라운드 정보를 갱신
+	void setCurrentRound(int currentRound);
+	
+	// 현재 라운드 전투
+	void combat(int currentRound);
+
 	// 테스트용 모든 라운드의 몬스터 이름 출력
 	void printAllMonsters() const;
-
 };
 
 #endif // !GAMEMANAGER_H_

@@ -72,7 +72,14 @@ void BattleManager::processPlayerTurn()
         }
         break;
     case 2: // 스킬
-        player->useSkill(monster);
+        if (int randomType = std::rand() % 100 <= (player->getAccuracy() / monster[0]->getMobEvasion())) // 랜덤값이 "명중률 / 몬스터회피율" 보다 작아야 명중
+        {
+            player->useSkill(monster);
+        }
+        else
+        {
+            cout << "빗나감!" << endl;
+        }
         break;
     case 3: // 인벤토리
         inventory->listItem();
@@ -99,7 +106,7 @@ void BattleManager::processMonsterTurn()
                 //명중시
                 int damage = monsters->useMobAttack();
                 std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
-                player->setHealth(damage);
+                player->setHealth(player->getHealth() - damage);
                 if (player->getHealth() >= 1)
                 {
                     std::cout << "남은 체력은 " << player->getHealth() << "입니다." << std::endl;
@@ -121,7 +128,7 @@ void BattleManager::processMonsterTurn()
 }
 
 // 전투 시작
-void BattleManager::startBattle(Character* player, std::vector<Monster*> monsters)
+void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster*>> monsters)
 {
     this->player = player;
     this->monster = monster;
