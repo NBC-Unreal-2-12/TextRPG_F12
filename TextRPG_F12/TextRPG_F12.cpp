@@ -78,10 +78,10 @@ int main()
 	gameManager->printAllMonsters();
 
 	clearConsole();
-
 	gameManager->visitShop(player);
 	//	battleManager.startBattle(player, monsterPool);
-
+	gameManager->destroyInstance();
+	return 0;
 }
 
 // 구현시 이건 테스트 해봐야겠는데? 싶은 것들을 추가해주세요

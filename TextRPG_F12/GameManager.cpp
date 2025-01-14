@@ -140,6 +140,7 @@ void GameManager::printAllMonsters() const
 			for (const auto& monster : monsters)
 			{
 				cout << "  - " << monster->getMobName() << endl;
+				monster->mobFace();
 			}
 		}
 	}
