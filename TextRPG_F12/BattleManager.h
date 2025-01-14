@@ -5,6 +5,8 @@
 #include "GameManager.h"
 #include "Monster.h"
 
+#include <cstdlib>
+
 class BattleManager 
 {
 private:

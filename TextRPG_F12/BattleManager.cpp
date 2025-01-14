@@ -174,7 +174,8 @@ int BattleManager::resolveBattle()
         {
             if (monster->isMobDead())
             {
-                Item* loot = monster->dropItem();
+                int idx = std::rand() % 100;
+                Item* loot = monster->dropItem(idx);
                 player->addItemToInventory(loot);
                 std::cout << "전리품 " << loot << "을(를) 습득하셨습니다.";
             }

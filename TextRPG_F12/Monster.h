@@ -83,9 +83,9 @@ public:
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
-    Item* dropItem()
+    Item* dropItem(int idx)
     {
-        return loot;
+        return loot[idx%loot.size()];
     }
 
 protected:
@@ -97,7 +97,7 @@ protected:
     int mobMaxMana = 99;
     int mobAccuracy = 99;
     double mobEvasion = 99;
-    Item* loot;
+    vector<Item*> loot;
 };
 
 
@@ -115,7 +115,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
-//        loot = new MonsterLoot("고블린의 작은 동전", 20);
+//        loot.emplace_back(MonsterLoot("고블린의 작은 동전", 20));
 //    }
 //
 //    /*void mobFace() override
@@ -158,7 +158,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
-//        loot = new MonsterLoot("오크의 부서진 검", 20);
+//        loot.emplace_back(MonsterLoot("오크의 부서진 검", 20));
 //    }
 //
 //    /*void mobFace() override
@@ -200,7 +200,7 @@ protected:
 //        mobAttackSpeed = 1;
 //        mobAccuracy = 50 + 20;
 //        mobEvasion = 1;
-//        loot = new MonsterLoot("슬라임 젤리", 20);
+//        loot.emplace_back(MonsterLoot("슬라임 젤리", 20));
 //    }
 //
 //    /*void mobFace() override
