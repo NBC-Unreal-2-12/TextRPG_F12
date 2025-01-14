@@ -17,6 +17,11 @@
 
 //vector<std::unique_ptr<Monster>> monsters;
 
+// 초기화 생성자
+BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Monster>>& monster)
+    : player(player), monster(monster) {
+}
+
 // 전투 종료 조건 확인
 bool BattleManager::isBattleOver()
 {
@@ -74,7 +79,7 @@ void BattleManager::processPlayerTurn()
     case 2: // 스킬
         if (int randomType = std::rand() % 100 <= (player->getAccuracy() / monster[0]->getMobEvasion())) // 랜덤값이 "명중률 / 몬스터회피율" 보다 작아야 명중
         {
-            player->useSkill(monster);
+            //player->useSkill(monster);
         }
         else
         {
@@ -96,7 +101,7 @@ void BattleManager::processPlayerTurn()
 // 몬스터 행동 처리
 void BattleManager::processMonsterTurn()
 {
-    for (Monster* monsters : monster)
+    for (const auto& monsters : monster)
     {
         if (allMonstersDead == false)
         {
@@ -131,7 +136,6 @@ void BattleManager::processMonsterTurn()
 void BattleManager::startBattle(Character* player, const std::vector<unique_ptr<Monster>>& monsters)
 {
     this->player = player;
-    this->monster = monster;
 
     std::cout << "Battle started!\n";
 
@@ -145,7 +149,7 @@ void BattleManager::startBattle(Character* player, const std::vector<unique_ptr<
         turnOrders.push_back(TurnOrder(true, player->getAttackSpeed()));
 
         // 몬스터들의 공격 속도 추가
-        for (Monster* m : monster) {
+        for (auto& m : monster) {
             turnOrders.push_back(TurnOrder(false, m->getMobAttackSpeed()));
         }
 
@@ -198,7 +202,7 @@ int BattleManager::resolveBattle()
         player->setGold(existGold + expGained);
         std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n";
         // 몬스터 드랍 아이템 처리
-        for (Monster* monster : monster)
+        for (auto& monster : monster)
         {
             if (monster->isMobDead())
             {

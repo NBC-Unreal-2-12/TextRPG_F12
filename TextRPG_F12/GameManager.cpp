@@ -139,7 +139,6 @@ void GameManager::combat(int currentRound)
 		return;
 	}
 
-	BattleManager battleManager;
 	Character* player = Character::getInstance();
 
 	// Null 체크
@@ -147,6 +146,9 @@ void GameManager::combat(int currentRound)
 		std::cout << "Error: Null player or no monsters." << std::endl;
 		return;
 	}
+
+	// BattleManager 생성 시 특정 라운드의 데이터를 전달
+	BattleManager battleManager(player, monsterGroup[currentRound]);
 
 	battleManager.startBattle(player, std::move(getMonsterGroup(currentRound)));
 }

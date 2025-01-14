@@ -76,6 +76,7 @@ int main()
 	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
 	gameManager->printAllMonsters();
+	gameManager->combat(1);
 
 	clearConsole();
 	gameManager->visitShop(player);

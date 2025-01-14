@@ -18,13 +18,17 @@ private:
         TurnOrder(bool isPlayer, int attackSpeed) : isPlayer(isPlayer), attackSpeed(attackSpeed) {}
     };
     Character* player;              // 플레이어 캐릭터
-    vector<Monster*> monster; // 전투 참여 몬스터
+    vector<unique_ptr<Monster>>& monster; // 전투 참여 몬스터
     bool isPlayerTurn;              // 현재 턴이 플레이어의 턴인지 여부
     bool allMonstersDead = false;           // 몬스터들이 전멸했는지 여부
 
     Inventory* inventory;
 
 public:
+
+    // 생성자
+    BattleManager(Character* player, std::vector<std::unique_ptr<Monster>>& monster);
+
     // 전투 종료 조건 확인
     bool isBattleOver();
 
