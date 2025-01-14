@@ -103,7 +103,7 @@ void BattleManager::processMonsterTurn()
 {
     for (const auto& monsters : monster)
     {
-        if (allMonstersDead == false)
+        if (monsters->isMobDead() == false)
         {
             std::cout << monsters->getMobName() << "이(가) 공격했습니다!" << std::endl;
             if (int randomType = std::rand() % 1 <= (monsters->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
