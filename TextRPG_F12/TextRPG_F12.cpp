@@ -87,21 +87,8 @@ int main()
 	clearConsole();
 	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
-	//gameManager->printAllMonsters();
-	PlayerInput playerInput;
-
-	while (true) {
-		int choice = playerInput.getPlayerChoiceAfterBattle();
-		if (choice == 1)
-		{
-			gameManager->combat(gameManager->getCurrentRound());
-		}
-		else if (choice == 2)
-		{
-			gameManager->visitShop(player);
-		}
-		playerInput.getPlayerChoiceAfterBattle();
-	}
+	gameManager->printAllMonsters();
+	gameManager->combat(1);
 
 	clearConsole();
 	gameManager->visitShop(player);
