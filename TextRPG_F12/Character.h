@@ -31,7 +31,7 @@ private:
 	bool isDead;        // 사망 여부    
     static Character* instance; // 싱글톤 인스턴스
     Character(string userName, Job* characterJob);
-    Inventory inventory;                
+	Inventory inventory;                // 인벤토리
 
 public:
     Character(const Character&) = delete;
@@ -54,6 +54,9 @@ public:
 	void setHealth(int set_health); // health setter
 	int getMaxHealth();				// maxhealth getter
     int getMP();                    // mp getter
+	void setMP(int set_mp);			// mp setter
+	int getMaxMP();					// maxmp getter
+	void setMaxMP(int set_maxMp);	// maxmp setter
     double getAttack();             // 데미지 getter
     int getAttackSpeed();           // 공격속도 getter
 	void setAttackSpeed(int set_attackSpeed); // 공격속도 setter
