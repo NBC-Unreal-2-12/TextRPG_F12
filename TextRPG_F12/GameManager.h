@@ -5,6 +5,8 @@
 #include <ctime>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <memory>
 
 #include "Character.h"
 #include "Shop.h"
@@ -13,6 +15,7 @@
 #include "Item.h"
 #include "ItemManager.h"
 #include "Monster.h"
+#include "MonsterFactory.h"
 
 using namespace std;
 
@@ -22,10 +25,15 @@ class GameManager
 private:
 	// 정적 멤버변수로 싱글톤 인스턴스를 저장
 	static GameManager* instance;
+	
+	int round = 15; // 게임이 진행되는 총 라운드
+	vector<vector<unique_ptr<Monster>>> monsterGroup; // 라운드별 몬스터들
+
 
 	GameManager()
 	{
 		cout << "게임 매니저 생성\n";
+		monsterGroup.resize(round); // 벡터 크기 미리 설정
 	};
 
 	~GameManager()
@@ -48,6 +56,12 @@ public:
 		return instance;
 	}
 
+	static void destroyInstance()
+	{
+		delete instance;
+		instance = nullptr;
+	}
+
 	// 게임 시작
 	void InitializeGame()
 	{
@@ -64,6 +78,13 @@ public:
 		Character* player = Character::getInstance();
 		player->displayStatus();
 
+		// 미리 몬스터를 생성
+		for (int currentRound = 1; currentRound <= round; currentRound++)
+		{
+			monsterGroup[currentRound - 1] = generateMonsters(currentRound);
+		}
+
+
 		// 필요에 따라 추가 초기화 작업 수행 가능
 	}
 
@@ -73,6 +94,22 @@ public:
 
 	// 인벤토리 표시
 	void displayInventory(Inventory inventory);
+
+	// 라운드 별 몬스터 생성
+	vector<unique_ptr<Monster>> generateMonsters(int round);
+
+	// 특정 라운드의 몬스터 그룹을 반환
+	const vector<unique_ptr<Monster>>& getMonsterGroup(int round) const
+	{
+		if (round < 0 || round >= static_cast<int>(monsterGroup.size()))
+		{
+			throw out_of_range("Invalid round index.");
+		}
+		return monsterGroup[round];
+	}
+
+	// 테스트용 모든 라운드의 몬스터 이름 출력
+	void printAllMonsters() const;
 
 };
 
