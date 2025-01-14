@@ -74,21 +74,34 @@ void clearConsole()
 
 	this_thread::sleep_for(chrono::seconds(1)); // 1초 대기
 	system("cls"); // 화면 지우기 cls 명령 사용
-
 }
 
 int main()
 {
-	gameStart();
 	srand(static_cast<unsigned>(time(nullptr))); // 시드 설정
+	gameStart();
 
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
 	clearConsole();
 	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
-	gameManager->printAllMonsters();
-	gameManager->combat(1);
+	//gameManager->printAllMonsters();
+	PlayerInput playerInput;
+
+	while (true)
+	{
+		int choice = playerInput.getPlayerChoiceAfterBattle();
+		if (choice == 1)
+		{
+			gameManager->combat(gameManager->getCurrentRound());
+		}
+		else if (choice == 2)
+		{
+			gameManager->visitShop(player);
+		}
+		playerInput.getPlayerChoiceAfterBattle();
+	}
 
 	clearConsole();
 	gameManager->visitShop(player);
