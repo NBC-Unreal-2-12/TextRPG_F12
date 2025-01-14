@@ -12,12 +12,12 @@ using namespace std;
 class Job 
 {
 protected:
-    int healthGrowth;
-	int manaGrowth;
-	int attackGrowth;
-	int attackSpeedGrowth;
-	double evasionGrowth;
-	double accuracyGrowth;
+    const int healthGrowth;
+	const int manaGrowth;
+	const int attackGrowth;
+	const int attackSpeedGrowth;
+	const double evasionGrowth;
+	const double accuracyGrowth;
 public:
     virtual string getJobName() const = 0;
     Job(int health, int mana, int attack, int attackSpeed, double evasion, double accuracy)
