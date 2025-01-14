@@ -106,7 +106,7 @@ void BattleManager::processMonsterTurn()
         if (allMonstersDead == false)
         {
             std::cout << monsters->getMobName() << "이(가) 공격했습니다!" << std::endl;
-            if (int randomType = std::rand() % 100 <= (monsters->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
+            if (int randomType = std::rand() % 1 <= (monsters->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
             {
                 //명중시
                 int damage = monsters->useMobAttack();
@@ -119,6 +119,7 @@ void BattleManager::processMonsterTurn()
                 
                 else
                 {
+                    player->setCharacterDead(true);
                     isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
                     resolveBattle();
                 }

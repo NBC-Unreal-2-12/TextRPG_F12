@@ -105,6 +105,10 @@ bool Character::isCharacterDead()
 {
     return isDead;
 }
+void Character::setCharacterDead(bool dead)
+{
+    isDead = dead;
+}
 int Character::getHealth()
 {
     return health;

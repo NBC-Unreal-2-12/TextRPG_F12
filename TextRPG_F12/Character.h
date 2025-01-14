@@ -50,6 +50,7 @@ public:
 	int getExp();				// 경험치 getter
 	void setExp(int set_exp);	// 경험치 setter
 	bool isCharacterDead();		 // 사망 여부 getter
+	void setCharacterDead(bool dead);		//사망 setter
 	int getHealth();                // health getter
 	void setHealth(int set_health); // health setter
 	int getMaxHealth();				// maxhealth getter

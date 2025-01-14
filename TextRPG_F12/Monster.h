@@ -33,7 +33,7 @@ public:
 
     int getMobAttackSpeed() { return this->mobAttackSpeed; }
 
-    int getMobAccuracy() { return this->mobAccuracy; }
+    double getMobAccuracy() { return this->mobAccuracy; }
 
     double getMobEvasion() { return this->mobEvasion; }
 
@@ -95,7 +95,7 @@ protected:
     int mobAttackSpeed = 99;
     int mobMana = 99;
     int mobMaxMana = 99;
-    int mobAccuracy = 99;
+    double mobAccuracy = 99;
     double mobEvasion = 99;
     vector<Item*> loot;
 };
