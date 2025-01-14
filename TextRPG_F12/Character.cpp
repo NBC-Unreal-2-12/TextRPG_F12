@@ -52,12 +52,13 @@ void Character::displayStatus()
 void Character::levelUp()
 {
     level++;
-    maxHealth += level * 20;
-    health = maxHealth;
-	maxMp += level * 10;
-	mp = maxMp;
-    attack += level * 5;
+    maxHealth += job->getHealthGrowth();
+    maxMp += job->getManaGrowth();
+    attack += job->getAttackGrowth();
+    evasion += job->getEvasionGrowth();
+    accuracy += job->getAccuracyGrowth();
     cout << "레벨업!" << name << "의 레벨이 " << level << "이 되었습니다!" << endl;
+	displayStatus();
 }
 
 void Character::useItem(Item* item)
@@ -118,7 +119,7 @@ int Character::getMaxHealth()
 }
 int Character::getMP()
 {
-    return mp;
+	return mp;
 }
 void Character::setMP(int set_mp)
 {
@@ -126,7 +127,7 @@ void Character::setMP(int set_mp)
 }
 int Character::getMaxMP()
 {
-	return maxMp;
+    return maxMp;
 }
 void Character::setMaxMP(int set_maxMp)
 {

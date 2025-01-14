@@ -19,7 +19,7 @@ private:
     int level;      // 레벨
     int health;     // 현재 체력
     int maxHealth;  // 최대 체력
-	int mp;     // 현재 마나
+	int mp;			// 현재 마나
 	int maxMp;      // 최대 마나
 	double attack;  // 공격력
 	int experience;     // 경험치
@@ -55,8 +55,8 @@ public:
 	int getMaxHealth();				// maxhealth getter
     int getMP();                    // mp getter
 	void setMP(int set_mp);			// mp setter
-	int getMaxMP();					// maxmp getter
-	void setMaxMP(int set_maxMp);	// maxmp setter
+	int getMaxMP();				// maxMp getter
+	void setMaxMP(int set_maxMp);	// maxMp setter
     double getAttack();             // 데미지 getter
     int getAttackSpeed();           // 공격속도 getter
 	void setAttackSpeed(int set_attackSpeed); // 공격속도 setter

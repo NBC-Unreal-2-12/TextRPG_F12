@@ -11,11 +11,29 @@ using namespace std;
 // 직업 인터페이스
 class Job 
 {
+protected:
+    int healthGrowth;
+	int manaGrowth;
+	int attackGrowth;
+	int attackSpeedGrowth;
+	double evasionGrowth;
+	double accuracyGrowth;
 public:
     virtual string getJobName() const = 0;
+    Job(int health, int mana, int attack, int attackSpeed, double evasion, double accuracy)
+        : healthGrowth(health), manaGrowth(mana), attackGrowth(attack),
+        attackSpeedGrowth(attackSpeed), evasionGrowth(evasion), accuracyGrowth(accuracy) {}
     virtual ~Job() {}
     virtual void applyJobEffect(double& attack, int& maxHelth, int& attackspeed, double& evasion, double& accuracy, int& maxMp) const = 0;
     virtual Skill* getSkill() const = 0; // 스킬 반환
+
+    // Getter 메서드
+    int getHealthGrowth() const { return healthGrowth; }
+    int getManaGrowth() const { return manaGrowth; }
+    int getAttackGrowth() const { return attackGrowth; }
+    int getAttackSpeedGrowth() const { return attackSpeedGrowth; }
+    double getEvasionGrowth() const { return evasionGrowth; }
+    double getAccuracyGrowth() const { return accuracyGrowth; }
 };
 
 // 전사 직업 클래스
@@ -24,9 +42,10 @@ class Warrior : public Job
 private:
     Skill* skill = new WarriorSkill();
 public:
+	Warrior() : Job(70, 20, 30, 0, 0.05, 0.02) {}
     string getJobName() const override 
     {
-        return "Warrior";
+        return "전사";
     }
 
     void applyJobEffect(double& attack, int& maxHelth, int& attackspeed,
@@ -49,9 +68,11 @@ class Mage : public Job
 private:
     Skill* skill = new MageSkill();
 public:
+    Mage() : Job(30, 50, 20, 0, 0.03, 0.01) {}
+
     string getJobName() const override
     {
-        return "Mage";
+        return "마법사";
     }
 
     void applyJobEffect(double& attack, int& maxHelth, int& attackspeed, 
@@ -75,9 +96,11 @@ class Archer : public Job
 private:
     Skill* skill = new ArcherSkill();
 public:
+    Archer() : Job(50, 30, 25, 0, 0.1, 0.05) {}
+
     string getJobName() const override
     {
-        return "Archer";
+        return "궁수";
     }
 
     void applyJobEffect(double& attack, int& maxHelth, int& attackspeed,
