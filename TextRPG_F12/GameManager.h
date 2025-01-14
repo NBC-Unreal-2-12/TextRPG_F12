@@ -73,7 +73,7 @@ public:
 	void displayInventory(Inventory inventory);
 
 	// 라운드 별 몬스터 마릿수를 결정하여 생성
-	vector<unique_ptr<Monster>> generateMonsters(int round);
+	vector<unique_ptr<Monster>>& generateMonsters(int round);
 
 	// 특정 라운드의 몬스터 그룹을 반환
 	const vector<unique_ptr<Monster>>& getMonsterGroup(int round) const;

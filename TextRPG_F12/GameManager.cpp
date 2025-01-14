@@ -23,7 +23,7 @@ void GameManager::InitializeGame()
 	// 미리 몬스터를 생성
 	for (int currentRound = 1; currentRound <= round; currentRound++)
 	{
-		monsterGroup[currentRound - 1] = generateMonsters(currentRound);
+		monsterGroup[currentRound - 1] = std::move(generateMonsters(currentRound));
 	}
 
 
@@ -82,7 +82,7 @@ void GameManager::displayInventory(Inventory inventory)
 }
 
 // 라운드 별 몬스터 마릿수를 결정하여 생성
-vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
+vector<unique_ptr<Monster>>& GameManager::generateMonsters(int round)
 {
 	std::vector<std::unique_ptr<Monster>> monsters;
 	MonsterFactory factory;
@@ -148,7 +148,7 @@ void GameManager::combat(int currentRound)
 		return;
 	}
 
-	battleManager.startBattle(player, monsterGroup[currentRound]);
+	battleManager.startBattle(player, std::move(getMonsterGroup(currentRound)));
 }
 
 
