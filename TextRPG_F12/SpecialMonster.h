@@ -4,16 +4,10 @@
 class SpecialMonster : public Monster
 {
 public:
-    SpecialMonster() {};
 	SpecialMonster(const std::string& name)
 		: Monster(name) 
 	{
 	}
-
-    int useMobSkill() override
-    {
-        return 0;
-    };
 };
 
 class Dragon : public SpecialMonster

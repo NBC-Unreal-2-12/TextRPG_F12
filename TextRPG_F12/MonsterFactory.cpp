@@ -41,7 +41,7 @@ std::unique_ptr<SpecialMonster> createSpecialMonster()
 
 std::unique_ptr<BossMonster> createBossMonster() 
 {
-    int randomType = std::rand() % 3; // 0, 1, 2 중 랜덤
+    int randomType = std::rand() % 1; // 0, 1, 2 중 랜덤
     switch (randomType) {
     case 0: return std::make_unique<GGD>();
     default: return nullptr;
@@ -61,18 +61,18 @@ std::unique_ptr<Monster> MonsterFactory::createMonster(int round)
     {
         if (probability <= 50) return createNormalMonster();
         else if (probability <= 90) return createEliteMonster();
-        else return std::make_unique<SpecialMonster>();
+        else return createSpecialMonster();
     }
     else if (round < 15) 
     {
         if (probability <= 30) return createNormalMonster();
         else if (probability <= 70) return createEliteMonster();
-        else if (probability <= 90) return std::make_unique<SpecialMonster>();
-        else return std::make_unique<BossMonster>();
+        else if (probability <= 90) return createSpecialMonster();
+        else return createBossMonster();
     }
     else 
     {
-        return std::make_unique<BossMonster>();
+        return createBossMonster();
     }
 }
 
