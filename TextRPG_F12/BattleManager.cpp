@@ -131,22 +131,21 @@ void BattleManager::startBattle(Character* player, std::vector<Monster*> monster
     // TurnOrder 구조체를 사용하여 전투 순서를 미리 결정
     std::vector<TurnOrder> turnOrders;
 
-    // 플레이어의 공격 속도 추가
-    turnOrders.push_back(TurnOrder(true, player->getAttackSpeed()));
-
-    // 몬스터들의 공격 속도 추가
-    for (Monster* m : monster) {
-        turnOrders.push_back(TurnOrder(false, m->getMobAttackSpeed()));
-    }
-
-    // 공격 속도에 따라 내림차순으로 정렬
-    std::sort(turnOrders.begin(), turnOrders.end(), [](const TurnOrder& a, const TurnOrder& b) {
-        return a.attackSpeed > b.attackSpeed;
-        });
-
     // 전투가 끝날 때까지 반복
     while (isBattleOver() != false)
     {
+        // 플레이어의 공격 속도 추가
+        turnOrders.push_back(TurnOrder(true, player->getAttackSpeed()));
+
+        // 몬스터들의 공격 속도 추가
+        for (Monster* m : monster) {
+            turnOrders.push_back(TurnOrder(false, m->getMobAttackSpeed()));
+        }
+
+        // 공격 속도에 따라 내림차순으로 정렬
+        std::sort(turnOrders.begin(), turnOrders.end(), [](const TurnOrder& a, const TurnOrder& b) {
+            return a.attackSpeed > b.attackSpeed;
+            });
         // 첫 번째 순서부터 차례대로 진행
         for (TurnOrder& turn : turnOrders)
         {
@@ -161,6 +160,8 @@ void BattleManager::startBattle(Character* player, std::vector<Monster*> monster
                 if (isBattleOver()) break; // 전투가 끝났으면 종료
             }
         }
+        //전투 순서 벡터 초기화
+        turnOrders.clear();
     }
 
     resolveBattle();
