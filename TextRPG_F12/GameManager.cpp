@@ -7,13 +7,13 @@ GameManager* GameManager::instance = nullptr;
 // 게임 시작시 초기화 메서드
 void GameManager::InitializeGame()
 {
-	// 테스트 직업 생성 
-	Job* job = new Warrior();
-
+	// 사용자 입력
+	PlayerInput PI;
 	// 캐릭터 이름 설정
-	cout << "캐릭터 이름을 입력하세요: ";
-	string name;
-	getline(cin, name);
+	string name = PI.setPlayerName();
+
+	// 테스트 직업 생성
+	Job* job = PI.setJobByPlayerInput();
 
 	// 싱글톤 객체 초기화 및 상태 출력
 	Character::initialize(name, job);
@@ -134,8 +134,9 @@ void GameManager::setCurrentRound(int currentRound)
 // 현재 라운드 전투
 void GameManager::combat(int currentRound)
 {
+	Character* player = Character::getInstance();
 	BattleManager battleManager;
-	battleManager.startBattle(player,monsterGroup[currentRound];);
+	// battleManager.startBattle(player, monsterGroup[currentRound]);
 
 }
 

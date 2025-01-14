@@ -27,3 +27,56 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 
     return choice;
 }
+
+
+string PlayerInput::setPlayerName()
+{
+    std::cout << "캐릭터의 이름을 설정해 주세요.\n";
+    string name;
+    cin.ignore();
+    while (true)
+    {
+        getline(cin, name);
+        name.erase(remove(name.begin(), name.end(), ' '), name.end());
+        if (!name.empty()) break;
+        cout << "잘못된 입력입니다. 다시 설정해 주세요.\n";
+    }
+
+    return name;
+}
+
+
+Job* PlayerInput::setJobByPlayerInput()
+{
+    std::cout << "직업을 선택해 주세요.\n";
+    std::cout << "1. 전사\n";
+    std::cout << "2. 마법사\n";
+    std::cout << "3. 궁수\n";
+    std::cout << "직업을 선택해 주세요 : ";
+
+    int choice;
+    while (true)
+    {
+        cin >> choice;
+        if (choice >= 1 && choice <= 3) break;
+        std::cout << "잘못된 입력입니다. 다시 선택해 주세요.\n";
+        std::cin.clear(); // 입력 스트림 초기화
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    Job* job = nullptr;
+    switch (choice)
+    {
+    case 1:
+        job = new Warrior();
+        break;
+    case 2:
+        job = new Mage();
+        break;
+    case 3:
+        job = new Archer();
+        break;
+    }
+
+    return job;
+}
