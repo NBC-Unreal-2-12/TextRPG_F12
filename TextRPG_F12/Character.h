@@ -45,6 +45,7 @@ public:
 	void useItemFromInventory(int index);   // 아이템 사용   
 	void addItemToInventory(Item* item);   // 인벤토리에 아이템 추가
 	Item* findItemFromInventory(int index); // 인벤토리에서 아이템 찾기
+	bool isInventoryEmpty();
 	void sellItemFromInventory(int index); // 인벤토리에서 아이템 제거
 	void displayInventory(); // 인벤토리 표시
 	int getGold(); // 골드 getter

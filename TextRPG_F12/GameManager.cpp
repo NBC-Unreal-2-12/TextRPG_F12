@@ -60,11 +60,14 @@ void GameManager::visitShop(Character* player)
 		}
 		else if (choice == 2)
 		{
-			player->displayInventory();
-			int index;
-			cout << "몇 번 아이템을 판매하시겠습니까? >> ";
-			cin >> index;
-			shop.sellItem(index, player);
+			if (!player->isInventoryEmpty())
+			{
+				player->displayInventory();
+				int index;
+				cout << "몇 번 아이템을 판매하시겠습니까? >> ";
+				cin >> index;
+				shop.sellItem(index-1, player);
+			}
 		}
 		else if (choice == 3)
 		{

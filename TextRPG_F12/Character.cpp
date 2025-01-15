@@ -155,6 +155,16 @@ Item* Character::findItemFromInventory(int index)
     return Inventory::getInstance()->findItem(index);
 }
 
+bool Character::isInventoryEmpty()
+{
+    if (Inventory::getInstance()->isInventoryEmpty())
+    {
+        return true;
+    }
+
+    return false;
+}
+
 
 // 추가
 

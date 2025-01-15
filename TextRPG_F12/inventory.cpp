@@ -90,16 +90,29 @@ void Inventory::useItem(int index, Character* player)
 
 void Inventory::listItem()
 {
-    cout << "======== ( Inventory ) ========" << endl;
-    for (int idx = 0; idx < inventory.size();idx++)
+    if (!isInventoryEmpty())
     {
-        Item* item = inventory[idx];
-        cout << "[" << idx << "] " << item->getName() << " (개수: " << counts[item] << ")" << endl;
+        cout << "======== ( Inventory ) ========" << endl;
+        for (int idx = 0; idx < inventory.size();idx++)
+        {
+            Item* item = inventory[idx];
+            cout << "[" << idx + 1 << "] " << item->getName() << " (개수: " << counts[item] << ")" << endl;
+        }
     }
-    if (inventory.empty()) cout << "인벤토리가 비어 있습니다.\n";
 }
 
 vector<Item*> Inventory::getInventory()
 {
     return inventory;
+}
+
+bool Inventory::isInventoryEmpty()
+{
+    if (inventory.empty()) {
+        cout << "======== ( Inventory ) ========" << endl;
+        cout << "인벤토리가 비어 있습니다.\n";
+        return true;
+    }
+
+    return false;
 }
