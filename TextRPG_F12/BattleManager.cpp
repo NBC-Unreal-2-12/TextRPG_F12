@@ -24,14 +24,8 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 }
 
 // 전투 종료 조건 확인
-bool BattleManager::isBattleOver()
+bool BattleManager::getAllMonsterDead()
 {
-    // 플레이어가 사망하면 전투 종료
-    if (player->isCharacterDead()) {
-        std::cout << "Player has been defeated!\n";
-        return true;
-    }
-
     // 모든 몬스터가 사망했는지 확인
     allMonstersDead = true;
     for (const auto& monster : monster) {
@@ -47,13 +41,6 @@ bool BattleManager::isBattleOver()
     }
 
     return false;
-}
-
-// 행동 순서 결정
-void BattleManager::determineTurnOrder()
-{
-    // 마주한 몬스터에 대한 로직은 나중에..
-    isPlayerTurn = player->getAttackSpeed() >= monster[0]->getMobAttackSpeed();
 }
 
 // 플레이어 행동 처리
@@ -143,6 +130,7 @@ void BattleManager::processPlayerTurn()
             {
                 std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n\n";
                 setColor(7); // 하양
+                if (getAllMonsterDead()) isBattleActive = false;
             }
         }
         else
@@ -167,7 +155,8 @@ void BattleManager::processPlayerTurn()
         inventory->listItem();
         break;
     case 4: // 도망
-        std::cout << "You ran away with all your might..\n";
+        std::cout << "도망쳤습니다!!\n";
+        isBattleActive = false;
         resolveBattle();
         break;
     default:
@@ -205,7 +194,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
             else
             {
                 player->setCharacterDead(true);
-                isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
+                isBattleActive = false; // 플레이어가 죽었다고 간주, isBattleOver() 호출
                 resolveBattle();
             }
         }
@@ -221,7 +210,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 }
 
 // 전투 시작
-int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
+void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
 {
     this->player = player;
     this->monster = std::move(monsters);
@@ -237,7 +226,7 @@ int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster
     std::vector<TurnOrder> turnOrders;
 
     // 전투가 끝날 때까지 반복
-    while (isBattleOver() == false)
+    while (isBattleActive)
     {
         // 플레이어의 공격 속도 추가
         turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
@@ -258,19 +247,19 @@ int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster
             if (turn.isPlayer) // 플레이어의 턴인 경우
             {
                 processPlayerTurn();
-                if (isBattleOver()) break; // 전투가 끝났으면 종료
+                if (!isBattleActive) break; // 전투가 끝났으면 종료
             }
             else
             {
                 processMonsterTurn(monster[turn.index]);
-                if (isBattleOver()) break; // 전투가 끝났으면 종료
+                if (!isBattleActive) break; // 전투가 끝났으면 종료
             }
         }
         //전투 순서 벡터 초기화
         turnOrders.clear();
     }
 
-    return resolveBattle();
+    resolveBattle();
 }
 
 // 전투 종료 처리
@@ -280,7 +269,8 @@ int BattleManager::resolveBattle()
     if (player->isCharacterDead())
     {
         // 우선 텍스트 출력은 영어로..
-        std::cout << "Player has been defeated. Game Over.\n";
+        std::cout << "전투에서 패배하셨습니다.\n";
+        std::cout << "게임이 종료됩니다.\n";
 
         return 0; // 게임종료
     }
@@ -296,26 +286,26 @@ int BattleManager::resolveBattle()
         int existGold = player->getGold();
         player->setGold(existGold + expGained);
         std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
-        // 몬스터 드랍 아이템 처리
-        for (auto& monster : monster)
-        {
-            if (monster->isMobDead())
-            {
-                int idx = std::rand() % 100;
-                Item* loot = monster->dropItem(idx);
-                setColor(6); // 노랑
-                std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
-                player->addItemToInventory(loot);
-                setColor(7); // 하양
-            }
-        }
+    }
 
-        return 1; // 게임 진행
-    }
-    else // 도망, input
+    // 처치한 몬스터 드랍 아이템 처리
+    for (auto& monster : monster)
     {
-        GameManager* gameManager = GameManager::getInstance();
-        gameManager->setCurrentRound();
-        return 2;
+        if (monster->isMobDead())
+        {
+            int idx = std::rand() % 100;
+            Item* loot = monster->dropItem(idx);
+            setColor(6); // 노랑
+            std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
+            player->addItemToInventory(loot);
+            setColor(7); // 하양
+            std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다.";
+        }
     }
+
+    // 다음 라운드 세팅
+    GameManager* gameManager = GameManager::getInstance();
+    gameManager->setCurrentRound();
+
+    return 1;
 }
