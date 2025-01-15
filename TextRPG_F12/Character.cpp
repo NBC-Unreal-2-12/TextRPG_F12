@@ -194,7 +194,7 @@ void Character::receiveDamage(int damage)
 	cout << name << "이 " << damage << " 데미지를 입었습니다. 남은 체력: " << health << endl;
 }
 
-void Character::useSkill(vector<Monster*>& targets)
+void Character::useSkill(Monster* target)
 {
     // Job에서 Skill 객체 가져오기
     Skill* skill = job->getSkill();
@@ -208,42 +208,6 @@ void Character::useSkill(vector<Monster*>& targets)
         cout << name << "의 마나가 부족합니다!" << endl;
         return;
     }
-
-    // 몬스터 목록이 비어 있는 경우
-    if (targets.empty())
-    {
-        cout << "공격할 대상이 없습니다!" << endl;
-        return;
-    }
-
-    // 타겟 선택 (여기서 첫 번째 몬스터를 기본 타겟으로 선택)
-    Monster* target = nullptr;
-
-    cout << "공격할 대상을 선택하세요:" << endl;
-    for (size_t i = 0; i < targets.size(); ++i)
-    {
-        cout << i + 1 << ". " << targets[i]->getMobName()
-            << " (체력: " << targets[i]->getMobHealth() << ")" << endl;
-    }
-
-    int choice;
-	bool validInput = false;
-
-    while (!validInput) 
-    {
-        cin >> choice;
-        // 유효한 선택인지 확인
-        if (choice < 1 || choice > static_cast<int>(targets.size()))
-        {
-            cout << "잘못된 선택입니다. 스킬을 사용하지 않았습니다." << endl;
-            continue;
-        }
-        validInput = true;
-        break;
-    }
-
-    // 선택된 타겟
-    target = targets[choice - 1];
 
     // 스킬의 데미지 배율 가져오기
     double damageFactor = skill->getDamageFactor();
