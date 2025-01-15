@@ -95,6 +95,7 @@ void BattleManager::processPlayerTurn() {
 			continue;
 
 		case 6: // 몬스터 정보
+			showMonsterCombatInfo();
 			showMonsterInfo();
 			isInformCheck = true;
 			continue;
