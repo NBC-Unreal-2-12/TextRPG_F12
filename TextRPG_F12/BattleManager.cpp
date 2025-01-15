@@ -270,8 +270,6 @@ int BattleManager::resolveBattle()
     else if (allMonstersDead)
     {
         std::cout << "축하합니다! 전투에서 승리하셨습니다!\n\n";
-        GameManager* gameManager = GameManager::getInstance();
-        gameManager->setCurrentRound();
         // 경험치, 돈, 아이템 획득 처리
         int expGained = 100; // 획득 경험치
         int goldGained = 50; // 획득 골드
@@ -292,7 +290,6 @@ int BattleManager::resolveBattle()
                 std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
                 player->addItemToInventory(loot);
                 setColor(7); // 하양
-                std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다.";
             }
         }
 
