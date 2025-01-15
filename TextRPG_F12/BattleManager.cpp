@@ -142,15 +142,75 @@ void BattleManager::processPlayerTurn()
         break;
     }
     case 2: // 스킬
-        if (int randomType = std::rand() % 100 <= (player->getAccuracy() / monster[0]->getMobEvasion())) // 랜덤값이 "명중률 / 몬스터회피율" 보다 작아야 명중
-        {
-            //player->useSkill(monster);
+    {
+        // 살아있는 몬스터 목록 가져오기
+        std::vector<int> aliveMonsterIndices;
+        for (size_t i = 0; i < monster.size(); ++i) {
+            if (!monster[i]->isMobDead()) {
+                aliveMonsterIndices.push_back(i);
+            }
         }
-        else
+        // 살아있는 몬스터가 없으면 전투 종료
+        if (aliveMonsterIndices.empty()) {
+            std::cout << "모든 몬스터가 쓰러졌습니다. 전투가 종료됩니다." << std::endl;
+            return;
+        }
+
+        // 현재 살아있는 몬스터 출력
+        std::cout << "\n현재 살아있는 몬스터 목록:\n";
+        for (int index : aliveMonsterIndices)
         {
-            cout << "빗나감!" << endl;
+            std::cout << "[" << index << "] " << monster[index]->getMobName()
+                << " (HP: " << monster[index]->getMobHealth()
+                << ", 명중률: " << player->getAccuracy() / monster[index]->getMobEvasion() << "%)\n";
+            monster[index]->mobFace();
+            for (int i = 0; i < monster[index]->getMobMana(); i++)
+            {
+                cout << "★";
+            }
+            for (int i = monster[index]->getMobMana(); i < monster[index]->getMobMaxMana(); i++)
+            {
+                cout << "☆";
+            }
+            cout << endl;
+            if (monster[index]->getMobMana() == monster[index]->getMobMaxMana())
+            {
+                cout << "[" << index << "] " << monster[index]->getMobName() << "이 힘을 모으고 있습니다.." << endl;;
+            }
+        }
+
+        // 플레이어가 공격할 몬스터 선택
+        int selectedMonsterIndex = -1;
+        while (true) {
+            std::cout << "공격할 몬스터의 번호를 입력하세요: ";
+            std::cin >> selectedMonsterIndex;
+            std::cout << endl;
+
+            // 입력값 검증
+            if (std::cin.fail() || std::find(aliveMonsterIndices.begin(), aliveMonsterIndices.end(), selectedMonsterIndex) == aliveMonsterIndices.end()) {
+                std::cin.clear(); // 입력 상태 초기화
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 잘못된 입력 무시
+                std::cout << "잘못된 입력입니다. 다시 입력해주세요.\n";
+            }
+            else {
+                cin.ignore();
+                break; // 유효한 입력일 경우 반복 종료
+            }
+        }
+        std::cout << "/////////////////////////////////\n\n";
+        // 몬스터 공격 처리
+
+        player->useSkill(monster[selectedMonsterIndex].get());
+        setColor(1); // 파랑
+        std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << endl;
+        if (monster[selectedMonsterIndex]->isMobDead())
+        {
+            std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n\n";
+            setColor(7); // 하양
+            if (getAllMonsterDead()) isBattleActive = false;
         }
         break;
+    }
     case 3: // 인벤토리
         inventory->listItem();
         break;

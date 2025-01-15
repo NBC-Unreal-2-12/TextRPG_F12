@@ -94,7 +94,7 @@ void Character::displayStatus()
     cout << "레벨: " << level << endl;
     cout << "체력: " << health << " / " << maxHealth << endl;
     cout << "마나: " << mp << " / " << maxMp << endl;
-    cout << "경험치: " << experience << endl;
+    cout << "경험치: " << experience << " / " << maxExperience << endl;
     cout << "공격력: " << attack << endl;
     cout << "공격속도: " << attackSpeed << endl;
     cout << "명중률: " << accuracy << endl;
