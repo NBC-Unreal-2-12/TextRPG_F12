@@ -69,6 +69,7 @@ public:
     void useSkill(vector<Monster*>& targets); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
 	string getName();	// 이름 getter
+	void doLevelUp();
 	
 };
 

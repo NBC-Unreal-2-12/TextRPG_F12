@@ -16,13 +16,13 @@ public:
 	EliteSlime() : EliteMonster("EliteSlime")
 	{
         mobName = "Elite Slime";
-        mobHealth = 20;
-        mobAttack = 10;
+        mobHealth = 500;
+        mobAttack = 30;
         mobMana = 0;
         mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 6;
+        mobAttackSpeed = 15;
+        mobAccuracy = 95;
+        mobEvasion = 1.5;
         loot.emplace_back(new MonsterLoot("슬라임 왕관", 20));
     }
 
@@ -40,8 +40,8 @@ public:
 
     int useMobSkill() override
     {
-        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-        mobHealth += 20;
+        cout << mobName << "이(가) 100만큼 회복합니다." << endl;
+        mobHealth += 100;
         return mobAttack;
     }
 };
@@ -52,13 +52,13 @@ public:
 	EliteOrc() : EliteMonster("EliteOrc")
 	{
         mobName = "Elite Orc";
-        mobHealth = 20;
-        mobAttack = 10;
+        mobHealth = 400;
+        mobAttack = 50;
         mobMana = 0;
         mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 5;
+        mobAttackSpeed = 10;
+        mobAccuracy = 95;
+        mobEvasion = 1.3;
         loot.emplace_back(new MonsterLoot("오크 대왕의 검", 20));
     }
 
@@ -81,8 +81,8 @@ public:
 
     int useMobSkill() override
     {
-        cout << mobName << "의 공격력이 5 증가합니다." << endl;
-        mobAttack += 5;
+        cout << mobName << "의 공격력이 20 증가합니다." << endl;
+        mobAttack += 20;
         return mobAttack;
     }
 };
@@ -93,11 +93,11 @@ public:
 	EliteGoblin() : EliteMonster("EliteGoblin")
 	{
         mobName = "Elite Goblin";
-        mobHealth = 20;
-        mobAttack = 10;
+        mobHealth = 300;
+        mobAttack = 40;
         mobMana = 0;
         mobMaxMana = 3;
-        mobAttackSpeed = 1;
+        mobAttackSpeed = 18;
         mobAccuracy = 50 + 20;
         mobEvasion = 4;
         loot.emplace_back(new MonsterLoot("고블린 대장의 반지", 20));

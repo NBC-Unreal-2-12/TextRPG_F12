@@ -16,11 +16,11 @@ public:
 	Dragon() : SpecialMonster("Dragon")
 	{
         mobName = "Dragon";
-        mobHealth = 20;
-        mobAttack = 10;
+        mobHealth = 400;
+        mobAttack = 50;
         mobMana = 0;
         mobMaxMana = 3;
-        mobAttackSpeed = 1;
+        mobAttackSpeed = 20;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
         loot.emplace_back(new MonsterLoot("드래곤의 비늘", 20));
