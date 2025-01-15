@@ -20,7 +20,7 @@ void Inventory::addItem(Item* item)
         inventory.push_back(item);
     }
     counts[item]++;
-    cout << "인벤토리에 " << item->getName() << "이(가) 추가되었습니다.\n" << endl;
+    cout << "\n인벤토리에 " << item->getName() << "이(가) 추가되었습니다.\n" << endl;
 }
 
 Item* Inventory::findItem(int index)
@@ -51,11 +51,13 @@ void Inventory::sellItem(int index)
     {
         counts.erase(item);
         inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
-        cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : 0개" << endl;
+        std::cout << "\n==============================\n";
+        cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : 0개\n" << endl;
     }
     else
     {
-        cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : " << counts[item] << endl;
+        std::cout << "\n==============================\n";
+        cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : \n" << counts[item] << endl;
     }
 }
 
@@ -64,7 +66,7 @@ void Inventory::useItem(int index, Character* player)
     Item* item = findItem(index);
     if (item == nullptr)
     {
-        cout << "잘못된 입력입니다." << endl;
+        cout << "\n잘못된 입력입니다.\n" << endl;
         return;
     }
 
@@ -75,16 +77,16 @@ void Inventory::useItem(int index, Character* player)
         {
             counts.erase(item);
             inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
-            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : 0개" << endl;
+            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : 0개\n" << endl;
         }
         else
         {
-            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : " << counts[item] << endl;
+            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : \n" << counts[item] << endl;
         }
     }
     else
     {
-        cout << item->getName() << " 이(가) 없습니다." << endl;
+        cout << item->getName() << " 이(가) 없습니다.\n" << endl;
     }
 }
 

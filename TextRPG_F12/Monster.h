@@ -1,12 +1,15 @@
 ﻿#ifndef MONSTERS_H
 #define MONSTERS_H
+#define NOMINMAX
 
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Windows.h>
 #include "Item.h"
 #include "Inventory.h"
 #include "Character.h"
+
 
 using namespace std;
 
@@ -84,6 +87,13 @@ public:
     {
         return lootIdx;
     }
+
+    void setColor(int color)
+    {
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, color);
+    }
+
 
 protected:
     string mobName = "Unknown";

@@ -40,8 +40,10 @@ void GameManager::visitShop(Character* player)
 	Shop shop(itemManager);
 	shop.displayItems();
 
-	int choice = -1;
 	player->setGold(200);
+	std::cout << "\n( 잔고 : " << player->getGold() << " )\n\n";
+
+	int choice = -1;
 	while (choice != 0)
 	{
 		cout << "구매 : 1, 판매 : 2,  인벤토리 확인 : 3, 나가기 : 0 >> ";
@@ -55,7 +57,7 @@ void GameManager::visitShop(Character* player)
 		else if (choice == 1)
 		{
 			int index;
-			cout << "몇 번 아이템을 구매하시겠습니까? >> ";
+			cout << "\n몇 번 아이템을 구매하시겠습니까? >> ";
 			cin >> index;
 			shop.buyItem(index, player);
 		}
@@ -65,7 +67,7 @@ void GameManager::visitShop(Character* player)
 			{
 				player->displayInventory();
 				int index;
-				cout << "몇 번 아이템을 판매하시겠습니까? >> ";
+				cout << "\n몇 번 아이템을 판매하시겠습니까? >> ";
 				cin >> index;
 				shop.sellItem(index-1, player);
 			}

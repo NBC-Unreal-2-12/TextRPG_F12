@@ -44,7 +44,7 @@ bool Shop::isValidIndex(int index) const
 // 상점 아이템 리스트 출력
 void Shop::displayItems()
 {
-	std::cout << "\n======== ( Item Shop ) ========\n";
+	std::cout << "\n\n======== ( Item Shop ) ========\n\n";
 	for (const auto& it : stock)
 	{
 		if (it.isLoot == false)
@@ -59,6 +59,8 @@ void Shop::displayItems()
 	{
 		std::cout << "상점에 물건이 없습니다.\n";
 	}
+
+
 }
 
 // 아이템 구매
@@ -93,7 +95,7 @@ void Shop::buyItem(int index, Character* player)
 	player->setGold(-stockItem.item->getPrice());
 	Item* managedItem = ItemManager::getInstance()->getItemByIndex(stockItem.index);
 	player->addItemToInventory(managedItem);
-	std::cout << managedItem->getName() << "을(를) 구매하였습니다. (잔고 : " << player->getGold() << ")\n";
+	std::cout << managedItem->getName() << "을(를) 구매 했습니다. (잔고 : " << player->getGold() << ")\n";
 
 	// 재고 업데이트
 	stockItem.quantity--;
@@ -122,5 +124,5 @@ void Shop::sellItem(int index, Character* player)
 	// 재고 업데이트
 	stockItem.quantity++;
 
-	std::cout << item->getName() << "을 판매하였습니다. (잔고 : " << player->getGold() << ")\n";
+	std::cout << item->getName() << "을 판매 했습니다. (잔고 : " << player->getGold() << ")\n";
 }

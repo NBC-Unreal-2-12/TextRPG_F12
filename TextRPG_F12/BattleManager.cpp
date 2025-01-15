@@ -89,7 +89,7 @@ void BattleManager::processPlayerTurn() {
 			break;
 
 		case 4: // 도망
-			std::cout << "도망쳤습니다!!\n";
+			std::cout << "\n도망쳤습니다!!\n";
 			isBattleActive = false;
 			isTurnEnd = true;
 			break;
@@ -473,7 +473,7 @@ int BattleManager::resolveBattle()
 				loot = ItemManager::getInstance()->getLootByIndex(monster->dropItemIdx());  // 나머지 90%는 monster에서 아이템 드랍
 			}
 			setColor(6); // 노랑
-			std::cout << "\n전리품 " << loot->getName() << "을(를) 습득하셨습니다. ";
+			std::cout << "\n전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
 			player->addItemToInventory(loot);
 			setColor(7); // 하양
 		}
