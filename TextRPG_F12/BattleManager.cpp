@@ -32,7 +32,6 @@ void BattleManager::displayBattleState() {
 	std::cout << "출현한 몬스터들:\n";
 
 	showMonsterCombatInfo();
-	showPlayerCombatInfo();
 }
 
 // 전투 종료 조건 확인
@@ -364,6 +363,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 
 			if (turn.isPlayer) // 플레이어의 턴인 경우
 			{
+				showPlayerCombatInfo();
 				processPlayerTurn();
 				if (!isBattleActive) break; // 전투가 끝났으면 종료
 			}
