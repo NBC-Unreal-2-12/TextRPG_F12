@@ -100,22 +100,20 @@ public:
     }
 };
 
-//스피드업
-//속도 증가 소모성 아이템
-class SpeedPotion : public Item
+class AttackSpeedBoost : public Item
 {
 private:
-    int speedIncrease; // 속도 증가량
+    int attackSpeedIncrease; // 공격속도 증가량
 
 public:
-    SpeedPotion(const string& itemName, int itemPrice, int increaseAmount)
-        : Item(itemName, itemPrice), speedIncrease(increaseAmount)
+    AttackSpeedBoost(const string& itemName, int itemPrice, int increaseAmount)
+        : Item(itemName, itemPrice), attackSpeedIncrease(increaseAmount) 
     {
     }
 
-    void use(Character* character) override
-	{
-	}
+    void use(Character* character) override 
+    {
+    }
 };
 
 //드랍 아이템 확률 매우낮음 
