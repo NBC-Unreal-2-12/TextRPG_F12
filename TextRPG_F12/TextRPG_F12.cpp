@@ -100,12 +100,9 @@ int main()
 		{
 			gameManager->visitShop(player);
 		}
-		playerInput.getPlayerChoiceAfterBattle();
+
 	}
 
-	clearConsole();
-	gameManager->visitShop(player);
-	//	battleManager.startBattle(player, monsterPool);
 	gameManager->destroyInstance();
 	return 0;
 }
