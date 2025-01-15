@@ -341,7 +341,13 @@ int BattleManager::resolveBattle()
 		if (monster->isMobDead())
 		{
 			int idx = std::rand() % 100;
-			Item* loot = monster->dropItem(idx);
+			Item* loot = nullptr;
+			if (idx < 5) {
+				loot = ItemManager::getInstance()->getItemByIndex(999);  // 10% 확률로 부활의 토템 드랍
+			}
+			else {
+				loot = ItemManager::getInstance()->getItemByIndex(monster->dropItem());  // 나머지 90%는 monster에서 아이템 드랍
+			}
 			setColor(6); // 노랑
 			std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
 			player->addItemToInventory(loot);

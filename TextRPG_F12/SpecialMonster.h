@@ -24,7 +24,8 @@ public:
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
         loot.emplace_back(new MonsterLoot("드래곤의 비늘", 20));
-		loot.emplace_back(new ReviveItem("부활의 토템", 300, 100));
+        Item* item = ItemManager::getInstance()->getItemByIndex(107);
+		loot.push_back(item);
     }
 
     void mobFace() override
