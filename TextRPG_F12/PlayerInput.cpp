@@ -6,13 +6,13 @@ int PlayerInput::getPlayerChoice()
 {
     int choice;
     std::cout << "\n==============================\n";
-    std::cout << "\nChoose your action : \n";
+    std::cout << "\n당신은 지금..\n";
     std::cout << "1. 공격!\n";
-    std::cout << "2. 스킬\n";
-    std::cout << "3. 아이템\n";
-    std::cout << "4. 도망친다\n";
-    std::cout << "5. 상태\n";
-    std::cout << "Enter your choice: ";
+    std::cout << "2. 스킬 사용!\n";
+    std::cout << "3. 아이템 사용!\n";
+    std::cout << "4. 도망친다..\n";
+    std::cout << "5. 상태창!\n";
+    std::cout << ">> ";
     std::cin >> choice;
     std::cout << "\n==============================\n";
     return choice;
@@ -21,9 +21,9 @@ int PlayerInput::getPlayerChoice()
 int PlayerInput::getPlayerChoiceAfterBattle()
 {
     std::cout << "다음 행동을 선택해 주세요.\n";
-    std::cout << "1. 다음 라운드 진행!\n";
+    std::cout << "1. 다음 전투 진행!\n";
     std::cout << "2. 상점 방문\n";
-    std::cout << "\nEnter your choice : ";
+    std::cout << ">> ";
 
     int choice;
     std::cin >> choice;
@@ -54,7 +54,7 @@ Job* PlayerInput::setJobByPlayerInput()
     std::cout << "1. 전사\n";
     std::cout << "2. 마법사\n";
     std::cout << "3. 궁수\n";
-    std::cout << "직업을 선택해 주세요 : ";
+    std::cout << ">> ";
 
     int choice;
     while (true)

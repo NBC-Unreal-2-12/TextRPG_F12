@@ -6,7 +6,7 @@ Character* Character::instance = nullptr;
 
 Character::Character(string userName, Job* characterJob) : 
     name(userName), job(characterJob), level(1), maxHealth(200), health(200), attack(30), 
-    experience(0), gold(0), accuracy(100), attackSpeed(20), evasion(1), isDead(false), mp(100), maxMp(100)
+    experience(0), gold(0), accuracy(100), attackSpeed(5), evasion(1), isDead(false), mp(100), maxMp(100)
 {
     characterJob->applyJobEffect(attack, maxHealth, attackSpeed, evasion, accuracy, maxMp);
     health = maxHealth;
@@ -272,4 +272,13 @@ void Character::useMP(int cost)
 string Character::getName()
 {
     return name;
+}
+
+void Character::doLevelUp()
+{
+    while (experience >= 100)
+    {
+        levelUp();
+        std::cout << "레벨업! 레벨이 " << level << "이 되었습니다." << endl;
+    }
 }

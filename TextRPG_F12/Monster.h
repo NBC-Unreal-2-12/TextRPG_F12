@@ -48,7 +48,6 @@ public:
         if (mobMana < mobMaxMana) // mobMaxMana만큼 Attack
         {
             mobMana++; // 공격할 때 마다 마나++
-            cout << "마나 : " << mobMana << " / " << mobMaxMana << endl;
             return mobAttack;
         }
         else
