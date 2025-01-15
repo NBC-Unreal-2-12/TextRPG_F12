@@ -63,7 +63,7 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 
 	while (true)
 	{
-		std::cout << "당신은 이제..\n";
+		std::cout << "\n당신은 이제..\n";
 		std::cout << "1. 바로 다음 전투 진행!\n";
 		std::cout << "2. 상점 방문\n";
 		std::cout << ">> ";

@@ -8,6 +8,9 @@
 
 #include <cstdlib>
 #include <Windows.h>
+#include <chrono>
+#include <thread>
+
 
 
 class BattleManager 
@@ -74,6 +77,9 @@ public:
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(hConsole, color);
     }
+
+    // 딜레이
+    void delay(int milliseconds) { std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds)); }
 };
 
 #endif

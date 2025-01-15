@@ -68,10 +68,12 @@ void BattleManager::processPlayerTurn()
 	case 1: // 공격
 		showCombatInfo();
 		attackMonster();
+		delay(500); // 0.5초 지연
 		break;
 	case 2: // 스킬
 		showCombatInfo();
 		useSkillOnMonster();
+		delay(500); // 0.5초 지연
 		break;
 	case 3: // 인벤토리
 		Inventory::getInstance()->listItem();
@@ -133,6 +135,8 @@ void BattleManager::attackMonster()
 	int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
 	if (selectedMonsterIndex != -1)
 	{
+		setColor(1);
+		std::cout << "\n";
 		int damage = player->getAttack();
 		if (std::rand() % 100 <= (player->getAccuracy() / monster[selectedMonsterIndex]->getMobEvasion()))
 		{
@@ -148,6 +152,7 @@ void BattleManager::attackMonster()
 		{
 			std::cout << "공격이 빗나갔습니다!\n";
 		}
+		setColor(7);
 	}
 }
 
@@ -187,7 +192,7 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 
 	while (true)
 	{
-		std::cout << "공격할 몬스터의 번호를 입력하세요.\n>> ";
+		std::cout << "\n대상 몬스터의 번호를 입력하세요.\n>> ";
 		std::getline(std::cin, input);
 
 		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
@@ -223,10 +228,11 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 {
 	if (monster->isMobDead() == false)
 	{
-		std::cout << "/////////////////////////////////\n\n";
+		std::cout << "\n==============================\n";
 		setColor(12); // 빨강
 		if (monster->getMobMana() != monster->getMobMaxMana())
 		{
+			std::cout << "\n";
 			std::cout << monster->getMobName() << "이(가) 공격했습니다!" << std::endl;
 		}
 		else
@@ -246,7 +252,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 				player->setHealth(player->getHealth() - damage);
 				if (player->getHealth() >= 1)
 				{
-					std::cout << player->getName() << "의 남은 체력은 " << player->getHealth() << "입니다.\n" << std::endl;
+					std::cout << player->getName() << "의 남은 체력은 " << player->getHealth() << "입니다." << std::endl;
 				}
 
 				else
@@ -262,6 +268,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 				cout << "빗나감!" << endl;
 			}
 		}
+		delay(500); // 0.5초 지연
 		setColor(7); // 하양
 	}
 
