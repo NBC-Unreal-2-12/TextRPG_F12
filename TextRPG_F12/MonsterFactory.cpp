@@ -54,20 +54,20 @@ std::unique_ptr<Monster> MonsterFactory::createMonster(int round)
 
     if (round <= 5) 
     {
-        if (probability <= 80) return createNormalMonster();
+        if (probability <= 100) return createNormalMonster();
         else return createEliteMonster();
     }
     else if (round <= 10) 
     {
-        if (probability <= 50) return createNormalMonster();
-        else if (probability <= 90) return createEliteMonster();
+        if (probability = 0) return createNormalMonster();
+        else if (probability <= 100) return createEliteMonster();
         else return createSpecialMonster();
     }
     else if (round < 15) 
     {
-        if (probability <= 30) return createNormalMonster();
-        else if (probability <= 70) return createEliteMonster();
-        else if (probability <= 90) return createSpecialMonster();
+        if (probability = 0) return createNormalMonster();
+        else if (probability = 0) return createEliteMonster();
+        else if (probability <= 100) return createSpecialMonster();
         else return createBossMonster();
     }
     else 
