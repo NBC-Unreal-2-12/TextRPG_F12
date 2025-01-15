@@ -100,7 +100,10 @@ int main()
 		{
 			gameManager->visitShop(player);
 		}
-
+		if (player->isCharacterDead())
+		{
+			break;
+		}
 	}
 
 	gameManager->destroyInstance();

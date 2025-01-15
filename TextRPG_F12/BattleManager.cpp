@@ -157,7 +157,6 @@ void BattleManager::processPlayerTurn()
     case 4: // 도망
         std::cout << "도망쳤습니다!!\n";
         isBattleActive = false;
-        resolveBattle();
         break;
     default:
         std::cout << "Invalid choice.\n";
@@ -195,7 +194,6 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
             {
                 player->setCharacterDead(true);
                 isBattleActive = false; // 플레이어가 죽었다고 간주, isBattleOver() 호출
-                resolveBattle();
             }
         }
         else
@@ -269,6 +267,7 @@ int BattleManager::resolveBattle()
     if (player->isCharacterDead())
     {
         // 우선 텍스트 출력은 영어로..
+        setColor(7); // 하양
         std::cout << "전투에서 패배하셨습니다.\n";
         std::cout << "게임이 종료됩니다.\n";
 
