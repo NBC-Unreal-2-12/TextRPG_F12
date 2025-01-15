@@ -1,11 +1,11 @@
-﻿#include <iostream>
+﻿﻿#include <iostream>
 #include <string>
 #include "Character.h"
 
-Character* Character::instance = nullptr;
+Character * Character::instance = nullptr;
 
-Character::Character(string userName, Job* characterJob) : 
-    name(userName), job(characterJob), level(1), maxHealth(200), health(200), attack(30), 
+Character::Character(string userName, Job* characterJob) :
+    name(userName), job(characterJob), level(1), maxHealth(200), health(200), attack(30),
     experience(0), gold(0), accuracy(100), attackSpeed(5), evasion(1), isDead(false), mp(100), maxMp(100)
 {
     characterJob->applyJobEffect(attack, maxHealth, attackSpeed, evasion, accuracy, maxMp);
@@ -36,7 +36,7 @@ Character* Character::getInstance()
 void Character::displayStatus()
 {
     cout << "\n현재 유저의 정보" << endl;
-	cout << "이름: " << name << endl;
+    cout << "이름: " << name << endl;
     cout << "직업: " << job->getJobName() << endl;
     cout << "레벨: " << level << endl;
     cout << "체력: " << health << "/" << maxHealth << endl;
@@ -58,7 +58,7 @@ void Character::levelUp()
     evasion += job->getEvasionGrowth();
     accuracy += job->getAccuracyGrowth();
     cout << "레벨업!" << name << "의 레벨이 " << level << "이 되었습니다!" << endl;
-	displayStatus();
+    displayStatus();
 }
 
 void Character::useItemFromInventory(int index)
@@ -76,7 +76,7 @@ void Character::sellItemFromInventory(int index)
     inventory.sellItem(index);
 }
 
-void Character::displayInventory() 
+void Character::displayInventory()
 {
     inventory.listItem();
 }
@@ -84,12 +84,12 @@ void Character::displayInventory()
 
 // 추가
 
-int Character::getGold() 
+int Character::getGold()
 {
     return gold;
 }
 
-void Character::setGold(int sellPrice) 
+void Character::setGold(int sellPrice)
 {
     gold += sellPrice;
 }
@@ -99,7 +99,7 @@ int Character::getExp()
 }
 void Character::setExp(int set_exp)
 {
-	experience = set_exp;
+    experience = set_exp;
 }
 bool Character::isCharacterDead()
 {
@@ -107,7 +107,7 @@ bool Character::isCharacterDead()
 }
 void Character::setCharacterDead(bool dead) {
     vector<Item*> item = inventory.getInventory();
-    auto it = find_if(item.begin(), item.end(), [](Item* i){ return dynamic_cast<ReviveItem*>(i) != nullptr; }); // 죽기 전 ReviveItem 찾기
+    auto it = find_if(item.begin(), item.end(), [](Item* i) { return dynamic_cast<ReviveItem*>(i) != nullptr; }); // 죽기 전 ReviveItem 찾기
     if (it != item.end()) {
         item.erase(it);
         health += 50;
@@ -123,7 +123,7 @@ int Character::getHealth()
 }
 void Character::setHealth(int set_health)
 {
-	health = set_health;
+    health = set_health;
 }
 int Character::getMaxHealth()
 {
@@ -131,11 +131,11 @@ int Character::getMaxHealth()
 }
 int Character::getMP()
 {
-	return mp;
+    return mp;
 }
 void Character::setMP(int set_mp)
 {
-	mp = set_mp;
+    mp = set_mp;
 }
 int Character::getMaxMP()
 {
@@ -143,7 +143,7 @@ int Character::getMaxMP()
 }
 void Character::setMaxMP(int set_maxMp)
 {
-	maxMp = set_maxMp;
+    maxMp = set_maxMp;
 }
 double Character::getAttack()
 {
@@ -160,7 +160,7 @@ Item* Character::findItemFromInventory(int index)
 
 void Character::setAttackSpeed(int set_attackSpeed)
 {
-	attackSpeed = set_attackSpeed;
+    attackSpeed = set_attackSpeed;
 }
 
 double Character::getAccuracy()
@@ -170,7 +170,7 @@ double Character::getAccuracy()
 
 void Character::setAccuracy(double set_accuracy)
 {
-	accuracy = set_accuracy;
+    accuracy = set_accuracy;
 }
 
 double Character::getEvasion()
@@ -180,18 +180,18 @@ double Character::getEvasion()
 
 void Character::setEvation(double set_evasion)
 {
-	evasion = set_evasion;  
+    evasion = set_evasion;
 }
 
 void Character::receiveDamage(int damage)
 {
-	health -= damage;
-	if (health <= 0)
-	{
-		health = 0;
-		isDead = true;
-	}
-	cout << name << "이 " << damage << " 데미지를 입었습니다. 남은 체력: " << health << endl;
+    health -= damage;
+    if (health <= 0)
+    {
+        health = 0;
+        isDead = true;
+    }
+    cout << name << "이 " << damage << " 데미지를 입었습니다. 남은 체력: " << health << endl;
 }
 
 void Character::useSkill(Monster* target)

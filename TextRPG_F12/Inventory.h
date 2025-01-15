@@ -99,6 +99,8 @@ public:
             Item* item = inventory[idx];
             cout << "[" << idx << "] " << item->getName() << " (개수: " << counts[item] << ")" << endl;
         }
+        if (inventory.empty())
+            cout << "이벤토리가 비어 있습니다.\n";
     }
 
     vector<Item*> getInventory()

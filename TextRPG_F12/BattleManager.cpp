@@ -1,4 +1,4 @@
-﻿#include "BattleManager.h"
+﻿﻿#include "BattleManager.h"
 #include "MonsterFactory.h"
 #include <iostream>
 #include <algorithm>
@@ -19,19 +19,13 @@
 //vector<std::unique_ptr<Monster>> monsters;
 
 // 초기화 생성자
-BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Monster>>& monster)
+BattleManager::BattleManager(Character * player, std::vector<std::unique_ptr<Monster>>&monster)
     : player(player), monster(monster) {
 }
 
 // 전투 종료 조건 확인
-bool BattleManager::isBattleOver()
+bool BattleManager::getAllMonsterDead()
 {
-    // 플레이어가 사망하면 전투 종료
-    if (player->isCharacterDead()) {
-        std::cout << "Player has been defeated!\n";
-        return true;
-    }
-
     // 모든 몬스터가 사망했는지 확인
     allMonstersDead = true;
     for (const auto& monster : monster) {
@@ -47,13 +41,6 @@ bool BattleManager::isBattleOver()
     }
 
     return false;
-}
-
-// 행동 순서 결정
-void BattleManager::determineTurnOrder()
-{
-    // 마주한 몬스터에 대한 로직은 나중에..
-    isPlayerTurn = player->getAttackSpeed() >= monster[0]->getMobAttackSpeed();
 }
 
 // 플레이어 행동 처리
@@ -88,9 +75,25 @@ void BattleManager::processPlayerTurn()
 
         // 현재 살아있는 몬스터 출력
         std::cout << "\n현재 살아있는 몬스터 목록:\n";
-        for (int index : aliveMonsterIndices) {
+        for (int index : aliveMonsterIndices)
+        {
             std::cout << "[" << index << "] " << monster[index]->getMobName()
-                << " (HP: " << monster[index]->getMobHealth() << ", 명중률: " << player->getAccuracy() / monster[index]->getMobEvasion() << "%)\n";
+                << " (HP: " << monster[index]->getMobHealth()
+                << ", 명중률: " << player->getAccuracy() / monster[index]->getMobEvasion() << "%)\n";
+            monster[index]->mobFace();
+            for (int i = 0; i < monster[index]->getMobMana(); i++)
+            {
+                cout << "★";
+            }
+            for (int i = monster[index]->getMobMana(); i < monster[index]->getMobMaxMana(); i++)
+            {
+                cout << "☆";
+            }
+            cout << endl;
+            if (monster[index]->getMobMana() == monster[index]->getMobMaxMana())
+            {
+                cout << "[" << index << "] " << monster[index]->getMobName() << "이 힘을 모으고 있습니다.." << endl;;
+            }
         }
 
         // 플레이어가 공격할 몬스터 선택
@@ -116,17 +119,18 @@ void BattleManager::processPlayerTurn()
         // 몬스터 공격 처리
         if (std::rand() % 100 <= (player->getAccuracy() / monster[selectedMonsterIndex]->getMobEvasion()))
         {
-            
+
             int damage = player->getAttack();
             monster[selectedMonsterIndex]->takeMobDamage(damage);
             setColor(1); // 파랑
             std::cout << monster[selectedMonsterIndex]->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
-            std::cout << monster[selectedMonsterIndex]->getMobName() <<"의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << endl;
+            std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << endl;
 
             if (monster[selectedMonsterIndex]->isMobDead())
             {
                 std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n\n";
                 setColor(7); // 하양
+                if (getAllMonsterDead()) isBattleActive = false;
             }
         }
         else
@@ -151,8 +155,8 @@ void BattleManager::processPlayerTurn()
         inventory->listItem();
         break;
     case 4: // 도망
-        std::cout << "You ran away with all your might..\n";
-        resolveBattle();
+        std::cout << "도망쳤습니다!!\n";
+        isBattleActive = false;
         break;
     default:
         std::cout << "Invalid choice.\n";
@@ -174,7 +178,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
         {
             std::cout << monster->getMobName() << "이(가) 스킬을 사용했습니다!" << std::endl;
         }
-        if (int randomType = std::rand() % 1 <= (monster->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
+        if (int randomType = std::rand() % 100 <= (monster->getMobAccuracy() / player->getEvasion())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
         {
             //명중시
             int damage = monster->useMobAttack();
@@ -182,15 +186,14 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
             player->setHealth(player->getHealth() - damage);
             if (player->getHealth() >= 1)
             {
-                std::cout << player->getName() <<"의 남은 체력은 " << player->getHealth() << "입니다.\n" << std::endl;
+                std::cout << player->getName() << "의 남은 체력은 " << player->getHealth() << "입니다.\n" << std::endl;
                 setColor(7); // 하양
             }
 
             else
             {
                 player->setCharacterDead(true);
-                isBattleOver(); // 플레이어가 죽었다고 간주, isBattleOver() 호출
-                resolveBattle();
+                isBattleActive = false; // 플레이어가 죽었다고 간주, isBattleOver() 호출
             }
         }
         else
@@ -205,7 +208,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 }
 
 // 전투 시작
-int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
+void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster>>& monsters)
 {
     this->player = player;
     this->monster = std::move(monsters);
@@ -214,13 +217,14 @@ int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster
 
     for (auto& m : monster) {
         cout << m->getMobName() << endl;
+        m->mobFace();
     }
 
     // TurnOrder 구조체를 사용하여 전투 순서를 미리 결정
     std::vector<TurnOrder> turnOrders;
 
     // 전투가 끝날 때까지 반복
-    while (isBattleOver() == false)
+    while (isBattleActive)
     {
         // 플레이어의 공격 속도 추가
         turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
@@ -241,19 +245,19 @@ int BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monster
             if (turn.isPlayer) // 플레이어의 턴인 경우
             {
                 processPlayerTurn();
-                if (isBattleOver()) break; // 전투가 끝났으면 종료
+                if (!isBattleActive) break; // 전투가 끝났으면 종료
             }
             else
             {
                 processMonsterTurn(monster[turn.index]);
-                if (isBattleOver()) break; // 전투가 끝났으면 종료
+                if (!isBattleActive) break; // 전투가 끝났으면 종료
             }
         }
         //전투 순서 벡터 초기화
         turnOrders.clear();
     }
 
-    return resolveBattle();
+    resolveBattle();
 }
 
 // 전투 종료 처리
@@ -263,7 +267,9 @@ int BattleManager::resolveBattle()
     if (player->isCharacterDead())
     {
         // 우선 텍스트 출력은 영어로..
-        std::cout << "Player has been defeated. Game Over.\n";
+        setColor(7); // 하양
+        std::cout << "전투에서 패배하셨습니다.\n";
+        std::cout << "게임이 종료됩니다.\n";
 
         return 0; // 게임종료
     }
@@ -279,24 +285,25 @@ int BattleManager::resolveBattle()
         int existGold = player->getGold();
         player->setGold(existGold + expGained);
         std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
-        // 몬스터 드랍 아이템 처리
-        for (auto& monster : monster)
-        {
-            if (monster->isMobDead())
-            {
-                int idx = std::rand() % 100;
-                Item* loot = monster->dropItem(idx);
-                setColor(6); // 노랑
-                std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
-                player->addItemToInventory(loot);
-                setColor(7); // 하양
-            }
-        }
+    }
 
-        return 1; // 게임 진행
-    }
-    else // 도망, input
+    // 처치한 몬스터 드랍 아이템 처리
+    for (auto& monster : monster)
     {
-        return 2;
+        if (monster->isMobDead())
+        {
+            int idx = std::rand() % 100;
+            Item* loot = monster->dropItem(idx);
+            setColor(6); // 노랑
+            std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
+            player->addItemToInventory(loot);
+            setColor(7); // 하양
+        }
     }
+
+    // 다음 라운드 세팅
+    GameManager* gameManager = GameManager::getInstance();
+    gameManager->setCurrentRound();
+
+    return 1;
 }
