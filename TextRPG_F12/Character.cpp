@@ -211,7 +211,15 @@ int Character::getHealth()
 }
 void Character::setHealth(int set_health)
 {
-    health = set_health;
+    if (set_health > maxHealth)
+    {
+        health = maxHealth;
+    }
+    else
+    {
+        health = set_health;
+    }
+    
 }
 int Character::getMaxHealth()
 {
@@ -223,7 +231,14 @@ int Character::getMP()
 }
 void Character::setMP(int set_mp)
 {
-    mp = set_mp;
+    if (set_mp > maxMp)
+    {
+        mp = maxMp;
+    }
+    else
+    {
+        mp = set_mp;
+    }
 }
 int Character::getMaxMP()
 {
