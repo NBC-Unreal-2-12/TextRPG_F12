@@ -239,7 +239,7 @@ double Character::getAttack()
 }
 void Character::setAttack(int set_attack)
 {
-    attack = set_attack
+    attack = set_attack;
 }
 int Character::getAttackSpeed()
 {

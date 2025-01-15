@@ -38,7 +38,7 @@ public:
 
     void use(Character* character) override
     {
-        character->setMP(character->getMP() + attackIncrease);
+        character->setMP(character->getMP() + manaRestore);
     }
 };
 //어택부스트
