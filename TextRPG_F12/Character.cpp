@@ -1,4 +1,4 @@
-﻿﻿#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include "Character.h"
 
@@ -236,13 +236,4 @@ void Character::useMP(int cost)
 string Character::getName()
 {
     return name;
-}
-
-void Character::doLevelUp()
-{
-    while (experience >= 100)
-    {
-        levelUp();
-        std::cout << "레벨업! 레벨이 " << level << "이 되었습니다." << endl;
-    }
 }

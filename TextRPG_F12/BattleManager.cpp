@@ -1,4 +1,4 @@
-﻿﻿#include "BattleManager.h"
+﻿#include "BattleManager.h"
 #include "MonsterFactory.h"
 #include <iostream>
 #include <algorithm>
