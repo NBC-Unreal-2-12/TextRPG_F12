@@ -94,7 +94,7 @@ int main()
 
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
-	clearConsole();
+	//clearConsole();
 	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
 	//gameManager->printAllMonsters();

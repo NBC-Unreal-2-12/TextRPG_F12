@@ -73,8 +73,6 @@ public:
         cout << "이름 : " << this->mobName << endl;
         cout << "체력 : " << this->mobHealth << endl;
         cout << "공격력 : " << this->mobAttack << endl;
-        cout << "현재 마나 : " << this->mobMana << endl;
-        cout << "최대 마나 : " << this->mobMaxMana << endl;
         cout << "속도 : " << this->mobAttackSpeed << endl;
         cout << "명중률 : " << this->mobAccuracy << endl;
         cout << "회피율 : " << this->mobEvasion << endl;
