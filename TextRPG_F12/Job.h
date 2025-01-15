@@ -12,6 +12,7 @@ using namespace std;
 class Job 
 {
 protected:
+    int jobIndex;
     int healthGrowth;
 	int manaGrowth;
 	int attackGrowth;
@@ -20,8 +21,8 @@ protected:
 	double accuracyGrowth;
 public:
     virtual string getJobName() const = 0;
-    Job(int health, int mana, int attack, int attackSpeed, double evasion, double accuracy)
-        : healthGrowth(health), manaGrowth(mana), attackGrowth(attack),
+    Job(int jobIndex, int health, int mana, int attack, int attackSpeed, double evasion, double accuracy)
+        :jobIndex(jobIndex), healthGrowth(health), manaGrowth(mana), attackGrowth(attack),
         attackSpeedGrowth(attackSpeed), evasionGrowth(evasion), accuracyGrowth(accuracy) {}
     virtual ~Job() {}
     virtual void applyJobEffect(double& attack, int& maxHelth, int& attackspeed, double& evasion, double& accuracy, int& maxMp) const = 0;
@@ -34,6 +35,7 @@ public:
     int getAttackSpeedGrowth() const { return attackSpeedGrowth; }
     double getEvasionGrowth() const { return evasionGrowth; }
     double getAccuracyGrowth() const { return accuracyGrowth; }
+    int getJobIndex() const { return jobIndex; }
 };
 
 // 전사 직업 클래스
@@ -42,7 +44,7 @@ class Warrior : public Job
 private:
     Skill* skill = new WarriorSkill();
 public:
-	Warrior() : Job(50, 20, 30, 1, 0.1, 5) {} // 전사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
+	Warrior() : Job(0, 50, 20, 30, 1, 0.1, 5) {} // 전사식별번호 전사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
     string getJobName() const override 
     {
         return "전사";
@@ -70,7 +72,7 @@ class Mage : public Job
 private:
     Skill* skill = new MageSkill();
 public:
-    Mage() : Job(30, 50, 50, 1, 0.1, 5) {} // 마법사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
+    Mage() : Job(1, 30, 50, 50, 1, 0.1, 5) {} // 마법사식별번호 마법사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
 
     string getJobName() const override
     {
@@ -100,7 +102,7 @@ class Archer : public Job
 private:
     Skill* skill = new ArcherSkill();
 public:
-    Archer() : Job(30, 20, 30, 2, 0.2, 10) {} // 궁수 마법사 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
+    Archer() : Job(2, 30, 20, 30, 2, 0.2, 10) {} // 궁수식별번호 궁수 마법사 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
 
     string getJobName() const override
     {
