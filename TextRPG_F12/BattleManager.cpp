@@ -27,9 +27,8 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 
 // 사용자에게 해당 라운드에 스폰된 몬스터 정보를 출력
 void BattleManager::displayBattleState() {
-	system("cls"); // 화면 초기화
 	std::cout << "==============================\n";
-	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound()+1 << "\n";
+	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound() + 1 << "\n";
 	std::cout << "출현한 몬스터들:\n";
 
 	showMonsterCombatInfo();
@@ -68,15 +67,15 @@ void BattleManager::processPlayerTurn() {
 
 		switch (choice) {
 		case 1: // 공격
-			system("cls");
-			showMonsterCombatInfo();
+			//system("cls");
+			//showMonsterCombatInfo();
 			attackMonster();
 			delay(500); // 0.5초 지연
 			break;
 
 		case 2: // 스킬
-			system("cls");
-			showMonsterCombatInfo();
+			//system("cls");
+			//showMonsterCombatInfo();
 			useSkillOnMonster();
 			delay(500); // 0.5초 지연
 			break;
@@ -92,13 +91,13 @@ void BattleManager::processPlayerTurn() {
 			break;
 
 		case 5: // 상태창
-			system("cls");
+			//system("cls");
 			player->displayStatus();
 			isTurnEnd = false;
 			continue;
 
 		case 6: // 몬스터 정보
-			system("cls");
+			//system("cls");
 			showMonsterInfo();
 			isTurnEnd = false;
 			continue;
@@ -123,6 +122,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 		}
 		else
 		{
+			std::cout << "\n";
 			std::cout << monster->getMobName() << "이(가) 스킬을 사용했습니다!" << std::endl;
 		}
 
@@ -165,10 +165,23 @@ void BattleManager::showMonsterCombatInfo()
 	aliveMonsterIndices = getAliveMonsters();
 	for (int index : aliveMonsterIndices)
 	{
-		std::cout << "[" << index + 1 << "] " << monster[index]->getMobName()
-			<< " (HP: " << monster[index]->getMobHealth()
-			<< ", 명중률: " << player->getAccuracy() / monster[index]->getMobEvasion() << "%)\n";
+		int healthBars = 10 * monster[index]->getMobHealth() / monster[index]->getMobMaxHealth();
+		std::cout << "\n\n";
+		delay(100); // 0.1초 지연
 		monster[index]->mobFace();
+		std::cout << "[" << index + 1 << "] " << monster[index]->getMobName();
+		std::cout << "( 체력 : " << monster[index]->getMobHealth() << " / " << monster[index]->getMobMaxHealth();
+		std::cout << ", 명중률: " << std::round(player->getAccuracy() / monster[index]->getMobEvasion()) << "% )\n";
+		if (monster[index]->getMobMana() == monster[index]->getMobMaxMana())
+		{
+			setColor(4);
+			cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "이(가) 힘을 모으고 있습니다..\n" << endl;;
+			setColor(7);
+		}
+		std::cout << "HP : ";
+		for (int i = 0; i < healthBars; ++i) std::cout << "■";
+		for (int i = healthBars; i < 10; ++i) std::cout << "□";
+		std::cout << "\nMP : ";
 		for (int i = 0; i < monster[index]->getMobMana(); i++)
 		{
 			cout << "★";
@@ -177,11 +190,7 @@ void BattleManager::showMonsterCombatInfo()
 		{
 			cout << "☆";
 		}
-		cout << endl;
-		if (monster[index]->getMobMana() == monster[index]->getMobMaxMana())
-		{
-			cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "이 힘을 모으고 있습니다.." << endl;;
-		}
+
 	}
 }
 
@@ -195,21 +204,22 @@ void BattleManager::showPlayerCombatInfo() {
 	int maxMana = player->getMaxMP();
 
 	// 상태 출력
-	std::cout << "\n==============================\n";
+	delay(500); // 0.5초 지연
+	std::cout << "\n==============================\n\n";
 	std::cout << "플레이어 상태:\n";
-	std::cout << "체력: " << currentHealth << " / " << maxHealth << "\n";
-	std::cout << "마나: " << currentMana << " / " << maxMana << "\n";
-
-	// 체력 상태바 출력
-	std::cout << "체력 상태: ";
-	for (int i = 0; i < currentHealth; i += maxHealth / 20) std::cout << "■";
-	for (int i = currentHealth; i < maxHealth; i += maxHealth / 20) std::cout << "□";
+	// 체력 상태바
+	int healthBars = 20 * currentHealth / maxHealth;
+	for (int i = 0; i < healthBars; ++i) std::cout << "■";
+	for (int i = healthBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
+	std::cout << "체력: " << currentHealth << " / " << maxHealth << "\n\n";
 
-	// 마나 상태바 출력
-	std::cout << "마나 상태: ";
-	for (int i = 0; i < currentMana; i += maxMana / 20) std::cout << "■";
-	for (int i = currentMana; i < maxMana; i += maxMana / 20) std::cout << "□";
+	// 마나 상태바
+	int manaBars = 20 * currentMana / maxMana;
+	for (int i = 0; i < manaBars; ++i) std::cout << "■";
+	for (int i = manaBars; i < 20; ++i) std::cout << "□";
+	std::cout << "\n";
+	std::cout << "마나: " << currentMana << " / " << maxMana << "\n";
 }
 
 void BattleManager::showMonsterInfo()
@@ -272,12 +282,15 @@ void BattleManager::useSkillOnMonster()
 		return;
 	} else
 	{
+
 		player->useSkill(monster[selectedMonsterIndex].get());
+		setColor(1);
 		std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
 		if (monster[selectedMonsterIndex]->isMobDead()) {
 			std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
 			if (getAllMonsterDead()) isBattleActive = false;
 		}
+		setColor(7);
 	}
 	isTurnEnd = true;
 }
@@ -301,14 +314,14 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 
 	while (true)
 	{
-		std::cout << "\n대상 몬스터의 번호를 입력하세요.\n";
+		std::cout << "\n대상 몬스터의 번호를 입력하세요.\n\n";
 		 for (int index : aliveMonsterIndices)
         {
             // 몬스터 이름 추가 출력
             std::cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "\n"; 
         }
 		std::cout << "\n==============================\n";
-		std::cout << "[0] 되돌아가기\n"; // 되돌아가기 옵션 추가
+		std::cout << "\n[0] 되돌아가기\n"; // 되돌아가기 옵션 추가
 		std::cout << ">> ";
 		std::getline(std::cin, input);
 
@@ -355,6 +368,8 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	this->player = player;
 	this->monster = std::move(monsters);
 
+	currentTurn = 1; // 현재 턴
+
 	// TurnOrder 초기화 및 재정렬
 	std::vector<TurnOrder> turnOrders;
 
@@ -362,7 +377,10 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	while (isBattleActive)
 	{
 		displayBattleState();
-
+		std::cout << "\n\n====================================================================\n\n";
+		setColor(6);
+		cout << "~ 턴 " << currentTurn << " ~" << endl;
+		setColor(7);
 		// 플레이어의 공격 속도 추가
 		turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
 
@@ -391,8 +409,15 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 				if (!isBattleActive) break; // 전투가 끝났으면 종료
 			}
 		}
-		//전투 순서 벡터 초기화
-		turnOrders.clear();
+
+		std::cout << "\n==============================\n";
+		setColor(6);
+		cout << "\n~ 턴 " << currentTurn << " 종료 ~" << endl;
+		setColor(7);
+		delay(2000); // 2초 지연
+		turnOrders.clear();//전투 순서 벡터 초기화
+		currentTurn++; // 현재 턴 추가
+		system("cls"); // 화면 초기화
 	}
 	resolveBattle();
 }
@@ -446,7 +471,7 @@ int BattleManager::resolveBattle()
 				loot = ItemManager::getInstance()->getLootByIndex(monster->dropItemIdx());  // 나머지 90%는 monster에서 아이템 드랍
 			}
 			setColor(6); // 노랑
-			std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
+			std::cout << "\n전리품 " << loot->getName() << "을(를) 습득하셨습니다. ";
 			player->addItemToInventory(loot);
 			setColor(7); // 하양
 		}

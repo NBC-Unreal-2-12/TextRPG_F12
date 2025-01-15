@@ -25,6 +25,8 @@ public:
 
     int getMobHealth() { return this->mobHealth; }
 
+    int getMobMaxHealth() { return this->mobMaxHealth; }
+
     int getMobAttack() { return this->mobAttack; }
 
     int getMobMana() { return this->mobMana; }
@@ -86,6 +88,7 @@ public:
 protected:
     string mobName = "Unknown";
     int mobHealth = 99;
+    int mobMaxHealth = 99;
     int mobAttack = 99;
     int mobAttackSpeed = 99;
     int mobMana = 99;

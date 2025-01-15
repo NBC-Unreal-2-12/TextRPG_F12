@@ -12,7 +12,6 @@ int PlayerInput::getPlayerChoice()
 
 	while (true)
 	{
-		std::cout << "\n==============================\n";
 		std::cout << "\n당신은 지금..\n";
 		std::cout << "1. 공격!\n";
 		std::cout << "2. 스킬 사용!\n";

@@ -1,8 +1,10 @@
 ﻿#ifndef CHARACTER_H
 #define CHARACTER_H
 #pragma once
+#define NOMINMAX
 
 #include <string>
+#include <Windows.h>
 #include "Job.h"
 #include "Inventory.h"
 #include "Item.h"
@@ -74,6 +76,7 @@ public:
     void useSkill(Monster* target); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
 	string getName();	// 이름 getter
+	void setColor(int color);	// 글자색 설정
 	
 };
 

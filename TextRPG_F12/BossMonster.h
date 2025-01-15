@@ -17,6 +17,7 @@ public:
 	{
 		mobName = "고길동";
 		mobHealth = 20;
+		mobMaxHealth = 20;
 		mobAttack = 10;
 		mobMana = 0;
 		mobMaxMana = 3;
@@ -52,7 +53,16 @@ public:
 		cout << mobName << "의 명중률이 50 증가합니다." << endl;
 		cout << mobName << "의 회피율이 0.5 증가합니다." << endl;
 		cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
-		mobHealth += 20;
+
+		if (mobMaxHealth - mobHealth <= 20) // 회복
+		{
+			mobHealth = mobMaxHealth;
+		}
+		else
+		{
+			mobHealth += 20;
+		}
+
 		mobAttack += 5;
 		mobAccuracy += 50;
 		mobEvasion += 0.5;

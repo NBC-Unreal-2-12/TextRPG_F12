@@ -324,9 +324,13 @@ void Character::useSkill(Monster* target)
     target->takeMobDamage(damage);
 
     // 출력
-    cout << name << "은(는)" << target->getMobName()
-        << " 에게 " << skill->getSkillName()
-        << "(을)를 사용해서 " << damage << " 데미지를 입혔습니다!" << endl;
+    setColor(5);
+    cout << "\n" << name << "의 " << skill->getSkillName() << "!\n\n";
+    setColor(7);
+
+    setColor(1);
+    cout << target->getMobName() << "에게 " << damage << " 데미지를 입혔습니다!\n";
+    setColor(7);
 }
 
 void Character::useMP(int cost)
@@ -338,4 +342,11 @@ void Character::useMP(int cost)
 string Character::getName()
 {
     return name;
+}
+
+// 글자색 설정
+void Character::setColor(int color)
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, color);
 }

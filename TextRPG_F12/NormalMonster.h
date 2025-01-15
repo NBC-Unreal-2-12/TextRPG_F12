@@ -17,6 +17,7 @@ public:
 	{
 		mobName = "슬라임";
 		mobHealth = 150;
+		mobMaxHealth = 150;
 		mobAttack = 20;
 		mobMana = 0;
 		mobMaxMana = 3;
@@ -41,7 +42,15 @@ public:
 	int useMobSkill() override
 	{
 		cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-		mobHealth += 20;
+
+		if (mobMaxHealth - mobHealth <= 20)
+		{
+			mobHealth = mobMaxHealth;
+		}
+		else
+		{
+			mobHealth += 20;
+		}
 		return 0;
 	}
 };
@@ -53,6 +62,7 @@ public:
 	{
 		mobName = "오크";
 		mobHealth = 100;
+		mobMaxHealth = 100;
 		mobAttack = 40;
 		mobMana = 0;
 		mobMaxMana = 3;
@@ -94,6 +104,7 @@ public:
 	{
 		mobName = "고블린";
 		mobHealth = 50;
+		mobMaxHealth = 50;
 		mobAttack = 30;
 		mobMana = 0;
 		mobMaxMana = 3;

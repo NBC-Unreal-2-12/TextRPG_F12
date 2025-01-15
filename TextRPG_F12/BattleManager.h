@@ -31,6 +31,7 @@ private:
     bool allMonstersDead = false;           // 몬스터들이 전멸했는지 여부
     bool isBattleActive = true;     // 전투 진행 상태 확인
     bool isTurnEnd = false;         // 플레이어 턴 종료여부 확인
+    int currentTurn;                // 현재 턴
 
     Inventory* inventory;
 
@@ -84,7 +85,12 @@ public:
     }
 
     // 딜레이
-    void delay(int milliseconds) { std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds)); }
+    void delay(int milliseconds)
+    {
+        //Beep(220, 200);
+        std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+    }
+
 };
 
 #endif

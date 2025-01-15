@@ -17,6 +17,7 @@ public:
 	{
         mobName = "엘리트 슬라임";
         mobHealth = 500;
+        mobMaxHealth = 500;
         mobAttack = 30;
         mobMana = 0;
         mobMaxMana = 3;
@@ -38,12 +39,20 @@ public:
              )" << endl;
      }
 
-    int useMobSkill() override
-    {
-        cout << mobName << "이(가) 100만큼 회복합니다." << endl;
-        mobHealth += 100;
-        return 0;
-    }
+     int useMobSkill() override
+     {
+         cout << mobName << "이(가) 100만큼 회복합니다." << endl;
+
+         if (mobMaxHealth - mobHealth <= 100)
+         {
+             mobHealth = mobMaxHealth;
+         }
+         else
+         {
+             mobHealth += 100;
+         }
+         return 0;
+     }
 };
 
 class EliteOrc : public EliteMonster
@@ -53,6 +62,7 @@ public:
 	{
         mobName = "엘리트 오크";
         mobHealth = 400;
+        mobMaxHealth = 400;
         mobAttack = 50;
         mobMana = 0;
         mobMaxMana = 3;
@@ -94,6 +104,7 @@ public:
 	{
         mobName = "엘리트 고블린";
         mobHealth = 300;
+        mobMaxHealth = 300;
         mobAttack = 40;
         mobMana = 0;
         mobMaxMana = 3;
