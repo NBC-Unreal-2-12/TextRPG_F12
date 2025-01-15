@@ -23,6 +23,7 @@ private:
 	int maxMp;      // 최대 마나
 	double attack;  // 공격력
 	int experience;     // 경험치
+	int maxExperience;  // 최대 경험치
 	int gold;       // 골드
 	int attackSpeed;        // 공격속도
 	double accuracy;            // 명중률
@@ -40,6 +41,7 @@ public:
 	static Character* getInstance();				// 인스턴스 가져오기
 	void displayStatus();   // 현재 상태 출력
 	void levelUp();     // 레벨업
+	void doLevelUp();   // 레벨업 확인
 	void useItemFromInventory(int index);   // 아이템 사용   
 	void addItemToInventory(Item* item);   // 인벤토리에 아이템 추가
 	Item* findItemFromInventory(int index); // 인벤토리에서 아이템 찾기
@@ -48,7 +50,8 @@ public:
 	int getGold(); // 골드 getter
 	void setGold(int sellPrice); // 골드 setter
 	int getExp();				// 경험치 getter
-	void setExp(int set_exp);	// 경험치 setter
+	int getMaxExp();			// 최대 경험치 getter
+	void addExp(int set_exp);	// 경험치 setter
 	bool isCharacterDead();		 // 사망 여부 getter
 	void setCharacterDead(bool dead);		//사망 setter
 	int getHealth();                // health getter

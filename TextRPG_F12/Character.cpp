@@ -6,7 +6,7 @@ Character * Character::instance = nullptr;
 
 Character::Character(string userName, Job* characterJob) :
     name(userName), job(characterJob), level(1), maxHealth(200), health(200), attack(30),
-    experience(0), gold(0), accuracy(100), attackSpeed(5), evasion(1), isDead(false), mp(100), maxMp(100)
+	experience(0), gold(0), accuracy(100), attackSpeed(5), evasion(1), isDead(false), mp(100), maxMp(100), maxExperience(100)
 {
     characterJob->applyJobEffect(attack, maxHealth, attackSpeed, evasion, accuracy, maxMp);
     health = maxHealth;
@@ -41,7 +41,7 @@ void Character::displayStatus()
     cout << "레벨: " << level << endl;
     cout << "체력: " << health << "/" << maxHealth << endl;
     cout << "마나: " << mp << "/" << maxMp << endl;
-    cout << "경험치: " << experience << endl;
+    cout << "경험치: " << experience << "/" << maxExperience << endl;
     cout << "공격력: " << attack << endl;
     cout << "보유골드: " << gold << endl;
     cout << "공격속도: " << attackSpeed << endl;
@@ -53,12 +53,25 @@ void Character::levelUp()
 {
     level++;
     maxHealth += job->getHealthGrowth();
+	health = maxHealth;
     maxMp += job->getManaGrowth();
+	mp = maxMp;
     attack += job->getAttackGrowth();
     evasion += job->getEvasionGrowth();
     accuracy += job->getAccuracyGrowth();
     cout << "레벨업!" << name << "의 레벨이 " << level << "이 되었습니다!" << endl;
     displayStatus();
+}
+
+void Character::doLevelUp()
+{
+    while (experience >= maxExperience)
+    {
+        levelUp();
+        experience -= maxExperience;
+        maxExperience = level * 100;
+        std::cout << "레벨업! 레벨이 " << level << "이 되었습니다." << endl;
+    }
 }
 
 void Character::useItemFromInventory(int index)
@@ -97,9 +110,13 @@ int Character::getExp()
 {
     return experience;
 }
-void Character::setExp(int set_exp)
+int Character::getMaxExp()
 {
-    experience = set_exp;
+    return maxExperience;
+}
+void Character::addExp(int set_exp)
+{
+    experience += set_exp;
 }
 bool Character::isCharacterDead()
 {

@@ -276,12 +276,19 @@ int BattleManager::resolveBattle()
     else if (allMonstersDead)
     {
         std::cout << "축하합니다! 전투에서 승리하셨습니다!\n\n";
+        GameManager* gameManager = GameManager::getInstance();
+        gameManager->setCurrentRound();
+        int monsterCount = gameManager->getMonsterGroup(gameManager->getCurrentRound()).size();
         // 경험치, 돈, 아이템 획득 처리
-        int expGained = 100; // 획득 경험치
-        int goldGained = 50; // 획득 골드
-        //int currentExp = player->getExp();
-        // player->addExp(currentExp);
-        // player->setExp(currentExp + expGained);
+        int expGained = 100 * monsterCount; // 획득 경험치
+        int goldGained = 50 * monsterCount; // 획득 골드
+        player->addExp(expGained);
+        int currentExp = player->getExp();
+		int maxExp = player->getMaxExp();
+		if (currentExp >= maxExp)
+		{
+			player->doLevelUp();
+		}
         int existGold = player->getGold();
         player->setGold(existGold + expGained);
         std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
