@@ -299,7 +299,6 @@ int BattleManager::resolveBattle()
             std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다. \n";
             player->addItemToInventory(loot);
             setColor(7); // 하양
-            std::cout << "전리품 " << loot->getName() << "을(를) 습득하셨습니다.";
         }
     }
 
