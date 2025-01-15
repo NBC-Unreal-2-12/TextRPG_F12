@@ -77,7 +77,7 @@ public:
 
 	int getCurrentRound()
 	{
-		return currentRound;
+		return currentRound - 1;
 	}
 
 	// 현재 라운드 정보를 갱신
