@@ -44,7 +44,7 @@ void ItemManager::initializeDefaultItems()
 	registerItem(4, new ManaPotion("마나포션(대)", 150, 50));
 	registerItem(5, new AttackBoost("데미지 부스터", 100, 5));
 	registerItem(6, new MudBall("진흙탄", 80, 5));
-	registerItem(7, new SpeedPotion("스피드업", 100, 5));
+    registerItem(7, new AttackSpeedBoost("스피드업", 100, 5));
 
 	// 전리품 아이템 리스트 초기화
 	registerLoot(101, new MonsterLoot("고블린의 작은 동전", 20));
