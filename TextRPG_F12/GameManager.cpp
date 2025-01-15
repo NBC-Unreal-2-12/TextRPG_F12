@@ -49,6 +49,7 @@ void GameManager::visitShop(Character* player)
 
 		if (choice == 0)
 		{
+			cin.ignore();
 			return; // 나가기
 		}
 		else if (choice == 1)
