@@ -57,40 +57,49 @@ bool BattleManager::getAllMonsterDead()
 
 void BattleManager::processPlayerTurn() {
 	PlayerInput input;
-	int choice = input.getPlayerChoice();;
+	bool isInformCheck = true;
 
-	switch (choice) {
-	case 1: // 공격
-		showMonsterCombatInfo();
-		attackMonster();
-		delay(500); // 0.5초 지연
-		break;
+	while(isInformCheck) {
 
-	case 2: // 스킬
-		showMonsterCombatInfo();
-		useSkillOnMonster();
-		delay(500); // 0.5초 지연
-		break;
+		int choice = input.getPlayerChoice();
 
-	case 3: // 인벤토리
-		Inventory::getInstance()->listItem();
-		break;
+		switch (choice) {
+		case 1: // 공격
+			showMonsterCombatInfo();
+			attackMonster();
+			delay(500); // 0.5초 지연
+			isInformCheck = false;
+			break;
 
-	case 4: // 도망
-		std::cout << "도망쳤습니다!!\n";
-		isBattleActive = false;
-		break;
+		case 2: // 스킬
+			showMonsterCombatInfo();
+			useSkillOnMonster();
+			delay(500); // 0.5초 지연
+			isInformCheck = false;
+			break;
 
-	case 5: // 상태창
-		player->displayStatus();
-		break;
+		case 3: // 인벤토리
+			Inventory::getInstance()->listItem();
+			isInformCheck = false;
+			break;
 
-	case 6: // 몬스터 정보
-		showMonsterInfo();
-		break;
+		case 4: // 도망
+			std::cout << "도망쳤습니다!!\n";
+			isBattleActive = false;
+			isInformCheck = false;
+			break;
 
-	default:
-		std::cout << "유효하지 않은 선택입니다. 다시 시도해주세요.\n";
+		case 5: // 상태창
+			player->displayStatus();
+			continue;
+
+		case 6: // 몬스터 정보
+			showMonsterInfo();
+			continue;
+
+		default:
+			std::cout << "유효하지 않은 선택입니다. 다시 시도해주세요.\n";
+		}
 	}
 }
 
