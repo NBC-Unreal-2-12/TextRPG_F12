@@ -66,10 +66,12 @@ void BattleManager::processPlayerTurn()
 	switch (choice)
 	{
 	case 1: // 공격
+		showCombatInfo();
 		attackMonster();
 		delay(500); // 0.5초 지연
 		break;
 	case 2: // 스킬
+		showCombatInfo();
 		useSkillOnMonster();
 		delay(500); // 0.5초 지연
 		break;
@@ -82,6 +84,32 @@ void BattleManager::processPlayerTurn()
 		break;
 	default:
 		std::cout << "Invalid choice.\n";
+	}
+}
+
+void BattleManager::showCombatInfo()
+{
+	std::vector<int> aliveMonsterIndices;
+	aliveMonsterIndices = getAliveMonsters();
+	for (int index : aliveMonsterIndices)
+	{
+		std::cout << "[" << index + 1 << "] " << monster[index]->getMobName()
+			<< " (HP: " << monster[index]->getMobHealth()
+			<< ", 명중률: " << player->getAccuracy() / monster[index]->getMobEvasion() << "%)\n";
+		monster[index]->mobFace();
+		for (int i = 0; i < monster[index]->getMobMana(); i++)
+		{
+			cout << "★";
+		}
+		for (int i = monster[index]->getMobMana(); i < monster[index]->getMobMaxMana(); i++)
+		{
+			cout << "☆";
+		}
+		cout << endl;
+		if (monster[index]->getMobMana() == monster[index]->getMobMaxMana())
+		{
+			cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "이 힘을 모으고 있습니다.." << endl;;
+		}
 	}
 }
 
