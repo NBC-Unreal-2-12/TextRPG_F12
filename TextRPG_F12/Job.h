@@ -53,9 +53,9 @@ public:
     void applyJobEffect(double& attack, int& maxHealth, int& attackspeed,
         double& evasion, double& accuracy, int& maxMp) const override 
     {
-        attack += 30;
-        maxHealth += 70;
-        attackspeed += 10;
+        attack += 10;
+        maxHealth += 100;
+        attackspeed += 2;
     }
 
     ~Warrior() override { delete skill; }
@@ -82,10 +82,10 @@ public:
     void applyJobEffect(double& attack, int& maxHealth, int& attackspeed, 
         double& evasion, double& accuracy, int& maxMp) const override 
     {
-        attack += 25;
+        attack += 10;
         maxHealth += 20;
         maxMp += 50;
-        attackspeed += 5;
+        attackspeed += 2;
     }
 
 	~Mage() override { delete skill; }
@@ -112,10 +112,10 @@ public:
     void applyJobEffect(double& attack, int& maxHealth, int& attackspeed,
         double& evasion, double& accuracy, int& maxMp) const override 
     {
-        attack += 20;
-        maxHealth += 30;
+        attack += 10;
+        maxHealth += 50;
         evasion += 0.1;
-        attackspeed += 20;
+        attackspeed += 3;
         accuracy += 10;
     }
 
