@@ -15,8 +15,9 @@ private:
 		int index;
 		Item* item;   // 아이템 포인터
 		int quantity; // 재고 수량
+		bool isLoot;
 
-		StockItem(int index, Item* _item, int _quantity = 5);
+		StockItem(int index, Item* _item, int _quantity = 5, bool isLoot = true);
 	};
 
 	std::vector<StockItem> stock;

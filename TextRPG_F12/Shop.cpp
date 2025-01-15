@@ -1,8 +1,8 @@
 ﻿#include "Shop.h"
 
 // StockItem 생성자
-Shop::StockItem::StockItem(int index, Item* _item, int _quantity)
-	: index(index), item(_item), quantity(_quantity)
+Shop::StockItem::StockItem(int index, Item* _item, int _quantity, bool isLoot)
+	: index(index), item(_item), quantity(_quantity), isLoot(isLoot)
 {
 }
 
@@ -16,7 +16,19 @@ Shop::Shop(ItemManager& itemManager)
 
 		if (item)
 		{
-			stock.emplace_back(index, item, 5);
+			stock.emplace_back(index, item, 5, false);
+		}
+	}
+
+	// 상점에 초기 전리품 추가
+	for (const auto& pair : itemManager.getAlILoots())
+	{
+		int index = pair.first;
+		Item* item = pair.second;
+
+		if (item)
+		{
+			stock.emplace_back(index, item, 5, true);
 		}
 	}
 
@@ -35,8 +47,11 @@ void Shop::displayItems()
 	std::cout << "\n======== ( Item Shop ) ========\n";
 	for (const auto& it : stock)
 	{
-		std::cout << it.index << ". " << it.item->getName()
-			<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
+		if (it.isLoot == false)
+		{
+			std::cout << it.index << ". " << it.item->getName()
+				<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
+		}
 	}
 
 	// 아이템이 하나도 없을 경우 (재고와 무관)
@@ -96,10 +111,10 @@ void Shop::sellItem(int index, Character* player)
 
 	// 해당 아이템 찾기
 	auto& stockItem = *std::find_if(stock.begin(), stock.end(),
-		[item](const StockItem& stockItem) { return stockItem.item == item; });
+		[item](const StockItem& stockItem) { return stockItem.item->getName() == item->getName(); });
 
 	// 판매 처리
-	int sellPrice = static_cast<int>(item->getPrice() * 0.6);
+	int sellPrice = static_cast<int>(stockItem.item->getPrice() * 0.6);
 	player->setGold(sellPrice);
 	player->sellItemFromInventory(index);
 
