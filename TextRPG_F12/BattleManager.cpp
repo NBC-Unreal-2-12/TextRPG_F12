@@ -212,12 +212,20 @@ void BattleManager::processPlayerTurn()
         break;
     }
     case 3: // 인벤토리
-        inventory->listItem();
+    {
+        int itemChoice = -1;
+        player->displayInventory();
+        cout << "사용하실 아이템의 숫자를 입력해 주세요.\n";
+        cin >> itemChoice;
+        player->useItemFromInventory(itemChoice);
         break;
+    }
     case 4: // 도망
+    {
         std::cout << "도망쳤습니다!!\n";
         isBattleActive = false;
         break;
+    }
     default:
         std::cout << "Invalid choice.\n";
     }

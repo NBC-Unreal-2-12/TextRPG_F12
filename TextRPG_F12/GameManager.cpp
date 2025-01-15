@@ -44,7 +44,7 @@ void GameManager::visitShop(Character* player)
 	player->setGold(200);
 	while (choice != 0)
 	{
-		cout << "구매 : 1, 판매 : 2,  나가기 : 0 >> ";
+		cout << "구매 : 1, 판매 : 2,  인벤토리 확인 : 3, 나가기 : 0 >> ";
 		cin >> choice;
 
 		if (choice == 0)
@@ -66,19 +66,15 @@ void GameManager::visitShop(Character* player)
 			cin >> index;
 			shop.sellItem(index, player);
 		}
+		else if (choice == 3)
+		{
+			player->displayInventory();
+		}
 		else
 		{
 			cout << "부적절한 입력입니다. 다시 입력해주세요." << endl;
 		}
 	}
-}
-
-// 인벤토리 출력
-void GameManager::displayInventory(Inventory inventory)
-{
-	cout << "======현재 소지한 아이템======" << endl;
-	inventory.listItem();
-	cout << "==============================." << endl;
 }
 
 // 라운드 별 몬스터 마릿수를 결정하여 생성

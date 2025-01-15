@@ -69,9 +69,6 @@ public:
 	// 상점 방문
 	void visitShop(Character* player);
 
-	// 인벤토리 표시
-	void displayInventory(Inventory inventory);
-
 	// 라운드 별 몬스터 마릿수를 결정하여 생성
 	vector<unique_ptr<Monster>> generateMonsters(int round);
 
