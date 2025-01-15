@@ -41,6 +41,9 @@ public:
     // 플레이어 행동 처리
     void processPlayerTurn();
 
+    // 현재 전투 상황 출력
+    void showCombatInfo();
+
     // 몬스터 정보 출력
     void showMonsterInfo();
 
