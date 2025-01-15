@@ -243,7 +243,7 @@ void BattleManager::processPlayerTurn()
 		break;
 	}
 	case 3: // 인벤토리
-		inventory->listItem();
+		Inventory::getInstance()->listItem();
 		break;
 	case 4: // 도망
 		std::cout << "도망쳤습니다!!\n";

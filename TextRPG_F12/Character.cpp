@@ -129,24 +129,30 @@ void Character::doLevelUp()
 
 }
 
+// 캐릭터 인벤토리 관련 메서드
 void Character::useItemFromInventory(int index)
 {
-    inventory.useItem(index, this);
+    Inventory::getInstance()->useItem(index, this);
 }
 
 void Character::addItemToInventory(Item* item)
 {
-    inventory.addItem(item);
+    Inventory::getInstance()->addItem(item);
 }
 
 void Character::sellItemFromInventory(int index)
 {
-    inventory.sellItem(index);
+    Inventory::getInstance()->sellItem(index);
 }
 
 void Character::displayInventory()
 {
-    inventory.listItem();
+    Inventory::getInstance()->listItem();
+}
+
+Item* Character::findItemFromInventory(int index)
+{
+    return Inventory::getInstance()->findItem(index);
 }
 
 
@@ -178,7 +184,7 @@ bool Character::isCharacterDead()
     return isDead;
 }
 void Character::setCharacterDead(bool dead) {
-    vector<Item*> item = inventory.getInventory();
+    vector<Item*> item = Inventory::getInstance()->getInventory();
     auto it = find_if(item.begin(), item.end(), [](Item* i) { return dynamic_cast<ReviveItem*>(i) != nullptr; }); // 죽기 전 ReviveItem 찾기
     if (it != item.end()) {
         item.erase(it);
@@ -224,10 +230,6 @@ double Character::getAttack()
 int Character::getAttackSpeed()
 {
     return attackSpeed;
-}
-Item* Character::findItemFromInventory(int index)
-{
-    return inventory.findItem(index);
 }
 
 void Character::setAttackSpeed(int set_attackSpeed)
