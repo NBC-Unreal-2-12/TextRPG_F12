@@ -13,9 +13,9 @@ public:
 class EliteSlime : public EliteMonster
 {
 public:
-	EliteSlime() : EliteMonster("EliteSlime")
+	EliteSlime() : EliteMonster("엘리트 슬라임")
 	{
-        mobName = "Elite Slime";
+        mobName = "엘리트 슬라임";
         mobHealth = 500;
         mobAttack = 30;
         mobMana = 0;
@@ -43,16 +43,16 @@ public:
     {
         cout << mobName << "이(가) 100만큼 회복합니다." << endl;
         mobHealth += 100;
-        return mobAttack;
+        return 0;
     }
 };
 
 class EliteOrc : public EliteMonster
 {
 public:
-	EliteOrc() : EliteMonster("EliteOrc")
+	EliteOrc() : EliteMonster("엘리트 오크")
 	{
-        mobName = "Elite Orc";
+        mobName = "엘리트 오크";
         mobHealth = 400;
         mobAttack = 50;
         mobMana = 0;
@@ -85,16 +85,16 @@ public:
     {
         cout << mobName << "의 공격력이 20 증가합니다." << endl;
         mobAttack += 20;
-        return mobAttack;
+        return 0;
     }
 };
 
 class EliteGoblin : public EliteMonster
 {
 public:
-	EliteGoblin() : EliteMonster("EliteGoblin")
+	EliteGoblin() : EliteMonster("엘리트 고블린")
 	{
-        mobName = "Elite Goblin";
+        mobName = "엘리트 고블린";
         mobHealth = 300;
         mobAttack = 40;
         mobMana = 0;

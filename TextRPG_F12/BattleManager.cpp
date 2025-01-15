@@ -280,31 +280,36 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 		{
 			std::cout << monster->getMobName() << "이(가) 스킬을 사용했습니다!" << std::endl;
 		}
-		if (int randomType = std::rand() % 100 <= (monster->getMobAccuracy() / player->getEvasion())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
-		{
-			//명중시
-			int damage = monster->useMobAttack();
-			std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
-			player->setHealth(player->getHealth() - damage);
-			if (player->getHealth() >= 1)
-			{
-				std::cout << player->getName() << "의 남은 체력은 " << player->getHealth() << "입니다.\n" << std::endl;
-				setColor(7); // 하양
-			}
 
+		int damage = monster->useMobAttack();
+
+		if (damage != 0) // 공격에 데미지가 있을 때
+		{
+			if (int randomType = std::rand() % 100 <= (monster->getMobAccuracy() / player->getEvasion())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
+			{
+				//명중시
+
+				std::cout << player->getName() << "이(가) " << damage << "의 데미지를 받았습니다." << std::endl;
+				player->setHealth(player->getHealth() - damage);
+				if (player->getHealth() >= 1)
+				{
+					std::cout << player->getName() << "의 남은 체력은 " << player->getHealth() << "입니다.\n" << std::endl;
+				}
+
+				else
+				{
+					player->setCharacterDead(true);
+					isBattleActive = false; // 플레이어가 죽었다고 간주, isBattleOver() 호출
+				}
+			}
 			else
 			{
-				player->setCharacterDead(true);
-				isBattleActive = false; // 플레이어가 죽었다고 간주, isBattleOver() 호출
+				//회피시
+				setColor(12); // 빨강
+				cout << "빗나감!" << endl;
 			}
 		}
-		else
-		{
-			//회피시
-			setColor(12); // 빨강
-			cout << "빗나감!" << endl;
-			setColor(7); // 하양
-		}
+		setColor(7); // 하양
 	}
 
 }

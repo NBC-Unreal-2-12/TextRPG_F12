@@ -13,9 +13,9 @@ public:
 class Slime : public NormalMonster
 {
 public:
-	Slime() : NormalMonster("Slime")
+	Slime() : NormalMonster("슬라임")
 	{
-		mobName = "Slime";
+		mobName = "슬라임";
 		mobHealth = 150;
 		mobAttack = 20;
 		mobMana = 0;
@@ -42,16 +42,16 @@ public:
 	{
 		cout << mobName << "이(가) 20만큼 회복합니다." << endl;
 		mobHealth += 20;
-		return mobAttack;
+		return 0;
 	}
 };
 
 class Orc : public NormalMonster
 {
 public:
-	Orc() : NormalMonster("Orc")
+	Orc() : NormalMonster("오크")
 	{
-		mobName = "Orc";
+		mobName = "오크";
 		mobHealth = 100;
 		mobAttack = 40;
 		mobMana = 0;
@@ -83,16 +83,16 @@ public:
 	{
 		cout << mobName << "의 공격력이 10 증가합니다." << endl;
 		mobAttack += 10;
-		return mobAttack;
+		return 0;
 	}
 };
 
 class Goblin : public NormalMonster
 {
 public:
-	Goblin() : NormalMonster("Goblin")
+	Goblin() : NormalMonster("고블린")
 	{
-		mobName = "Goblin";
+		mobName = "고블린";
 		mobHealth = 50;
 		mobAttack = 30;
 		mobMana = 0;

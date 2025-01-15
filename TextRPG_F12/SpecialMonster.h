@@ -13,9 +13,9 @@ public:
 class Dragon : public SpecialMonster
 {
 public:
-	Dragon() : SpecialMonster("Dragon")
+	Dragon() : SpecialMonster("드래곤")
 	{
-        mobName = "Dragon";
+        mobName = "드래곤";
         mobHealth = 400;
         mobAttack = 50;
         mobMana = 0;
@@ -52,9 +52,9 @@ public:
 class Balrog : public SpecialMonster
 {
 public:
-	Balrog() : SpecialMonster("Balrog")
+	Balrog() : SpecialMonster("발록")
 	{
-        mobName = "Balrog";
+        mobName = "발록";
         mobHealth = 20;
         mobAttack = 10;
         mobMana = 0;
@@ -85,16 +85,16 @@ public:
     {
         cout << mobName << "의 공격력이 5 증가합니다." << endl;
         mobAttack += 5;
-        return mobAttack;
+        return 0;
     }
 };
 
 class Kraken : public SpecialMonster
 {
 public:
-	Kraken() : SpecialMonster("Kraken")
+	Kraken() : SpecialMonster("크라켄")
 	{
-        mobName = "Kraken";
+        mobName = "크라켄";
         mobHealth = 20;
         mobAttack = 10;
         mobMana = 0;
@@ -125,6 +125,6 @@ public:
     {
         cout << mobName << "이(가) 20만큼 회복합니다." << endl;
         mobHealth += 20;
-        return mobAttack;
+        return 0;
     }
 };
