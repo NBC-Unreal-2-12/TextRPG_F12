@@ -40,6 +40,7 @@ public:
 	static Character* getInstance();				// 인스턴스 가져오기
 	void displayStatus();   // 현재 상태 출력
 	void levelUp();     // 레벨업
+	void doLevelUp();	// 레벨업
 	void useItemFromInventory(int index);   // 아이템 사용   
 	void addItemToInventory(Item* item);   // 인벤토리에 아이템 추가
 	Item* findItemFromInventory(int index); // 인벤토리에서 아이템 찾기
@@ -66,7 +67,7 @@ public:
     double getEvasion();            // 회피율 getter
 	void setEvation(double set_evasion); // 회피율 setter
 	void receiveDamage(int damage); // 유저가 데미지를 받는 메서드
-    void useSkill(vector<Monster*>& targets); // 스킬 사용 메서드
+    void useSkill(Monster* target); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
 	string getName();	// 이름 getter
 	void doLevelUp();
