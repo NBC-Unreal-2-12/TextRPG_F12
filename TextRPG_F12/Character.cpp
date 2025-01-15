@@ -237,6 +237,10 @@ double Character::getAttack()
 {
     return attack;
 }
+void Character::setAttack(int set_attack)
+{
+    attack = set_attack
+}
 int Character::getAttackSpeed()
 {
     return attackSpeed;

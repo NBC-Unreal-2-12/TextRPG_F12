@@ -63,6 +63,7 @@ public:
 	int getMaxMP();				// maxMp getter
 	void setMaxMP(int set_maxMp);	// maxMp setter
     double getAttack();             // 데미지 getter
+    void setAttack(int set_attack);             // 데미지 getter
     int getAttackSpeed();           // 공격속도 getter
 	void setAttackSpeed(int set_attackSpeed); // 공격속도 setter
     double getAccuracy();           // 명중률 getter

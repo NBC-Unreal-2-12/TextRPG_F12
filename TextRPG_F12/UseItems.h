@@ -38,6 +38,7 @@ public:
 
     void use(Character* character) override
     {
+        character->setMP(character->getMP() + attackIncrease);
     }
 };
 //어택부스트
@@ -55,11 +56,12 @@ public:
 
     void use(Character* character) override
     {
+        character->setAttack(character->getAttack() + attackIncrease);
     }
 };
 
 //진흙단
-//명중률 감소 소모성 아이템
+//회피율 증가 소모성 아이템
 class MudBall : public Item
 {
 private:
@@ -73,6 +75,7 @@ public:
 
     void use(Character* character) override
     {
+        character->setEvation(character->getEvasion() + accuracyReduction);
     }
 };
 
@@ -89,5 +92,6 @@ public:
 
     void use(Character* character) override
     {
+        character->setAttackSpeed(character->getAttackSpeed() + attackSpeedIncrease);
     }
 };
