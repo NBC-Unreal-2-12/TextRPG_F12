@@ -1,4 +1,4 @@
-#include "inventory.h"
+﻿#include "inventory.h"
 
 // 싱글톤 인스턴스 초기화
 Inventory* Inventory::instance = nullptr;
