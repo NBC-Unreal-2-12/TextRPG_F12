@@ -57,6 +57,57 @@ void BattleManager::processPlayerTurn()
 		choice = input.getPlayerChoice();
 	}
 
+	while (choice == 6)
+	{
+		// 살아있는 몬스터 목록 가져오기
+		std::vector<int> aliveMonsterIndices;
+		for (size_t i = 0; i < monster.size(); ++i)
+		{
+			if (!monster[i]->isMobDead()) {
+				aliveMonsterIndices.push_back(i);
+			}
+		}
+		// 플레이어가 공격할 몬스터 선택
+		int selectedMonsterIndex = -1;
+		std::string finput;
+
+		// 입력값 검증
+		while (true)
+		{
+			std::cout << "정보를 볼 몬스터의 번호를 입력하세요.\n";
+			std::cout << ">> ";
+			std::getline(std::cin, finput); // 전체 입력을 문자열로 받음
+
+			// 입력값이 숫자로만 이루어졌는지 확인
+			if (!finput.empty() && std::all_of(finput.begin(), finput.end(), ::isdigit))
+			{
+				try {
+					// 문자열을 정수로 변환
+					selectedMonsterIndex = std::stoi(finput) - 1;
+
+					// 범위 확인
+					if (std::find(aliveMonsterIndices.begin(), aliveMonsterIndices.end(), selectedMonsterIndex) != aliveMonsterIndices.end())
+					{
+						// 살아있는 몬스터의 인덱스에 해당하면 입력이 유효한 것으로 처리
+						break; // 유효한 입력 범위라면 반복문 탈출
+					}
+					else {
+						std::cout << "유효한 몬스터 번호를 입력해 주세요.\n";
+					}
+				}
+				catch (const std::out_of_range&) {
+					std::cout << "입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+				}
+			}
+			else
+			{
+				std::cout << "유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+			}
+		}
+		monster[selectedMonsterIndex]->getMobInterface();
+		choice = input.getPlayerChoice();
+	}
+
 	switch (choice)
 	{
 	case 1: // 공격
