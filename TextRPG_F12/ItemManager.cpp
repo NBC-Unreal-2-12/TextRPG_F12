@@ -36,6 +36,17 @@ Item* ItemManager::getItemByIndex(int index) const
 	return nullptr;
 }
 
+// 인덱스로 아이템 접근
+Item* ItemManager::getLootByIndex(int index) const
+{
+	auto iter = lootLIst.find(index);
+	if (iter != lootLIst.end())
+	{
+		return iter->second;
+	}
+	return nullptr;
+}
+
 // 모든 아이템 반환 (참조)
 const std::map<int, Item*>& ItemManager::getAllItems() const
 {

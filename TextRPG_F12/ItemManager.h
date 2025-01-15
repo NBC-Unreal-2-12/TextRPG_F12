@@ -30,6 +30,7 @@ public:
 	void registerItem(int index, Item* item);	// 소비 아이템 등록
 	void registerLoot(int index, Item* item);	// 전리품 등록
 	Item* getItemByIndex(int index) const;		// 아이템 인덱스로 접근
+	Item* getLootByIndex(int index) const;		// 전리품 인덱스로 접근
 	void initializeDefaultItems();				// 아이템 목록 초기화 (상점 방문시 사용)
 	const map<int, Item*>& getAllItems() const; // 모든 소비 아이템 목록
 	const map<int, Item*>& getAlILoots() const; // 모든 전리품 목록
