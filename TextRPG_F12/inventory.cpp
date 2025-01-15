@@ -92,7 +92,7 @@ void Inventory::listItem()
 {
     if (!isInventoryEmpty())
     {
-        cout << "======== ( Inventory ) ========" << endl;
+        cout << "\n======== ( Inventory ) ========" << endl;
         for (int idx = 0; idx < inventory.size();idx++)
         {
             Item* item = inventory[idx];
@@ -109,7 +109,7 @@ vector<Item*> Inventory::getInventory()
 bool Inventory::isInventoryEmpty()
 {
     if (inventory.empty()) {
-        cout << "======== ( Inventory ) ========" << endl;
+        cout << "\n======== ( Inventory ) ========" << endl;
         cout << "인벤토리가 비어 있습니다.\n";
         return true;
     }

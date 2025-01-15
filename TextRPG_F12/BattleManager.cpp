@@ -27,9 +27,13 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 
 // 사용자에게 해당 라운드에 스폰된 몬스터 정보를 출력
 void BattleManager::displayBattleState() {
+
+	std::cout << "==============================\n\n";
+	setColor(6);
+	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound() + 1 << "\n\n";
+	cout << "~ 턴 " << currentTurn << " ~\n" << endl;
+	setColor(7);
 	std::cout << "==============================\n";
-	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound() + 1 << "\n";
-	std::cout << "출현한 몬스터들:\n";
 
 	showMonsterCombatInfo();
 }
@@ -167,7 +171,7 @@ void BattleManager::showMonsterCombatInfo()
 	{
 		int healthBars = 10 * monster[index]->getMobHealth() / monster[index]->getMobMaxHealth();
 		std::cout << "\n\n";
-		delay(100); // 0.1초 지연
+		delay(300); // 0.3초 지연
 		monster[index]->mobFace();
 		std::cout << "[" << index + 1 << "] " << monster[index]->getMobName();
 		std::cout << "( 체력 : " << monster[index]->getMobHealth() << " / " << monster[index]->getMobMaxHealth();
@@ -190,6 +194,7 @@ void BattleManager::showMonsterCombatInfo()
 		{
 			cout << "☆";
 		}
+		std::cout << "\n";
 
 	}
 }
@@ -204,7 +209,7 @@ void BattleManager::showPlayerCombatInfo() {
 	int maxMana = player->getMaxMP();
 
 	// 상태 출력
-	delay(500); // 0.5초 지연
+	delay(300); // 0.3초 지연
 	std::cout << "\n==============================\n\n";
 	std::cout << "플레이어 상태:\n";
 	// 체력 상태바
@@ -320,8 +325,7 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
             // 몬스터 이름 추가 출력
             std::cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "\n"; 
         }
-		std::cout << "\n==============================\n";
-		std::cout << "\n[0] 되돌아가기\n"; // 되돌아가기 옵션 추가
+		std::cout << "\n[0] 되돌아가기\n\n"; // 되돌아가기 옵션 추가
 		std::cout << ">> ";
 		std::getline(std::cin, input);
 
@@ -346,17 +350,17 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 				}
 				else
 				{
-					std::cout << "유효한 몬스터 번호를 입력해 주세요.\n";
+					std::cout << "\n유효한 몬스터 번호를 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
 			{
-				std::cout << "입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
 			}
 		}
 		else
 		{
-			std::cout << "유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
 		}
 	}
 	return selectedMonsterIndex;
@@ -368,7 +372,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	this->player = player;
 	this->monster = std::move(monsters);
 
-	currentTurn = 1; // 현재 턴
+
 
 	// TurnOrder 초기화 및 재정렬
 	std::vector<TurnOrder> turnOrders;
@@ -377,10 +381,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	while (isBattleActive)
 	{
 		displayBattleState();
-		std::cout << "\n\n====================================================================\n\n";
-		setColor(6);
-		cout << "~ 턴 " << currentTurn << " ~" << endl;
-		setColor(7);
+		delay(500); // 0.5초 딜레이
 		// 플레이어의 공격 속도 추가
 		turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
 
@@ -419,6 +420,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 		currentTurn++; // 현재 턴 추가
 		system("cls"); // 화면 초기화
 	}
+	currentTurn = 1;
 	resolveBattle();
 }
 

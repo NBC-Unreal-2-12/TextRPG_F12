@@ -38,17 +38,17 @@ int PlayerInput::getPlayerChoice()
 				}
 				else
 				{
-					std::cout << "잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
+					std::cout << "\n잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
 			{
-				std::cout << "입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
 			}
 		}
 		else
 		{
-			std::cout << "유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
 		}
 	}
 
@@ -85,19 +85,19 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 				else
 				{
 					system("cls");
-					std::cout << "잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
+					std::cout << "\n잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
 			{
 				system("cls");
-				std::cout << "입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
 			}
 		}
 		else
 		{
 			system("cls");
-			std::cout << "유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
 		}
 	}
 
@@ -117,7 +117,7 @@ string PlayerInput::setPlayerName()
 		getline(cin, name);
 		name.erase(remove(name.begin(), name.end(), ' '), name.end());
 		if (!name.empty()) break;
-		cout << "잘못된 입력입니다. 다시 설정해 주세요.\n";
+		cout << "\n잘못된 입력입니다. 다시 설정해 주세요.\n";
 	}
 
 	return name;
@@ -168,19 +168,19 @@ Job* PlayerInput::setJobByPlayerInput()
 				else
 				{
 					system("cls");
-					std::cout << "잘못된 선택입니다. 유효한 직업을 입력해 주세요.\n";
+					std::cout << "\n잘못된 선택입니다. 유효한 직업을 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
 			{
 				system("cls");
-				std::cout << "입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
 			}
 		}
 		else
 		{
 			system("cls");
-			std::cout << "유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
 		}
 	}
 
