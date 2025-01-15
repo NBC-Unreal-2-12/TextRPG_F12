@@ -113,7 +113,7 @@ void Character::levelUp()
     attack += job->getAttackGrowth();
     evasion += job->getEvasionGrowth();
     accuracy += job->getAccuracyGrowth();
-    cout << "레벨업!" << name << "의 레벨이 " << level << "이 되었습니다!" << endl;
+    cout << "레벨업! " << name << " 의 레벨이 " << level << "이 되었습니다!" << endl;
     displayStatus();
 }
 
@@ -265,7 +265,7 @@ void Character::receiveDamage(int damage)
         health = 0;
         isDead = true;
     }
-    cout << name << "이 " << damage << " 데미지를 입었습니다. 남은 체력: " << health << endl;
+    cout << name << "이(가) " << damage << "의 데미지를 입었습니다. 남은 체력: " << health << endl;
 }
 
 void Character::useSkill(Monster* target)
@@ -296,9 +296,9 @@ void Character::useSkill(Monster* target)
     target->takeMobDamage(damage);
 
     // 출력
-    cout << name << "은" << target->getMobName()
+    cout << name << "은(는)" << target->getMobName()
         << " 에게 " << skill->getSkillName()
-        << "를 사용해서 " << damage << " 데미지를 입혔습니다!" << endl;
+        << "(을)를 사용해서 " << damage << " 데미지를 입혔습니다!" << endl;
 }
 
 void Character::useMP(int cost)

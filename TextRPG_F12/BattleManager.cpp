@@ -127,7 +127,6 @@ void BattleManager::processPlayerTurn()
 		}
 
 		// 현재 살아있는 몬스터 출력
-		std::cout << "\n현재 살아있는 몬스터 목록:\n";
 		for (int index : aliveMonsterIndices)
 		{
 			std::cout << "[" << index << "] " << monster[index]->getMobName()
@@ -217,6 +216,7 @@ void BattleManager::processPlayerTurn()
 				aliveMonsterIndices.push_back(i);
 			}
 		}
+
 		// 살아있는 몬스터가 없으면 전투 종료
 		if (aliveMonsterIndices.empty()) {
 			std::cout << "모든 몬스터가 쓰러졌습니다. 전투가 종료됩니다." << std::endl;
@@ -224,7 +224,6 @@ void BattleManager::processPlayerTurn()
 		}
 
 		// 현재 살아있는 몬스터 출력
-		std::cout << "\n현재 살아있는 몬스터 목록:\n";
 		for (int index : aliveMonsterIndices)
 		{
 			std::cout << "[" << index << "] " << monster[index]->getMobName()
