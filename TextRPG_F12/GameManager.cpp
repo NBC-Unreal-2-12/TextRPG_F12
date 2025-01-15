@@ -22,8 +22,8 @@ void GameManager::InitializeGame()
 
 	// 라운드별 몬스터 그룹 초기화
 	monsterGroup.clear();
-	for (currentRound; currentRound < round; currentRound++) {
-		monsterGroup.emplace_back(generateMonsters(currentRound)); // 데이터 추가
+	for (int i = 0; i < round; i++) {
+		monsterGroup.emplace_back(generateMonsters(i)); // 데이터 추가
 	}
 
 
