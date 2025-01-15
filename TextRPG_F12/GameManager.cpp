@@ -22,7 +22,7 @@ void GameManager::InitializeGame()
 
 	// 라운드별 몬스터 그룹 초기화
 	monsterGroup.clear();
-	for (int currentRound = 1; currentRound <= round; currentRound++) {
+	for (currentRound; currentRound < round; currentRound++) {
 		monsterGroup.emplace_back(generateMonsters(currentRound)); // 데이터 추가
 	}
 
@@ -88,19 +88,19 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 
 	int monsterCount = 0;
 	int probability = std::rand() % 100 + 1;
-	if (round <= 5)
+	if (round < 5)
 	{
 		monsterCount = (probability <= 70) ? 2 : 3;
 	}
-	else if (round <= 10)
+	else if (round < 10)
 	{
 		monsterCount = (probability <= 50) ? 1 : 2;
 	}
-	else if (round < 15)
+	else if (round < 14)
 	{
 		monsterCount = (probability <= 40) ? 1 : 2;
 	}
-	else // round 15
+	else // round 14
 	{
 		monsterCount = 1;
 	}

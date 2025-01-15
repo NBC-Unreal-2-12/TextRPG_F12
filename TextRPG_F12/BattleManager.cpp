@@ -28,7 +28,7 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 void BattleManager::displayBattleState() {
 	system("cls"); // 화면 초기화
 	std::cout << "==============================\n";
-	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound() << "\n";
+	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound()+1 << "\n";
 	std::cout << "출현한 몬스터들:\n";
 
 	showMonsterCombatInfo();
@@ -331,6 +331,8 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	// 전투가 끝날 때까지 반복
 	while (isBattleActive)
 	{
+		displayBattleState();
+
 		// 플레이어의 공격 속도 추가
 		turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
 
@@ -361,7 +363,6 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 		}
 		//전투 순서 벡터 초기화
 		turnOrders.clear();
-		displayBattleState();
 	}
 	resolveBattle();
 }

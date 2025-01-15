@@ -27,7 +27,7 @@ private:
 	static GameManager* instance;
 
 	int round = 15; // 게임이 진행되는 총 라운드
-	int currentRound = 1; // 현재 라운드
+	int currentRound = 0; // 현재 라운드
 	vector<vector<unique_ptr<Monster>>> monsterGroup; // 라운드별 몬스터들
 
 	GameManager()
@@ -77,7 +77,7 @@ public:
 
 	int getCurrentRound()
 	{
-		return currentRound - 1;
+		return currentRound;
 	}
 
 	// 현재 라운드 정보를 갱신

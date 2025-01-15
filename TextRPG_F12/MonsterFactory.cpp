@@ -52,18 +52,18 @@ std::unique_ptr<Monster> MonsterFactory::createMonster(int round)
 {
     int probability = getRandomInt(1, 100); // 1~100 사이의 난수
 
-    if (round <= 5) 
+    if (round < 5) 
     {
         if (probability <= 100) return createNormalMonster();
         else return createEliteMonster();
     }
-    else if (round <= 10) 
+    else if (round < 10) 
     {
         if (probability = 0) return createNormalMonster();
         else if (probability <= 100) return createEliteMonster();
         else return createSpecialMonster();
     }
-    else if (round < 15) 
+    else if (round < 14) 
     {
         if (probability = 0) return createNormalMonster();
         else if (probability = 0) return createEliteMonster();
