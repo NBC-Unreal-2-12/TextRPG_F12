@@ -67,7 +67,7 @@ void BattleManager::processPlayerTurn()
 				aliveMonsterIndices.push_back(i);
 			}
 		}
-		// 플레이어가 공격할 몬스터 선택
+		// 플레이어가 찾을 몬스터 선택
 		int selectedMonsterIndex = -1;
 		std::string finput;
 
@@ -83,7 +83,7 @@ void BattleManager::processPlayerTurn()
 			{
 				try {
 					// 문자열을 정수로 변환
-					selectedMonsterIndex = std::stoi(finput) - 1;
+					selectedMonsterIndex = std::stoi(finput) - 1; // 1을 입력하면 index 0번째를 찾음
 
 					// 범위 확인
 					if (std::find(aliveMonsterIndices.begin(), aliveMonsterIndices.end(), selectedMonsterIndex) != aliveMonsterIndices.end())
