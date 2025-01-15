@@ -20,6 +20,7 @@ void Inventory::addItem(Item* item)
         inventory.push_back(item);
     }
     counts[item]++;
+    std::cout << "\n==============================\n";
     cout << "\n인벤토리에 " << item->getName() << "이(가) 추가되었습니다.\n" << endl;
 }
 
@@ -51,12 +52,12 @@ void Inventory::sellItem(int index)
     {
         counts.erase(item);
         inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
-        std::cout << "\n==============================\n";
+        std::cout << "\n==============================\n\n";
         cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : 0개\n" << endl;
     }
     else
     {
-        std::cout << "\n==============================\n";
+        std::cout << "\n==============================\n\n";
         cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : \n" << counts[item] << endl;
     }
 }
