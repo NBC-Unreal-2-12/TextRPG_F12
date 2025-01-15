@@ -342,6 +342,11 @@ int BattleManager::resolveBattle()
         // 경험치, 돈, 아이템 획득 처리
         int expGained = 100 * monsterCount; // 획득 경험치
         int goldGained = 50 * monsterCount; // 획득 골드
+
+        int existGold = player->getGold();
+        player->setGold(existGold + expGained);
+        std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
+
         player->addExp(expGained);
         int currentExp = player->getExp();
 		int maxExp = player->getMaxExp();
@@ -349,9 +354,6 @@ int BattleManager::resolveBattle()
 		{
 			player->doLevelUp();
 		}
-        int existGold = player->getGold();
-        player->setGold(existGold + expGained);
-        std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
     }
 
     // 처치한 몬스터 드랍 아이템 처리

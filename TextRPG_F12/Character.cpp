@@ -119,13 +119,14 @@ void Character::levelUp()
 
 void Character::doLevelUp()
 {
+
     while (experience >= maxExperience)
     {
-        levelUp();
         experience -= maxExperience;
         maxExperience = level * 100;
-        std::cout << "레벨업! 레벨이 " << level << "이 되었습니다." << endl;
+        levelUp();
     }
+
 }
 
 void Character::useItemFromInventory(int index)
