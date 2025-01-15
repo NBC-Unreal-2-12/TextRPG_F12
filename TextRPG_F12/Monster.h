@@ -78,9 +78,9 @@ public:
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
-    Item* dropItem(int idx)
+    int dropItemIdx()
     {
-        return loot[idx%loot.size()];
+        return lootIdx;
     }
 
 protected:
@@ -92,7 +92,7 @@ protected:
     int mobMaxMana = 99;
     double mobAccuracy = 99;
     double mobEvasion = 99;
-    vector<Item*> loot;
+    int lootIdx;
 };
 
 
