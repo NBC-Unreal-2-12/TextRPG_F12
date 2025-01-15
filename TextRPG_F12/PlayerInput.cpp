@@ -12,6 +12,7 @@ int PlayerInput::getPlayerChoice()
     std::cout << "3. 아이템 사용!\n";
     std::cout << "4. 도망친다..\n";
     std::cout << "5. 상태창!\n";
+    std::cout << "6. 몬스터 정보!\n";
     std::cout << ">> ";
     std::cin >> choice;
     std::cout << "\n==============================\n";
