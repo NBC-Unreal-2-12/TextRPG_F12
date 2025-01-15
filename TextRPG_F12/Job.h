@@ -42,7 +42,7 @@ class Warrior : public Job
 private:
     Skill* skill = new WarriorSkill();
 public:
-	Warrior() : Job(70, 20, 30, 0, 0.05, 0.02) {}
+	Warrior() : Job(50, 20, 30, 1, 0.1, 5) {} // 전사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
     string getJobName() const override 
     {
         return "전사";
@@ -70,7 +70,7 @@ class Mage : public Job
 private:
     Skill* skill = new MageSkill();
 public:
-    Mage() : Job(30, 50, 20, 0, 0.03, 0.01) {}
+    Mage() : Job(30, 50, 50, 1, 0.1, 5) {} // 마법사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
 
     string getJobName() const override
     {
@@ -100,7 +100,7 @@ class Archer : public Job
 private:
     Skill* skill = new ArcherSkill();
 public:
-    Archer() : Job(50, 30, 25, 0, 0.1, 0.05) {}
+    Archer() : Job(30, 20, 30, 2, 0.2, 10) {} // 궁수 마법사 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
 
     string getJobName() const override
     {

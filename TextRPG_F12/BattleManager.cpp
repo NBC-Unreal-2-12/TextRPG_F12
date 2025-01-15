@@ -190,7 +190,7 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
         {
             std::cout << monster->getMobName() << "이(가) 스킬을 사용했습니다!" << std::endl;
         }
-        if (int randomType = std::rand() % 1 <= (monster->getMobAccuracy() / player->getAccuracy())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
+        if (int randomType = std::rand() % 100 <= (monster->getMobAccuracy() / player->getEvasion())) // 랜덤값이 "몬스터 명중률 / 회피율" 보다 작아야 명중
         {
             //명중시
             int damage = monster->useMobAttack();
