@@ -23,7 +23,7 @@ public:
 		mobAttackSpeed = 1;
 		mobAccuracy = 50 + 20;
 		mobEvasion = 1;
-		lootIdx = 999;
+		lootIdx = 110;  // 가시고기의 갈비뼈
 	}
 
 	void mobFace()

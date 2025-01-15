@@ -23,7 +23,7 @@ public:
 		mobAttackSpeed = 7;
 		mobAccuracy = 70;
 		mobEvasion = 1.3;
-		loot.emplace_back(new MonsterLoot("슬라임 젤리", 20));
+		lootIdx = 103; // 슬라임 젤리
 	}
 
 	void mobFace() override
@@ -59,7 +59,7 @@ public:
 		mobAttackSpeed = 1;
 		mobAccuracy = 70;
 		mobEvasion = 1.1;
-		loot.emplace_back(new MonsterLoot("오크의 부서진 검", 20));
+		lootIdx = 102; // 오크의 부서진 검
 	}
 
 	void mobFace() override
@@ -100,7 +100,7 @@ public:
 		mobAttackSpeed = 10;
 		mobAccuracy = 70;
 		mobEvasion = 1.3;
-		loot.emplace_back(new MonsterLoot("고블린의 작은 동전", 20));
+		lootIdx = 101; // 고블린의 작은 동전
 	}
 
 	void mobFace() override

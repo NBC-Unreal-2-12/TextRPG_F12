@@ -61,14 +61,14 @@ void ItemManager::initializeDefaultItems()
 
 	// 전리품 아이템 리스트 초기화
 	registerLoot(101, new MonsterLoot("고블린의 작은 동전", 20));
-	registerLoot(103, new MonsterLoot("오크의 부서진 검", 20));
-	registerLoot(104, new MonsterLoot("슬라임 젤리", 20));
-	registerLoot(105, new MonsterLoot("고블린 대장의 반지", 45));
-	registerLoot(106, new MonsterLoot("오크 대왕의 검", 45));
-	registerLoot(107, new MonsterLoot("슬라임 왕관", 45));
-	registerLoot(108, new MonsterLoot("드래곤의 비늘", 75));
-	registerLoot(109, new MonsterLoot("발록의 재", 75));
-	registerLoot(110, new MonsterLoot("크라켄의 심장", 75));
-	registerLoot(111, new MonsterLoot("가시고기의 갈비뼈", 125));
-	registerLoot(112, new ReviveItem("부활의 토탬", 300, 100));
+	registerLoot(102, new MonsterLoot("오크의 부서진 검", 20));
+	registerLoot(103, new MonsterLoot("슬라임 젤리", 20));
+	registerLoot(104, new MonsterLoot("고블린 대장의 반지", 45));
+	registerLoot(105, new MonsterLoot("오크 대왕의 검", 45));
+	registerLoot(106, new MonsterLoot("슬라임 왕관", 45));
+	registerLoot(107, new MonsterLoot("드래곤의 비늘", 75));
+	registerLoot(108, new MonsterLoot("발록의 재", 75));
+	registerLoot(109, new MonsterLoot("크라켄의 심장", 75));
+	registerLoot(110, new MonsterLoot("가시고기의 갈비뼈", 125));
+	registerLoot(999, new ReviveItem("부활의 토탬", 300, 100));
 }

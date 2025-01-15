@@ -23,8 +23,7 @@ public:
         mobAttackSpeed = 15;
         mobAccuracy = 95;
         mobEvasion = 1.5;
-        loot.emplace_back(new MonsterLoot("슬라임 왕관", 20));
-        loot.emplace_back(new ReviveItem("부활의 토템", 300, 100));
+        lootIdx = 106; // 슬라임 왕관
     }
 
      void mobFace() override
@@ -60,8 +59,7 @@ public:
         mobAttackSpeed = 10;
         mobAccuracy = 95;
         mobEvasion = 1.3;
-        loot.emplace_back(new MonsterLoot("오크 대왕의 검", 20));
-        loot.emplace_back(new ReviveItem("부활의 토템", 300, 100));
+        lootIdx = 105; // 오크 대왕의 검
     }
 
     void mobFace() override
@@ -102,8 +100,7 @@ public:
         mobAttackSpeed = 18;
         mobAccuracy = 50 + 20;
         mobEvasion = 4;
-        loot.emplace_back(new MonsterLoot("고블린 대장의 반지", 20));
-        loot.emplace_back(new ReviveItem("부활의 토템", 300, 100));
+        lootIdx = 104; // 고블린 대장의 반지
     }
 
     void mobFace() override

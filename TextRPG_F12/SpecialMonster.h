@@ -23,9 +23,7 @@ public:
         mobAttackSpeed = 20;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot.emplace_back(new MonsterLoot("드래곤의 비늘", 20));
-        Item* item = ItemManager::getInstance()->getItemByIndex(107);
-		loot.push_back(item);
+        lootIdx = 107; // 드래곤의 비늘
     }
 
     void mobFace() override
@@ -63,8 +61,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot.emplace_back(new MonsterLoot("발록의 재", 20));
-        loot.emplace_back(new ReviveItem("부활의 토템", 300, 100));
+        lootIdx = 108; // 발록의 재
     }
 
      void mobFace()
@@ -103,8 +100,7 @@ public:
         mobAttackSpeed = 1;
         mobAccuracy = 50 + 20;
         mobEvasion = 1;
-        loot.emplace_back(new MonsterLoot("크라켄의 심장", 20));
-		loot.emplace_back(new ReviveItem("부활의 토템", 300, 100));
+        lootIdx = 109; // 크라켄의 심장
     }
 
     void mobFace()

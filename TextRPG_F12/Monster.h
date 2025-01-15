@@ -78,7 +78,7 @@ public:
         cout << "회피율 : " << this->mobEvasion << endl;
     }
 
-    int dropItemIdx()
+    int dropItem()
     {
         return lootIdx;
     }
