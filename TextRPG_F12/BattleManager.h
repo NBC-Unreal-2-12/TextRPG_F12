@@ -41,6 +41,21 @@ public:
     // 플레이어 행동 처리
     void processPlayerTurn();
 
+    // 몬스터 정보 출력
+    void showMonsterInfo();
+
+    // 몬스터 공격
+    void attackMonster();
+
+    // 몬스터 스킬로 공격
+    void useSkillOnMonster();
+
+    // 현재 남아있는 몬스터 반환
+    std::vector<int> getAliveMonsters();
+
+    // 특정 몬스터 선택
+    int getMonsterChoice(const std::vector<int>& aliveMonsterIndices);
+
     // 몬스터 행동 처리
     void processMonsterTurn(unique_ptr<Monster>& monster);
 
