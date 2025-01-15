@@ -28,15 +28,15 @@ void GameManager::InitializeGame()
 
 
 	// 필요에 따라 추가 초기화 작업 수행 가능
+	// 아이템 리스트 초기화
+	ItemManager* itemManager = ItemManager::getInstance();
+	itemManager->initializeDefaultItems();
 }
 
 // 상점 방문
 void GameManager::visitShop(Character* player)
 {
-	// 아이템 리스트 초기화
-	ItemManager itemManager;
-	itemManager.initializeDefaultItems();
-
+	ItemManager* itemManager = ItemManager::getInstance();
 	Shop shop(itemManager);
 	shop.displayItems();
 

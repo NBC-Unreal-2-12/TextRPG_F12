@@ -26,7 +26,7 @@ private:
 public:
 	~Shop() = default;
 
-	Shop(ItemManager& itemManager);  // 상점 생성자
+	Shop(ItemManager* itemManager);  // 상점 생성자
 
 	void displayItems();		// 아이템 목록 확인
 	void buyItem(int index, Character* player);  // 아이템 구매

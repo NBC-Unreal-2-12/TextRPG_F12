@@ -31,7 +31,23 @@ public:
     }
 
     virtual void use(Character* character) = 0;
+
+    // 해시 함수 클래스
+    struct ItemHash {
+        std::size_t operator()(const Item* item) const {
+            return std::hash<std::string>()(item->getName()) ^ std::hash<int>()(item->getPrice());
+        }
+    };
+
+    // 비교 연산자 클래스
+    struct ItemEqual {
+        bool operator()(const Item* lhs, const Item* rhs) const {
+            // 이름과 가격이 같으면 동일한 아이템으로 판단
+            return lhs->getName() == rhs->getName() && lhs->getPrice() == rhs->getPrice();
+        }
+    };
 };
+
 // 회복 포션
 // 체력 회복 소모성 아이템
 class HealthPotion : public Item 

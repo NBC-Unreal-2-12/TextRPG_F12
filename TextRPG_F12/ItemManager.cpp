@@ -1,5 +1,18 @@
 ﻿#include "ItemManager.h"
 
+// 싱글톤 인스턴스 초기화
+ItemManager* ItemManager::instance = nullptr;
+
+// 싱글톤 인스턴스를 반환하는 정적 메서드
+ItemManager* ItemManager::getInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new ItemManager();
+	}
+	return instance;
+}
+
 // 소비 아이템 등록
 void ItemManager::registerItem(int index, Item* item)
 {

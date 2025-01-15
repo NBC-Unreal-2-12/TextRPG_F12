@@ -6,10 +6,10 @@ Shop::StockItem::StockItem(int index, Item* _item, int _quantity, bool isLoot)
 {
 }
 
-Shop::Shop(ItemManager& itemManager)
+Shop::Shop(ItemManager* itemManager)
 {
 	// 상점에 초기 재고 추가
-	for (const auto& pair : itemManager.getAllItems())
+	for (const auto& pair : itemManager->getAllItems())
 	{
 		int index = pair.first;
 		Item* item = pair.second;
@@ -21,7 +21,7 @@ Shop::Shop(ItemManager& itemManager)
 	}
 
 	// 상점에 초기 전리품 추가
-	for (const auto& pair : itemManager.getAlILoots())
+	for (const auto& pair : itemManager->getAlILoots())
 	{
 		int index = pair.first;
 		Item* item = pair.second;
@@ -91,8 +91,9 @@ void Shop::buyItem(int index, Character* player)
 
 	// 구매 처리
 	player->setGold(-stockItem.item->getPrice());
-	player->addItemToInventory(stockItem.item);
-	std::cout << stockItem.item->getName() << "을(를) 구매하였습니다. (잔고 : " << player->getGold() << ")\n";
+	Item* managedItem = ItemManager::getInstance()->getItemByIndex(stockItem.index);
+	player->addItemToInventory(managedItem);
+	std::cout << managedItem->getName() << "을(를) 구매하였습니다. (잔고 : " << player->getGold() << ")\n";
 
 	// 재고 업데이트
 	stockItem.quantity--;
