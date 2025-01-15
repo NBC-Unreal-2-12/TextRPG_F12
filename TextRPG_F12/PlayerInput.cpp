@@ -150,7 +150,7 @@ Job* PlayerInput::setJobByPlayerInput()
 				choice = std::stoi(input);
 
 				// 범위 확인
-				if (choice >= 1 && choice <= 2)
+				if (choice >= 1 && choice <= 3)
 				{
 					switch (choice)
 					{
@@ -169,7 +169,7 @@ Job* PlayerInput::setJobByPlayerInput()
 				else
 				{
 					system("cls");
-					std::cout << "잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
+					std::cout << "잘못된 선택입니다. 유효한 직업을 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
