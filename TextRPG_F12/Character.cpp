@@ -114,7 +114,6 @@ void Character::levelUp()
     evasion += job->getEvasionGrowth();
     accuracy += job->getAccuracyGrowth();
     cout << "레벨업! " << name << " 의 레벨이 " << level << "이 되었습니다!" << endl;
-    displayStatus();
 }
 
 void Character::doLevelUp()
@@ -126,7 +125,7 @@ void Character::doLevelUp()
         maxExperience = level * 100;
         levelUp();
     }
-
+    displayStatus();
 }
 
 // 캐릭터 인벤토리 관련 메서드

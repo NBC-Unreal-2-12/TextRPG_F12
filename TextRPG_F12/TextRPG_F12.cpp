@@ -7,6 +7,8 @@
 #include <thread> // std::this_thread::sleep_for 사용
 #include <chrono> // std::chrono::seconds 사용
 
+#include <windows.h> // 콘솔창 내부 위치 출력 위치 조정 ( SetConsoleCursorPosition )
+
 #include "GameManager.h"
 #include "BattleManager.h"
 #include "Character.h"
@@ -58,35 +60,131 @@ using namespace std;
 
 // 전투->상점 상점->전투로 이동할 때 화면 지우기
 
+
 void delay(int milliseconds) { std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds)); }
 
+void setTextColor(int color) {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // 콘솔 핸들 가져오기
+	SetConsoleTextAttribute(hConsole, color);          // 텍스트 색상 설정
+}
+
+// 아래 두 함수를 활용하여 ★콘솔창★ 내부에서 ★출력 위치★를 조정해줄 수 있다.
+void setCursorPosition(int x, int y) {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // 콘솔 핸들 가져오기
+	COORD position = { static_cast<SHORT>(x), static_cast<SHORT>(y) }; // 위치 설정
+	SetConsoleCursorPosition(hConsole, position); // 커서 위치 설정
+}
+
+void printCentered(const std::string& text, int lineNumber = 0, int color = 7) { // 현재 y축은 최상단을 기준으로 lineNumber값에 따라 구분함, y축 또한 중앙 정렬로 표시하려면 주석 부분 확인
+										 // int yOffset = 0;
+	// 콘솔 크기 확인
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	int consoleWidth = 80; // 기본값
+	//int consoleHeight = 25; // 기본 크기
+
+	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+		// consoleHeight = csbi.srWindow.Bottom - csbi.srWindow.Top + 1; // y축 계산
+	}
+
+	// 중앙 정렬 X 좌표 계산
+	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
+
+	// Y좌표는 lineNumber에 따라 동적으로 계산
+	int y = lineNumber;
+	// int y = (consoleHeight / 2) + yOffset;
+
+	setCursorPosition(x, y); // 지정된 위치로 이동
+	setTextColor(color);     // 색상 설정
+	std::cout << text;       // 텍스트 출력
+	setTextColor(7);         // 기본 색상으로 복구
+}
+
+void printBlinkingText(const std::string& text, int lineNumber, int blinkCount, int intervalMs, int color) {
+	// 콘솔 크기 확인
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	int consoleWidth = 80; // 기본 콘솔 너비
+
+	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	}
+
+	// 중앙 정렬 X 좌표 계산
+	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
+
+	// Y좌표는 lineNumber에 따라 동적으로 계산
+	int y = lineNumber;
+
+	// 콘솔 텍스트 색상 설정
+	SetConsoleTextAttribute(hConsole, color);
+
+	// 깜빡이는 효과 구현
+	for (int i = 0; i < blinkCount; ++i) {
+		setCursorPosition(x, y);
+		std::cout << text;               // 텍스트 출력
+		std::this_thread::sleep_for(std::chrono::milliseconds(intervalMs)); // 일정 시간 대기
+
+		setCursorPosition(x, y);
+		std::cout << std::string(text.length(), ' '); // 텍스트 지우기
+		std::this_thread::sleep_for(std::chrono::milliseconds(intervalMs)); // 일정 시간 대기
+	}
+
+	// 마지막으로 텍스트를 출력한 상태로 고정
+	setCursorPosition(x, y);
+	std::cout << text;
+}
+
 void gameStart() {
-	cout << "▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭" << endl;
+	printCentered("▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭", 0);
 	delay(100);
-	cout << "######                                      ### ##   ### ##     # ###  " << endl;
+	printCentered("######                                      ### ##   ### ##     # ###  ", 1);
 	delay(300);
-	cout << "# ## #   ######  ##   ##   ######            ##  ##   ##  ##   ##  ##  " << endl;
+	printCentered("# ## #   ######  ##   ##   ######            ##  ##   ##  ##   ##  ##  ", 2);
 	delay(100);
-	cout << "  ##    ##       ##  ##      ##              ##  ##   ##  ##  ###      " << endl;
+	printCentered("  ##    ##       ##  ##      ##              ##  ##   ##  ##  ###      ", 3);
 	delay(300);
-	cout << "  ##    ##        ####       ##              ## ##    ## ##   ### ###  " << endl;
+	printCentered("  ##    ##        ####       ##              ## ##    ## ##   ### ###  ", 4);
 	delay(100);
-	cout << "  ##    ####       ##        ##              ## #     ##      ###  ##  " << endl;
+	printCentered("  ##    ####       ##        ##              ## #     ##      ###  ##  ", 5);
 	delay(100);
-	cout << "  ##    ##        ####       ##              ##  #    ##       ##  ##  " << endl;
+	printCentered("  ##    ##        ####       ##              ##  #    ##       ##  ##  ", 6);
 	delay(300);
-	cout << "  ##    ##       ##  ##      ##             #### ##  ####       # ##   " << endl;
+	printCentered("  ##    ##       ##  ##      ##             #### ##  ####       # ##   ", 7);
 	delay(300);
-	cout << "        #######  ##   ##     ##                                        " << endl;
+	printCentered("        #######  ##   ##     ##                                        ", 8);
 	delay(100);
-	cout << "▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭" << endl;
+	printCentered("▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭", 9);
 
-	cout << "Press ENTER to continue..." << endl;
+	std::string text = "시작하기";
+	int lineNumber = 13; // y축 줄 수 저장
 
-	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 엔터 입력받고 버퍼 지우기
+	// 텍스트를 중앙에 출력
+	// 인터벌(500)으로 3번 깜빡이고 고정되게 설정함. '대충 이쯤에 엔터 누르겠지' 싶은 타이밍으로 맞춰봄.
+	// 이 동작이 끝나기 전에 엔터를 여러 번 누르게되면 입력이 누적되어 넘어가버림.
+	printBlinkingText("> 시작하기 <", 13, 3, 500, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
+	// 커서를 텍스트 오른쪽에 배치
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	// 콘솔 창 너비 확인
+	int consoleWidth = 80; // 기본 너비
+	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	}
+
+	// "시작하기" 텍스트 끝 위치 계산
+	int x = (consoleWidth - static_cast<int>(text.length())) / 2 + static_cast<int>(text.length());
+
+	//cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 엔터 입력받고 버퍼 지우기
+	cin.ignore(1000, '\n');
+	setCursorPosition(x + 2, lineNumber);
 
 	delay(1000); // 1초 대기
 	system("cls"); // 화면 지우기 cls 명령 사용
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
 void clearConsole()

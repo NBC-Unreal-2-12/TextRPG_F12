@@ -25,6 +25,7 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 	: player(player), monster(monster) {
 }
 
+// 사용자에게 해당 라운드에 스폰된 몬스터 정보를 출력
 void BattleManager::displayBattleState() {
 	system("cls"); // 화면 초기화
 	std::cout << "==============================\n";
@@ -56,47 +57,50 @@ bool BattleManager::getAllMonsterDead()
 
 void BattleManager::processPlayerTurn() {
 	PlayerInput input;
-	bool isInformCheck = true;
+	
+	// isTurnEnd 초기화
+	isTurnEnd = false;
 
-	while(isInformCheck) {
-
+	// 각 case에서 isTurnEnd bool 변수값을 관리하여 턴 종료 시점 결정
+	while(!isTurnEnd) {
+		showPlayerCombatInfo();
 		int choice = input.getPlayerChoice();
 
 		switch (choice) {
 		case 1: // 공격
+			system("cls");
 			showMonsterCombatInfo();
 			attackMonster();
 			delay(500); // 0.5초 지연
-			isInformCheck = false;
 			break;
 
 		case 2: // 스킬
+			system("cls");
 			showMonsterCombatInfo();
 			useSkillOnMonster();
 			delay(500); // 0.5초 지연
-			isInformCheck = false;
 			break;
 
 		case 3: // 인벤토리
 			Inventory::getInstance()->listItem();
-			isInformCheck = false;
 			break;
 
 		case 4: // 도망
 			std::cout << "도망쳤습니다!!\n";
 			isBattleActive = false;
-			isInformCheck = false;
+			isTurnEnd = true;
 			break;
 
 		case 5: // 상태창
+			system("cls");
 			player->displayStatus();
-			isInformCheck = true;
+			isTurnEnd = false;
 			continue;
 
 		case 6: // 몬스터 정보
-			showMonsterCombatInfo();
+			system("cls");
 			showMonsterInfo();
-			isInformCheck = true;
+			isTurnEnd = false;
 			continue;
 
 		default:
@@ -253,6 +257,7 @@ void BattleManager::attackMonster() {
 	else {
 		std::cout << "공격이 빗나갔습니다!\n";
 	}
+	isTurnEnd = true;
 	setColor(7); // 기본색
 }
 
@@ -262,7 +267,10 @@ void BattleManager::useSkillOnMonster()
 	if (aliveMonsterIndices.empty()) return;
 
 	int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
-	if (selectedMonsterIndex != -1)
+	if (selectedMonsterIndex == -1)
+	{
+		return;
+	} else
 	{
 		player->useSkill(monster[selectedMonsterIndex].get());
 		std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
@@ -271,6 +279,7 @@ void BattleManager::useSkillOnMonster()
 			if (getAllMonsterDead()) isBattleActive = false;
 		}
 	}
+	isTurnEnd = true;
 }
 
 std::vector<int> BattleManager::getAliveMonsters()
@@ -293,6 +302,14 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 	while (true)
 	{
 		std::cout << "\n대상 몬스터의 번호를 입력하세요.\n";
+		 for (int index : aliveMonsterIndices)
+        {
+            // 몬스터 이름 추가 출력
+            std::cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "\n"; 
+        }
+		std::cout << "\n==============================\n";
+		std::cout << "[0] 되돌아가기\n"; // 되돌아가기 옵션 추가
+		std::cout << ">> ";
 		std::getline(std::cin, input);
 
 		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
@@ -304,6 +321,8 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 				// 되돌아가기 처리
 				if (selectedMonsterIndex == -1) // 사용자가 0을 입력한 경우
 				{
+					isTurnEnd = false;
+					displayBattleState();
 					return -1; // 되돌아가기 신호로 -1 반환
 				}
 
@@ -363,7 +382,6 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 
 			if (turn.isPlayer) // 플레이어의 턴인 경우
 			{
-				showPlayerCombatInfo();
 				processPlayerTurn();
 				if (!isBattleActive) break; // 전투가 끝났으면 종료
 			}

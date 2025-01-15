@@ -30,6 +30,7 @@ private:
     bool isPlayerTurn;              // 현재 턴이 플레이어의 턴인지 여부
     bool allMonstersDead = false;           // 몬스터들이 전멸했는지 여부
     bool isBattleActive = true;     // 전투 진행 상태 확인
+    bool isTurnEnd = false;         // 플레이어 턴 종료여부 확인
 
     Inventory* inventory;
 
