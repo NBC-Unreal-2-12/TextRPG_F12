@@ -91,10 +91,12 @@ void BattleManager::processPlayerTurn() {
 
 		case 5: // 상태창
 			player->displayStatus();
+			isInformCheck = true;
 			continue;
 
 		case 6: // 몬스터 정보
 			showMonsterInfo();
+			isInformCheck = true;
 			continue;
 
 		default:
