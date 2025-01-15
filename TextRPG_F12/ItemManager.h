@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "GameManager.h"
+#include "UseItems.h"
 #include <map>
 
 class ItemManager
