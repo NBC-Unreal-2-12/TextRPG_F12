@@ -127,34 +127,62 @@ string PlayerInput::setPlayerName()
 
 Job* PlayerInput::setJobByPlayerInput()
 {
-	std::cout << "직업을 선택해 주세요.\n";
-	std::cout << "1. 전사\n";
-	std::cout << "2. 마법사\n";
-	std::cout << "3. 궁수\n";
-	std::cout << ">> ";
-
+	std::string input;
 	int choice;
+	Job* job = nullptr;
+
 	while (true)
 	{
-		cin >> choice;
-		if (choice >= 1 && choice <= 3) break;
-		std::cout << "잘못된 입력입니다. 다시 선택해 주세요.\n";
-	}
+		std::cout << "직업을 선택해 주세요.\n";
+		std::cout << "1. 전사\n";
+		std::cout << "2. 마법사\n";
+		std::cout << "3. 궁수\n";
+		std::cout << ">> ";
 
-	cin.ignore();
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
 
-	Job* job = nullptr;
-	switch (choice)
-	{
-	case 1:
-		job = new Warrior();
-		break;
-	case 2:
-		job = new Mage();
-		break;
-	case 3:
-		job = new Archer();
-		break;
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				// 문자열을 정수로 변환
+				choice = std::stoi(input);
+
+				// 범위 확인
+				if (choice >= 1 && choice <= 2)
+				{
+					switch (choice)
+					{
+					case 1:
+						job = new Warrior();
+						break;
+					case 2:
+						job = new Mage();
+						break;
+					case 3:
+						job = new Archer();
+						break;
+					}
+					break; // 유효한 입력 범위라면 반복문 탈출
+				}
+				else
+				{
+					system("cls");
+					std::cout << "잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
+				}
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			system("cls");
+			std::cout << "유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
 	}
 
 	return job;
