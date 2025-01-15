@@ -79,7 +79,7 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 				choice = std::stoi(input);
 
 				// 범위 확인
-				if (choice >= 1 && choice <= 2)
+				if (choice >= 0 && choice <= 2)
 				{
 					break; // 유효한 입력 범위라면 반복문 탈출
 				}

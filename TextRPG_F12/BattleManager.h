@@ -41,11 +41,15 @@ public:
     // 전투 종료 조건 확인
     bool getAllMonsterDead();
 
+    // 전투 화면 출력
+    void displayBattleState();
+
     // 플레이어 행동 처리
     void processPlayerTurn();
 
     // 현재 전투 상황 출력
-    void showCombatInfo();
+    void showMonsterCombatInfo();
+    void showPlayerCombatInfo();
 
     // 몬스터 정보 출력
     void showMonsterInfo();
