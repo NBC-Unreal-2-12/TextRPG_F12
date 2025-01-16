@@ -71,7 +71,14 @@ void GameManager::visitShop(Character* player)
 				{
 					pair<int, int> inputValue = PI.getPlayerBuyingItem();
 					if (inputValue.first == 0) continue;
-					shop.buyItem(inputValue.first, inputValue.second, player);
+					else if (Inventory::getInstance()->getInventory().size() >= 9 )
+					{
+						cout << "\n인벤토리가 가득 찼습니다!\n";
+						cin.ignore();
+						delay(1000);
+						continue;
+					}
+					else shop.buyItem(inputValue.first, inputValue.second, player);
 					delay(1500);
 				}
 				else if (choice == 2)
