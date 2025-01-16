@@ -95,6 +95,7 @@ void Inventory::listItem()
     if (!isInventoryEmpty())
     {
         inventoryIcon();
+        cout << "\n\n======== ( Inventory ) ========" << endl;
         for (int idx = 0; idx < inventory.size();idx++)
         {
             Item* item = inventory[idx];
