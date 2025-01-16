@@ -56,7 +56,7 @@ public:
 	{
         mobName = "발록";
         mobHealth = 1200;
-        mobMaxHealth = 20;
+        mobMaxHealth = 1200;
         mobAttack = 70;
         mobMana = 0;
         mobMaxMana = 3;
