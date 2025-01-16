@@ -28,14 +28,13 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 // 사용자에게 해당 라운드에 스폰된 몬스터 정보를 출력
 void BattleManager::displayBattleState() {
 
-	std::cout << "==============================\n\n";
+	system("cls");
+	std::cout << "========================================\n\n";
 	setColor(6);
 	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound() + 1 << "\n\n";
 	cout << "~ 턴 " << currentTurn << " ~\n" << endl;
 	setColor(7);
-	std::cout << "==============================\n";
-
-	showMonsterCombatInfo();
+	std::cout << "========================================\n";
 }
 
 // 전투 종료 조건 확인
@@ -86,6 +85,9 @@ void BattleManager::processPlayerTurn() {
 
 		case 3: // 인벤토리
 			useItem();
+			delay(1000);
+			displayBattleState();
+			showMonsterCombatInfo();
 			break;
 
 		case 4: // 도망
@@ -95,13 +97,13 @@ void BattleManager::processPlayerTurn() {
 			break;
 
 		case 5: // 상태창
-			//system("cls");
+			displayBattleState();
 			player->displayStatus();
 			isTurnEnd = false;
 			continue;
 
 		case 6: // 몬스터 정보
-			//system("cls");
+			displayBattleState();
 			showMonsterInfo();
 			isTurnEnd = false;
 			continue;
@@ -171,7 +173,7 @@ void BattleManager::showMonsterCombatInfo()
 	{
 		int healthBars = 10 * monster[index]->getMobHealth() / monster[index]->getMobMaxHealth();
 		std::cout << "\n\n";
-		delay(300); // 0.3초 지연
+		delay(300); // 0.3초 지연d
 		monster[index]->mobFace();
 		std::cout << "[" << index + 1 << "] " << monster[index]->getMobName();
 		std::cout << "( 체력 : " << monster[index]->getMobHealth() << " / " << monster[index]->getMobMaxHealth();
@@ -340,6 +342,7 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 				{
 					isTurnEnd = false;
 					displayBattleState();
+					showMonsterCombatInfo();
 					return -1; // 되돌아가기 신호로 -1 반환
 				}
 
@@ -388,7 +391,6 @@ void BattleManager::useItem() {
 				if (selectedItemIndex == -1) // 사용자가 0을 입력한 경우
 				{
 					isTurnEnd = false;
-					displayBattleState();
 					return; // 되돌아가기 신호로 -1 반환
 				}
 
@@ -413,7 +415,6 @@ void BattleManager::useItem() {
 			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
 		}
 	}
-	
 }
 
 // 전투 시작
@@ -431,6 +432,7 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	while (isBattleActive)
 	{
 		displayBattleState();
+		showMonsterCombatInfo();
 		delay(500); // 0.5초 딜레이
 		// 플레이어의 공격 속도 추가
 		turnOrders.push_back(TurnOrder(-1, true, player->getAttackSpeed()));
@@ -480,7 +482,6 @@ int BattleManager::resolveBattle()
 
 	if (player->isCharacterDead())
 	{
-		// 우선 텍스트 출력은 영어로..
 		setColor(7); // 하양
 		std::cout << "전투에서 패배하셨습니다.\n";
 		std::cout << "게임이 종료됩니다.\n";
@@ -497,7 +498,7 @@ int BattleManager::resolveBattle()
 		int goldGained = 50 * monsterCount; // 획득 골드
 
 		int existGold = player->getGold();
-		player->setGold(existGold + expGained);
+		player->setGold(existGold + goldGained);
 		std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
 
 		player->addExp(expGained);
