@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include "Monster.h"
+#include <Windows.h>
+#include <chrono>
+#include <thread>
 
 class BossMonster : public Monster
 {
@@ -16,14 +19,14 @@ public:
 	GGD() : BossMonster("GGD")
 	{
 		mobName = "고길동";
-		mobHealth = 20;
-		mobMaxHealth = 20;
-		mobAttack = 10;
+		mobHealth = 5000;
+		mobMaxHealth = 5000;
+		mobAttack = 50;
 		mobMana = 0;
 		mobMaxMana = 3;
-		mobAttackSpeed = 1;
-		mobAccuracy = 50 + 20;
-		mobEvasion = 1;
+		mobAttackSpeed = 20;
+		mobAccuracy = 200;
+		mobEvasion = 2;
 		lootIdx = 110;  // 가시고기의 갈비뼈
 	}
 
@@ -46,13 +49,29 @@ public:
 			)" << endl;
 	}
 
+	void delay(int milliseconds)
+	{
+		//Beep(220, 200);
+		std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+	}
+
 	int useMobSkill() override
 	{
-		cout << mobName << "이(가) 20만큼 회복합니다." << endl;
-		cout << mobName << " 의 공격력이 5 증가합니다." << endl;
+		cout << "[かみなりのこきゅう]-." << endl;
+		delay(500);
+		cout << mobName << "이(가) 1000만큼 회복합니다." << endl;
+		cout << mobName << " 의 공격력이 30 증가합니다." << endl;
+		delay(1000);
+
+		cout << "[いちのかた]-." << endl;
+		delay(500);
 		cout << mobName << "의 명중률이 50 증가합니다." << endl;
-		cout << mobName << "의 회피율이 0.5 증가합니다." << endl;
-		cout << mobName << "이(가) 두 배의 데미지를 가합니다." << endl;
+		cout << mobName << "의 회피율이 0.3 증가합니다." << endl;
+		delay(1000);
+
+		cout << "[へきれきいっせん]-!!" << endl;
+		cout << mobName << "이(가) 두 배의 데미지를 가합니다.\n" << endl;
+		delay(1000);
 
 		if (mobMaxHealth - mobHealth <= 20) // 회복
 		{
@@ -60,12 +79,12 @@ public:
 		}
 		else
 		{
-			mobHealth += 20;
+			mobHealth += 1000;
 		}
 
-		mobAttack += 5;
+		mobAttack += 30;
 		mobAccuracy += 50;
-		mobEvasion += 0.5;
+		mobEvasion += 0.3;
 		return mobAttack * 2;
 	}
 };
