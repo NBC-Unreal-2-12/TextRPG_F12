@@ -137,7 +137,6 @@ public:
     {
         addSkill(make_unique<Smite>());           // 강타 스킬 추가
         addSkill(make_unique<Whirlwind>());       // 회전 베기 스킬 추가
-        addSkill(make_unique<Test>());         // 테스트용 스킬
     }
     string getJobName() const override {
         return "전사";
@@ -164,7 +163,6 @@ public:
     {
         addSkill(make_unique<FireBall>());     // 화염구 스킬 추가
         addSkill(make_unique<Blizzard>());     // 눈보라 스킬 추가
-        addSkill(make_unique<Test>());         // 테스트용 스킬
     }
     string getJobName() const override {
         return "마법사";
@@ -192,7 +190,6 @@ public:
     {
         addSkill(make_unique<Fusillade>());         // 연속 사격 스킬 추가
         addSkill(make_unique<RainOfArrows>());      // 화살비 스킬 추가
-        addSkill(make_unique<Test>());         // 테스트용 스킬
     }
 
     string getJobName() const override {

@@ -24,6 +24,16 @@ public:
     }
 };
 
+class HeavenlyLight : public Skill
+{
+public:
+    HeavenlyLight() : Skill("천상의 빛", 90, 3.0, SkillType::Normal) {}
+
+    string getSkillName() const override {
+        return "천상의 빛";
+    }
+};
+
 class IceBlock : public Skill
 {
 public:

@@ -122,11 +122,11 @@ void Character::levelUp()
 	{
 		switch (job->getJobIndex()) {
 		case 0:     // 전사일 경우
-			job->addSkill(make_unique<DefensiveStance>());     // 방어 태세 스킬 추가
+			job->addSkill(make_unique<SwordDance>());     // 방어 태세 스킬 추가
 			cout << "레벨이 5가 되어 " << job->getSkillName(2) << "를 배웠습니다!" << endl;
 			break;
 		case 1:     // 마법사일 경우
-			job->addSkill(make_unique<IceBlock>());     // 얼음 방패 스킬 추가
+			job->addSkill(make_unique<HeavenlyLight>());     // 얼음 방패 스킬 추가
 			cout << "레벨이 5가 되어 " << job->getSkillName(2) << "를 배웠습니다!" << endl;
 			break;
 		case 2:     // 궁수일 경우

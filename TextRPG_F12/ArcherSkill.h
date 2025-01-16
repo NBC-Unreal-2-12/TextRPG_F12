@@ -29,7 +29,7 @@ public:
 class  PreciseShot : public Skill
 {
 public:
-    PreciseShot() : Skill("정밀 사격", 80, 2.5, SkillType::Normal) {}
+    PreciseShot() : Skill("정밀 사격", 80, 3.0, SkillType::Normal) {}
     string getSkillName() const override
     {
         return "정밀 사격";

@@ -27,23 +27,13 @@ public:
 };
 
 // 방어 자세 스킬
-class DefensiveStance : public Skill
+class SwordDance : public Skill
 {
 public:
-    DefensiveStance() : Skill("방어 자세", 30, 0.5, SkillType::Counter) {}
+    SwordDance() : Skill("검의 춤", 90, 3.0, SkillType::Normal) {}
 
     string getSkillName() const override {
-        return "방어 자세";
-    }
-};
-
-class Test : public Skill
-{
-public:
-    Test() : Skill("테스트", 0, 999, SkillType::AreaOfEffect) {}
-
-    string getSkillName() const override {
-        return "테스트";
+        return "검의 춤";
     }
 };
 
