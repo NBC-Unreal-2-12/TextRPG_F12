@@ -60,22 +60,21 @@ public:
     }
 };
 
-//진흙단
-//회피율 증가 소모성 아이템
-class MudBall : public Item
+//진흙단 -> 캐릭터 회피율 증가 포션으로 변경
+class EvasionBoost : public Item
 {
 private:
-    int accuracyReduction; // 명중률 감소량
+	int evasionIncrease; // 회피율 증가량
 
 public:
-    MudBall(const string& itemName, int itemPrice, int reductionAmount)
-        : Item(itemName, itemPrice), accuracyReduction(reductionAmount)
+    EvasionBoost(const string& itemName, int itemPrice, int reductionAmount)
+        : Item(itemName, itemPrice), evasionIncrease(reductionAmount)
     {
     }
 
     void use(Character* character) override
     {
-        character->setEvation(character->getEvasion() + accuracyReduction);
+        character->setEvation(character->getEvasion() + evasionIncrease);
     }
 };
 
