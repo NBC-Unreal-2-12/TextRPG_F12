@@ -46,6 +46,10 @@ public:
     {
         return skill->getSkillName();
     }
+    double getDamageFactor()
+    {
+        return skill->getDamageFactor();
+    }
 };
 
 // 전사 직업 클래스

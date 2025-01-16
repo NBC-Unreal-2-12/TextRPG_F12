@@ -73,6 +73,7 @@ public:
     double getEvasion();            // 회피율 getter
 	void setEvation(double set_evasion); // 회피율 setter
 	void receiveDamage(int damage); // 유저가 데미지를 받는 메서드
+	double getDamageFactor();		// 스킬Damage배율 getter
     void useSkill(Monster* target); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
 	string getSkillName();

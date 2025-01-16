@@ -296,6 +296,11 @@ void Character::receiveDamage(int damage)
     cout << name << "이(가) " << damage << "의 데미지를 입었습니다. 남은 체력: " << health << endl;
 }
 
+double Character::getDamageFactor()
+{
+    return job->getDamageFactor();
+}
+
 void Character::useSkill(Monster* target)
 {
     // Job에서 Skill 객체 가져오기

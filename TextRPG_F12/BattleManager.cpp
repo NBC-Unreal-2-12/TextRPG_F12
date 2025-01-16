@@ -307,8 +307,8 @@ void BattleManager::useSkillOnMonster()
 	std::vector<int> aliveMonsterIndices = getAliveMonsters();
 	if (aliveMonsterIndices.empty()) return;
 
-	std::cout << "스킬 이름: " << player->getSkillName() << ", 마나 소모: " << player->getManaCost() << endl;
-	std::cout << "\n";
+	std::cout << "스킬이름: " << player->getSkillName() << endl << "마나 소모: " << player->getManaCost() << endl
+		<< "데미지: " << player->getAttack() * player->getDamageFactor() << endl;
 	std::cout << player-> getSkillName() <<"을(를) 사용하시겠습니까?\n" << endl;
 
 	int select;
