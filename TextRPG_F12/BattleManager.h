@@ -68,6 +68,8 @@ public:
     // 특정 몬스터 선택
     int getMonsterChoice(const std::vector<int>& aliveMonsterIndices);
 
+    void useItem();
+
     // 몬스터 행동 처리
     void processMonsterTurn(unique_ptr<Monster>& monster);
 

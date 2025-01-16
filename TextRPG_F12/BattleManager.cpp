@@ -85,7 +85,7 @@ void BattleManager::processPlayerTurn() {
 			break;
 
 		case 3: // 인벤토리
-			Inventory::getInstance()->listItem();
+			useItem();
 			break;
 
 		case 4: // 도망
@@ -364,6 +364,56 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 		}
 	}
 	return selectedMonsterIndex;
+}
+
+void BattleManager::useItem() {
+	int selectedItemIndex = -1;
+	std::string input;
+
+	while (true)
+	{
+		Inventory::getInstance()->listItem();
+		std::cout << "\n\n사용할 아이템 번호를 입력해 주세요.\n";
+		std::cout << "\n[0] 되돌아가기\n\n"; // 되돌아가기 옵션 추가
+		std::cout << ">> ";
+		std::getline(std::cin, input);
+
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				selectedItemIndex = std::stoi(input) - 1;
+
+				// 되돌아가기 처리
+				if (selectedItemIndex == -1) // 사용자가 0을 입력한 경우
+				{
+					isTurnEnd = false;
+					displayBattleState();
+					return; // 되돌아가기 신호로 -1 반환
+				}
+
+				// 선택한 아이템 인덱스가 유효한지 확인
+				if (selectedItemIndex >= 0 && selectedItemIndex < Inventory::getInstance()->getInventory().size())
+				{
+					player->useItemFromInventory(selectedItemIndex);
+					break; // 유효한 아이템 선택 시 반복문 탈출
+				}
+				else
+				{
+					std::cout << "\n유효한 아이템 번호를 입력해 주세요.\n";
+				}
+			}
+			catch (const std::out_of_range&)
+			{
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
+	}
+	
 }
 
 // 전투 시작
