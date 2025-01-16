@@ -142,6 +142,7 @@
     <ClCompile Include="TextRPG_F12.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArcherSkill.h" />
     <ClInclude Include="BattleManager.h" />
     <ClInclude Include="BossMonster.h" />
     <ClInclude Include="Character.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Job.h" />
+    <ClInclude Include="MageSkill.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterFactory.h" />
     <ClInclude Include="NormalMonster.h" />
@@ -159,6 +161,7 @@
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SpecialMonster.h" />
     <ClInclude Include="UseItems.h" />
+    <ClInclude Include="WarriorSkill.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

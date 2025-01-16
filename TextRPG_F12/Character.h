@@ -50,6 +50,7 @@ public:
 	bool isInventoryEmpty();
 	void sellItemFromInventory(int index); // 인벤토리에서 아이템 제거
 	void displayInventory(); // 인벤토리 표시
+	int displaySkillList();	// 스킬 목록 표시 반환으로 스킬리스트 크기반환
 	int getGold(); // 골드 getter
 	void setGold(int sellPrice); // 골드 setter
 	double getExp();				// 경험치 getter
@@ -73,11 +74,11 @@ public:
     double getEvasion();            // 회피율 getter
 	void setEvation(double set_evasion); // 회피율 setter
 	void receiveDamage(int damage); // 유저가 데미지를 받는 메서드
-	double getDamageFactor();		// 스킬Damage배율 getter
-    void useSkill(Monster* target); // 스킬 사용 메서드
+	double getDamageFactor(size_t index);		// 스킬Damage배율 getter
+    void useSkill(Monster* target, int skillIndex); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
-	string getSkillName();
-	int getManaCost();
+	string getSkillName(size_t index);
+	int getManaCost(size_t index);
 	string getName();	// 이름 getter
 	void setColor(int color);	// 글자색 설정
 	

@@ -72,12 +72,12 @@ bool BattleManager::getAllMonsterDead()
 
 void BattleManager::processPlayerTurn() {
 	PlayerInput input;
-	
+
 	// isTurnEnd 초기화
 	isTurnEnd = false;
 
 	// 각 case에서 isTurnEnd bool 변수값을 관리하여 턴 종료 시점 결정
-	while(!isTurnEnd) {
+	while (!isTurnEnd) {
 		showPlayerCombatInfo();
 		int choice = input.getPlayerChoiceInBattle();
 
@@ -309,13 +309,50 @@ void BattleManager::useSkillOnMonster()
 {
 	std::vector<int> aliveMonsterIndices = getAliveMonsters();
 	if (aliveMonsterIndices.empty()) return;
+	cout << "사용할 스킬을 선택하세요:" << endl;
+	int size = player->displaySkillList();
+	if (size == 0)
+	{
+		cout << player->getName() << "은(는) 사용할 수 있는 스킬이 없습니다!" << endl;
+		return;
+	}
 
-	std::cout << "스킬이름: " << player->getSkillName() << endl << "마나 소모: " << player->getManaCost() << endl
-		<< "데미지: " << player->getAttack() * player->getDamageFactor() << endl;
-	std::cout << player-> getSkillName() <<"을(를) 사용하시겠습니까?\n" << endl;
+	int skillIndex = -1;
+	std::string input;
+
+	while (true)
+	{
+		cout << "스킬 번호 >> ";
+		std::getline(std::cin, input);  // 전체 입력을 문자열로 받음
+
+		// 입력이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			skillIndex = std::stoi(input);  // 문자열을 정수로 변환
+
+			// 유효한 입력인지 확인 (스킬 개수를 가져오기 위해 job->getSkillCount() 추가 필요)
+			if (skillIndex >= 1 && skillIndex <= size)
+			{
+				skillIndex--; // 1-based index를 0-based index로 변환
+				break;
+			}
+			else
+			{
+				cout << "잘못된 입력입니다. 유효한 스킬 번호를 입력해 주세요." << endl;
+			}
+		}
+		else
+		{
+			cout << "잘못된 입력입니다. 숫자만 입력해 주세요." << endl;
+		}
+	}
+
+	std::cout << "스킬이름: " << player->getSkillName(skillIndex) << endl << "마나 소모: " << player->getManaCost(skillIndex) << endl
+		<< "데미지: " << player->getAttack() * player->getDamageFactor(skillIndex) << endl;
+	std::cout << player->getSkillName(skillIndex) << "을(를) 사용하시겠습니까?\n" << endl;
 
 	int select;
-	std::string input;
+	std::string input2;
 
 	while (true)
 	{
@@ -344,7 +381,7 @@ void BattleManager::useSkillOnMonster()
 	}
 	if (select == 1)
 	{
-		if (player->getMP() < player->getManaCost())
+		if (player->getMP() < player->getManaCost(skillIndex))
 		{
 			std::cout << "\n마나가 부족합니다." << endl;
 			delay(1000); // 1초 지연
@@ -361,7 +398,7 @@ void BattleManager::useSkillOnMonster()
 			}
 			else
 			{
-				player->useSkill(monster[selectedMonsterIndex].get());
+				player->useSkill(monster[selectedMonsterIndex].get(), skillIndex);
 				setColor(1);
 				std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
 				if (monster[selectedMonsterIndex]->isMobDead()) {
@@ -404,11 +441,11 @@ int BattleManager::getMonsterChoice(const std::vector<int>& aliveMonsterIndices)
 	while (true)
 	{
 		std::cout << "\n대상 몬스터의 번호를 입력하세요.\n\n";
-		 for (int index : aliveMonsterIndices)
-        {
-            // 몬스터 이름 추가 출력
-            std::cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "\n"; 
-        }
+		for (int index : aliveMonsterIndices)
+		{
+			// 몬스터 이름 추가 출력
+			std::cout << "[" << index + 1 << "] " << monster[index]->getMobName() << "\n";
+		}
 		std::cout << "\n[0] 되돌아가기\n\n"; // 되돌아가기 옵션 추가
 		std::cout << ">> ";
 		std::getline(std::cin, input);

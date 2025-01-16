@@ -125,5 +125,14 @@
     <ClInclude Include="UseItems.h">
       <Filter>Item</Filter>
     </ClInclude>
+    <ClInclude Include="WarriorSkill.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="MageSkill.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcherSkill.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
