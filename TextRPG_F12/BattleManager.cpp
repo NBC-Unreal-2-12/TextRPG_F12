@@ -497,8 +497,7 @@ int BattleManager::resolveBattle()
 		int expGained = 100 * monsterCount; // 획득 경험치
 		int goldGained = 50 * monsterCount; // 획득 골드
 
-		int existGold = player->getGold();
-		player->setGold(existGold + goldGained);
+		player->setGold(goldGained);
 		std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
 
 		player->addExp(expGained);
