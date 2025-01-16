@@ -1,6 +1,7 @@
-﻿#include <iostream>
+﻿#include "Character.h"
+#include <iostream>
 #include <string>
-#include "Character.h"
+#include "GameManager.h"
 
 using namespace std;
 
@@ -340,6 +341,8 @@ void Character::useSkill(Monster* target, int skillIndex)
 
 	// 데미지 계산 (기본 공격력을 스킬의 데미지 배율로 곱함)
 	int damage = static_cast<int>(attack * damageFactor);
+	GameManager* gameManager = GameManager::getInstance();
+	gameManager->setTotalSkillDamage(damage);
 
 	// MP 소모
 	useMP(skill->getManaCost());
