@@ -75,6 +75,8 @@ public:
 	void receiveDamage(int damage); // 유저가 데미지를 받는 메서드
     void useSkill(Monster* target); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
+	string getSkillName();
+	int getManaCost();
 	string getName();	// 이름 getter
 	void setColor(int color);	// 글자색 설정
 	

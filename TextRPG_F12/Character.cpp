@@ -107,9 +107,9 @@ void Character::levelUp()
 {
     level++;
     maxHealth += job->getHealthGrowth();
-	health = maxHealth;
+	health += job->getHealthGrowth();
     maxMp += job->getManaGrowth();
-	mp = maxMp;
+	mp += job->getManaGrowth();
     attack += job->getAttackGrowth();
     evasion += job->getEvasionGrowth();
     accuracy += job->getAccuracyGrowth();
@@ -337,6 +337,16 @@ void Character::useMP(int cost)
 {
     mp -= cost;
     if (mp < 0) mp = 0;
+}
+
+string Character::getSkillName()
+{
+    return job->getSkillName();
+}
+
+int Character::getManaCost()
+{
+    return job->getManaCost();
 }
 
 string Character::getName()

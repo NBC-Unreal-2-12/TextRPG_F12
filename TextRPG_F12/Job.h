@@ -12,6 +12,7 @@ using namespace std;
 class Job 
 {
 protected:
+    unique_ptr<Skill> skill; // unique_ptr로 변경
     int jobIndex;
     int healthGrowth;
 	int manaGrowth;
@@ -36,15 +37,25 @@ public:
     double getEvasionGrowth() const { return evasionGrowth; }
     double getAccuracyGrowth() const { return accuracyGrowth; }
     int getJobIndex() const { return jobIndex; }
+    int getManaCost()
+    {
+
+        return skill->getManaCost();
+    }
+    string getSkillName()
+    {
+        return skill->getSkillName();
+    }
 };
 
 // 전사 직업 클래스
 class Warrior : public Job 
-{
-private:
-    Skill* skill = new WarriorSkill();
+{    
 public:
-	Warrior() : Job(0, 50, 20, 30, 1, 0.1, 5) {} // 전사식별번호 전사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
+	Warrior() : Job(0, 50, 20, 30, 1, 0.1, 5) 
+    {
+        skill = make_unique<WarriorSkill>();
+    } // 전사식별번호 전사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
     string getJobName() const override 
     {
         return "전사";
@@ -58,21 +69,21 @@ public:
         attackspeed += 2;
     }
 
-    ~Warrior() override { delete skill; }
 
     Skill* getSkill() const override 
     {
-        return skill;
+        return skill.get();
     }
 };
 
 // 마법사 직업 클래스
 class Mage : public Job 
 {
-private:
-    Skill* skill = new MageSkill();
 public:
-    Mage() : Job(1, 30, 50, 50, 1, 0.1, 5) {} // 마법사식별번호 마법사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
+    Mage() : Job(1, 30, 50, 50, 1, 0.1, 5) 
+    {
+        skill = make_unique<MageSkill>();
+    } // 마법사식별번호 마법사 레벨업 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
 
     string getJobName() const override
     {
@@ -88,21 +99,20 @@ public:
         attackspeed += 1;
     }
 
-	~Mage() override { delete skill; }
-
     Skill* getSkill() const override 
     {
-        return skill;
+        return skill.get();
     }
 };
 
 // 궁수 직업 클래스
 class Archer : public Job 
 {
-private:
-    Skill* skill = new ArcherSkill();
 public:
-    Archer() : Job(2, 30, 20, 30, 2, 0.2, 10) {} // 궁수식별번호 궁수 마법사 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
+    Archer() : Job(2, 30, 20, 30, 2, 0.2, 10) 
+    {
+        skill = make_unique<ArcherSkill>();
+    } // 궁수식별번호 궁수 마법사 증가량, 체력, 마나, 공격력, 속도, 회피, 명중
 
     string getJobName() const override
     {
@@ -119,11 +129,9 @@ public:
         accuracy += 10;
     }
 
-	~Archer() override { delete skill; }
-
     Skill* getSkill() const override 
     {
-        return skill;
+        return skill.get();
     }
 };
 

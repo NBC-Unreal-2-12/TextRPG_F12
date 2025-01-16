@@ -307,23 +307,78 @@ void BattleManager::useSkillOnMonster()
 	std::vector<int> aliveMonsterIndices = getAliveMonsters();
 	if (aliveMonsterIndices.empty()) return;
 
-	int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
-	if (selectedMonsterIndex == -1)
-	{
-		return;
-	} else
-	{
+	std::cout << "스킬이름: " << player->getSkillName() << "마나 소모: " << player->getManaCost() << endl << "를 사용하시 겠습니까?" << endl;
 
-		player->useSkill(monster[selectedMonsterIndex].get());
-		setColor(1);
-		std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
-		if (monster[selectedMonsterIndex]->isMobDead()) {
-			std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
-			if (getAllMonsterDead()) isBattleActive = false;
+	int select;
+	std::string input;
+
+	while (true)
+	{
+		std::cout << "[1] 예" << std::endl;
+		std::cout << "[2] 아니오" << std::endl;
+		std::cout << ">> ";
+		std::getline(std::cin, input);  // 전체 입력을 문자열로 받음
+
+		// 입력이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			select = std::stoi(input);  // 문자열을 정수로 변환
+			if (select == 1 || select == 2)
+			{
+				break;
+			}
+			else
+			{
+				std::cout << "잘못된 입력입니다. 1 또는 2를 입력해 주세요." << std::endl;
+			}
 		}
-		setColor(7);
+		else
+		{
+			std::cout << "잘못된 입력입니다. 숫자만 입력해 주세요." << std::endl;
+		}
 	}
-	isTurnEnd = true;
+	if (select == 1)
+	{
+		if (player->getMP() < player->getManaCost())
+		{
+			setColor(1); // 파랑색
+			std::cout << "마나가 부족합니다" << endl;
+			delay(1000); // 0.5초 지연
+			setColor(7); // 기본색
+			displayBattleState();
+			showMonsterCombatInfo();
+			return;
+		}
+		else
+		{
+			int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
+			if (selectedMonsterIndex == -1)
+			{
+				return;
+			}
+			else
+			{
+				player->useSkill(monster[selectedMonsterIndex].get());
+				setColor(1);
+				std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
+				if (monster[selectedMonsterIndex]->isMobDead()) {
+					std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
+					if (getAllMonsterDead()) isBattleActive = false;
+				}
+				setColor(7);
+			}
+			isTurnEnd = true;
+		}
+	}
+	else if (select == 2)
+	{
+		std::cout << "돌아갑니다" << endl;
+		delay(1000); // 0.5초 지연
+		displayBattleState();
+		showMonsterCombatInfo();
+		return;
+	}
+
 }
 
 std::vector<int> BattleManager::getAliveMonsters()
