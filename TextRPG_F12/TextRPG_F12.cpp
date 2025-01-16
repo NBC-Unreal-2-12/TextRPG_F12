@@ -232,11 +232,11 @@ void gameStart()
 
 void clearConsole()
 {
-	std::string text = "\n> 모험을 시작한다.. <";
+	std::string text = "\n>> 모험을 시작한다..";
 
 	cout << text;
 	cin.ignore(); // 엔터 키 입력 대기
-	setCursorPosition(0 + static_cast<int>(text.length())-1, 33);
+	setCursorPosition(0 + static_cast<int>(text.length()) -1, 33);
 	this_thread::sleep_for(chrono::seconds(1)); // 1초 대기
 	system("cls"); // 화면 지우기 cls 명령 사용
 }
