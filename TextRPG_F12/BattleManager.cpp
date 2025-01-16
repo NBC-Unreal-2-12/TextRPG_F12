@@ -246,23 +246,24 @@ void BattleManager::showPlayerCombatInfo() {
 	for (int i = healthBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
 	std::cout << "체력: " << currentHealth << " / " << maxHealth << "\n\n";
-
+	delay(300); // 0.3초 지연
 	// 마나 상태바
 	int manaBars = 20 * currentMana / maxMana;
 	for (int i = 0; i < manaBars; ++i) std::cout << "■";
 	for (int i = manaBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
 	std::cout << "마나: " << currentMana << " / " << maxMana << "\n\n";
-
+	delay(300); // 0.3초 지연
 	// 경험치바
 	int expBars = 20 * currentExp / maxExp;
 	for (int i = 0; i < expBars; ++i) std::cout << "■";
 	for (int i = expBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
 	std::cout << "경험치: " << currentExp << " / " << maxExp << "\n\n";
-
+	delay(300); // 0.3초 지연
 	// 공격력
-	std::cout << "공격력: " << player->getAttack() << "\n\n==============================\n\n";
+	std::cout << "공격력: " << player->getAttack() << "\n\n==============================\n";
+	delay(300); // 0.3초 지연
 }
 
 void BattleManager::showMonsterInfo()
