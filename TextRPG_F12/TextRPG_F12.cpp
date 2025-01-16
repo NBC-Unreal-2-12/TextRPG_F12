@@ -123,9 +123,9 @@ void printCentered(const std::string& text, int lineOffset = 0, int color = 7) {
 	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
 
 	// Y좌표는 중앙에서 lineOffset 만큼 이동
-	// int y = (consoleHeight / 2) + lineOffset;
+	int y = lineOffset;
 
-	setCursorPosition(x, lineOffset); // 지정된 위치로 이동
+	setCursorPosition(x, y); // 지정된 위치로 이동
 	setTextColor(color);     // 색상 설정
 	std::cout << text;       // 텍스트 출력
 	setTextColor(7);         // 기본 색상으로 복구
@@ -187,33 +187,45 @@ void gameStart() {
 	delay(100);
 	printCentered("▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭", 9);
 
-	std::string text = "시작하기";
-	int lineNumber = 13; // y축 줄 수 저장
+	std::string text = "> 시작하기 <";
+	int lineNumber = 13; // 출력할 줄 번호
 
-	// 텍스트를 중앙에 출력
-	// 인터벌(500)으로 3번 깜빡이고 고정되게 설정함. '대충 이쯤에 엔터 누르겠지' 싶은 타이밍으로 맞춰봄.
-	// 이 동작이 끝나기 전에 엔터를 여러 번 누르게되면 입력이 누적되어 넘어가버림.
-	printBlinkingText("> 시작하기 <", 13, 3, 500, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	// 콘솔 크기 확인
+	int consoleWidth, consoleHeight;
+	getConsoleSize(consoleWidth, consoleHeight);
 
-	// 커서를 텍스트 오른쪽에 배치
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	// "시작하기" 텍스트 출력 위치 계산
+	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
+
+	// 텍스트 색상 설정
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 
-	// 콘솔 창 너비 확인
-	int consoleWidth = 80; // 기본 너비
-	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	// 깜빡임 효과
+	for (int i = 0; i < 3; ++i) {
+		// 텍스트 출력
+		setCursorPosition(x, lineNumber);
+		std::cout << text;
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+		// 텍스트 지우기
+		setCursorPosition(x, lineNumber);
+		std::cout << std::string(text.length(), ' ');
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
 
-	// "시작하기" 텍스트 끝 위치 계산
-	int x = (consoleWidth - static_cast<int>(text.length())) / 2 + static_cast<int>(text.length());
+	// 마지막 텍스트 출력 (고정)
+	setCursorPosition(x, lineNumber);
+	std::cout << text;
 
-	//cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 엔터 입력받고 버퍼 지우기
-	cin.ignore(1000, '\n');
-	setCursorPosition(x + 2, lineNumber);
+	// 사용자 입력 대기
+	std::cin.ignore(1000, '\n');
+	// 커서를 텍스트 오른쪽에 배치
+	setCursorPosition(x + static_cast<int>(text.length()) + 1, lineNumber);
 
-	delay(1000); // 1초 대기
-	system("cls"); // 화면 지우기 cls 명령 사용
+	// 화면 정리 후 초기화
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	system("cls");
 	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
