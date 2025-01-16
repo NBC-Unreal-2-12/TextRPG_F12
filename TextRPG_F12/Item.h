@@ -12,18 +12,18 @@ class Character;
 class Item 
 {
 protected:
-    string name; // 아이템 이름
+    std::string name; // 아이템 이름
     int price; // 아이템 가격
 
 public:
-    Item(const string& itemName, int itemPrice)
+    Item(const std::string& itemName, int itemPrice)
         : name(itemName), price(itemPrice) 
     {
     }
 
     virtual ~Item() = default;
 
-    string getName() const 
+    std::string getName() const
     {
         return name;
     }
@@ -31,6 +31,8 @@ public:
     {
         return price; 
     }
+
+    virtual std::string getEffect() const = 0;
 
     virtual void use(Character* character) = 0;
 };
@@ -51,6 +53,12 @@ public:
     void use(Character* character) override
 	{
 	}
+
+    std::string getEffect() const
+    {
+        return "사망 시 부활";
+    }
+
 };
 
 //몬스터 드랍 아이템
@@ -66,6 +74,11 @@ public:
     {
         cout << "아.. 저거 상점에 팔면 " << this->getPrice()*0.6 <<"골드 짜리였는데.." << endl;
         delay(1000);
+    }
+
+    std::string getEffect() const
+    {
+        return "판매 가격 : " + to_string(static_cast<int>(price * 0.6)) + "골드";
     }
 };
 

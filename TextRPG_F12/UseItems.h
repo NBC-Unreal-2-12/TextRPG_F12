@@ -24,6 +24,11 @@ public:
         delay(1000);
     }
 
+    std::string getEffect() const
+    {
+        return "최대 체력의 " + to_string(healthRestore) + "% 회복";
+    }
+
 };
 
 //마나포션
@@ -46,6 +51,12 @@ public:
         cout << "\n마나가 " << character->getMP() - prevMP << "만큼 회복되었습니다! (현재 체력 : " << character->getMP() << ")" << endl;
         delay(1000);
     }
+
+    std::string getEffect() const
+    {
+        return "최대 마나의 " + to_string(manaRestore) + "% 회복";
+    }
+
 };
 //어택부스트
 //공격력 증가 소모성 아이템
@@ -67,6 +78,12 @@ public:
         cout << "\n공격력이 " << character->getAttack() - prevAttack << "만큼 증가하였습니다! (현재 공격력 : " << character->getAttack() << ")" << endl;
         delay(1000);
     }
+
+    std::string getEffect() const
+    {
+        return "공격력 " + to_string(attackIncrease) + "증가";
+    }
+
 };
 
 //진흙단 -> 캐릭터 회피율 증가 포션으로 변경
@@ -88,6 +105,12 @@ public:
         cout << "\n회피율이 " << character->getEvasion() - prevEvasion << "만큼 증가하였습니다! (현재 회피율 : " << character->getEvasion() << ")" << endl;
         delay(1000);
     }
+
+    std::string getEffect() const
+    {
+        return "회피율 " + to_string(evasionIncrease) + "증가";
+    }
+
 };
 
 class AttackSpeedBoost : public Item
@@ -108,4 +131,10 @@ public:
         cout << "\n공격 속도가 " << character->getAttackSpeed() - prevAttackSpeed << "만큼 증가하였습니다! (현재 공격 속도 : " << character->getAttackSpeed() << ")" << endl;
         delay(1000);
     }
+
+    std::string getEffect() const
+    {
+        return "공격 속도 " + to_string(attackSpeedIncrease) + "증가";
+    }
+
 };

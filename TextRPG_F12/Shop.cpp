@@ -87,7 +87,7 @@ void Shop::displayItems()
 		if (it.isLoot == false)
 		{
 			std::cout << index++ << ". " << it.item->getName()
-				<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
+				<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개, " << it.item->getEffect() << ")\n";
 		}
 	}
 
