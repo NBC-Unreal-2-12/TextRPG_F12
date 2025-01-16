@@ -35,7 +35,7 @@ class WarriorSkill : public Skill
 {
 public:
     WarriorSkill()
-        : Skill("전사의 강타", 10, 2.0) {
+        : Skill("전사의 강타", 40, 2.0) {
     } // 이름, 고정 MP 소모, 고정 데미지 배율
 
     string getSkillName() const override 
@@ -48,7 +48,7 @@ class MageSkill : public Skill
 {
 public:
 	MageSkill()
-		: Skill("마법사의 화염구", 20, 1.5) {
+		: Skill("마법사의 화염구", 50, 2.5) {
 	} // 이름, 고정 MP 소모, 고정 데미지 배율
 
 
@@ -62,7 +62,7 @@ class ArcherSkill : public Skill
 {
 public:
 	ArcherSkill()
-		: Skill("궁수의 연속 사격", 15, 1.8) {
+		: Skill("궁수의 연속 사격", 30, 1.8) {
 	} // 이름, 고정 MP 소모, 고정 데미지 배율
 
     string getSkillName() const override
