@@ -243,7 +243,7 @@ void BattleManager::showPlayerCombatInfo() {
 	for (int i = 0; i < manaBars; ++i) std::cout << "■";
 	for (int i = manaBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
-	std::cout << "마나: " << currentMana << " / " << maxMana << "\n";
+	std::cout << "마나: " << currentMana << " / " << maxMana << "\n\n";
 
 	// 경험치바
 	int expBars = 20 * currentExp / maxExp;
@@ -307,7 +307,9 @@ void BattleManager::useSkillOnMonster()
 	std::vector<int> aliveMonsterIndices = getAliveMonsters();
 	if (aliveMonsterIndices.empty()) return;
 
-	std::cout << "스킬이름: " << player->getSkillName() << "마나 소모: " << player->getManaCost() << endl << "를 사용하시 겠습니까?" << endl;
+	std::cout << "스킬 이름: " << player->getSkillName() << ", 마나 소모: " << player->getManaCost() << endl;
+	std::cout << "\n";
+	std::cout << player-> getSkillName() <<"을(를) 사용하시겠습니까?\n" << endl;
 
 	int select;
 	std::string input;
@@ -341,10 +343,8 @@ void BattleManager::useSkillOnMonster()
 	{
 		if (player->getMP() < player->getManaCost())
 		{
-			setColor(1); // 파랑색
-			std::cout << "마나가 부족합니다" << endl;
-			delay(1000); // 0.5초 지연
-			setColor(7); // 기본색
+			std::cout << "\n마나가 부족합니다." << endl;
+			delay(1000); // 1초 지연
 			displayBattleState();
 			showMonsterCombatInfo();
 			return;
@@ -372,8 +372,8 @@ void BattleManager::useSkillOnMonster()
 	}
 	else if (select == 2)
 	{
-		std::cout << "돌아갑니다" << endl;
-		delay(1000); // 0.5초 지연
+		std::cout << "스킬 사용 취소." << endl;
+		delay(1000); // 1초 지연
 		displayBattleState();
 		showMonsterCombatInfo();
 		return;
