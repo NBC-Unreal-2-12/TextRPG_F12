@@ -140,14 +140,17 @@ void PlayerInput::getPlayerChoiceUsingItem()
 				// 범위 확인
 				if (choice ==0)
 				{
-					break; // 유효한 입력 범위라면 반복문 탈출
+					break; // 휴식 종료, 전투로 복귀
 				}
 				// 선택한 아이템 인덱스가 유효한지 확인
 				else if (choice > 0 && choice <= Inventory::getInstance()->getInventory().size())
 				{
 					Character::getInstance()->useItemFromInventory(choice - 1);
-					system("cls");
-					std::cout << "\n잘못된 선택입니다. 0을 입력해 주세요.\n";
+					break; // 유효한 아이템 선택 시 반복문 탈출
+				}
+				else
+				{
+					std::cout << "\n유효한 아이템 번호를 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
