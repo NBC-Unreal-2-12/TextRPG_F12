@@ -18,7 +18,7 @@ public:
 
     void use(Character* character)
     {
-        character->setHealth(character->getHealth() + healthRestore);
+        character->setHealth(character->getHealth() + character->getMaxHealth() * healthRestore / 100);
     }
 
 };
@@ -38,7 +38,7 @@ public:
 
     void use(Character* character) override
     {
-        character->setMP(character->getMP() + manaRestore);
+        character->setMP(character->getMP() + character->getMaxHealth() * manaRestore / 100);
     }
 };
 //어택부스트

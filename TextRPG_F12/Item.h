@@ -62,6 +62,7 @@ public:
 
     void use(Character* character) override
     {
+        cout << "아.. 저거 상점에 팔면 " << this->getPrice()*0.6 <<"골드 짜리였는데.." << endl;
     }
 };
 

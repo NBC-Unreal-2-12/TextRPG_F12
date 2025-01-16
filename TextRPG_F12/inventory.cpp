@@ -57,7 +57,7 @@ void Inventory::sellItem(int index)
     else
     {
         std::cout << "\n";
-        cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : \n" << counts[item] << endl;
+        cout << item->getName() << "이(가) 판매되었습니다. 남은 개수 : " << counts[item] << endl;
     }
 }
 
@@ -77,11 +77,11 @@ void Inventory::useItem(int index, Character* player)
         {
             counts.erase(item);
             inventory.erase(remove(inventory.begin(), inventory.end(), item), inventory.end());
-            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : 0개\n" << endl;
+            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : 0\n" << endl;
         }
         else
         {
-            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : \n" << counts[item] << endl;
+            cout << item->getName() << "이(가) 사용되었습니다. 남은 개수 : " << counts[item] << endl;
         }
     }
     else

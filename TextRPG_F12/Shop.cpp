@@ -77,6 +77,9 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 	auto& stockItem = *std::find_if(stock.begin(), stock.end(),
 		[index](const StockItem& stockItem) { return stockItem.index == index; });
 
+	int count = itemCount;
+
+	Item* managedItem = ItemManager::getInstance()->getItemByIndex(stockItem.index);
 	while (itemCount--)
 	{
 		// 재고가 없을 경우
@@ -95,13 +98,12 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 
 		// 구매 처리
 		player->setGold(-stockItem.item->getPrice());
-		Item* managedItem = ItemManager::getInstance()->getItemByIndex(stockItem.index);
 		player->addItemToInventory(managedItem);
-		std::cout << managedItem->getName() << "을(를) 구매 했습니다. (잔고 : " << player->getGold() << ")\n";
 
 		// 재고 업데이트
 		stockItem.quantity--;
 	}
+	std::cout << managedItem->getName() << "을(를) " << count << " 개 구매 했습니다. (잔고 : " << player->getGold() << ")\n";
 }
 
 // 아이템 판매
@@ -117,21 +119,25 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 
 	// 해당 아이템 찾기
 	auto& stockItem = *std::find_if(stock.begin(), stock.end(),
-		[item](const StockItem& stockItem) { return stockItem.item->getName() == item->getName(); });
+		[item](const StockItem& stockItem)
+		{
+			return stockItem.item->getName() == item->getName();
+		});
 
-	
+	int count = itemCount;
+
 
 
 	while (itemCount-- && Inventory::getInstance()->numberOfItems(item) > 0)
 	{
 		// 판매 처리
-		int sellPrice = static_cast<int>(stockItem.item->getPrice()  * 0.6);
+		int sellPrice = static_cast<int>(stockItem.item->getPrice() * 0.6);
 		player->setGold(sellPrice);
 		player->sellItemFromInventory(index);
 
 		// 재고 업데이트
 		stockItem.quantity++;
 
-		std::cout << item->getName() << "을 판매 했습니다. (잔고 : " << player->getGold() << ")\n";
 	}
+		std::cout << item->getName() << "을(를) " << count << " 개 판매 했습니다. (잔고 : " << player->getGold() << ")\n";
 }

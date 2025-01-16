@@ -62,13 +62,15 @@ const std::map<int, Item*>& ItemManager::getAlILoots() const
 void ItemManager::initializeDefaultItems()
 {
 	// 아이템 리스트 초기화
-	registerItem(1, new HealthPotion("회복포션(소)", 50, 20));
-	registerItem(2, new HealthPotion("회복포션(대)", 150, 50));
-	registerItem(3, new ManaPotion("마나포션(소)", 50, 20));
-	registerItem(4, new ManaPotion("마나포션(대)", 150, 50));
-	registerItem(5, new AttackBoost("데미지 부스터", 100, 5));
-	registerItem(6, new AttackSpeedBoost("공격 속도 부스트", 100, 5));
-    registerItem(7, new EvasionBoost("회피 증가 부스트", 100, 5));
+	registerItem(1, new HealthPotion("회복포션(소)", 50, 10));
+	registerItem(2, new HealthPotion("회복포션(대)", 150, 30));
+	registerItem(3, new HealthPotion("회복포션(특대)", 300, 70));
+	registerItem(4, new ManaPotion("마나포션(소)", 50, 10));
+	registerItem(5, new ManaPotion("마나포션(대)", 150, 30));
+	registerItem(6, new ManaPotion("마나포션(특대)", 300, 70));
+	registerItem(7, new AttackBoost("데미지 부스터", 100, 5));
+	registerItem(8, new AttackSpeedBoost("공격 속도 부스트", 100, 5));
+    registerItem(9, new EvasionBoost("투명망토", 80, 5));
 
 	// 전리품 아이템 리스트 초기화
 	registerLoot(101, new MonsterLoot("고블린의 작은 동전", 20));
@@ -83,3 +85,35 @@ void ItemManager::initializeDefaultItems()
 	registerLoot(110, new MonsterLoot("가시고기의 갈비뼈", 125));
 	registerLoot(999, new ReviveItem("부활의 토탬", 300, 100));
 }
+
+// 몬스터 수에 따른 골드 획득 기대값
+// 1라운드 100:1 
+// + 50
+// 2라운드 70:2 30 : 3
+// + 230
+// 3라운드 70 : 2 30 : 3
+// + 345
+// 4라운드 70 : 2 30 : 3
+// + 460
+// 5라운드 70 : 2 30 : 3
+// + 575
+// 6라운드 50 : 1 50 : 2
+// + 450
+// 7라운드 50 : 1 50 : 2
+// + 525
+// 8라운드 50 : 1 50 : 2
+// + 600
+// 9라운드 50 : 1 50 : 2
+// + 675
+// 10라운드 50 : 1 50 : 2
+// + 750
+// 11라운드 40 : 1 60 : 2
+// + 880
+// 12라운드 40 : 1 60 : 2
+// + 960
+// 13라운드 40 : 1 60 : 2
+// + 1040
+// 14라운드 40 : 1 60 : 2
+// + 1120
+// 15라운드 100 : 1
+// + 750
