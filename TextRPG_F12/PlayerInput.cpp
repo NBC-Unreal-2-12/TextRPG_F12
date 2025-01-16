@@ -65,6 +65,7 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 		std::cout << "\n당신은 이제..\n";
 		std::cout << "1. 바로 다음 전투 진행!\n";
 		std::cout << "2. 상점 방문\n";
+		std::cout << "3. 상태창!!\n";
 		std::cout << ">> ";
 
 		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
@@ -78,14 +79,14 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 				choice = std::stoi(input);
 
 				// 범위 확인
-				if (choice >= 0 && choice <= 2)
+				if (choice >= 0 && choice <= 3)
 				{
 					break; // 유효한 입력 범위라면 반복문 탈출
 				}
 				else
 				{
 					system("cls");
-					std::cout << "\n잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
+					std::cout << "\n잘못된 선택입니다. 1 에서 3까지의 숫자를 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)

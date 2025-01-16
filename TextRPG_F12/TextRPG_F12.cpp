@@ -219,6 +219,11 @@ int main()
 		{
 			gameManager->visitShop(player);
 		}
+		else if (choice == 3)
+		{
+			system("cls");
+			player->displayStatus();
+		}
 		if (player->isCharacterDead())
 		{
 			break;
