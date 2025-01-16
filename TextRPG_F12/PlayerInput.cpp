@@ -66,7 +66,7 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 	while (true)
 	{
 		if (round < 15) {
-			std::cout << "\n당신은 이제..\n";
+			std::cout << "\n어떻게 할까..? (다음 라운드 : " << round << ")\n";
 			std::cout << "1. 상점 방문\n";
 			std::cout << "2. 휴식하기\n";
 			std::cout << ">> ";
