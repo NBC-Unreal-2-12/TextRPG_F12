@@ -144,7 +144,6 @@ void Character::doLevelUp()
 		maxExperience = maxExperience * 1.45;
 		levelUp();
 	}
-	displayStatus();
 }
 
 // 캐릭터 인벤토리 관련 메서드
