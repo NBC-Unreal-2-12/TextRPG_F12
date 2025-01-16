@@ -166,8 +166,9 @@ void printBlinkingText(const std::string& text, int lineNumber, int blinkCount, 
 	std::cout << text;
 }
 
-void gameStart() {
-	printCentered("▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭", 0);
+void gameStart() 
+{
+	printCentered("=========================================================================", 0);
 	delay(100);
 	printCentered("######                                      ### ##   ### ##     # ###  ", 1);
 	delay(300);
@@ -185,7 +186,7 @@ void gameStart() {
 	delay(300);
 	printCentered("        #######  ##   ##     ##                                        ", 8);
 	delay(100);
-	printCentered("▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭▬▭", 9);
+	printCentered("=========================================================================", 9);
 
 	std::string text = "> 시작하기 <";
 	int lineNumber = 13; // 출력할 줄 번호
