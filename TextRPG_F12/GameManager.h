@@ -30,7 +30,9 @@ private:
 	int currentRound = 0; // 현재 라운드
 	vector<vector<unique_ptr<Monster>>> monsterGroup; // 라운드별 몬스터들
 
-	GameManager()
+	bool isGameEnd; // 게임 종료 상태 변수
+
+	GameManager() : isGameEnd(false)
 	{
 		cout << "게임 매니저 생성\n";
 		monsterGroup.resize(round); // 벡터 크기 미리 설정
@@ -85,6 +87,10 @@ public:
 
 	// 현재 라운드 전투
 	void combat(int currentRound);
+
+	// 게임 종료 상태 확인용 getter/setter
+	bool getIsGameEnd() const { return isGameEnd; }
+	void setIsGameEnd(bool value) { isGameEnd = value; }
 
 	// 테스트용 모든 라운드의 몬스터 이름 출력
 	void printAllMonsters() const;

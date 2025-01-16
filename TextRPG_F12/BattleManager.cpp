@@ -9,7 +9,6 @@
 #include <cctype> // isdigit 사용
 #include "Inventory.h"
 
-
 // 함수에서 참조할 변수 monster에 대하여
 // ★BattleManager 호출 이전에 마주치게 될 monster는 이미 생성이 되어있는 상태.
 // 
@@ -28,13 +27,27 @@ BattleManager::BattleManager(Character* player, std::vector<std::unique_ptr<Mons
 // 사용자에게 해당 라운드에 스폰된 몬스터 정보를 출력
 void BattleManager::displayBattleState() {
 
-	system("cls");
-	std::cout << "========================================\n\n";
-	setColor(6);
-	std::cout << "라운드 " << GameManager::getInstance()->getCurrentRound() + 1 << "\n\n";
-	cout << "~ 턴 " << currentTurn << " ~\n" << endl;
-	setColor(7);
-	std::cout << "========================================\n";
+	int round = GameManager::getInstance()->getCurrentRound() + 1;
+
+	if (round < 15) {
+		system("cls");
+		std::cout << "========================================\n\n";
+		setColor(6);
+		std::cout << "라운드 " << round << "\n\n";
+		cout << "~ 턴 " << currentTurn << " ~\n" << endl;
+		setColor(7);
+		std::cout << "========================================\n";
+	}
+	else // 보스 스테이지, 마지막 라운드
+	{
+		system("cls");
+		std::cout << "========================================\n\n";
+		setColor(4);
+		std::cout << "라운드 " << round << ": Boss" << "\n\n";
+		cout << "~ 턴 " << currentTurn << " ~\n" << endl;
+		setColor(7);
+		std::cout << "========================================\n";
+	}
 }
 
 // 전투 종료 조건 확인
@@ -210,6 +223,10 @@ void BattleManager::showPlayerCombatInfo() {
 	int currentMana = player->getMP();
 	int maxMana = player->getMaxMP();
 
+	// 현재 경험치 및 최대 경험치 가져오기
+	int currentExp = player->getExp();
+	int maxExp = player->getMaxExp();
+
 	// 상태 출력
 	delay(300); // 0.3초 지연
 	std::cout << "\n==============================\n\n";
@@ -227,6 +244,13 @@ void BattleManager::showPlayerCombatInfo() {
 	for (int i = manaBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
 	std::cout << "마나: " << currentMana << " / " << maxMana << "\n";
+
+	// 경험치바
+	int expBars = 20 * currentExp / maxExp;
+	for (int i = 0; i < expBars; ++i) std::cout << "■";
+	for (int i = expBars; i < 20; ++i) std::cout << "□";
+	std::cout << "\n";
+	std::cout << "경험치: " << currentExp << " / " << maxExp << "\n\n";
 }
 
 void BattleManager::showMonsterInfo()
@@ -423,8 +447,6 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 	this->player = player;
 	this->monster = std::move(monsters);
 
-
-
 	// TurnOrder 초기화 및 재정렬
 	std::vector<TurnOrder> turnOrders;
 
@@ -479,12 +501,13 @@ void BattleManager::startBattle(Character* player, std::vector<unique_ptr<Monste
 // 전투 종료 처리
 int BattleManager::resolveBattle()
 {
+	int round = GameManager::getInstance()->getCurrentRound() + 1;
 
 	if (player->isCharacterDead())
 	{
 		setColor(7); // 하양
 		std::cout << "전투에서 패배하셨습니다.\n";
-		std::cout << "게임이 종료됩니다.\n";
+		std::cout << "게임이 종료됩니다.\n"; // 게임오버 관련
 
 		return 0; // 게임종료
 	}
@@ -492,10 +515,12 @@ int BattleManager::resolveBattle()
 	{
 		std::cout << "축하합니다! 전투에서 승리하셨습니다!\n\n";
 		GameManager* gameManager = GameManager::getInstance();
+		int round = GameManager::getInstance()->getCurrentRound() + 1;
 		int monsterCount = gameManager->getMonsterGroup(gameManager->getCurrentRound()).size();
+
 		// 경험치, 돈, 아이템 획득 처리
-		int expGained = 100 * monsterCount; // 획득 경험치
-		int goldGained = 50 * monsterCount; // 획득 골드
+		int expGained = 100 * round; // 획득 경험치
+		int goldGained = 50 * (round * monsterCount); // 획득 골드
 
 		player->setGold(goldGained);
 		std::cout << "You gained " << expGained << " EXP and " << goldGained << " Gold.\n\n";
@@ -529,9 +554,22 @@ int BattleManager::resolveBattle()
 		}
 	}
 
-	// 다음 라운드 세팅
-	GameManager* gameManager = GameManager::getInstance();
-	gameManager->setCurrentRound();
+	if (round < 15)
+	{
+		// 다음 라운드 세팅
+		GameManager* gameManager = GameManager::getInstance();
+		gameManager->setCurrentRound();
+	}
+	else // round 15 (보스)
+	{
+		system("cls");
+		std::cout << "모든 전투가 끝났습니다." << endl;
+		std::cout << "Game Clear!! 축하드립니다.";
+
+		GameManager* gameManager = GameManager::getInstance();
+		gameManager->setIsGameEnd(true);
+	}
+
 
 	return 1;
 }

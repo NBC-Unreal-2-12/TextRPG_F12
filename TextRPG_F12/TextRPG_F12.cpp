@@ -208,7 +208,7 @@ int main()
 	//gameManager->printAllMonsters();
 	PlayerInput playerInput;
 
-	while (true)
+	while (gameManager->getIsGameEnd() == false)
 	{
 		int choice = playerInput.getPlayerChoiceAfterBattle();
 		if (choice == 1)
@@ -221,12 +221,18 @@ int main()
 		}
 		else if (choice == 3)
 		{
+
+		}
+		else if (choice == 4)
+		{
 			system("cls");
 			player->displayStatus();
 		}
 		if (player->isCharacterDead())
 		{
-			break;
+			// 게임오버 출력
+			// delay(1000);
+			gameManager->setIsGameEnd(true); // break
 		}
 	}
 
