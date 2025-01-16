@@ -85,7 +85,7 @@ public:
         attack += 10;
         maxHealth += 20;
         maxMp += 50;
-        attackspeed += 2;
+        attackspeed += 1;
     }
 
 	~Mage() override { delete skill; }
