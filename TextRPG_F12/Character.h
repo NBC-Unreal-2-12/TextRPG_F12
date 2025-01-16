@@ -50,11 +50,11 @@ public:
 	bool isInventoryEmpty();
 	void sellItemFromInventory(int index); // 인벤토리에서 아이템 제거
 	void displayInventory(); // 인벤토리 표시
-	int displaySkillList();	// 스킬 목록 표시 반환으로 스킬리스트 크기반환
+	int displaySkillList(double playerAttack);	// 스킬 목록 표시 반환으로 스킬리스트 크기반환
 	int getGold(); // 골드 getter
 	void setGold(int sellPrice); // 골드 setter
-	double getExp();				// 경험치 getter
-	double getMaxExp();			// 최대 경험치 getter
+	int getExp();				// 경험치 getter
+	int getMaxExp();			// 최대 경험치 getter
 	void addExp(int set_exp);	// 경험치 setter
 	bool isCharacterDead();		 // 사망 여부 getter
 	void setCharacterDead(bool dead);		//사망 setter

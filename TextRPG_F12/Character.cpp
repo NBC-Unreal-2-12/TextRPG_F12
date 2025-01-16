@@ -96,7 +96,7 @@ void Character::displayStatus()
 	cout << "레벨: " << level << endl;
 	cout << "체력: " << health << " / " << maxHealth << endl;
 	cout << "마나: " << mp << " / " << maxMp << endl;
-	cout << "경험치: " << experience << " / " << maxExperience << endl;
+	cout << "경험치: " << round(experience) << " / " << round(maxExperience) << endl;
 	cout << "공격력: " << attack << endl;
 	cout << "공격속도: " << attackSpeed << endl;
 	cout << "명중률: " << accuracy << endl;
@@ -168,9 +168,9 @@ void Character::displayInventory()
 	Inventory::getInstance()->listItem();
 }
 
-int Character::displaySkillList()
+int Character::displaySkillList(double playerAttack)
 {
-	job->displaySkills();
+	job->displaySkills(playerAttack);
 	const vector<unique_ptr<Skill>>& skills = job->getSkills(); // Job에서 스킬 목록 가져오기
 	return skills.size();
 }
@@ -202,11 +202,11 @@ void Character::setGold(int sellPrice)
 {
 	gold += sellPrice;
 }
-double Character::getExp()
+int Character::getExp()
 {
-	return experience;
+	return round(experience);
 }
-double Character::getMaxExp()
+int Character::getMaxExp()
 {
 	return round(maxExperience);
 }

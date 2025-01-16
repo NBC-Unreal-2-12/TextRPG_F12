@@ -44,11 +44,11 @@ public:
     }
 
     // 모든 스킬 출력
-    void displaySkills() const {
+    void displaySkills(double playerAttack) const {
         for (size_t i = 0; i < skills.size(); ++i) {
             std::cout << "[" << i + 1 << "] " << skills[i]->getSkillName()
                 << " (마나 소모: " << skills[i]->getManaCost()
-                << ", 데미지 배율: " << skills[i]->getDamageFactor() << ")\n";
+                << ", 데미지: " << skills[i]->getDamageFactor() * playerAttack << ")\n";
         }
     }
         

@@ -8,7 +8,7 @@
 class Smite : public Skill
 {
 public:
-    Smite() : Skill("강타", 40, 2.0) {}
+    Smite() : Skill("강타", 40, 2.0, SkillType::Normal) {}
 
     string getSkillName() const override {
         return "강타";
@@ -19,7 +19,7 @@ public:
 class Whirlwind : public Skill
 {
 public:
-    Whirlwind() : Skill("회전 베기", 60, 3.0) {}
+    Whirlwind() : Skill("회전 베기", 60, 1.8, SkillType::Normal) {}
 
     string getSkillName() const override {
         return "회전 베기";
@@ -30,7 +30,7 @@ public:
 class DefensiveStance : public Skill
 {
 public:
-    DefensiveStance() : Skill("방어 자세", 30, 0.5) {}
+    DefensiveStance() : Skill("방어 자세", 30, 0.5, SkillType::Normal) {}
 
     string getSkillName() const override {
         return "방어 자세";
