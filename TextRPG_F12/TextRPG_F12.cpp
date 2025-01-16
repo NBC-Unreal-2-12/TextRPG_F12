@@ -208,9 +208,10 @@ int main()
 	//gameManager->printAllMonsters();
 	PlayerInput playerInput;
 
+	bool isFirst = true;
 	while (gameManager->getIsGameEnd() == false)
 	{
-		int choice = playerInput.getPlayerChoiceAfterBattle();
+		int choice = playerInput.getPlayerChoiceAfterBattle(isFirst);
 		if (choice == 1)
 		{
 			gameManager->combat(gameManager->getCurrentRound());
@@ -218,9 +219,12 @@ int main()
 		else if (choice == 2)
 		{
 			gameManager->visitShop(player);
+			isFirst = false;
 		}
 		else if (choice == 3)
 		{
+			player->displayInventory();
+			isFirst = false;
 
 		}
 		else if (choice == 4)

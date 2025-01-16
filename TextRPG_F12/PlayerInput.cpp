@@ -56,8 +56,10 @@ int PlayerInput::getPlayerChoice()
 	return choice;
 }
 
-int PlayerInput::getPlayerChoiceAfterBattle()
+int PlayerInput::getPlayerChoiceAfterBattle(bool isFirst)
 {
+	if (!isFirst) return 1;
+
 	int round = GameManager::getInstance()->getCurrentRound() + 1;
 	std::string input;
 	int choice;
