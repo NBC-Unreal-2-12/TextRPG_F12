@@ -21,7 +21,7 @@ public:
         int prevHP = character->getHealth();
         character->setHealth(character->getHealth() + character->getMaxHealth() * healthRestore / 100);
         cout << "\n체력이 " << character->getHealth() - prevHP << "만큼 회복되었습니다! (현재 체력 : " << character->getHealth() << ")" << endl;
-        delay(500);
+        delay(1000);
     }
 
 };
@@ -44,7 +44,7 @@ public:
         int prevMP = character->getMP();
         character->setMP(character->getMP() + character->getMaxHealth() * manaRestore / 100);
         cout << "\n마나가 " << character->getMP() - prevMP << "만큼 회복되었습니다! (현재 체력 : " << character->getMP() << ")" << endl;
-        delay(500);
+        delay(1000);
     }
 };
 //어택부스트
@@ -65,7 +65,7 @@ public:
         int prevAttack = character->getAttack();
         character->setAttack(character->getAttack() + attackIncrease);
         cout << "\n공격력이 " << character->getAttack() - prevAttack << "만큼 증가하였습니다! (현재 공격력 : " << character->getAttack() << ")" << endl;
-        delay(500);
+        delay(1000);
     }
 };
 
@@ -86,7 +86,7 @@ public:
         int prevEvasion = character->getEvasion();
         character->setEvation(character->getEvasion() + evasionIncrease);
         cout << "\n회피율이 " << character->getEvasion() - prevEvasion << "만큼 증가하였습니다! (현재 회피율 : " << character->getEvasion() << ")" << endl;
-        delay(500);
+        delay(1000);
     }
 };
 
@@ -106,6 +106,6 @@ public:
         int prevAttackSpeed = character->getAttackSpeed();
         character->setAttackSpeed(character->getAttackSpeed() + attackSpeedIncrease);
         cout << "\n공격 속도가 " << character->getAttackSpeed() - prevAttackSpeed << "만큼 증가하였습니다! (현재 공격 속도 : " << character->getAttackSpeed() << ")" << endl;
-        delay(500);
+        delay(1000);
     }
 };

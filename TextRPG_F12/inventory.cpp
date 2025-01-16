@@ -99,7 +99,7 @@ void Inventory::listItem()
         for (int idx = 0; idx < inventory.size();idx++)
         {
             Item* item = inventory[idx];
-            cout << "[" << idx + 1 << "] " << item->getName() << " (개수: " << counts[item] << ")" << endl;
+            cout << "[" << idx + 1 << "] " << item->getName() << " (개수: " << counts[item] << ", 판매 가격 : " << item->getPrice() * 0.6 << ")" << endl;
         }
     }
 }
