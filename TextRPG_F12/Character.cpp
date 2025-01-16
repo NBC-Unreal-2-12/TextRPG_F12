@@ -390,6 +390,8 @@ void Character::useAreaSkill(std::vector<std::unique_ptr<Monster>>& monsters, in
 		if (monster->isMobDead()) {
 			cout << monster->getMobName() << "이(가) 쓰러졌습니다!\n";
 		}
+
+		delay(500);
 	}
 }
 
