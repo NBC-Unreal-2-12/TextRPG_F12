@@ -182,7 +182,7 @@ double Character::getExp()
 }
 double Character::getMaxExp()
 {
-    return maxExperience;
+    return round(maxExperience);
 }
 void Character::addExp(int set_exp)
 {
