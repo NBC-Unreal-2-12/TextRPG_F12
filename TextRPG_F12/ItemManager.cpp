@@ -83,7 +83,7 @@ void ItemManager::initializeDefaultItems()
 	registerLoot(108, new MonsterLoot("발록의 재", 75));
 	registerLoot(109, new MonsterLoot("크라켄의 심장", 75));
 	registerLoot(110, new MonsterLoot("가시고기의 갈비뼈", 125));
-	registerLoot(999, new ReviveItem("부활의 토탬", 300, 100));
+	registerLoot(999, new ReviveItem("부활의 토템", 300, 100));
 }
 
 // 몬스터 수에 따른 골드 획득 기대값
