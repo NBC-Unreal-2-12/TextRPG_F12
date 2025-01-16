@@ -125,13 +125,14 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 		if (stockItem.quantity <= 0)
 		{
 			std::cout << stockItem.item->getName() << " 재고가 없습니다!\n";
+			std::cout << "( 잔고 : " << player->getGold() << " )\n";
 			return;
 		}
 
 		// 잔고 부족
 		if (player->getGold() < stockItem.item->getPrice())
 		{
-			std::cout << stockItem.item->getName() << ": 골드가 부족합니다. 보유 금액 " << player->getGold() << "골드\n";
+			std::cout << stockItem.item->getName() << ": 골드가 부족합니다. ( 잔고 : " << player->getGold() << "골드 )\n";
 			return;
 		}
 
@@ -144,7 +145,7 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 		stockItem.quantity--;
 		delay(500);
 	}
-	std::cout << managedItem->getName() << "을(를) " << count << " 개 구매 했습니다. (잔고 : " << player->getGold() << ")\n";
+	std::cout << managedItem->getName() << "을(를) " << count << " 개 구매 했습니다. ( 잔고 : " << player->getGold() << "골드 )\n";
 }
 
 // 아이템 판매
@@ -181,5 +182,5 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 		stockItem.quantity++;
 		delay(500);
 	}
-	std::cout << item->getName() << "을(를) " << count << " 개 판매 했습니다. (잔고 : " << player->getGold() << ")\n";
+	std::cout << item->getName() << "을(를) " << count << " 개 판매 했습니다. ( 잔고 : " << player->getGold() << " )\n";
 }
