@@ -166,6 +166,37 @@ void printBlinkingText(const std::string& text, int lineNumber, int blinkCount, 
 	std::cout << text;
 }
 
+void printTextWithEffect(const std::string& text, int delayMs = 50, int lineNumber = 0, int color = 7) {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	int consoleWidth = 80;
+
+	// 콘솔 크기 확인
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	}
+
+	// 텍스트 출력 위치 계산
+	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
+
+	// 커서 위치 설정
+	COORD position = { static_cast<SHORT>(x), static_cast<SHORT>(lineNumber) };
+	SetConsoleCursorPosition(hConsole, position);
+
+	// 색상 설정
+	SetConsoleTextAttribute(hConsole, color);
+
+	// 텍스트를 한 글자씩 출력
+	for (char c : text) {
+		std::cout << c;
+		std::cout.flush(); // 즉시 출력
+		std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+	}
+
+	// 기본 색상으로 복원
+	SetConsoleTextAttribute(hConsole, 7);
+}
+
 void gameStart() 
 {
 	printCentered("=========================================================================", 0);
@@ -188,7 +219,7 @@ void gameStart()
 	delay(100);
 	printCentered("=========================================================================", 9);
 
-	std::string text = "> 시작하기 <";
+	std::string text = "> 테스트 모드 <";
 	int lineNumber = 13; // 출력할 줄 번호
 
 	// 콘솔 크기 확인
@@ -230,6 +261,49 @@ void gameStart()
 	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 }
 
+void printStory()
+{
+	string text = "뭐, 그전에.. 클리어부터 하셔야겠지만요.";
+	int lineNumber = 33;
+
+	printTextWithEffect("TEXT RPG 베타 테스트에 참여해주셔서 감사합니다.", 30, 12);
+	delay(500);
+	printTextWithEffect("총 15라운드로 이루어진 전투를 모쪼록 즐겨주시면 감사하겠습니다.", 25,  15);
+	delay(500);
+	printTextWithEffect("첫 전투는 튜토리얼 난이도로 설정되었으니 안심하고 싸워주세요!", 25 , 18);
+	delay(500);
+	printTextWithEffect("라운드 사이에는 상점 혹은 휴식, 두 가지 선택지 중에서 원하시는대로 골라 가실 수 있습니다.", 20, 21);
+	delay(550);
+	printTextWithEffect("선택을 되돌리는 것은 불가능하니 신중하게 결정해주세요!", 30, 24);
+	delay(500);
+	printTextWithEffect("참고로 전투중에 도망치는 행위는 불명예스러운 행위로 간주, 클리어 후에 기록으로 남으니 이 점 유의해주세요. 라운드도 넘어갑니다.", 15, 27);
+	delay(700);
+	printTextWithEffect("테스터 분들의 건전한 피드백을 기다리고 있겠습니다.", 30, 30);
+	delay(500);
+	printTextWithEffect("뭐, 그전에.. 클리어부터 하셔야겠지만요!", 50, 33, 3);
+
+	// 콘솔 크기 확인
+	int consoleWidth, consoleHeight;
+	getConsoleSize(consoleWidth, consoleHeight);
+
+	// 텍스트 출력 위치 계산
+	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
+
+	// 텍스트 색상 설정
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
+	// 사용자 입력 대기
+	std::cin.ignore(1000, '\n');
+	// 커서를 텍스트 오른쪽에 배치
+	setCursorPosition(x + static_cast<int>(text.length()) - 1, lineNumber);
+
+	// 화면 정리 후 초기화
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	system("cls");
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+}
+
 void clearConsole()
 {
 	std::string text = "\n>> 모험을 시작한다..";
@@ -245,6 +319,7 @@ int main()
 {
 	srand(static_cast<unsigned>(time(nullptr))); // 시드 설정
 	gameStart();
+	printStory();
 
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
