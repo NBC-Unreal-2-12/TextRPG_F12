@@ -19,7 +19,7 @@ public:
 class Whirlwind : public Skill
 {
 public:
-    Whirlwind() : Skill("회전 베기", 60, 1.8, SkillType::Normal) {}
+    Whirlwind() : Skill("회전 베기", 60, 1.8, SkillType::AreaOfEffect) {}
 
     string getSkillName() const override {
         return "회전 베기";
@@ -30,7 +30,7 @@ public:
 class DefensiveStance : public Skill
 {
 public:
-    DefensiveStance() : Skill("방어 자세", 30, 0.5, SkillType::Normal) {}
+    DefensiveStance() : Skill("방어 자세", 30, 0.5, SkillType::Counter) {}
 
     string getSkillName() const override {
         return "방어 자세";

@@ -201,6 +201,7 @@ int Character::getGold()
 void Character::setGold(int sellPrice)
 {
 	gold += sellPrice;
+	
 }
 int Character::getExp()
 {
@@ -368,6 +369,11 @@ string Character::getSkillName(size_t index)
 int Character::getManaCost(size_t index)
 {
 	return job->getManaCost(index);
+}
+
+string Character::getSkillTypeName(size_t index)
+{
+	return job->getSkillTypeName(index);
 }
 
 double Character::getDamageFactor(size_t index)

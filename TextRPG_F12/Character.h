@@ -77,8 +77,9 @@ public:
 	double getDamageFactor(size_t index);		// 스킬Damage배율 getter
     void useSkill(Monster* target, int skillIndex); // 스킬 사용 메서드
 	void useMP(int useMp); // MP 사용 메서드
-	string getSkillName(size_t index);
-	int getManaCost(size_t index);
+	string getSkillName(size_t index);		// 스킬 이름 getter
+	string getSkillTypeName(size_t index);	// 스킬 이름 타입이름 getter
+	int getManaCost(size_t index);			// 스킬 마나 코스트 getter
 	string getName();	// 이름 getter
 	void setColor(int color);	// 글자색 설정
 	

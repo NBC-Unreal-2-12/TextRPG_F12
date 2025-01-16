@@ -191,7 +191,7 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 	{
 		monsters.emplace_back(factory.createMonster(round));
 	}
-
+	setTotalMonsterCount(monsterCount);
 	return monsters;
 }
 
@@ -234,6 +234,70 @@ void GameManager::combat(int currentRound)
 	
 }
 
+// 엔딩크레딧
+void GameManager::endingCredit()
+{
+	cout << "이번 모험에서 나는...\n";
+	cout << getTotalMonsterCount() << " 의 적을 처치했으며..";
+	cout << "총 "<<getTotalGold()<<"를 획득했으며.."; // 상점에 아이템 판매시에도 추가해야함
+
+}
+
+void GameManager::setTotalGold(int set_gold)
+{
+	totalGold += set_gold;
+}
+
+int GameManager::getTotalGold()
+{
+	return totalGold;
+}
+
+void GameManager::setTotalMonsterCount(int set_monsterCount)
+{
+	totalMonsterCount += set_monsterCount;
+}
+
+int GameManager::getTotalMonsterCount()
+{
+	return totalMonsterCount;
+}
+
+void GameManager::setTotalDamage()
+{
+}
+
+int GameManager::getTotalDamage()
+{
+	return 0;
+}
+
+void GameManager::setTotalSkillDamage()
+{
+}
+
+int GameManager::getTotalSkillDamage()
+{
+	return 0;
+}
+
+void GameManager::setTotalReceiveDamage()
+{
+}
+
+int GameManager::getTotalReceiveDamage()
+{
+	return 0;
+}
+
+void GameManager::setTotalRunCount()
+{
+}
+
+int GameManager::getTotalRunCount()
+{
+	return 0;
+}
 
 void GameManager::printAllMonsters() const
 {

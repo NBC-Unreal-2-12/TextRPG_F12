@@ -46,6 +46,14 @@ private:
 	GameManager(const GameManager&) = delete;
 	GameManager& operator=(const GameManager) = delete;
 
+	int totalTimeSeconds; // 클리어 시간
+	int totalGold = 0; // 총 획득 골드
+	int totalMonsterCount = 0; // 총 몬스터 수
+	int totalDamage = 0; // 총 가한 공격 데미지
+	int totalSkillDamage = 0; // 총 가한 스킬 데미지
+	int totalReceiveDamage = 0; // 받은 데미지
+	int totalRunCount = 0; // 등을 보인 횟수
+
 
 public:
 	// 싱글톤 인스턴스 접근 메서드
@@ -94,6 +102,26 @@ public:
 	// 게임 종료 상태 확인용 getter/setter
 	bool getIsGameEnd() const { return isGameEnd; }
 	void setIsGameEnd(bool value) { isGameEnd = value; }
+
+	void endingCredit();
+
+	void setTotalGold(int set_gold);
+	int getTotalGold();
+	
+	void setTotalMonsterCount(int set_monsterCount);
+	int getTotalMonsterCount();
+	
+	void setTotalDamage();
+	int getTotalDamage();
+	
+	void setTotalSkillDamage();
+	int getTotalSkillDamage();
+	
+	void setTotalReceiveDamage();
+	int getTotalReceiveDamage();
+	
+	void setTotalRunCount();
+	int getTotalRunCount();
 
 	// 테스트용 모든 라운드의 몬스터 이름 출력
 	void printAllMonsters() const;

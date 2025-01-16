@@ -17,7 +17,7 @@ public:
 class Blizzard : public Skill
 {
 public:
-    Blizzard() : Skill("눈보라", 60, 2.0, SkillType::Normal) {}
+    Blizzard() : Skill("눈보라", 60, 2.0, SkillType::AreaOfEffect) {}
 
     string getSkillName() const override {
         return "눈보라";
@@ -27,7 +27,7 @@ public:
 class IceBlock : public Skill
 {
 public:
-    IceBlock() : Skill("얼음 방패", 60, 0, SkillType::Normal) {}
+    IceBlock() : Skill("얼음 방패", 60, 0, SkillType::Buff) {}
 
     string getSkillName() const override {
         return "얼음 방패";
