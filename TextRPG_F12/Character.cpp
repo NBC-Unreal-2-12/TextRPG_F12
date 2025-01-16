@@ -371,6 +371,11 @@ int Character::getManaCost(size_t index)
 	return job->getManaCost(index);
 }
 
+string Character::getSkillTypeName(size_t index)
+{
+	return job->getSkillTypeName(index);
+}
+
 double Character::getDamageFactor(size_t index)
 {
 	return job->getDamageFactor(index);
