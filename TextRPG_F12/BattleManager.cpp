@@ -71,6 +71,8 @@ bool BattleManager::getAllMonsterDead()
 }
 
 void BattleManager::processPlayerTurn() {
+	GameManager* gameManager = GameManager::getInstance();
+
 	PlayerInput input;
 
 	// isTurnEnd 초기화
@@ -108,6 +110,7 @@ void BattleManager::processPlayerTurn() {
 
 		case 4: // 도망
 			std::cout << "\n도망쳤습니다!!\n";
+			gameManager->setTotalRunCount();
 			isBattleActive = false;
 			isTurnEnd = true;
 			break;
@@ -149,6 +152,9 @@ void BattleManager::processMonsterTurn(unique_ptr<Monster>& monster)
 		}
 
 		int damage = monster->useMobAttack();
+
+		GameManager* gameManager = GameManager::getInstance();
+		gameManager->setTotalReceiveDamage(damage); 
 
 		if (damage != 0) // 공격에 데미지가 있을 때
 		{
@@ -294,6 +300,10 @@ void BattleManager::attackMonster() {
 		monster[selectedMonsterIndex]->takeMobDamage(damage);
 
 		std::cout << monster[selectedMonsterIndex]->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
+
+		GameManager* gameManager = GameManager::getInstance();
+		gameManager->setTotalDamage(damage);
+
 		std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력: " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
 
 		if (monster[selectedMonsterIndex]->isMobDead()) {

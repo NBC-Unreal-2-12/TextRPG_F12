@@ -111,13 +111,13 @@ public:
 	void setTotalMonsterCount(int set_monsterCount);
 	int getTotalMonsterCount();
 	
-	void setTotalDamage();
+	void setTotalDamage(int set_attack);
 	int getTotalDamage();
 	
-	void setTotalSkillDamage();
+	void setTotalSkillDamage(int set_skillAttack);
 	int getTotalSkillDamage();
 	
-	void setTotalReceiveDamage();
+	void setTotalReceiveDamage(int set_totalReceiveDamage);
 	int getTotalReceiveDamage();
 	
 	void setTotalRunCount();

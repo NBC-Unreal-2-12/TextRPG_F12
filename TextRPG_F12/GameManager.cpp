@@ -238,8 +238,13 @@ void GameManager::combat(int currentRound)
 void GameManager::endingCredit()
 {
 	cout << "이번 모험에서 나는...\n";
-	cout << getTotalMonsterCount() << " 의 적을 처치했으며..";
-	cout << "총 "<<getTotalGold()<<"를 획득했으며.."; // 상점에 아이템 판매시에도 추가해야함
+	cout << "공격을 통해 총 " << getTotalDamage() << " 의 피해를 입혔으며..\n";
+	cout << "스킬을 통해 총 " << getTotalSkillDamage() << " 의 피해를 입혔으며..\n";
+	cout << "총 " << getTotalReceiveDamage() << " 의 피해를 입었고..\n";
+	cout << "총 " << getTotalMonsterCount() << " 의 적을 처치했고..\n";
+	cout << "총 " << getTotalGold() << "를 획득했으며.."; 
+	cout << "총 " << getTotalRunCount() << "등을 보였다.."; 
+	
 
 }
 
@@ -263,40 +268,44 @@ int GameManager::getTotalMonsterCount()
 	return totalMonsterCount;
 }
 
-void GameManager::setTotalDamage()
+void GameManager::setTotalDamage(int set_attack)
 {
+	totalDamage += set_attack;
 }
 
 int GameManager::getTotalDamage()
 {
-	return 0;
+	return totalDamage;
 }
 
-void GameManager::setTotalSkillDamage()
+void GameManager::setTotalSkillDamage(int set_skillAttack)
 {
+	totalSkillDamage += set_skillAttack;
 }
 
 int GameManager::getTotalSkillDamage()
 {
-	return 0;
+	return totalSkillDamage;
 }
 
-void GameManager::setTotalReceiveDamage()
+void GameManager::setTotalReceiveDamage(int set_totalReceiveDamage)
 {
+	totalReceiveDamage += set_totalReceiveDamage;
 }
 
 int GameManager::getTotalReceiveDamage()
 {
-	return 0;
+	return totalReceiveDamage;
 }
 
 void GameManager::setTotalRunCount()
 {
+	totalRunCount += 1;
 }
 
 int GameManager::getTotalRunCount()
 {
-	return 0;
+	return totalRunCount;
 }
 
 void GameManager::printAllMonsters() const
