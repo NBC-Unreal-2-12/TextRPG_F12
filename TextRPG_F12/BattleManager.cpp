@@ -333,11 +333,11 @@ void BattleManager::useSkillOnMonster()
 {
 	std::vector<int> aliveMonsterIndices = getAliveMonsters();
 	if (aliveMonsterIndices.empty()) return;
-	cout << "사용할 스킬을 선택하세요:" << endl;
+	std::cout << "사용할 스킬을 선택하세요:" << endl;
 	int size = player->displaySkillList(player->getAttack());
 	if (size == 0)
 	{
-		cout << player->getName() << "은(는) 사용할 수 있는 스킬이 없습니다!" << endl;
+		std::cout << player->getName() << "은(는) 사용할 수 있는 스킬이 없습니다!" << endl;
 		return;
 	}
 
@@ -346,7 +346,7 @@ void BattleManager::useSkillOnMonster()
 
 	while (true)
 	{
-		cout << "스킬 번호 >> ";
+		std::cout << "스킬 번호 >> ";
 		std::getline(std::cin, input);  // 전체 입력을 문자열로 받음
 
 		// 입력이 숫자로만 이루어졌는지 확인
@@ -362,17 +362,18 @@ void BattleManager::useSkillOnMonster()
 			}
 			else
 			{
-				cout << "잘못된 입력입니다. 유효한 스킬 번호를 입력해 주세요." << endl;
+				std::cout << "잘못된 입력입니다. 유효한 스킬 번호를 입력해 주세요." << endl;
 			}
 		}
 		else
 		{
-			cout << "잘못된 입력입니다. 숫자만 입력해 주세요." << endl;
+			std::cout << "잘못된 입력입니다. 숫자만 입력해 주세요." << endl;
 		}
 	}
 
-	std::cout << "스킬이름: " << player->getSkillName(skillIndex) << endl << "마나 소모: " << player->getManaCost(skillIndex) << endl
-		<< "데미지: " << player->getAttack() * player->getDamageFactor(skillIndex) << endl;
+	std::cout << "스킬타입: " << player->getSkillTypeName(skillIndex) << endl
+		<< "스킬이름: " << player->getSkillName(skillIndex) << endl << "마나 소모: "
+		<< player->getManaCost(skillIndex) << endl << "데미지: " << player->getAttack() * player->getDamageFactor(skillIndex) << endl;
 	std::cout << player->getSkillName(skillIndex) << "을(를) 사용하시겠습니까?\n" << endl;
 
 	int select;
@@ -415,23 +416,39 @@ void BattleManager::useSkillOnMonster()
 		}
 		else
 		{
-			int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
-			if (selectedMonsterIndex == -1)
+			switch (player->getSkillType(skillIndex))
 			{
-				return;
-			}
-			else
+			case SkillType::Normal:
 			{
-				player->useSkill(monster[selectedMonsterIndex].get(), skillIndex);
-				setColor(1);
-				std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
-				if (monster[selectedMonsterIndex]->isMobDead()) {
-					std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
-					if (getAllMonsterDead()) isBattleActive = false;
+				int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
+				if (selectedMonsterIndex == -1)
+				{
+					return;
 				}
-				setColor(7);
+				else
+				{
+					player->useNormalSkill(monster[selectedMonsterIndex].get(), skillIndex);
+					setColor(1);
+					std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
+					if (monster[selectedMonsterIndex]->isMobDead()) {
+						std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
+						if (getAllMonsterDead()) isBattleActive = false;
+					}
+					setColor(7);
+				}
+				isTurnEnd = true;
+				break;
 			}
-			isTurnEnd = true;
+			case SkillType::AreaOfEffect:
+			{
+				player->useAreaSkill(monster, skillIndex);
+				// 전투 상태 갱신
+				setColor(7);
+				isTurnEnd = true;
+				break;
+			}
+
+			}
 		}
 	}
 	else if (select == 2)
