@@ -75,27 +75,57 @@ void setCursorPosition(int x, int y) {
 	SetConsoleCursorPosition(hConsole, position); // 커서 위치 설정
 }
 
-void printCentered(const std::string& text, int lineNumber = 0, int color = 7) { // 현재 y축은 최상단을 기준으로 lineNumber값에 따라 구분함, y축 또한 중앙 정렬로 표시하려면 주석 부분 확인
-										 // int yOffset = 0;
-	// 콘솔 크기 확인
+//void printCentered(const std::string& text, int lineNumber = 0, int color = 7) { // 현재 y축은 최상단을 기준으로 lineNumber값에 따라 구분함, y축 또한 중앙 정렬로 표시하려면 주석 부분 확인
+//										 // int yOffset = 0;
+//	// 콘솔 크기 확인
+//	CONSOLE_SCREEN_BUFFER_INFO csbi;
+//	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+//	int consoleWidth = 80; // 기본값
+//	//int consoleHeight = 25; // 기본 크기
+//
+//	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+//		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+//		// consoleHeight = csbi.srWindow.Bottom - csbi.srWindow.Top + 1; // y축 계산
+//	}
+//
+//	// 중앙 정렬 X 좌표 계산
+//	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
+//
+//	// Y좌표는 lineNumber에 따라 동적으로 계산
+//	int y = lineNumber;
+//	// int y = (consoleHeight / 2) + yOffset;
+//
+//	setCursorPosition(x, y); // 지정된 위치로 이동
+//	setTextColor(color);     // 색상 설정
+//	std::cout << text;       // 텍스트 출력
+//	setTextColor(7);         // 기본 색상으로 복구
+//}
+
+void getConsoleSize(int& width, int& height) {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	int consoleWidth = 80; // 기본값
-	//int consoleHeight = 25; // 기본 크기
-
 	if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-		consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-		// consoleHeight = csbi.srWindow.Bottom - csbi.srWindow.Top + 1; // y축 계산
+		width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+		height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 	}
+	else {
+		// 기본 크기로 설정 (80x25)
+		width = 80;
+		height = 25;
+	}
+}
+
+void printCentered(const std::string& text, int lineOffset = 0, int color = 7) {
+	int consoleWidth, consoleHeight;
+	getConsoleSize(consoleWidth, consoleHeight);
 
 	// 중앙 정렬 X 좌표 계산
 	int x = (consoleWidth - static_cast<int>(text.length())) / 2;
 
-	// Y좌표는 lineNumber에 따라 동적으로 계산
-	int y = lineNumber;
-	// int y = (consoleHeight / 2) + yOffset;
+	// Y좌표는 중앙에서 lineOffset 만큼 이동
+	// int y = (consoleHeight / 2) + lineOffset;
 
-	setCursorPosition(x, y); // 지정된 위치로 이동
+	setCursorPosition(x, lineOffset); // 지정된 위치로 이동
 	setTextColor(color);     // 색상 설정
 	std::cout << text;       // 텍스트 출력
 	setTextColor(7);         // 기본 색상으로 복구
