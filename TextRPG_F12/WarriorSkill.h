@@ -26,7 +26,7 @@ public:
     }
 };
 
-// 방어 자세 스킬
+// 검의 춤 스킬
 class SwordDance : public Skill
 {
 public:
@@ -34,6 +34,17 @@ public:
 
     string getSkillName() const override {
         return "검의 춤";
+    }
+};
+
+// 테스트 스킬
+class TestSkill : public Skill
+{
+public:
+    TestSkill() : Skill("테스트", 0, 983748792.0, SkillType::Normal) {}
+
+    string getSkillName() const override {
+        return "테스트";
     }
 };
 

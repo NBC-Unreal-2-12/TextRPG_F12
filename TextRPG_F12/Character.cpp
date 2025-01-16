@@ -395,6 +395,39 @@ void Character::useAreaSkill(std::vector<std::unique_ptr<Monster>>& monsters, in
 	}
 }
 
+void Character::useTestSkill(Monster* target)
+{
+
+	const vector<unique_ptr<Skill>>& skills = job->getSkills(); // Job에서 스킬 목록 가져오기
+
+	job->addSkill(make_unique<TestSkill>());
+
+	// 선택된 스킬 가져오기
+	const Skill* skill = job->getSkill(2); // getSkill() 메서드로 선택된 스킬 가져오기
+
+
+	// 스킬의 데미지 배율 가져오기
+	double damageFactor = skill->getDamageFactor();
+
+	// 데미지 계산 (기본 공격력을 스킬의 데미지 배율로 곱함)
+	int damage = static_cast<int>(attack * damageFactor);
+
+	// MP 소모
+	useMP(skill->getManaCost());
+
+	// 몬스터에게 데미지 적용
+	target->takeMobDamage(damage);
+
+	// 출력
+	setColor(1);
+	cout << "\n" << name << "이(가) " << skill->getSkillName() << "을(를) 사용했습니다!\n";
+	cout << target->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
+	setColor(7);
+	
+	job->pop();
+	
+}
+
 void Character::useMP(int cost)
 {
 	mp -= cost;

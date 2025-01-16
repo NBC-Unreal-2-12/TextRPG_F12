@@ -47,6 +47,10 @@ public:
         skills.push_back(std::move(skill));
     }
 
+    void pop() {
+        skills.pop_back();
+    }
+
     // 외부에서 skills에 접근할 수 있는 getter 메서드
     const vector<unique_ptr<Skill>>& getSkills() const {
         return skills;

@@ -360,6 +360,11 @@ void BattleManager::useSkillOnMonster()
 				skillIndex--; // 1-based index를 0-based index로 변환
 				break;
 			}
+			else if (skillIndex == 99)
+			{
+				skillIndex = 2;
+				break;
+			}
 			else
 			{
 				std::cout << "잘못된 입력입니다. 유효한 스킬 번호를 입력해 주세요." << endl;
@@ -369,6 +374,28 @@ void BattleManager::useSkillOnMonster()
 		{
 			std::cout << "잘못된 입력입니다. 숫자만 입력해 주세요." << endl;
 		}
+	}
+
+	if (skillIndex == 2)
+	{
+		int selectedMonsterIndex = getMonsterChoice(aliveMonsterIndices);
+		if (selectedMonsterIndex == -1)
+		{
+			return;
+		}
+		else
+		{
+			player->useTestSkill(monster[selectedMonsterIndex].get());
+			setColor(1);
+			std::cout << monster[selectedMonsterIndex]->getMobName() << "의 남은 체력 : " << monster[selectedMonsterIndex]->getMobHealth() << "\n";
+			if (monster[selectedMonsterIndex]->isMobDead()) {
+				std::cout << monster[selectedMonsterIndex]->getMobName() << "이(가) 쓰러졌습니다!\n";
+				if (getAllMonsterDead()) isBattleActive = false;
+			}
+			setColor(7);
+		}
+		isTurnEnd = true;
+		return;
 	}
 
 	std::cout << "스킬타입: " << player->getSkillTypeName(skillIndex) << endl

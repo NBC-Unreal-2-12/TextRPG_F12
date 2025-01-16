@@ -76,7 +76,8 @@ public:
 	void receiveDamage(int damage); // 유저가 데미지를 받는 메서드
 	double getDamageFactor(size_t index);		// 스킬Damage배율 getter
     void useNormalSkill(Monster* target, int skillIndex); // 스킬 단일기 사용 메서드
-	void useAreaSkill(std::vector<std::unique_ptr<Monster>>& monsters, int skillIndex);	  // 스킬 광역기 사용 메서드
+	void useAreaSkill(vector<std::unique_ptr<Monster>>& monsters, int skillIndex);	  // 스킬 광역기 사용 메서드
+	void useTestSkill(Monster* target);
 	void useMP(int useMp); // MP 사용 메서드
 	SkillType getSkillType(size_t index);	// 스킬 타입 getter
 	string getSkillName(size_t index);		// 스킬 이름 getter
