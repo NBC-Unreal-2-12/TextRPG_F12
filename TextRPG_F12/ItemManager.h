@@ -35,4 +35,9 @@ public:
 	void initializeDefaultItems();				// 아이템 목록 초기화 (상점 방문시 사용)
 	const map<int, Item*>& getAllItems() const; // 모든 소비 아이템 목록
 	const map<int, Item*>& getAlILoots() const; // 모든 전리품 목록
+
+	int getItemListSize() const  // 아이템 리스트 사이즈 반환
+	{
+		return itemList.size();
+	}
 };

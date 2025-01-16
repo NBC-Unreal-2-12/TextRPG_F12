@@ -1,5 +1,7 @@
 ﻿#include "Shop.h"
 
+#include <set>
+
 // StockItem 생성자
 Shop::StockItem::StockItem(int index, Item* _item, int _quantity, bool isLoot)
 	: index(index), item(_item), quantity(_quantity), isLoot(isLoot)
@@ -8,13 +10,19 @@ Shop::StockItem::StockItem(int index, Item* _item, int _quantity, bool isLoot)
 
 Shop::Shop(ItemManager* itemManager)
 {
-	// 상점에 초기 재고 추가
+	// 상점에 초기 재고 랜덤 추가
+	std::set<int> randomIndex;
+	while(randomIndex.size() < stockMaxSize)
+	{
+		randomIndex.insert(std::rand() % itemManager->getItemListSize());
+	}
+
 	for (const auto& pair : itemManager->getAllItems())
 	{
 		int index = pair.first;
 		Item* item = pair.second;
 
-		if (item)
+		if (find(randomIndex.begin(), randomIndex.end(), index) != randomIndex.end())
 		{
 			stock.emplace_back(index, item, 5, false);
 		}
@@ -44,12 +52,39 @@ bool Shop::isValidIndex(int index) const
 // 상점 아이템 리스트 출력
 void Shop::displayItems()
 {
-	std::cout << "\n\n======== ( Item Shop ) ========\n\n";
+	system("cls");
+	std::cout << R"(
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣄⣠⣄⣤⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⠿⠟⠛⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠛⠛⠿⢿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣠⣄⣤⣠⣾⣿⣿⠟⠋⢀⣠⣀⠀⢀⣀⠀⢀⣀⠀⠀⣀⣄⡀⠀⠀⣀⣀⣈⠙⢿⣿⣿⣦⣄⣤⣀⡀⠀⠀⠀⠀
+⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠃⠀⠀⢿⣥⣙⠀⠸⣯⣀⣼⡷⠀⣾⠋⠈⢻⡆⠘⣿⢉⣹⡇⠀⢹⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀
+⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⣤⣌⣿⠆⢸⣟⠈⢸⡷⠀⢻⣇⣀⣿⠃⢈⣿⠉⠉⠀⢀⣼⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀
+⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀⠉⠀⠀⠀⠀⠀⠀⠁⠀⠀⠈⠉⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀
+⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣤⣤⣤⣠⣀⣄⣠⣄⣤⣤⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀
+⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀
+⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀
+⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆
+⠙⠛⠟⠻⠻⣿⣿⣿⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠟⠻⠛⠿⣿⣿⣿⠛⠟⠻⠛⠁
+⠀⠀⠀⠀⢀⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣤⣀⠀⠀⠀⠀⢘⣿⣿⡷⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⢘⣿⣿⣟⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⣿⠀⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⢸⣿⣿⡟⠁⣻⡇⠙⣿⣿⣿⠀⠀⢨⣿⣿⣯⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠠⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⡇⠀⣻⡇⠀⣿⣿⣿⠀⠀⢰⣿⣿⡷⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠐⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⡿⠟⣿⡿⠿⣿⣿⣿⠀⠀⢰⣿⣿⣟⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⡇⠀⣽⡇⠀⣿⣿⣿⠀⠀⠰⣿⣿⣯⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⢘⣿⣿⡷⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠈⠛⠛⠛⠛⠛⠛⠛⠛⠛⠋⠀⠀⢘⣿⣿⣟⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⣿⣿⣿⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⢨⣿⣿⣯⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠙⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠁⠀⠀⠀⠀⠀
+             )" << endl;
+
+	int index = 1;
 	for (const auto& it : stock)
 	{
 		if (it.isLoot == false)
 		{
-			std::cout << it.index << ". " << it.item->getName()
+			std::cout << index++ << ". " << it.item->getName()
 				<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
 		}
 	}
@@ -74,10 +109,9 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 	}
 
 	// 해당 아이템 찾기
-	auto& stockItem = *std::find_if(stock.begin(), stock.end(),
-		[index](const StockItem& stockItem) { return stockItem.index == index; });
+	auto& stockItem = stock[index - 1];
 
-	int count = itemCount;
+	int count = 0;
 
 	Item* managedItem = ItemManager::getInstance()->getItemByIndex(stockItem.index);
 	while (itemCount--)
@@ -92,13 +126,14 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 		// 잔고 부족
 		if (player->getGold() < stockItem.item->getPrice())
 		{
-			std::cout << "골드가 부족합니다. 보유 금액 " << player->getGold() << "골드\n";
+			std::cout << stockItem.item->getName() << ": 골드가 부족합니다. 보유 금액 " << player->getGold() << "골드\n";
 			return;
 		}
 
 		// 구매 처리
 		player->setGold(-stockItem.item->getPrice());
 		player->addItemToInventory(managedItem);
+		count++;
 
 		// 재고 업데이트
 		stockItem.quantity--;
@@ -124,9 +159,7 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 			return stockItem.item->getName() == item->getName();
 		});
 
-	int count = itemCount;
-
-
+	int count = 0;
 
 	while (itemCount-- && Inventory::getInstance()->numberOfItems(item) > 0)
 	{
@@ -134,6 +167,7 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 		int sellPrice = static_cast<int>(stockItem.item->getPrice() * 0.6);
 		player->setGold(sellPrice);
 		player->sellItemFromInventory(index);
+		count++;
 
 		// 재고 업데이트
 		stockItem.quantity++;
