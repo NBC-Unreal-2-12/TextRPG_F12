@@ -24,8 +24,8 @@ private:
 	int mp;			// 현재 마나
 	int maxMp;      // 최대 마나
 	double attack;  // 공격력
-	int experience;     // 경험치
-	int maxExperience;  // 최대 경험치
+	double experience;     // 경험치
+	double maxExperience;  // 최대 경험치
 	int gold;       // 골드
 	int attackSpeed;        // 공격속도
 	double accuracy;            // 명중률
@@ -52,8 +52,8 @@ public:
 	void displayInventory(); // 인벤토리 표시
 	int getGold(); // 골드 getter
 	void setGold(int sellPrice); // 골드 setter
-	int getExp();				// 경험치 getter
-	int getMaxExp();			// 최대 경험치 getter
+	double getExp();				// 경험치 getter
+	double getMaxExp();			// 최대 경험치 getter
 	void addExp(int set_exp);	// 경험치 setter
 	bool isCharacterDead();		 // 사망 여부 getter
 	void setCharacterDead(bool dead);		//사망 setter

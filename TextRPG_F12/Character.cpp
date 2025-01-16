@@ -122,7 +122,7 @@ void Character::doLevelUp()
     while (experience >= maxExperience)
     {
         experience -= maxExperience;
-        maxExperience = level * 100;
+        maxExperience = maxExperience * 1.45;
         levelUp();
     }
     displayStatus();
@@ -176,11 +176,11 @@ void Character::setGold(int sellPrice)
 {
     gold += sellPrice;
 }
-int Character::getExp()
+double Character::getExp()
 {
     return experience;
 }
-int Character::getMaxExp()
+double Character::getMaxExp()
 {
     return maxExperience;
 }
