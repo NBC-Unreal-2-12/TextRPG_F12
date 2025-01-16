@@ -254,7 +254,6 @@ pair<int, int> PlayerInput::getPlayerSellingItem()
 
 	while (true)
 	{
-		Character::getInstance()->displayInventory();
 		cout << "\n몇 번 아이템을 판매하시겠습니까? ( 취소 : 0 )>> ";
 		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
 

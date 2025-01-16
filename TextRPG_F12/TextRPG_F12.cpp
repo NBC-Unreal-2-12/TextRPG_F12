@@ -319,7 +319,7 @@ int main()
 {
 	srand(static_cast<unsigned>(time(nullptr))); // 시드 설정
 	gameStart();
-	printStory();
+	// printStory();
 
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
