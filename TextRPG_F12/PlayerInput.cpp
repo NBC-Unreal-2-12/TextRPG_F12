@@ -116,13 +116,14 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 	return choice;
 }
 
-int PlayerInput::getPlayerChoiceAfterRest()
+void PlayerInput::getPlayerChoiceUsingItem()
 {
 	std::string input;
 	int choice;
 
 	while (true)
 	{
+		Inventory::getInstance()->listItem();
 		std::cout << "\n==============================\n";
 		std::cout << "[0] 다시 전투로!\n";
 
@@ -141,8 +142,10 @@ int PlayerInput::getPlayerChoiceAfterRest()
 				{
 					break; // 유효한 입력 범위라면 반복문 탈출
 				}
-				else
+				// 선택한 아이템 인덱스가 유효한지 확인
+				else if (choice > 0 && choice <= Inventory::getInstance()->getInventory().size())
 				{
+					Character::getInstance()->useItemFromInventory(choice - 1);
 					system("cls");
 					std::cout << "\n잘못된 선택입니다. 0을 입력해 주세요.\n";
 				}
@@ -160,7 +163,7 @@ int PlayerInput::getPlayerChoiceAfterRest()
 		}
 	}
 
-	return choice;
+	return;
 }
 
 

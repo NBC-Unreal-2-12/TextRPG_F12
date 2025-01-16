@@ -45,7 +45,7 @@ void GameManager::visitShop(Character* player)
 	int choice = -1;
 	while (choice != 0)
 	{
-		cout << "구매 : 1, 판매 : 2,  인벤토리 확인 : 3, 나가기 : 0 >> ";
+		cout << "구매 : 1, 판매 : 2, 나가기 : 0 >> ";
 		cin >> choice;
 
 		if (choice == 0)
@@ -75,10 +75,6 @@ void GameManager::visitShop(Character* player)
 				shop.sellItem(index - 1, itemCount, player);
 			}
 		}
-		else if (choice == 3)
-		{
-			player->displayInventory();
-		}
 		else
 		{
 			cout << "부적절한 입력입니다. 다시 입력해주세요." << endl;
@@ -86,7 +82,7 @@ void GameManager::visitShop(Character* player)
 	}
 }
 
-void GameManager::rest(Character* player)
+void GameManager::takeRest(Character* player)
 {
 	PlayerInput PI;
 
@@ -122,9 +118,10 @@ void GameManager::rest(Character* player)
 	player->displayStatus();
 
 	// 인벤토리 -> 아이템 사용
-	player->displayInventory();
+	// BattleManager battleManager(player, monsterGroup[0]);
+	// battleManager.useItem();
 
-	PI.getPlayerChoiceAfterRest();
+	PI.getPlayerChoiceUsingItem();
 }
 
 // 라운드 별 몬스터 마릿수를 결정하여 생성

@@ -45,7 +45,7 @@ Shop::Shop(ItemManager* itemManager)
 // 인덱스 아이템 접근 유효성 검사
 bool Shop::isValidIndex(int index) const
 {
-	if (index < 0 || index > stock.size()) return false;
+	if (index <= 0 || index > stock.size()) return false;
 	return true;
 }
 
@@ -88,6 +88,9 @@ void Shop::displayItems()
 				<< " (가격: " << it.item->getPrice() << " 골드, 재고 수량: " << it.quantity << "개)\n";
 		}
 	}
+
+	// 인벤토리 확인
+	Inventory::getInstance()->listItem();
 
 	// 아이템이 하나도 없을 경우 (재고와 무관)
 	if (stock.empty())

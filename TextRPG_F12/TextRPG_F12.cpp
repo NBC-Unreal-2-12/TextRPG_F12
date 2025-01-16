@@ -263,7 +263,7 @@ int main()
 		else if (choice == 2)
 		{
 			// 휴식하기 추가
-			gameManager->rest(player);
+			gameManager->takeRest(player);
 
 			gameManager->combat(gameManager->getCurrentRound());
 		}
