@@ -153,13 +153,29 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 	{
 		monsterCount = 1;
 	}
+	else if (round == 1)
+	{
+		monsterCount = 1;
+	}
+	else if (round == 2)
+	{
+		monsterCount = 2;
+	}
 	else if (round < 5)
 	{
 		monsterCount = (probability <= 70) ? 2 : 3;
 	}
+	else if (round == 5)
+	{
+		monsterCount = 1;
+	}
 	else if (round < 10)
 	{
 		monsterCount = (probability <= 50) ? 1 : 2;
+	}
+	else if (round == 10)
+	{
+		monsterCount = 1;
 	}
 	else if (round < 14)
 	{
