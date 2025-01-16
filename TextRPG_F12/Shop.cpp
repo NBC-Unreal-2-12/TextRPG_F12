@@ -45,8 +45,8 @@ Shop::Shop(ItemManager* itemManager)
 // 인덱스 아이템 접근 유효성 검사
 bool Shop::isValidIndex(int index) const
 {
-	return std::any_of(stock.begin(), stock.end(),
-		[index](const StockItem& stockItem) { return stockItem.index == index; });
+	if (index < 0 || index > stock.size()) return false;
+	return true;
 }
 
 // 상점 아이템 리스트 출력
