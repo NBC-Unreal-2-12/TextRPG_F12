@@ -345,9 +345,10 @@ void Character::useSkill(Monster* target, int skillIndex)
     target->takeMobDamage(damage);
 
     // 출력
+    setColor(1);
     cout << "\n" << name << "이(가) " << skill->getSkillName() << "을(를) 사용했습니다!\n";
     cout << target->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
-
+    setColor(7);
 }
 
 void Character::useMP(int cost)
