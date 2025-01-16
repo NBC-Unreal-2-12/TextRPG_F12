@@ -73,6 +73,7 @@ bool BattleManager::getAllMonsterDead()
 void BattleManager::processPlayerTurn() {
 	GameManager* gameManager = GameManager::getInstance();
 
+	int round = GameManager::getInstance()->getCurrentRound() + 1;
 	PlayerInput input;
 
 	// isTurnEnd 초기화
@@ -109,10 +110,19 @@ void BattleManager::processPlayerTurn() {
 			break;
 
 		case 4: // 도망
-			std::cout << "\n도망쳤습니다!!\n";
-			gameManager->setTotalRunCount();
-			isBattleActive = false;
-			isTurnEnd = true;
+			if (round < 15)
+			{
+				std::cout << "\n도망쳤습니다!!\n";
+				gameManager->setTotalRunCount();
+				isBattleActive = false;
+				isTurnEnd = true;
+			}
+			else
+			{
+				std::cout << "\n도망칠 수 없다...(카운트는 누적됩니다).\n";
+				gameManager->setTotalRunCount();
+				isTurnEnd = false;
+			}
 			break;
 
 		case 5: // 상태창
@@ -570,6 +580,9 @@ int BattleManager::resolveBattle()
 		std::cout << "전투에서 패배하셨습니다.\n";
 		std::cout << "게임이 종료됩니다.\n"; // 게임오버 관련
 
+		GameManager* gameManager = GameManager::getInstance();
+		gameManager->endingCredit();
+
 		return 0; // 게임종료
 	}
 	else if (allMonstersDead)
@@ -629,6 +642,7 @@ int BattleManager::resolveBattle()
 		std::cout << "Game Clear!! 축하드립니다.";
 
 		GameManager* gameManager = GameManager::getInstance();
+		gameManager->endingCredit();
 		gameManager->setIsGameEnd(true);
 	}
 

@@ -34,13 +34,11 @@ private:
 
 	GameManager() : isGameEnd(false)
 	{
-		cout << "게임 매니저 생성\n";
 		monsterGroup.resize(round); // 벡터 크기 미리 설정
 	};
 
 	~GameManager()
 	{
-		cout << "게임 매니저 소멸\n";
 	};
 
 	GameManager(const GameManager&) = delete;
