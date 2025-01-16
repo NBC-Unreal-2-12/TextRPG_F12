@@ -29,7 +29,7 @@ public:
 	Shop(ItemManager* itemManager);  // 상점 생성자
 
 	void displayItems();		// 아이템 목록 확인
-	void buyItem(int index, Character* player);  // 아이템 구매
-	void sellItem(int index, Character* player); // 아이템 판매
+	void buyItem(int index, int itemCount, Character* player);  // 아이템 구매
+	void sellItem(int index, int itemCount, Character* player); // 아이템 판매
 
 };

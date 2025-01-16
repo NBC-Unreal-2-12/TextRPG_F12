@@ -44,6 +44,8 @@ public:
     vector<Item*> getInventory();
 
     bool isInventoryEmpty();
+
+    int numberOfItems(Item* item);
 };
 
 #endif // INVENTORY_H

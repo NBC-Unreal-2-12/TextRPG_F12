@@ -118,3 +118,8 @@ bool Inventory::isInventoryEmpty()
 
     return false;
 }
+
+int Inventory::numberOfItems(Item* item)
+{
+    return counts[item];
+}
