@@ -232,7 +232,7 @@ void gameStart()
 
 void clearConsole()
 {
-	cout << "Enter 를 입력하여 다음으로.." << endl;
+	cout << "모험을 시작한다.." << endl;
 	cin.ignore(); // 엔터 키 입력 대기
 	this_thread::sleep_for(chrono::seconds(1)); // 1초 대기
 	system("cls"); // 화면 지우기 cls 명령 사용
@@ -245,12 +245,15 @@ int main()
 
 	GameManager* gameManager = GameManager::getInstance();
 	gameManager->InitializeGame();
-	//clearConsole();
 	Character* player = Character::getInstance(); // 게임매니저, 플레이어 생성
 
 	//gameManager->printAllMonsters();
 	PlayerInput playerInput;
 
+	player->displayStatus();
+	player->displayInventory();
+	clearConsole();
+	gameManager->combat(gameManager->getCurrentRound());
 
 	while (gameManager->getIsGameEnd() == false)
 	{
