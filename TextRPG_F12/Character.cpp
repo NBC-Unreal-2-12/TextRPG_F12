@@ -201,6 +201,7 @@ int Character::getGold()
 void Character::setGold(int sellPrice)
 {
 	gold += sellPrice;
+	
 }
 int Character::getExp()
 {

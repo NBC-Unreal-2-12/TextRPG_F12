@@ -172,6 +172,8 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 		// 판매 처리
 		int sellPrice = static_cast<int>(stockItem.item->getPrice() * 0.6);
 		player->setGold(sellPrice);
+		GameManager* gameManager = GameManager::getInstance();
+		gameManager->setTotalGold(sellPrice);
 		player->sellItemFromInventory(index);
 		count++;
 
