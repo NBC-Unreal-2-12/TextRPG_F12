@@ -115,6 +115,11 @@ public:
         return skills[index]->getManaCost();
     }
 
+    SkillType getSkillType(size_t index)
+    {
+        return skills[index]->getSkillType();
+    }
+
     string getSkillName(int index) {
         return skills[index]->getSkillName();
     }
@@ -203,6 +208,8 @@ public:
     Skill* getSkill(size_t index) const override {
         return skills.empty() ? nullptr : skills[index].get();
     }
+
+
 };
 
 #endif

@@ -323,7 +323,7 @@ void Character::receiveDamage(int damage)
 	cout << name << "이(가) " << damage << "의 데미지를 입었습니다. 남은 체력: " << health << endl;
 }
 
-void Character::useSkill(Monster* target, int skillIndex)
+void Character::useNormalSkill(Monster* target, int skillIndex)
 {
 
 	const vector<unique_ptr<Skill>>& skills = job->getSkills(); // Job에서 스킬 목록 가져오기
@@ -341,8 +341,6 @@ void Character::useSkill(Monster* target, int skillIndex)
 
 	// 데미지 계산 (기본 공격력을 스킬의 데미지 배율로 곱함)
 	int damage = static_cast<int>(attack * damageFactor);
-	GameManager* gameManager = GameManager::getInstance();
-	gameManager->setTotalSkillDamage(damage);
 
 	// MP 소모
 	useMP(skill->getManaCost());
@@ -357,6 +355,44 @@ void Character::useSkill(Monster* target, int skillIndex)
 	setColor(7);
 }
 
+void Character::useAreaSkill(std::vector<std::unique_ptr<Monster>>& monsters, int skillIndex)
+{
+	const vector<unique_ptr<Skill>>& skills = job->getSkills(); // Job에서 스킬 목록 가져오기
+
+	// 선택된 스킬 가져오기
+	const Skill* skill = job->getSkill(skillIndex); // getSkill() 메서드로 선택된 스킬 가져오기
+
+	if (skill == nullptr) {
+		cout << "잘못된 스킬 선택입니다." << endl;
+		return;
+	}
+
+	// 스킬의 데미지 배율 가져오기
+	double damageFactor = skill->getDamageFactor();
+
+	// 데미지 계산 (기본 공격력을 스킬의 데미지 배율로 곱함)
+	int damage = static_cast<int>(attack * damageFactor);
+
+	// MP 소모
+	useMP(skill->getManaCost());
+
+	// 광역기일 경우 모든 몬스터에게 데미지 적용
+	for (auto& monster : monsters) {
+		// 몬스터에게 데미지 적용
+		monster->takeMobDamage(damage);
+
+		// 출력
+		setColor(1);
+		cout << "\n" << name << "이(가) " << skill->getSkillName() << "을(를) 사용했습니다!\n";
+		cout << monster->getMobName() << "에게 " << damage << "의 데미지를 입혔습니다!\n";
+
+		// 몬스터가 죽었는지 확인
+		if (monster->isMobDead()) {
+			cout << monster->getMobName() << "이(가) 쓰러졌습니다!\n";
+		}
+	}
+}
+
 void Character::useMP(int cost)
 {
 	mp -= cost;
@@ -368,6 +404,8 @@ string Character::getSkillName(size_t index)
 	return job->getSkillName(index);
 }
 
+
+
 int Character::getManaCost(size_t index)
 {
 	return job->getManaCost(index);
@@ -376,6 +414,11 @@ int Character::getManaCost(size_t index)
 string Character::getSkillTypeName(size_t index)
 {
 	return job->getSkillTypeName(index);
+}
+
+SkillType Character::getSkillType(size_t index)
+{
+	return job->getSkillType(index);
 }
 
 double Character::getDamageFactor(size_t index)
