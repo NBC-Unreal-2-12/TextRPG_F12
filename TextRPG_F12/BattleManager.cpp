@@ -310,7 +310,7 @@ void BattleManager::useSkillOnMonster()
 	std::vector<int> aliveMonsterIndices = getAliveMonsters();
 	if (aliveMonsterIndices.empty()) return;
 	cout << "사용할 스킬을 선택하세요:" << endl;
-	int size = player->displaySkillList();
+	int size = player->displaySkillList(player->getAttack());
 	if (size == 0)
 	{
 		cout << player->getName() << "은(는) 사용할 수 있는 스킬이 없습니다!" << endl;

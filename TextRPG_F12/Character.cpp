@@ -168,9 +168,9 @@ void Character::displayInventory()
 	Inventory::getInstance()->listItem();
 }
 
-int Character::displaySkillList()
+int Character::displaySkillList(double playerAttack)
 {
-	job->displaySkills();
+	job->displaySkills(playerAttack);
 	const vector<unique_ptr<Skill>>& skills = job->getSkills(); // Job에서 스킬 목록 가져오기
 	return skills.size();
 }
