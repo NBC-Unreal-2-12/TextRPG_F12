@@ -1,5 +1,7 @@
 ﻿#include "GameManager.h"
 
+void delay(int milliseconds);
+
 using namespace std;
 // 정적 멤버 변수 정의
 GameManager* GameManager::instance = nullptr;
@@ -38,46 +40,66 @@ void GameManager::visitShop(Character* player)
 {
 	ItemManager* itemManager = ItemManager::getInstance();
 	Shop shop(itemManager);
-	shop.displayItems();
 
-	std::cout << "\n( 잔고 : " << player->getGold() << " )\n\n";
-
+	PlayerInput PI;	
+	std::string input;
 	int choice = -1;
-	while (choice != 0)
-	{
-		cout << "구매 : 1, 판매 : 2, 나가기 : 0 >> ";
-		cin >> choice;
 
-		if (choice == 0)
+	while (true)
+	{
+		// 상점 출력
+		shop.displayItems();
+		std::cout << "\n( 잔고 : " << player->getGold() << " )\n\n";
+
+		cout << "구매 : 1, 판매 : 2, 나가기 : 0 >> ";
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
+
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
 		{
-			cin.ignore();
-			return; // 나가기
-		}
-		else if (choice == 1)
-		{
-			int index, itemCount;
-			cout << "\n몇 번 아이템을 구매하시겠습니까? >> ";
-			cin >> index;
-			cout << "\n수량을 선택해 주세요. >> ";
-			cin >> itemCount;
-			shop.buyItem(index, itemCount, player);
-		}
-		else if (choice == 2)
-		{
-			if (!player->isInventoryEmpty())
+			try
 			{
-				player->displayInventory();
-				int index, itemCount;
-				cout << "\n몇 번 아이템을 판매하시겠습니까? >> ";
-				cin >> index;
-				cout << "\n수량을 선택해 주세요. >> ";
-				cin >> itemCount;
-				shop.sellItem(index - 1, itemCount, player);
+				// 문자열을 정수로 변환
+				choice = std::stoi(input);
+
+				// 범위 확인
+				if (choice == 0)
+				{
+					return; // 상점 나가기
+				}
+				// 선택한 아이템 인덱스가 유효한지 확인
+				else if (choice == 1)
+				{
+					pair<int, int> inputValue = PI.getPlayerBuyingItem();
+					if (inputValue.first == 0) continue;
+					shop.buyItem(inputValue.first, inputValue.second, player);
+					delay(1500);
+				}
+				else if (choice == 2)
+				{
+					if (!player->isInventoryEmpty())
+					{
+						pair<int, int> inputValue = PI.getPlayerSellingItem();
+						if (inputValue.first == 0) continue;
+						shop.sellItem(inputValue.first - 1, inputValue.second, player);
+					}
+					delay(1500);
+				}
+				else
+				{
+					std::cout << "\n부적절한 입력입니다. 다시 입력해주세요.\n";
+				}
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
 			}
 		}
 		else
 		{
-			cout << "부적절한 입력입니다. 다시 입력해주세요." << endl;
+			system("cls");
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
 		}
 	}
 }

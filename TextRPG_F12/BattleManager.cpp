@@ -79,7 +79,7 @@ void BattleManager::processPlayerTurn() {
 	// 각 case에서 isTurnEnd bool 변수값을 관리하여 턴 종료 시점 결정
 	while(!isTurnEnd) {
 		showPlayerCombatInfo();
-		int choice = input.getPlayerChoice();
+		int choice = input.getPlayerChoiceInBattle();
 
 		switch (choice) {
 		case 1: // 공격

@@ -2,6 +2,8 @@
 
 #include <set>
 
+void delay(int milliseconds);
+
 // StockItem 생성자
 Shop::StockItem::StockItem(int index, Item* _item, int _quantity, bool isLoot)
 	: index(index), item(_item), quantity(_quantity), isLoot(isLoot)
@@ -96,8 +98,8 @@ void Shop::displayItems()
 	if (stock.empty())
 	{
 		std::cout << "상점에 물건이 없습니다.\n";
+		delay(1000);
 	}
-
 
 }
 
@@ -140,6 +142,7 @@ void Shop::buyItem(int index, int itemCount, Character* player)
 
 		// 재고 업데이트
 		stockItem.quantity--;
+		delay(500);
 	}
 	std::cout << managedItem->getName() << "을(를) " << count << " 개 구매 했습니다. (잔고 : " << player->getGold() << ")\n";
 }
@@ -174,7 +177,7 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 
 		// 재고 업데이트
 		stockItem.quantity++;
-
+		delay(500);
 	}
-		std::cout << item->getName() << "을(를) " << count << " 개 판매 했습니다. (잔고 : " << player->getGold() << ")\n";
+	std::cout << item->getName() << "을(를) " << count << " 개 판매 했습니다. (잔고 : " << player->getGold() << ")\n";
 }

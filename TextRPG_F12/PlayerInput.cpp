@@ -6,7 +6,8 @@
 #include <limits> // numeric_limits 사용을 위해 필요
 #include <cctype> // isdigit 사용
 
-int PlayerInput::getPlayerChoice()
+// 전투 중 사용자 입력
+int PlayerInput::getPlayerChoiceInBattle()
 {
 	std::string input;
 	int choice;
@@ -39,7 +40,7 @@ int PlayerInput::getPlayerChoice()
 				}
 				else
 				{
-					std::cout << "\n잘못된 선택입니다. 1 또는 2를 입력해 주세요.\n";
+					std::cout << "\n잘못된 선택입니다. 1에서 6사이 값을 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)
@@ -56,6 +57,7 @@ int PlayerInput::getPlayerChoice()
 	return choice;
 }
 
+// 전투 이후 사용자 입력
 int PlayerInput::getPlayerChoiceAfterBattle()
 {
 
@@ -116,6 +118,7 @@ int PlayerInput::getPlayerChoiceAfterBattle()
 	return choice;
 }
 
+// 아이템 사용 선택
 void PlayerInput::getPlayerChoiceUsingItem()
 {
 	std::string input;
@@ -169,10 +172,157 @@ void PlayerInput::getPlayerChoiceUsingItem()
 	return;
 }
 
+pair<int, int> PlayerInput::getPlayerBuyingItem()
+{
+	std::string input;
+	int index, itemCount;
+
+	while (true)
+	{
+		cout << "\n몇 번 아이템을 구매하시겠습니까? ( 취소 : 0 )>> ";
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
+
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				// 문자열을 정수로 변환
+				index = std::stoi(input);
+
+				// 범위 확인
+				if (index == 0)
+				{
+					return make_pair(0, 0); // 상점으로 복귀
+				}
+				else break;
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			system("cls");
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
+	}
+
+	while (true)
+	{
+		cout << "\n수량을 선택해 주세요. ( 취소 : 0 ) >> ";
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
+
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				// 문자열을 정수로 변환
+				itemCount = std::stoi(input);
+
+				// 범위 확인
+				if (itemCount == 0)
+				{
+					return make_pair(0, 0); // 상점으로 복귀
+				}
+				else break;
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			system("cls");
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
+	}
+
+	return make_pair(index, itemCount);
+}
+
+pair<int, int> PlayerInput::getPlayerSellingItem()
+{
+	std::string input;
+	int index, itemCount;
+
+	while (true)
+	{
+		Character::getInstance()->displayInventory();
+		cout << "\n몇 번 아이템을 판매하시겠습니까? ( 취소 : 0 )>> ";
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
+
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				// 문자열을 정수로 변환
+				index = std::stoi(input);
+
+				// 범위 확인
+				if (index == 0)
+				{
+					return make_pair(0, 0); // 상점으로 복귀
+				}
+				else break;
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			system("cls");
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
+	}
+
+	while (true)
+	{
+		cout << "\n수량을 선택해 주세요. ( 취소 : 0 ) >> ";
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
+
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				// 문자열을 정수로 변환
+				itemCount = std::stoi(input);
+
+				// 범위 확인
+				if (itemCount == 0)
+				{
+					return make_pair(0, 0); // 상점으로 복귀
+				}
+				else break;
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			system("cls");
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
+	}
+
+	return make_pair(index, itemCount);
+}
 
 
-
-
+// 캐릭터 생성 시 이름 지정
 string PlayerInput::setPlayerName()
 {
 	std::cout << "캐릭터의 이름을 설정해 주세요.\n";
@@ -188,7 +338,7 @@ string PlayerInput::setPlayerName()
 	return name;
 }
 
-
+// 캐릭터 생성 시 직업 선택
 Job* PlayerInput::setJobByPlayerInput()
 {
 	std::string input;
