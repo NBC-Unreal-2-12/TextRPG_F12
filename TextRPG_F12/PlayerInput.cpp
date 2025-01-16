@@ -127,7 +127,8 @@ void PlayerInput::getPlayerChoiceUsingItem()
 	while (true)
 	{
 		Inventory::getInstance()->listItem();
-		std::cout << "\n==============================\n";
+		std::cout << "\n아이템 번호를 입력하여 사용할 수 있습니다.";
+		std::cout << "\n===============================\n";
 		std::cout << "[0] 다시 전투로!\n";
 
 		std::getline(std::cin, input); // 전체 입력을 문자열로 받음

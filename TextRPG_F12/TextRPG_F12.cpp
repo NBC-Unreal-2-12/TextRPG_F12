@@ -254,6 +254,7 @@ int main()
 
 	while (gameManager->getIsGameEnd() == false)
 	{
+		player->displayStatus();
 		player->displayInventory();
 		int choice = playerInput.getPlayerChoiceAfterBattle();
 		if (choice == 1)
@@ -265,7 +266,6 @@ int main()
 		{
 			// 휴식하기 추가
 			gameManager->takeRest(player);
-
 			gameManager->combat(gameManager->getCurrentRound());
 		}
 

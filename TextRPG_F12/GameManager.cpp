@@ -20,7 +20,6 @@ void GameManager::InitializeGame()
 	// 싱글톤 객체 초기화 및 상태 출력
 	Character::initialize(name, job);
 	Character* player = Character::getInstance();
-	player->displayStatus();
 
 	// 라운드별 몬스터 그룹 초기화
 	monsterGroup.clear();
@@ -128,21 +127,17 @@ void GameManager::takeRest(Character* player)
 ⠀⠀⠀⠀⠀⠈⠁⠀⠈⠀⠘⢦⡙⡜⠠⠁⠈⠧⡘⠊⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 			)" << endl;
-
 	// 일정 비율로 HP/MP 회복
 	cout << "모닥불을 쬐며 휴식했다..." << endl;
 	player->setHealth(player->getHealth() + (player->getMaxHealth()*0.3));
 	player->setMP(player->getMP() + (player->getMaxMP() * 0.3));
-
+	delay(1000);
 	cout << "마음이 따뜻해진다.." << endl;
-
+	delay(1000);
 	// 상태창 출력
 	player->displayStatus();
-
-	// 인벤토리 -> 아이템 사용
-	// BattleManager battleManager(player, monsterGroup[0]);
-	// battleManager.useItem();
-
+	delay(1000);
+	// 아이템 사용
 	PI.getPlayerChoiceUsingItem();
 }
 
