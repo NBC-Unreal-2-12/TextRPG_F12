@@ -18,12 +18,12 @@ public:
 		mobName = "슬라임";
 		mobHealth = 150;
 		mobMaxHealth = 150;
-		mobAttack = 20;
+		mobAttack = 30;
 		mobMana = 0;
 		mobMaxMana = 3;
-		mobAttackSpeed = 7;
-		mobAccuracy = 70;
-		mobEvasion = 1.3;
+		mobAttackSpeed = 5;
+		mobAccuracy = 80;
+		mobEvasion = 1;
 		lootIdx = 103; // 슬라임 젤리
 	}
 
@@ -41,15 +41,15 @@ public:
 
 	int useMobSkill() override
 	{
-		cout << mobName << "이(가) 20만큼 회복합니다." << endl;
+		cout << mobName << "이(가) 100만큼 회복합니다." << endl;
 
-		if (mobMaxHealth - mobHealth <= 20)
+		if (mobMaxHealth - mobHealth <= 100)
 		{
 			mobHealth = mobMaxHealth;
 		}
 		else
 		{
-			mobHealth += 20;
+			mobHealth += 100;
 		}
 		return 0;
 	}
@@ -61,14 +61,14 @@ public:
 	Orc() : NormalMonster("오크")
 	{
 		mobName = "오크";
-		mobHealth = 100;
-		mobMaxHealth = 100;
-		mobAttack = 40;
+		mobHealth = 150;
+		mobMaxHealth = 150;
+		mobAttack = 30;
 		mobMana = 0;
 		mobMaxMana = 3;
-		mobAttackSpeed = 1;
-		mobAccuracy = 70;
-		mobEvasion = 1.1;
+		mobAttackSpeed = 5;
+		mobAccuracy = 80;
+		mobEvasion = 1;
 		lootIdx = 102; // 오크의 부서진 검
 	}
 
@@ -91,8 +91,8 @@ public:
 
 	int useMobSkill() override
 	{
-		cout << mobName << "의 공격력이 10 증가합니다." << endl;
-		mobAttack += 10;
+		cout << mobName << "의 공격력이 15 증가합니다." << endl;
+		mobAttack += 15;
 		return 0;
 	}
 };
@@ -103,14 +103,14 @@ public:
 	Goblin() : NormalMonster("고블린")
 	{
 		mobName = "고블린";
-		mobHealth = 50;
-		mobMaxHealth = 50;
+		mobHealth = 100;
+		mobMaxHealth = 100;
 		mobAttack = 30;
 		mobMana = 0;
 		mobMaxMana = 3;
 		mobAttackSpeed = 10;
-		mobAccuracy = 70;
-		mobEvasion = 1.3;
+		mobAccuracy = 80;
+		mobEvasion = 1.5;
 		lootIdx = 101; // 고블린의 작은 동전
 	}
 

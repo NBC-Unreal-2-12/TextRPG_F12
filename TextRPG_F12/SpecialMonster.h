@@ -16,14 +16,14 @@ public:
 	Dragon() : SpecialMonster("드래곤")
 	{
         mobName = "드래곤";
-        mobHealth = 400;
-        mobMaxHealth = 400;
-        mobAttack = 50;
+        mobHealth = 700;
+        mobMaxHealth = 700;
+        mobAttack = 70;
         mobMana = 0;
         mobMaxMana = 3;
         mobAttackSpeed = 20;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
+        mobAccuracy = 150;
+        mobEvasion = 3;
         lootIdx = 107; // 드래곤의 비늘
     }
 
@@ -55,14 +55,14 @@ public:
 	Balrog() : SpecialMonster("발록")
 	{
         mobName = "발록";
-        mobHealth = 20;
+        mobHealth = 1200;
         mobMaxHealth = 20;
-        mobAttack = 10;
+        mobAttack = 70;
         mobMana = 0;
         mobMaxMana = 3;
-        mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
+        mobAttackSpeed = 16;
+        mobAccuracy = 150;
+        mobEvasion = 2;
         lootIdx = 108; // 발록의 재
     }
 
@@ -83,8 +83,8 @@ public:
 
     int useMobSkill() override
     {
-        cout << mobName << "의 공격력이 5 증가합니다." << endl;
-        mobAttack += 5;
+        cout << mobName << "의 공격력이 50 증가합니다." << endl;
+        mobAttack += 50;
         return 0;
     }
 };
@@ -95,14 +95,14 @@ public:
 	Kraken() : SpecialMonster("크라켄")
 	{
         mobName = "크라켄";
-        mobHealth = 20;
-        mobMaxHealth = 20;
-        mobAttack = 10;
+        mobHealth = 1200;
+        mobMaxHealth = 1200;
+        mobAttack = 70;
         mobMana = 0;
         mobMaxMana = 3;
         mobAttackSpeed = 1;
-        mobAccuracy = 50 + 20;
-        mobEvasion = 1;
+        mobAccuracy = 150;
+        mobEvasion = 2;
         lootIdx = 109; // 크라켄의 심장
     }
 
@@ -123,15 +123,15 @@ public:
 
     int useMobSkill() override
     {
-        cout << mobName << "이(가) 20만큼 회복합니다." << endl;
+        cout << mobName << "이(가) 300만큼 회복합니다." << endl;
 
-        if (mobMaxHealth - mobHealth <= 20)
+        if (mobMaxHealth - mobHealth <= 300)
         {
             mobHealth = mobMaxHealth;
         }
         else
         {
-            mobHealth += 20;
+            mobHealth += 300;
         }
         return 0;
     }

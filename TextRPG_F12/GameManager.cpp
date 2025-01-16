@@ -94,7 +94,11 @@ vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 
 	int monsterCount = 0;
 	int probability = std::rand() % 100 + 1;
-	if (round < 5)
+	if (round = 1)
+	{
+		monsterCount = 1;
+	}
+	else if (round < 5)
 	{
 		monsterCount = (probability <= 70) ? 2 : 3;
 	}
