@@ -254,6 +254,9 @@ void BattleManager::showPlayerCombatInfo() {
 	for (int i = expBars; i < 20; ++i) std::cout << "□";
 	std::cout << "\n";
 	std::cout << "경험치: " << currentExp << " / " << maxExp << "\n\n";
+
+	// 공격력
+	std::cout << "공격력: " << player->getAttack() << "\n\n==============================\n\n";
 }
 
 void BattleManager::showMonsterInfo()
