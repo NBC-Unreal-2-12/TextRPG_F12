@@ -15,6 +15,12 @@ Inventory* Inventory::getInstance()
 
 void Inventory::addItem(Item* item)
 {
+    if (inventory.size() > 9)
+    {
+        cout << "\n인벤토리가 가득 찼습니다!\n";
+        return;
+    }
+
     if (counts[item] == 0)
     {
         inventory.push_back(item);
