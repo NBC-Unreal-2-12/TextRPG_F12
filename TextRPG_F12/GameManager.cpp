@@ -40,7 +40,6 @@ void GameManager::visitShop(Character* player)
 	Shop shop(itemManager);
 	shop.displayItems();
 
-	player->setGold(200);
 	std::cout << "\n( 잔고 : " << player->getGold() << " )\n\n";
 
 	int choice = -1;
