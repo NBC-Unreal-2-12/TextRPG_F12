@@ -21,7 +21,7 @@ private:
 	};
 
 	std::vector<StockItem> stock;
-	int stockMaxSize = 7;
+	int stockMaxSize = 6;
 	bool isValidIndex(int index) const;	// 인덱스 접근 유효성 검사
 
 public:
