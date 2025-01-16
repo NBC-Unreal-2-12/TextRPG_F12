@@ -80,7 +80,14 @@ void GameManager::visitShop(Character* player)
 					{
 						pair<int, int> inputValue = PI.getPlayerSellingItem();
 						if (inputValue.first == 0) continue;
-						shop.sellItem(inputValue.first - 1, inputValue.second, player);
+						else if (inputValue.first == 9)
+						{
+							shop.sellAllLootItems(player);
+						}
+						else
+						{
+							shop.sellItem(inputValue.first - 1, inputValue.second, player);
+						}
 					}
 					delay(1500);
 				}

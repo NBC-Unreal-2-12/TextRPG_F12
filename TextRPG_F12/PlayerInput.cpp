@@ -255,6 +255,7 @@ pair<int, int> PlayerInput::getPlayerSellingItem()
 	while (true)
 	{
 		cout << "\n몇 번 아이템을 판매하시겠습니까? ( 취소 : 0 )>> ";
+		cout << "\n전리품 일괄 판매 : 9\n";
 		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
 
 		// 입력값이 숫자로만 이루어졌는지 확인
@@ -269,6 +270,10 @@ pair<int, int> PlayerInput::getPlayerSellingItem()
 				if (index == 0)
 				{
 					return make_pair(0, 0); // 상점으로 복귀
+				}
+				else if (index == 9)
+				{
+					return make_pair(9, 9);
 				}
 				else break;
 			}

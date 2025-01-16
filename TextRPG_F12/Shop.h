@@ -33,4 +33,6 @@ public:
 	void buyItem(int index, int itemCount, Character* player);  // 아이템 구매
 	void sellItem(int index, int itemCount, Character* player); // 아이템 판매
 
+	void sellAllLootItems(Character* player); // 모든 전리품 아이템 판매
+
 };

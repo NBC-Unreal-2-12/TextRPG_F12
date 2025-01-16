@@ -184,3 +184,19 @@ void Shop::sellItem(int index, int itemCount, Character* player)
 	}
 	std::cout << item->getName() << "을(를) " << count << " 개 판매 했습니다. ( 잔고 : " << player->getGold() << " )\n";
 }
+
+void Shop::sellAllLootItems(Character* player)
+{
+	for (int index = 0; index < Inventory::getInstance()->getInventory().size();)
+	{
+		Item* item = player->findItemFromInventory(index);
+		if (dynamic_cast<MonsterLoot*>(item) != nullptr)
+		{
+			while (item == player->findItemFromInventory(index))
+			{
+				sellItem(index, 99, player);
+			}
+		}
+		else index++;
+	}
+}
