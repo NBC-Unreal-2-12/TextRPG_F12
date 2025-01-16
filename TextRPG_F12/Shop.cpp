@@ -16,7 +16,7 @@ Shop::Shop(ItemManager* itemManager)
 	std::set<int> randomIndex;
 	while(randomIndex.size() < stockMaxSize)
 	{
-		randomIndex.insert(std::rand() % itemManager->getItemListSize());
+		randomIndex.insert(std::rand() % itemManager->getItemListSize() + 1);
 	}
 
 	for (const auto& pair : itemManager->getAllItems())
