@@ -37,4 +37,14 @@ public:
     }
 };
 
+class Test : public Skill
+{
+public:
+    Test() : Skill("테스트", 0, 999, SkillType::AreaOfEffect) {}
+
+    string getSkillName() const override {
+        return "테스트";
+    }
+};
+
 #endif

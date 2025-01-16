@@ -443,6 +443,7 @@ void BattleManager::useSkillOnMonster()
 			{
 				player->useAreaSkill(monster, skillIndex);
 				// 전투 상태 갱신
+				if (getAllMonsterDead()) isBattleActive = false;
 				setColor(7);
 				isTurnEnd = true;
 				break;
