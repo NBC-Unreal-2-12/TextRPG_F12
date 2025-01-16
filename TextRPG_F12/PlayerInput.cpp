@@ -56,9 +56,8 @@ int PlayerInput::getPlayerChoice()
 	return choice;
 }
 
-int PlayerInput::getPlayerChoiceAfterBattle(bool isFirst)
+int PlayerInput::getPlayerChoiceAfterBattle()
 {
-	if (!isFirst) return 1;
 
 	int round = GameManager::getInstance()->getCurrentRound() + 1;
 	std::string input;
@@ -68,19 +67,15 @@ int PlayerInput::getPlayerChoiceAfterBattle(bool isFirst)
 	{
 		if (round < 15) {
 			std::cout << "\n당신은 이제..\n";
-			std::cout << "1. 바로 다음 전투 진행!\n";
-			std::cout << "2. 상점 방문\n";
-			std::cout << "3. 인벤토리\n";
-			std::cout << "4. 상태창!!\n";
+			std::cout << "1. 상점 방문\n";
+			std::cout << "2. 휴식하기\n";
 			std::cout << ">> ";
 		}
 		else // round 15 (보스)
 		{
 			std::cout << "\n아마도 다음이 마지막이 될 것만 같다..\n";
-			std::cout << "1. 바로간다!\n";
-			std::cout << "2. 상점 방문\n";
-			std::cout << "3. 인벤토리\n";
-			std::cout << "4. 상태창!!\n";
+			std::cout << "1. 상점 방문!\n";
+			std::cout << "2. 휴식하기\n";
 			std::cout << ">> ";
 		}
 
@@ -95,14 +90,61 @@ int PlayerInput::getPlayerChoiceAfterBattle(bool isFirst)
 				choice = std::stoi(input);
 
 				// 범위 확인
-				if (choice >= 0 && choice <= 4)
+				if (choice >= 0 && choice <= 2)
 				{
 					break; // 유효한 입력 범위라면 반복문 탈출
 				}
 				else
 				{
 					system("cls");
-					std::cout << "\n잘못된 선택입니다. 1 에서 4까지의 숫자를 입력해 주세요.\n";
+					std::cout << "\n잘못된 선택입니다. 1 아니면 2를 입력해 주세요.\n";
+				}
+			}
+			catch (const std::out_of_range&)
+			{
+				system("cls");
+				std::cout << "\n입력값이 너무 큽니다. 유효한 숫자를 입력해 주세요.\n";
+			}
+		}
+		else
+		{
+			system("cls");
+			std::cout << "\n유효하지 않은 입력입니다. 숫자만 입력해 주세요.\n";
+		}
+	}
+
+	return choice;
+}
+
+int PlayerInput::getPlayerChoiceAfterRest()
+{
+	std::string input;
+	int choice;
+
+	while (true)
+	{
+		std::cout << "\n==============================\n";
+		std::cout << "[0] 다시 전투로!\n";
+
+		std::getline(std::cin, input); // 전체 입력을 문자열로 받음
+
+		// 입력값이 숫자로만 이루어졌는지 확인
+		if (!input.empty() && std::all_of(input.begin(), input.end(), ::isdigit))
+		{
+			try
+			{
+				// 문자열을 정수로 변환
+				choice = std::stoi(input);
+
+				// 범위 확인
+				if (choice ==0)
+				{
+					break; // 유효한 입력 범위라면 반복문 탈출
+				}
+				else
+				{
+					system("cls");
+					std::cout << "\n잘못된 선택입니다. 0을 입력해 주세요.\n";
 				}
 			}
 			catch (const std::out_of_range&)

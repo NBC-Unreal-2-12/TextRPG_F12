@@ -71,6 +71,9 @@ public:
 	// 상점 방문
 	void visitShop(Character* player);
 
+	// 휴식하기
+	void rest(Character* player);
+
 	// 라운드 별 몬스터 마릿수를 결정하여 생성
 	vector<unique_ptr<Monster>> generateMonsters(int round);
 

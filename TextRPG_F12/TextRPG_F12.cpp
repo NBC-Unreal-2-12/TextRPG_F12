@@ -208,30 +208,24 @@ int main()
 	//gameManager->printAllMonsters();
 	PlayerInput playerInput;
 
-	bool isFirst = true;
+
 	while (gameManager->getIsGameEnd() == false)
 	{
-		int choice = playerInput.getPlayerChoiceAfterBattle(isFirst);
+		player->displayInventory();
+		int choice = playerInput.getPlayerChoiceAfterBattle();
 		if (choice == 1)
 		{
+			gameManager->visitShop(player);
 			gameManager->combat(gameManager->getCurrentRound());
 		}
 		else if (choice == 2)
 		{
-			gameManager->visitShop(player);
-			isFirst = false;
-		}
-		else if (choice == 3)
-		{
-			player->displayInventory();
-			isFirst = false;
+			// 휴식하기 추가
+			gameManager->rest(player);
 
+			gameManager->combat(gameManager->getCurrentRound());
 		}
-		else if (choice == 4)
-		{
-			system("cls");
-			player->displayStatus();
-		}
+
 		if (player->isCharacterDead())
 		{
 			// 게임오버 출력

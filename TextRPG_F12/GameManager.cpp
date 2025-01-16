@@ -86,6 +86,28 @@ void GameManager::visitShop(Character* player)
 	}
 }
 
+void GameManager::rest(Character* player)
+{
+	PlayerInput PI;
+
+	system("cls");
+
+	// 일정 비율로 HP/MP 회복
+	cout << "모닥불을 쬐며 휴식했다..." << endl;
+	player->setHealth(player->getHealth() + (player->getMaxHealth()*0.3));
+	player->setMP(player->getMP() + (player->getMaxMP() * 0.3));
+
+	cout << "마음이 따뜻해진다.." << endl;
+
+	// 상태창 출력
+	player->displayStatus();
+
+	// 인벤토리 -> 아이템 사용
+	player->displayInventory();
+
+	PI.getPlayerChoiceAfterRest();
+}
+
 // 라운드 별 몬스터 마릿수를 결정하여 생성
 vector<unique_ptr<Monster>> GameManager::generateMonsters(int round)
 {
